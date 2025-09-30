@@ -32,27 +32,13 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
     void initializeAdapters()
   }, [])
 
+  // エラーが発生してもページは表示する（adaptersなしで動作）
   if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-red-50">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">初期化エラー</h1>
-          <p className="text-gray-700">{error.message}</p>
-        </div>
-      </div>
-    )
+    console.error('Adapters initialization error:', error)
+    // エラーでもchildrenを表示してページが使えるようにする
   }
 
-  if (!adapters) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">アプリケーションを初期化中...</p>
-        </div>
-      </div>
-    )
-  }
-
+  // アダプターがロード中でもページコンテンツを表示
+  // アダプターが必要な機能は初期化後に有効になる
   return <AppProvider adapters={adapters}>{children}</AppProvider>
 }
