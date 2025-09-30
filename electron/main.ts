@@ -3,15 +3,19 @@
  * 3K評価システム デスクトップ版
  */
 
-import { app, BrowserWindow, ipcMain } from 'electron';
-import * as path from 'path';
-import * as isDev from 'electron-is-dev';
-import Store from 'electron-store';
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const Store = require('electron-store');
+
+// 開発モードの判定関数
+function isDevelopment(): boolean {
+  return process.env.NODE_ENV !== 'production' && !app.isPackaged;
+}
 
 // electron-storeの初期化
 const store = new Store();
 
-let mainWindow: BrowserWindow | null = null;
+let mainWindow: any = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -32,7 +36,7 @@ function createWindow() {
   });
 
   // 開発モードとプロダクションモードで読み込むURLを切り替え
-  if (isDev) {
+  if (isDevelopment()) {
     // 開発モード: Next.js devサーバーに接続
     mainWindow.loadURL('http://localhost:3000');
     // DevToolsを開く
@@ -72,18 +76,18 @@ app.on('window-all-closed', () => {
 // ========================================
 
 // ストアから値を取得
-ipcMain.handle('store:get', async (_event, key: string) => {
+ipcMain.handle('store:get', async (_event: any, key: string) => {
   return store.get(key);
 });
 
 // ストアに値を保存
-ipcMain.handle('store:set', async (_event, key: string, value: any) => {
+ipcMain.handle('store:set', async (_event: any, key: string, value: any) => {
   store.set(key, value);
   return true;
 });
 
 // ストアから値を削除
-ipcMain.handle('store:delete', async (_event, key: string) => {
+ipcMain.handle('store:delete', async (_event: any, key: string) => {
   store.delete(key);
   return true;
 });
