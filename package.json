@@ -1,0 +1,165 @@
+{
+  "name": "3k-evaluation-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbopack",
+    "build": "next build",
+    "build:electron": "npm run build && npm run build:electron-main",
+    "build:electron-main": "tsc electron/main.ts electron/preload/preload.ts electron/database/DatabaseManager.ts electron/window/WindowManager.ts electron/security/SecurityManager.ts electron/updater/UpdateManager.ts --outDir dist/electron --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck --declaration false",
+    "build:electron-renderer": "ELECTRON_BUILD=true next build",
+    "start": "next start",
+    "electron": "npm run build:electron-main && electron dist/electron/main.js",
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:3000 && npm run build:electron-main && electron dist/electron/main.js\"",
+    "pack": "npm run build:electron && electron-builder --dir",
+    "dist": "npm run build:electron && electron-builder",
+    "dist:win": "npm run build:electron && electron-builder --win",
+    "dist:mac": "npm run build:electron && electron-builder --mac",
+    "dist:linux": "npm run build:electron && electron-builder --linux",
+    "lint": "eslint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "test:ui-score": "playwright test tests/ui-scoring.spec.ts",
+    "test:components": "playwright test tests/components/",
+    "test:layouts": "playwright test tests/layouts/",
+    "test:calculator": "playwright test tests/scoring/",
+    "test:accessibility": "playwright test --config playwright-accessibility.config.ts",
+    "test:accessibility:report": "playwright show-report accessibility-report",
+    "test:performance": "playwright test tests/performance/",
+    "test:memory": "playwright test tests/performance/memory-usage.spec.ts",
+    "test:electron:memory": "playwright test tests/electron/memory-test.spec.ts",
+    "lighthouse": "lighthouse-ci autorun",
+    "lighthouse:desktop": "lighthouse http://localhost:3000 --preset=desktop --output=json --output-path=lighthouse-desktop.json",
+    "lighthouse:mobile": "lighthouse http://localhost:3000 --preset=mobile --output=json --output-path=lighthouse-mobile.json",
+    "audit:security": "npm audit --audit-level=moderate",
+    "audit:bundle": "npx next-bundle-analyzer",
+    "ci:full": "npm run lint && npm run test:ci && npm run test:accessibility && npm run test:performance && npm run build",
+    "build:vercel": "set ELECTRON_BUILD=false && next build",
+    "vercel-build": "npm run build:vercel",
+    "deploy:vercel": "vercel --prod",
+    "preview:vercel": "vercel"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^5.2.1",
+    "@prisma/client": "^6.14.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@supabase/supabase-js": "^2.55.0",
+    "chart.js": "^4.5.0",
+    "clsx": "^2.1.1",
+    "critters": "^0.0.23",
+    "electron-store": "^8.1.0",
+    "framer-motion": "^12.23.22",
+    "next": "15.5.0",
+    "prisma": "^6.14.0",
+    "react": "19.1.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
+    "sql.js": "^1.8.0",
+    "tailwind-merge": "^3.3.1",
+    "web-vitals": "^4.2.4",
+    "zod": "^4.0.17",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.55.0",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/sql.js": "^1.4.4",
+    "concurrently": "^8.2.2",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-is-dev": "^2.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.0",
+    "jest": "^30.1.3",
+    "jest-environment-jsdom": "^30.1.2",
+    "typescript": "^5",
+    "wait-on": "^7.2.0",
+    "webpack-bundle-analyzer": "^4.10.2"
+  },
+  "build": {
+    "appId": "com.3kevaluation.app",
+    "productName": "3K評価システム",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "database/",
+        "to": "database/",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icons/icon.ico"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "public/icons/icon.icns",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icons/icon.png",
+      "category": "Office"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
