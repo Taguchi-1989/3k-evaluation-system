@@ -38,10 +38,10 @@ export class ErrorBoundary extends Component<Props, State> {
     }
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     // エラーを記録
     handleReactError(error, errorInfo as Record<string, unknown>)
-    
+
     // プロップスで渡されたエラーハンドラーを呼び出し
     if (this.props.onError) {
       this.props.onError(error, errorInfo)
@@ -85,7 +85,7 @@ export class ErrorBoundary extends Component<Props, State> {
     alert('エラーレポートが生成されました（開発モード）')
   }
 
-  render() {
+  override render(): ReactNode {
     if (this.state.hasError) {
       // カスタムフォールバックUIが提供されている場合
       if (this.props.fallback) {

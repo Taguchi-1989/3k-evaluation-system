@@ -242,7 +242,7 @@ export class LocalEvaluationRepository implements EvaluationRepository {
   }
 
   async getAll(): Promise<ComprehensiveEvaluation[]> {
-    const allKeys = await this.storage.kv.keys()
+    const allKeys = await this.storage.kv.keys?.() ?? []
     const evalKeys = allKeys.filter(key => key.startsWith(this.prefix))
 
     const evaluations = await Promise.all(
@@ -250,7 +250,7 @@ export class LocalEvaluationRepository implements EvaluationRepository {
     )
 
     const validEvaluations = evaluations.filter(
-      (e): e is ComprehensiveEvaluation => e !== null
+      (e): e is ComprehensiveEvaluation => e !== null && e !== undefined
     )
 
     // 作成日時の降順でソート
@@ -316,8 +316,8 @@ function createInMemoryStorage(): StoragePort {
 
   return {
     kv: {
-      get: async <T>(key: string): Promise<T | null> => {
-        return (store.get(key) as T) || null
+      get: async <T>(key: string): Promise<T | undefined> => {
+        return store.get(key) as T | undefined
       },
       set: async <T>(key: string, value: T): Promise<void> => {
         store.set(key, value)
@@ -332,10 +332,11 @@ function createInMemoryStorage(): StoragePort {
         return Array.from(store.keys())
       }
     },
-    blob: {
-      save: async (): Promise<string> => '',
-      get: async (): Promise<Blob | null> => null,
-      remove: async (): Promise<void> => {},
+    blobs: {
+      read: async (): Promise<Uint8Array> => new Uint8Array(),
+      write: async (): Promise<void> => {},
+      exists: async (): Promise<boolean> => false,
+      delete: async (): Promise<void> => {},
       list: async (): Promise<string[]> => []
     }
   }

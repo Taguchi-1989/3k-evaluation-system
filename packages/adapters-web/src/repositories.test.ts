@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { createWebEvaluationRepository } from './repositories'
-import type { ComprehensiveEvaluation } from '@3k/ports/repositories'
+import type { ComprehensiveEvaluation } from '@3k/ports'
 
 /**
  * Contract Tests for EvaluationRepository
@@ -129,9 +129,9 @@ describe('WebEvaluationRepository - Contract Tests', () => {
       })
 
       const all = await repository.getAll()
-      expect(all[0].id).toBe('test-6') // 最新
-      expect(all[1].id).toBe('test-7')
-      expect(all[2].id).toBe('test-5') // 最古
+      expect(all[0]?.id).toBe('test-6') // 最新
+      expect(all[1]?.id).toBe('test-7')
+      expect(all[2]?.id).toBe('test-5') // 最古
     })
   })
 

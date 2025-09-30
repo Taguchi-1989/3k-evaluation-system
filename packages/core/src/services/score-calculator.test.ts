@@ -35,7 +35,7 @@ describe('score-calculator', () => {
 
       // 30kgは25kg以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.weight).toBe(7)
+      expect(result.factors?.weight).toBe(7)
     })
 
     it('片手で重量物を扱う場合のスコア計算', () => {
@@ -56,7 +56,7 @@ describe('score-calculator', () => {
 
       // 15kgは12kg以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.weight).toBe(7)
+      expect(result.factors?.weight).toBe(7)
     })
 
     it('筋力スコアの計算', () => {
@@ -75,7 +75,7 @@ describe('score-calculator', () => {
 
       // 40kgは30kg以上なのでスコア4
       expect(result.score).toBe(4)
-      expect(result.factors.muscle).toBe(4)
+      expect(result.factors?.muscle).toBe(4)
     })
 
     it('保護具着用率スコアの計算', () => {
@@ -94,7 +94,7 @@ describe('score-calculator', () => {
 
       // 85%は80%以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.gear).toBe(7)
+      expect(result.factors?.gear).toBe(7)
     })
 
     it('RULA姿勢評価スコアの計算', () => {
@@ -119,7 +119,7 @@ describe('score-calculator', () => {
 
       // RULAスコア6は5以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.posture).toBe(7)
+      expect(result.factors?.posture).toBe(7)
     })
 
     it('作業時間ファクターの適用', () => {
@@ -176,7 +176,7 @@ describe('score-calculator', () => {
 
       // '頻繁にある'(7) × 40%(1.0) = 7
       expect(result.score).toBe(7)
-      expect(result.factors.failure).toBe(7)
+      expect(result.factors?.failure).toBe(7)
     })
 
     it('集中力スコアの計算', () => {
@@ -193,7 +193,7 @@ describe('score-calculator', () => {
 
       // '高度な集中を要する'(7) × 60%(1.2) = 9
       expect(result.score).toBe(9)
-      expect(result.factors.concentration).toBe(9)
+      expect(result.factors?.concentration).toBe(9)
     })
 
     it('認知負荷スコアの計算', () => {
@@ -210,7 +210,7 @@ describe('score-calculator', () => {
 
       // 'ある'(7) × 40%(1.0) = 7
       expect(result.score).toBe(7)
-      expect(result.factors.cognitive).toBe(7)
+      expect(result.factors?.cognitive).toBe(7)
     })
 
     it('技能活用度スコアの計算（低い = 高スコア）', () => {
@@ -227,7 +227,7 @@ describe('score-calculator', () => {
 
       // '低い'(10) × 40%(1.0) = 10
       expect(result.score).toBe(10)
-      expect(result.factors.skill).toBe(10)
+      expect(result.factors?.skill).toBe(10)
     })
 
     it('複数ファクターの最大値採用', () => {
@@ -268,7 +268,7 @@ describe('score-calculator', () => {
 
       // 150/100 = 1.5 なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.substances).toBe(7)
+      expect(result.factors?.substances).toBe(7)
     })
 
     it('温度スコアの計算（高温）', () => {
@@ -280,7 +280,7 @@ describe('score-calculator', () => {
 
       // 39度は38度以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.temperature).toBe(7)
+      expect(result.factors?.temperature).toBe(7)
     })
 
     it('温度スコアの計算（低温）', () => {
@@ -292,7 +292,7 @@ describe('score-calculator', () => {
 
       // -5度は0度以下なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.temperature).toBe(7)
+      expect(result.factors?.temperature).toBe(7)
     })
 
     it('騒音スコアの計算', () => {
@@ -304,7 +304,7 @@ describe('score-calculator', () => {
 
       // 88dBは85dB以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.noise).toBe(7)
+      expect(result.factors?.noise).toBe(7)
     })
 
     it('粉じんスコアの計算', () => {
@@ -316,7 +316,7 @@ describe('score-calculator', () => {
 
       // 7mg/m³は5以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.dust).toBe(7)
+      expect(result.factors?.dust).toBe(7)
     })
 
     it('振動スコアの計算', () => {
@@ -328,7 +328,7 @@ describe('score-calculator', () => {
 
       // 4m/s²は3以上なのでスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.vibration).toBe(7)
+      expect(result.factors?.vibration).toBe(7)
     })
 
     it('汚染レベルスコアの計算', () => {
@@ -340,7 +340,7 @@ describe('score-calculator', () => {
 
       // '汚い'はスコア7
       expect(result.score).toBe(7)
-      expect(result.factors.contamination).toBe(7)
+      expect(result.factors?.contamination).toBe(7)
     })
   })
 
@@ -362,7 +362,7 @@ describe('score-calculator', () => {
 
       // リスクポイント = 4 × 4 = 16 なのでスコア10
       expect(result.score).toBe(10)
-      expect(result.factors.hazard).toBe(10)
+      expect(result.factors?.hazard).toBe(10)
     })
 
     it('リスクスコアの計算（中リスク）', () => {
@@ -382,7 +382,7 @@ describe('score-calculator', () => {
 
       // リスクポイント = 2 × 3 = 6 なのでスコア4
       expect(result.score).toBe(4)
-      expect(result.factors.hazard).toBe(4)
+      expect(result.factors?.hazard).toBe(4)
     })
 
     it('複数ハザードの最大値採用', () => {

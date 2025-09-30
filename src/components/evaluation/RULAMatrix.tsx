@@ -27,7 +27,8 @@ export function RULAMatrix({
   const getCellClasses = (value: number, rowIndex: number, colIndex: number) => {
     const isHighlighted = highlightedCell?.row === rowIndex && highlightedCell?.col === colIndex
     const scoreStr = value.toString()
-    const colorClass = rulaMatrix.scoreColors[scoreStr] || 'text-gray-600 bg-gray-50 dark:text-gray-400 dark:bg-gray-700'
+    const scoreColors = rulaMatrix.scoreColors as Record<string, string>
+    const colorClass = scoreColors[scoreStr] || 'text-gray-600 bg-gray-50 dark:text-gray-400 dark:bg-gray-700'
     
     const baseClasses = 'cursor-pointer transition-all duration-200 flex items-center justify-center text-sm font-bold border border-gray-300 dark:border-gray-600 min-h-[40px] p-2'
     const highlightClass = isHighlighted ? 'ring-2 ring-blue-500 scale-105 z-10' : 'hover:scale-105 hover:shadow-md'
@@ -124,8 +125,8 @@ export function RULAMatrix({
 
   // 選択されたスコアに基づいてマトリックスの該当セルを計算
   const rowIndex = Math.min(selectedTabA - 1, rulaMatrix.matrix.length - 1)
-  const colIndex = Math.min(selectedTabB - 1, rulaMatrix.matrix[0].length - 1)
-  const finalScore = rulaMatrix.matrix[rowIndex][colIndex]
+  const colIndex = Math.min(selectedTabB - 1, rulaMatrix.matrix[0]?.length ?? 1 - 1)
+  const finalScore = rulaMatrix.matrix[rowIndex]?.[colIndex]
 
   return (
     <div className={`flex flex-col h-full ${className}`}>
@@ -180,7 +181,7 @@ export function RULAMatrix({
                               <div className="font-bold">{value}</div>
                               {isSelected && (
                                 <div className="text-[10px] mt-1">
-                                  {rulaMatrix.scoreLabels[value.toString()]}
+                                  {(rulaMatrix.scoreLabels as Record<string, string>)[value.toString()]}
                                 </div>
                               )}
                             </div>
@@ -204,13 +205,13 @@ export function RULAMatrix({
                 </div>
                 <div className="text-center">
                   <p className={`text-3xl font-bold ${
-                    finalScore <= 2 ? 'text-green-600' :
-                    finalScore <= 4 ? 'text-yellow-600' :
-                    finalScore <= 6 ? 'text-orange-600' : 'text-red-600'
+                    (finalScore ?? 1) <= 2 ? 'text-green-600' :
+                    (finalScore ?? 1) <= 4 ? 'text-yellow-600' :
+                    (finalScore ?? 1) <= 6 ? 'text-orange-600' : 'text-red-600'
                   }`}>
-                    {finalScore}
+                    {finalScore ?? '-'}
                   </p>
-                  <p className="text-xs mt-1">{rulaMatrix.scoreLabels[finalScore.toString()]}</p>
+                  <p className="text-xs mt-1">{finalScore ? (rulaMatrix.scoreLabels as Record<string, string>)[finalScore.toString()] : '-'}</p>
                 </div>
               </div>
             </div>

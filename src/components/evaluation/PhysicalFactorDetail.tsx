@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { TabInterface } from '@/components/ui/TabInterface'
 import { Input, HelpTooltip } from '@/components/ui'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
-import { PostureList, MatrixDisplay, type Posture } from '@/components/evaluation'
+import { PostureList, MatrixDisplay } from '@/components/evaluation'
+import type { Posture } from '@/components/evaluation/PostureList'
 import { StandardsLegend } from '@/components/evaluation/StandardsLegend'
 import { AIComprehensiveAssistant } from '@/components/ui/AIComprehensiveAssistant'
 import matrixData from '@/data/evaluation-matrix.json'
@@ -93,11 +94,16 @@ export function PhysicalFactorDetail({
   const [selectedDuration, setSelectedDuration] = useState<string>('<10%')
   const [calculatedScore, setCalculatedScore] = useState<number>(1)
   const [physicalDetails, setPhysicalDetails] = useState<PhysicalDetails>({
-    checkboxes: {},
+    checkboxes: {
+      weightBoth: false,
+      weightSingle: false,
+      muscle: false,
+      gear: false,
+      eye: false
+    },
     targetWeight: {},
-    muscleStrength: {},
-    protectiveEquipment: 'なし',
-    eyeStrain: '対象無し'
+    protectiveGear: { percentage: 0 },
+    eyeStrain: { percentage: 0 }
   })
   const [realTimeEvaluation, setRealTimeEvaluation] = useState<any>(null)
   
@@ -166,13 +172,16 @@ export function PhysicalFactorDetail({
       const workDescription = result.workAnalysis
 
       if (workDescription.physicalDemand === 'high') {
-        newCheckboxes['weight-10kg'] = true
-        newCheckboxes['posture-bad'] = true
+        newCheckboxes.weightBoth = true
+        newCheckboxes.muscle = true
       }
 
       setPhysicalDetails(prev => ({
         ...prev,
-        checkboxes: newCheckboxes
+        checkboxes: {
+          ...prev.checkboxes,
+          ...newCheckboxes
+        }
       }))
 
       // 成功メッセージを表示
@@ -194,17 +203,8 @@ export function PhysicalFactorDetail({
       setRealTimeEvaluation(result)
       // Real-time evaluation completed
 
-      // データストアに保存 - create evaluation data inside function to avoid dependency issues
-      const currentEvaluationData = {
-        physicalDetails,
-        selectedComprehensivePosture,
-        selectedStrength,
-        selectedDuration,
-        calculatedScore,
-        selectedPosture,
-        selectedEvaluationMethod
-      }
-      updateFactorData('physicalFactor', currentEvaluationData)
+      // データストアに保存 - PhysicalDetails型のみを保存
+      updateFactorData('physicalFactor', physicalDetails)
     } catch (error) {
       console.error('Evaluation error:', error)
     }
@@ -214,10 +214,11 @@ export function PhysicalFactorDetail({
   useEffect(() => {
     const comprehensiveMatrix = matrixData.COMPREHENSIVE
     if (comprehensiveMatrix && comprehensiveMatrix.matrix) {
-      const postureMatrix = comprehensiveMatrix.matrix[selectedComprehensivePosture]
+      const matrix = comprehensiveMatrix.matrix as Record<string, Record<string, number[]>>
+      const postureMatrix = matrix[selectedComprehensivePosture]
       if (postureMatrix && postureMatrix[selectedDuration]) {
         const strengthIndex = comprehensiveMatrix.strengthLevels.indexOf(selectedStrength)
-        if (strengthIndex !== -1) {
+        if (strengthIndex !== -1 && postureMatrix[selectedDuration]?.[strengthIndex] !== undefined) {
           const score = postureMatrix[selectedDuration][strengthIndex]
           setCalculatedScore(score)
         }
@@ -268,12 +269,16 @@ export function PhysicalFactorDetail({
           <input 
             type="checkbox" 
             className="h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+            checked={physicalDetails.checkboxes?.weightBoth || false}
             onChange={(e) => {
               setPhysicalDetails(prev => ({
                 ...prev,
                 checkboxes: {
-                  ...prev.checkboxes,
-                  weightBoth: e.target.checked
+                  weightBoth: e.target.checked,
+                  weightSingle: prev.checkboxes?.weightSingle || false,
+                  muscle: prev.checkboxes?.muscle || false,
+                  gear: prev.checkboxes?.gear || false,
+                  eye: prev.checkboxes?.eye || false
                 }
               }))
             }}
@@ -322,7 +327,7 @@ export function PhysicalFactorDetail({
           <button 
             className="ml-1 p-0.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600" 
             title="保護具の詳細情報"
-            onClick={() => showPopup('保護具について', EVALUATION_STANDARDS.physical.protectiveEquipment?.description || '保護具無し・クリーン服作業: 軽い\n呼吸器付作業着・適防耐火服(一部なし): 適防耐火服\n適防耐火服(一式すべて): 対象無し')}
+            onClick={() => showPopup('保護具について', (EVALUATION_STANDARDS.physical as { protectiveEquipment?: { description?: string } }).protectiveEquipment?.description || '保護具無し・クリーン服作業: 軽い\n呼吸器付作業着・適防耐火服(一部なし): 適防耐火服\n適防耐火服(一式すべて): 対象無し')}
           >
             <svg className="h-3 w-3 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4c0-1.105.448-2.09 1.172-2.828M12 14v.01M12 18v-2m-3-5a3 3 0 116 0 3 3 0 01-6 0z" />
@@ -330,9 +335,9 @@ export function PhysicalFactorDetail({
           </button>
         </label>
         <select className="w-20 p-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-          {physicalStandards.protectiveEquipment?.levels?.map((level) => (
+          {((physicalStandards as { protectiveEquipment?: { levels?: string[] } }).protectiveEquipment?.levels?.map((level: string) => (
             <option key={level} className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">{level}</option>
-          )) || [
+          ))) || [
             <option key="none" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">なし</option>,
             <option key="no-protection" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">保護具無し</option>,
             <option key="clean-suit" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">クリーン服作業</option>,
@@ -352,7 +357,7 @@ export function PhysicalFactorDetail({
           <button 
             className="ml-1 p-0.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600" 
             title="眼精疲労の詳細情報"
-            onClick={() => showPopup('眼精疲労について', EVALUATION_STANDARDS.physical.eyeStrain?.description || '対象無し: 眼精疲労による負担がない\n軽度: わずかに眼の疲れを感じる\n中度: 明らかに眼の疲れを感じる\n重度: 眼の痛み、頭痛を伴う\n限界: 作業継続が困難')}
+            onClick={() => showPopup('眼精疲労について', (EVALUATION_STANDARDS.physical as { eyeStrain?: { description?: string } }).eyeStrain?.description || '対象無し: 眼精疲労による負担がない\n軽度: わずかに眼の疲れを感じる\n中度: 明らかに眼の疲れを感じる\n重度: 眼の痛み、頭痛を伴う\n限界: 作業継続が困難')}
           >
             <svg className="h-3 w-3 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4c0-1.105.448-2.09 1.172-2.828M12 14v.01M12 18v-2m-3-5a3 3 0 116 0 3 3 0 01-6 0z" />
@@ -360,9 +365,9 @@ export function PhysicalFactorDetail({
           </button>
         </label>
         <select className="w-20 p-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-          {physicalStandards.eyeStrain?.levels?.map((level) => (
+          {((physicalStandards as { eyeStrain?: { levels?: string[] } }).eyeStrain?.levels?.map((level: string) => (
             <option key={level} className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">{level}</option>
-          )) || [
+          ))) || [
             <option key="na" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">対象無し</option>,
             <option key="light" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">軽度</option>,
             <option key="moderate" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">中度</option>,

@@ -3,19 +3,19 @@
  * 3K評価システム デスクトップ版
  */
 
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-const Store = require('electron-store');
+import { app, BrowserWindow, ipcMain, type IpcMainInvokeEvent } from 'electron'
+import * as path from 'path'
+import Store from 'electron-store'
 
 // 開発モードの判定関数
 function isDevelopment(): boolean {
-  return process.env.NODE_ENV !== 'production' && !app.isPackaged;
+  return process.env.NODE_ENV !== 'production' && !app.isPackaged
 }
 
 // electron-storeの初期化
-const store = new Store();
+const store = new Store()
 
-let mainWindow: any = null;
+let mainWindow: BrowserWindow | null = null
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -76,21 +76,21 @@ app.on('window-all-closed', () => {
 // ========================================
 
 // ストアから値を取得
-ipcMain.handle('store:get', async (_event: any, key: string) => {
-  return store.get(key);
-});
+ipcMain.handle('store:get', async (_event: IpcMainInvokeEvent, key: string) => {
+  return store.get(key)
+})
 
 // ストアに値を保存
-ipcMain.handle('store:set', async (_event: any, key: string, value: any) => {
-  store.set(key, value);
-  return true;
-});
+ipcMain.handle('store:set', async (_event: IpcMainInvokeEvent, key: string, value: unknown) => {
+  store.set(key, value)
+  return true
+})
 
 // ストアから値を削除
-ipcMain.handle('store:delete', async (_event: any, key: string) => {
-  store.delete(key);
-  return true;
-});
+ipcMain.handle('store:delete', async (_event: IpcMainInvokeEvent, key: string) => {
+  store.delete(key)
+  return true
+})
 
 // ストアをクリア
 ipcMain.handle('store:clear', async () => {

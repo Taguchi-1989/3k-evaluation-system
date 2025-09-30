@@ -5,7 +5,8 @@ import { useAuth, DEMO_USERS } from '@/contexts/AuthContext'
 import { PermissionGuard } from '@/components/auth/PermissionGuard'
 import { UserRoleIndicator } from '@/components/auth/UserRoleIndicator'
 import { Card, CardContent, CardHeader, CardTitle, Button } from '@/components/ui'
-import { User, UserRole, ROLE_LABELS } from '@/types/permissions'
+import type { User, UserRole } from '@/types/permissions'
+import { ROLE_LABELS } from '@/types/permissions'
 import { Header } from '@/components/layout/Header'
 
 export default function AdminPage() {
