@@ -13,13 +13,15 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
   
   const standards = EVALUATION_STANDARDS[factorType]
   
-  const renderPhysicalStandards = () => (
+  const renderPhysicalStandards = () => {
+    const physicalStandards = standards as { scales?: { rula?: { scale?: Array<{ score: number; level: string; color: string; description: string }> }; owas?: { scale?: Array<{ category: number; level: string; color: string; description: string; action: string }> } } }
+    return (
     <div className="space-y-3">
       {/* RULA評価基準 */}
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">RULA評価基準</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-          {standards.scales?.rula?.scale?.map((scale, index) => (
+          {physicalStandards.scales?.rula?.scale?.map((scale: { score: number; level: string; color: string; description: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${scale.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -38,7 +40,7 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">OWAS評価基準</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-          {standards.scales?.owas?.scale?.map((scale, index) => (
+          {physicalStandards.scales?.owas?.scale?.map((scale: { category: number; level: string; color: string; description: string; action: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${scale.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -54,15 +56,18 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
         </div>
       </div>
     </div>
-  )
+    )
+  }
 
-  const renderMentalStandards = () => (
+  const renderMentalStandards = () => {
+    const mentalStandards = standards as { scales?: { severity?: Array<{ level: string; color: string; description: string }> } }
+    return (
     <div className="space-y-3">
       {/* 重要度レベル */}
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">重要度レベル</h4>
         <div className="grid grid-cols-1 gap-2 text-xs">
-          {standards.scales?.severity?.map((severity, index) => (
+          {mentalStandards.scales?.severity?.map((severity: { level: string; color: string; description: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${severity.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -77,15 +82,18 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
         </div>
       </div>
     </div>
-  )
+    )
+  }
 
-  const renderEnvironmentalStandards = () => (
+  const renderEnvironmentalStandards = () => {
+    const envStandards = standards as { substances?: Array<{ name: string; standardValue: number; unit: string; category: string }>; riskLevels?: Array<{ level: string; color: string; description: string }> }
+    return (
     <div className="space-y-3">
       {/* 化学物質基準値 */}
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">主要化学物質基準値</h4>
         <div className="grid grid-cols-1 gap-2 text-xs">
-          {standards.substances?.slice(0, 5).map((substance, index) => (
+          {envStandards.substances?.slice(0, 5).map((substance: { name: string; standardValue: number; unit: string; category: string }, index: number) => (
             <div key={index} className="p-2 bg-gray-50 dark:bg-gray-700 rounded">
               <div className="font-medium">{substance.name}</div>
               <div className="text-gray-600 dark:text-gray-300">
@@ -101,7 +109,7 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">リスクレベル</h4>
         <div className="grid grid-cols-2 gap-2 text-xs">
-          {standards.riskLevels?.map((level, index) => (
+          {envStandards.riskLevels?.map((level: { level: string; color: string; description: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${level.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -116,9 +124,12 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
         </div>
       </div>
     </div>
-  )
+    )
+  }
 
-  const renderHazardStandards = () => (
+  const renderHazardStandards = () => {
+    const hazardStandards = standards as { riskLevels?: Array<{ level: string; color: string; description: string; action: string }> }
+    return (
     <div className="space-y-3">
       {/* リスクマトリクス */}
       <div>
@@ -160,7 +171,7 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">リスクレベル説明</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-          {standards.riskLevels?.map((level, index) => (
+          {hazardStandards.riskLevels?.map((level: { level: string; color: string; description: string; action: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${level.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -176,15 +187,18 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
         </div>
       </div>
     </div>
-  )
+    )
+  }
 
-  const renderWorkTimeStandards = () => (
+  const renderWorkTimeStandards = () => {
+    const workTimeStandards = standards as { timeClasses?: Array<{ class: number; range: string; color: string; description: string }>; fatigueIndex?: Array<{ range: string; level: string; color: string; description: string }> }
+    return (
     <div className="space-y-3">
       {/* 時間クラス */}
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">時間クラス基準</h4>
         <div className="grid grid-cols-1 gap-2 text-xs">
-          {standards.timeClasses?.map((timeClass, index) => (
+          {workTimeStandards.timeClasses?.map((timeClass: { class: number; range: string; color: string; description: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${timeClass.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -203,7 +217,7 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
       <div>
         <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">疲労指数基準</h4>
         <div className="grid grid-cols-2 gap-2 text-xs">
-          {standards.fatigueIndex?.map((fatigue, index) => (
+          {workTimeStandards.fatigueIndex?.map((fatigue: { range: string; level: string; color: string; description: string }, index: number) => (
             <div 
               key={index} 
               className={`p-2 rounded border-l-4 ${fatigue.color === 'green' ? 'border-green-500 bg-green-50' : 
@@ -218,7 +232,8 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
         </div>
       </div>
     </div>
-  )
+    )
+  }
 
   const renderContent = () => {
     switch (factorType) {
