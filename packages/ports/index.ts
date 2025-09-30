@@ -21,6 +21,7 @@ export type { HttpClient } from './http'
 
 // Repositories
 export type {
+  ComprehensiveEvaluation,
   EvaluationRepository,
   Note,
   NotesRepository

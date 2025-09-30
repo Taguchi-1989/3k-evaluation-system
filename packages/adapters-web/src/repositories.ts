@@ -74,8 +74,8 @@ export class SupabaseEvaluationRepository implements EvaluationRepository {
     }
 
     // 全件をローカルキャッシュに保存
-    for (const eval of data) {
-      await this.storage.kv.set(`eval:${eval.id}`, eval)
+    for (const evaluation of data) {
+      await this.storage.kv.set(`eval:${evaluation.id}`, evaluation)
     }
 
     return data as ComprehensiveEvaluation[]

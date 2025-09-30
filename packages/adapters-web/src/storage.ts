@@ -151,7 +151,10 @@ class LocalStorageBlobStore implements BlobStore {
     // Base64エンコード
     let binaryString = ''
     for (let i = 0; i < data.length; i++) {
-      binaryString += String.fromCharCode(data[i])
+      const byte = data[i]
+      if (byte !== undefined) {
+        binaryString += String.fromCharCode(byte)
+      }
     }
     const base64 = btoa(binaryString)
     localStorage.setItem(this.prefix + path, base64)

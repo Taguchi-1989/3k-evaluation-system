@@ -3,7 +3,15 @@
  * Web環境用アダプター集約
  */
 
-import type { Adapters } from '@3k/core'
+import type {
+  ConfigPort,
+  StoragePort,
+  AuthPort,
+  HttpClient,
+  Logger,
+  EvaluationRepository,
+  NotesRepository
+} from '@3k/ports'
 import { createClient } from '@supabase/supabase-js'
 import { webConfig } from './config'
 import { webStorage } from './storage'
@@ -11,6 +19,19 @@ import { createSupabaseAuth } from './auth'
 import { createFetchClient } from './http'
 import { consoleLogger } from './logger'
 import { createSupabaseRepositories } from './repositories'
+
+/**
+ * アダプター集約型
+ */
+export interface Adapters {
+  config: ConfigPort
+  storage: StoragePort
+  auth: AuthPort
+  http: HttpClient
+  logger: Logger
+  evaluationRepo: EvaluationRepository
+  notesRepo: NotesRepository
+}
 
 /**
  * Web環境用アダプターを初期化

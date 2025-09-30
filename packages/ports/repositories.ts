@@ -3,14 +3,26 @@
  * Data access layer interfaces for domain entities
  */
 
-import type {
-  PhysicalDetails,
-  MentalDetails,
-  EnvironmentalDetails,
-  HazardDetails,
-  WorkTimeFactor,
-  ComprehensiveEvaluation
-} from '@/types/evaluation'
+/**
+ * ComprehensiveEvaluation Domain Model
+ * Re-export from domain for repository interface
+ */
+export interface ComprehensiveEvaluation {
+  readonly id: string
+  readonly createdAt: string
+  readonly updatedAt?: string
+  readonly workDescription: string
+  readonly physicalScore?: number
+  readonly mentalScore?: number
+  readonly environmentalScore?: number
+  readonly hazardScore?: number
+  readonly workTimeScore?: number
+  readonly final3KIndex?: 'A' | 'B' | 'C' | 'D'
+  readonly finalKitsusaScore?: number
+  readonly calculationDetails?: Record<string, unknown>
+  // 他の詳細フィールドは必要に応じて拡張
+  [key: string]: unknown
+}
 
 /**
  * Evaluation Repository Port
@@ -33,16 +45,19 @@ export interface EvaluationRepository {
 }
 
 /**
- * Notes Repository Port (for future features)
+ * Note Domain Model
  */
 export interface Note {
-  id: string
-  title: string
-  body: string
-  createdAt: string
-  updatedAt?: string
+  readonly id: string
+  readonly title: string
+  readonly body: string
+  readonly createdAt: string
+  readonly updatedAt?: string
 }
 
+/**
+ * Notes Repository Port
+ */
 export interface NotesRepository {
   list(): Promise<Note[]>
   get(id: string): Promise<Note | null>
