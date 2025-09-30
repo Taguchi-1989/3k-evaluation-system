@@ -1,0 +1,116 @@
+[
+  {
+    "name": "KV",
+    "type": "interface",
+    "file": "packages\\ports\\storage.ts",
+    "package": "ports"
+  },
+  {
+    "name": "BlobStore",
+    "type": "interface",
+    "file": "packages\\ports\\storage.ts",
+    "package": "ports"
+  },
+  {
+    "name": "StoragePort",
+    "type": "interface",
+    "file": "packages\\ports\\storage.ts",
+    "package": "ports"
+  },
+  {
+    "name": "EvaluationRepository",
+    "type": "interface",
+    "file": "packages\\ports\\repositories.ts",
+    "package": "ports"
+  },
+  {
+    "name": "Note",
+    "type": "interface",
+    "file": "packages\\ports\\repositories.ts",
+    "package": "ports"
+  },
+  {
+    "name": "NotesRepository",
+    "type": "interface",
+    "file": "packages\\ports\\repositories.ts",
+    "package": "ports"
+  },
+  {
+    "name": "LogMetadata",
+    "type": "interface",
+    "file": "packages\\ports\\logger.ts",
+    "package": "ports"
+  },
+  {
+    "name": "Logger",
+    "type": "interface",
+    "file": "packages\\ports\\logger.ts",
+    "package": "ports"
+  },
+  {
+    "name": "LogLevel",
+    "type": "type",
+    "file": "packages\\ports\\logger.ts",
+    "package": "ports"
+  },
+  {
+    "name": "ChatMessage",
+    "type": "interface",
+    "file": "packages\\ports\\llm.ts",
+    "package": "ports"
+  },
+  {
+    "name": "LLMUsage",
+    "type": "interface",
+    "file": "packages\\ports\\llm.ts",
+    "package": "ports"
+  },
+  {
+    "name": "LLMResponse",
+    "type": "interface",
+    "file": "packages\\ports\\llm.ts",
+    "package": "ports"
+  },
+  {
+    "name": "LLMPort",
+    "type": "interface",
+    "file": "packages\\ports\\llm.ts",
+    "package": "ports"
+  },
+  {
+    "name": "ChatRole",
+    "type": "type",
+    "file": "packages\\ports\\llm.ts",
+    "package": "ports"
+  },
+  {
+    "name": "HttpClient",
+    "type": "interface",
+    "file": "packages\\ports\\http.ts",
+    "package": "ports"
+  },
+  {
+    "name": "AppConfig",
+    "type": "interface",
+    "file": "packages\\ports\\config.ts",
+    "package": "ports"
+  },
+  {
+    "name": "ConfigPort",
+    "type": "interface",
+    "file": "packages\\ports\\config.ts",
+    "package": "ports"
+  },
+  {
+    "name": "Session",
+    "type": "interface",
+    "file": "packages\\ports\\auth.ts",
+    "package": "ports"
+  },
+  {
+    "name": "AuthPort",
+    "type": "interface",
+    "file": "packages\\ports\\auth.ts",
+    "package": "ports"
+  }
+]

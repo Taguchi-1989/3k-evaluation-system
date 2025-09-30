@@ -13,15 +13,24 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "composite": false,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/ref/*": ["./ref/*"],
+      "@3k/ports": ["./packages/ports"],
+      "@3k/core": ["./packages/core"],
+      "@3k/ui": ["./packages/ui"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "3k-evaluation-app", "dist", "release"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "packages/**/*.ts"],
+  "exclude": ["node_modules", "3k-evaluation-app", "dist", "release", ".next", "out"]
 }

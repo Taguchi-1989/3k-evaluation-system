@@ -1,10 +1,49 @@
 # 3K評価アプリケーション - Claude Code 引き継ぎ記録
 
-## 📅 作業完了日: 2025-09-30
+## 📅 最終更新: 2025-09-30 (Phase 0 完了)
 
 ---
 
-## 🔄 2025-09-30 更新: Vercelデプロイ修正
+## 🏗️ アーキテクチャ移行 (Phase 0: 基盤整備 完了)
+
+### 現状の課題と目標
+**課題:**
+- モノリシックな Next.js + Electron 構成
+- Web/Electron間でコード重複とビルド時分岐（`if (isElectron)`）
+- 型安全性の欠如（`any`の多用）
+- テスト・CI/CD不足
+
+**目標アーキテクチャ:**
+- **Hexagonal (Ports & Adapters)** パターン
+- **Monorepo (pnpm + turbo)** 構成
+- **共有コア（Pure TS）+ 環境別アダプター**
+- **Contract-First開発** + 関数レジストリ
+
+### Phase 0 成果物 ✅
+- [x] モノレポ構造作成（`pnpm-workspace.yaml`, `turbo.json`）
+- [x] 7つのPort定義作成（`packages/ports/`）
+  - ConfigPort, StoragePort, AuthPort, HttpClient
+  - EvaluationRepository, Logger, LLMPort
+- [x] 型堅牢化設定
+  - `tsconfig.json`: strict + noUncheckedIndexedAccess + path aliases
+  - `.eslintrc.cjs`: @typescript-eslint/no-explicit-any: error
+- [x] 関数レジストリ自動生成（`npm run gen:functions`）
+  - `docs/FUNCTIONS.md` (19 items)
+  - `docs/functions.base.json` (baseline snapshot)
+- [x] ガードスクリプト作成
+  - `scripts/guards/check-functions.js` (関数削除検知)
+  - `scripts/guards/no-mixed-ui-logic.js` (UI/Logic分離)
+
+### 次のフェーズ（予定）
+- **Phase 1**: Core抽出（評価ロジックのPure TS化、bootstrap関数）
+- **Phase 2**: Webアダプター実装（Supabase, IDB）
+- **Phase 3**: Desktopアダプター実装（SQLite, OAuth, keytar）
+
+詳細な移行計画・実装ガイドは **[chrome.md](./chrome.md)** を参照。
+
+---
+
+## 🔄 2025-09-30 更新: Vercelデプロイ修正 + Phase 0完了
 
 ### ✅ 7. Vercelデプロイエラー修正
 - **問題**: 必須設定ファイル不足によりVercelビルドが失敗
