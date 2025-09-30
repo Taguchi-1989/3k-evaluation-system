@@ -87,6 +87,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/sql.js": "^1.4.4",
+    "@vitest/ui": "^3.2.4",
     "concurrently": "^8.2.2",
     "cross-env": "^10.1.0",
     "electron": "^28.0.0",
@@ -96,7 +97,9 @@
     "glob": "^11.0.3",
     "jest": "^30.1.3",
     "jest-environment-jsdom": "^30.1.2",
+    "jsdom": "^27.0.0",
     "typescript": "^5",
+    "vitest": "^3.2.4",
     "wait-on": "^7.2.0",
     "webpack-bundle-analyzer": "^4.10.2"
   },

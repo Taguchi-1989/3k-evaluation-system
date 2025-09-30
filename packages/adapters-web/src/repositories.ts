@@ -220,7 +220,69 @@ export class SupabaseNotesRepository implements NotesRepository {
 }
 
 /**
- * ファクトリー関数
+ * LocalOnly EvaluationRepository (テスト用・オフライン用)
+ * IndexedDB/LocalStorageのみを使用
+ */
+export class LocalEvaluationRepository implements EvaluationRepository {
+  private storage: StoragePort
+  private prefix = 'eval:'
+
+  constructor(storage: StoragePort) {
+    this.storage = storage
+  }
+
+  async save(evaluation: ComprehensiveEvaluation): Promise<string> {
+    await this.storage.kv.set(`${this.prefix}${evaluation.id}`, evaluation)
+    return evaluation.id
+  }
+
+  async get(id: string): Promise<ComprehensiveEvaluation | null> {
+    const data = await this.storage.kv.get<ComprehensiveEvaluation>(`${this.prefix}${id}`)
+    return data || null
+  }
+
+  async getAll(): Promise<ComprehensiveEvaluation[]> {
+    const allKeys = await this.storage.kv.keys()
+    const evalKeys = allKeys.filter(key => key.startsWith(this.prefix))
+
+    const evaluations = await Promise.all(
+      evalKeys.map(key => this.storage.kv.get<ComprehensiveEvaluation>(key))
+    )
+
+    const validEvaluations = evaluations.filter(
+      (e): e is ComprehensiveEvaluation => e !== null
+    )
+
+    // 作成日時の降順でソート
+    return validEvaluations.sort((a, b) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.storage.kv.remove(`${this.prefix}${id}`)
+  }
+
+  async update(id: string, evaluation: Partial<ComprehensiveEvaluation>): Promise<ComprehensiveEvaluation> {
+    const existing = await this.get(id)
+    if (!existing) {
+      throw new Error(`Evaluation ${id} not found`)
+    }
+
+    const updated: ComprehensiveEvaluation = {
+      ...existing,
+      ...evaluation,
+      id: existing.id, // IDは変更不可
+      updatedAt: new Date().toISOString()
+    }
+
+    await this.save(updated)
+    return updated
+  }
+}
+
+/**
+ * ファクトリー関数（Supabase版）
  */
 export function createSupabaseRepositories(
   supabase: SupabaseClient,
@@ -232,5 +294,49 @@ export function createSupabaseRepositories(
   return {
     evaluationRepo: new SupabaseEvaluationRepository(supabase, storage),
     notesRepo: new SupabaseNotesRepository(supabase, storage)
+  }
+}
+
+/**
+ * ファクトリー関数（ローカルのみ版 - テスト・オフライン用）
+ */
+export function createWebEvaluationRepository(
+  storage?: StoragePort
+): EvaluationRepository {
+  // StoragePortが渡されない場合は簡易実装を使用
+  const storageImpl = storage || createInMemoryStorage()
+  return new LocalEvaluationRepository(storageImpl)
+}
+
+/**
+ * インメモリStorage実装（テスト用）
+ */
+function createInMemoryStorage(): StoragePort {
+  const store = new Map<string, unknown>()
+
+  return {
+    kv: {
+      get: async <T>(key: string): Promise<T | null> => {
+        return (store.get(key) as T) || null
+      },
+      set: async <T>(key: string, value: T): Promise<void> => {
+        store.set(key, value)
+      },
+      remove: async (key: string): Promise<void> => {
+        store.delete(key)
+      },
+      clear: async (): Promise<void> => {
+        store.clear()
+      },
+      keys: async (): Promise<string[]> => {
+        return Array.from(store.keys())
+      }
+    },
+    blob: {
+      save: async (): Promise<string> => '',
+      get: async (): Promise<Blob | null> => null,
+      remove: async (): Promise<void> => {},
+      list: async (): Promise<string[]> => []
+    }
   }
 }
