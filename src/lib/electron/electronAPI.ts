@@ -3,6 +3,32 @@
  * Next.js (Renderer Process) からElectron APIへの安全なアクセス
  */
 
+// API Response Types
+export interface APIResponse<T = unknown> {
+  success: boolean
+  data?: T
+  error?: string
+}
+
+export interface QueryResult {
+  changes?: number
+  lastInsertRowid?: number
+}
+
+export interface DialogOptions {
+  title?: string
+  defaultPath?: string
+  buttonLabel?: string
+  filters?: Array<{ name: string; extensions: string[] }>
+  properties?: string[]
+}
+
+export interface EvaluationFilters {
+  factoryName?: string
+  dateFrom?: string
+  dateTo?: string
+}
+
 // Electron環境判定
 export const isElectron = (): boolean => {
   return typeof window !== 'undefined' &&
@@ -22,21 +48,21 @@ export const electronDB = {
   /**
    * SQLクエリ実行
    */
-  query: async (sql: string, params: any[] = []) => {
+  query: async <T = unknown>(sql: string, params: unknown[] = []): Promise<APIResponse<T>> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
-    return await window.electronAPI.database.query(sql, params);
+    return await window.electronAPI.database.query<T>(sql, params);
   },
 
   /**
    * トランザクション実行
    */
-  transaction: async (queries: Array<{query: string, params: any[]}>) => {
+  transaction: async <T = unknown>(queries: Array<{query: string, params: unknown[]}>): Promise<APIResponse<T>> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
-    return await window.electronAPI.database.transaction(queries);
+    return await window.electronAPI.database.transaction<T>(queries);
   }
 };
 
@@ -47,7 +73,7 @@ export const electronEvaluation = {
   /**
    * 評価データ保存
    */
-  save: async (data: any) => {
+  save: async <T = unknown>(data: T): Promise<APIResponse<T>> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
@@ -57,7 +83,7 @@ export const electronEvaluation = {
   /**
    * 評価データ読み込み
    */
-  load: async (id: string) => {
+  load: async <T = unknown>(id: string): Promise<APIResponse<T>> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
@@ -67,7 +93,7 @@ export const electronEvaluation = {
   /**
    * 評価データ一覧取得
    */
-  list: async (filters?: any) => {
+  list: async <T = unknown>(filters?: EvaluationFilters): Promise<APIResponse<T[]>> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
@@ -77,7 +103,7 @@ export const electronEvaluation = {
   /**
    * 評価データ削除
    */
-  delete: async (id: string) => {
+  delete: async (id: string): Promise<APIResponse<void>> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
@@ -92,7 +118,7 @@ export const electronFile = {
   /**
    * ファイル保存ダイアログ
    */
-  saveDialog: async (options: any) => {
+  saveDialog: async (options: DialogOptions): Promise<string | undefined> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
@@ -102,7 +128,7 @@ export const electronFile = {
   /**
    * ファイル選択ダイアログ
    */
-  openDialog: async (options: any) => {
+  openDialog: async (options: DialogOptions): Promise<string[] | undefined> => {
     if (!isElectron()) {
       throw new Error('Electron環境でのみ利用可能です');
     }
@@ -137,7 +163,7 @@ export const electronSystem = {
   /**
    * 外部リンクを開く
    */
-  openExternal: async (url: string) => {
+  openExternal: async (url: string): Promise<void> => {
     if (!isElectron()) {
       // Web版の場合は通常のwindow.open
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -154,7 +180,7 @@ export const electronApp = {
   /**
    * アプリケーション終了
    */
-  quit: async () => {
+  quit: async (): Promise<void> => {
     if (!isElectron()) {
       // Web版の場合は何もしない
       return;
@@ -165,7 +191,7 @@ export const electronApp = {
   /**
    * ウィンドウ最小化
    */
-  minimize: async () => {
+  minimize: async (): Promise<void> => {
     if (!isElectron()) {
       return;
     }
@@ -175,7 +201,7 @@ export const electronApp = {
   /**
    * ウィンドウ最大化/復元
    */
-  maximize: async () => {
+  maximize: async (): Promise<void> => {
     if (!isElectron()) {
       return;
     }
@@ -203,7 +229,7 @@ export const universalStorage = {
   /**
    * データ保存
    */
-  save: async (key: string, data: any) => {
+  save: async (key: string, data: unknown): Promise<APIResponse> => {
     if (isElectron()) {
       // Electron: SQLiteに保存
       return await electronDB.query(
@@ -220,28 +246,29 @@ export const universalStorage = {
   /**
    * データ読み込み
    */
-  load: async (key: string) => {
+  load: async (key: string): Promise<unknown> => {
     if (isElectron()) {
       // Electron: SQLiteから読み込み
-      const result = await electronDB.query(
+      const result = await electronDB.query<Array<{ value: string }>>(
         'SELECT value FROM settings WHERE key = ?',
         [key]
       );
       if (result.success && result.data && result.data.length > 0) {
-        return JSON.parse(result.data[0].value);
+        const value = result.data[0]?.value;
+        return value ? JSON.parse(value) as unknown : null;
       }
       return null;
     } else {
       // Web: LocalStorageから読み込み
       const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : null;
+      return data ? JSON.parse(data) as unknown : null;
     }
   },
 
   /**
    * データ削除
    */
-  remove: async (key: string) => {
+  remove: async (key: string): Promise<APIResponse> => {
     if (isElectron()) {
       // Electron: SQLiteから削除
       return await electronDB.query(
@@ -263,7 +290,7 @@ export const universalEvaluationStorage = {
   /**
    * 評価データ保存
    */
-  save: async (evaluation: any) => {
+  save: async <T extends { id: string }>(evaluation: T): Promise<APIResponse<T>> => {
     if (isElectron()) {
       return await electronEvaluation.save(evaluation);
     } else {
@@ -276,30 +303,30 @@ export const universalEvaluationStorage = {
   /**
    * 評価データ読み込み
    */
-  load: async (id: string) => {
+  load: async <T = unknown>(id: string): Promise<APIResponse<T>> => {
     if (isElectron()) {
-      return await electronEvaluation.load(id);
+      return await electronEvaluation.load<T>(id);
     } else {
       // Web版: ローカルストレージから読み込み
       const key = `evaluation_${id}`;
       const data = await universalStorage.load(key);
-      return { success: !!data, data };
+      return { success: !!data, data: data as T };
     }
   },
 
   /**
    * 評価データ一覧取得
    */
-  list: async (filters?: any) => {
+  list: async <T = unknown>(filters?: EvaluationFilters): Promise<APIResponse<T[]>> => {
     if (isElectron()) {
-      return await electronEvaluation.list(filters);
+      return await electronEvaluation.list<T>(filters);
     } else {
       // Web版: ローカルストレージから一覧取得
       const keys = Object.keys(localStorage).filter(key => key.startsWith('evaluation_'));
       const evaluations = keys.map(key => {
         const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : null;
-      }).filter(Boolean);
+        return data ? JSON.parse(data) as T : null;
+      }).filter((item): item is T => item !== null);
 
       return { success: true, data: evaluations };
     }
@@ -308,7 +335,7 @@ export const universalEvaluationStorage = {
   /**
    * 評価データ削除
    */
-  delete: async (id: string) => {
+  delete: async (id: string): Promise<APIResponse<void>> => {
     if (isElectron()) {
       return await electronEvaluation.delete(id);
     } else {
@@ -319,7 +346,7 @@ export const universalEvaluationStorage = {
   }
 };
 
-export default {
+const electronAPI = {
   isElectron,
   isElectronDev,
   platform,
@@ -331,3 +358,5 @@ export default {
   storage: universalStorage,
   evaluationStorage: universalEvaluationStorage
 };
+
+export default electronAPI;

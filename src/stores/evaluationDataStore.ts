@@ -3,6 +3,29 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { isElectron, universalStorage, universalEvaluationStorage } from '@/lib/electron/electronAPI'
+import type { APIResponse } from '@/lib/electron/electronAPI'
+import type {
+  PhysicalDetails,
+  MentalDetails,
+  EnvironmentalDetails,
+  HazardDetails,
+  WorkTimeFactor
+} from '@3k/core'
+
+interface UserInfo {
+  readonly name?: string
+  readonly role?: string
+  readonly department?: string
+}
+
+interface WorkInfo {
+  readonly factoryName?: string
+  readonly processName?: string
+  readonly creator?: UserInfo
+  readonly checker?: UserInfo
+}
+
+type FactorData = PhysicalDetails | MentalDetails | EnvironmentalDetails | HazardDetails | WorkTimeFactor
 
 interface EvaluationData {
   id: string
@@ -12,14 +35,14 @@ interface EvaluationData {
   processName: string
   createdAt: string
   updatedAt: string
-  physicalFactor?: any
-  mentalFactor?: any
-  environmentalFactor?: any
-  hazardFactor?: any
-  workTimeFactor?: any
+  physicalFactor?: PhysicalDetails
+  mentalFactor?: MentalDetails
+  environmentalFactor?: EnvironmentalDetails
+  hazardFactor?: HazardDetails
+  workTimeFactor?: WorkTimeFactor
   metadata?: {
-    creator?: any
-    checker?: any
+    creator?: UserInfo
+    checker?: UserInfo
     photos?: string[]
   }
 }
@@ -39,7 +62,7 @@ interface EvaluationDataState {
   // アクション
   setCurrentEvaluation: (evaluation: EvaluationData | null) => void
   updateCurrentEvaluation: (updates: Partial<EvaluationData>) => void
-  updateFactorData: (factorType: string, data: any) => void
+  updateFactorData: (factorType: string, data: FactorData) => void
 
   // データ永続化
   saveCurrentEvaluation: () => Promise<string | null>
@@ -48,7 +71,7 @@ interface EvaluationDataState {
   deleteEvaluation: (id: string) => Promise<void>
 
   // 新規評価作成
-  createNewEvaluation: (workName: string, workInfo?: any) => void
+  createNewEvaluation: (workName: string, workInfo?: WorkInfo) => void
 
   // 状態リセット
   reset: () => void
@@ -59,9 +82,9 @@ const STORAGE_KEY = '3k-evaluation-data'
 
 // Electron環境でのデータベース操作
 const electronStorage = {
-  getItem: async (key: string) => {
+  getItem: async (key: string): Promise<string | null> => {
     try {
-      const result = await universalStorage.load(key)
+      const result: unknown = await universalStorage.load(key)
       return result ? JSON.stringify(result) : null
     } catch {
       return null
@@ -143,7 +166,7 @@ export const useEvaluationDataStore = create<EvaluationDataState>()(
 
           if (isElectron()) {
             // Electron環境: SQLiteデータベースに保存
-            const result = await universalEvaluationStorage.save(currentEvaluation)
+            const result: APIResponse<EvaluationData> = await universalEvaluationStorage.save(currentEvaluation)
             savedId = result.success ? currentEvaluation.id : ''
           } else {
             // Web環境: 既存の保存済みリストに追加
@@ -182,8 +205,8 @@ export const useEvaluationDataStore = create<EvaluationDataState>()(
           let evaluation: EvaluationData | null = null
 
           if (isElectron()) {
-            const result = await universalEvaluationStorage.load(id)
-            evaluation = result.success ? result.data : null
+            const result: APIResponse<EvaluationData> = await universalEvaluationStorage.load<EvaluationData>(id)
+            evaluation = (result.success && result.data) ? result.data : null
           } else {
             const savedEvaluations = get().savedEvaluations
             evaluation = savedEvaluations.find(e => e.id === id) || null
@@ -206,8 +229,8 @@ export const useEvaluationDataStore = create<EvaluationDataState>()(
 
         try {
           if (isElectron()) {
-            const result = await universalEvaluationStorage.list()
-            set({ savedEvaluations: result.success ? result.data : [] })
+            const result: APIResponse<EvaluationData[]> = await universalEvaluationStorage.list<EvaluationData>()
+            set({ savedEvaluations: (result.success && result.data) ? result.data : [] })
           }
           // Web環境では既にpersistで管理されているため何もしない
 

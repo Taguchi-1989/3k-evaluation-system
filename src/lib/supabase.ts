@@ -13,17 +13,17 @@ export async function uploadFile(
   file: File,
   bucket: string = 'uploads',
   path?: string
-) {
+): Promise<{ path: string; url: string }> {
   if (!supabase) {
     throw new Error('Supabase not configured')
   }
   
   const filePath = path || `${Date.now()}-${file.name}`
-  
-  const { data, error } = await supabase.storage
+
+  const { error } = await supabase.storage
     .from(bucket)
     .upload(filePath, file)
-  
+
   if (error) {
     throw error
   }
@@ -39,7 +39,7 @@ export async function uploadFile(
 }
 
 // ファイル削除用ヘルパー
-export async function deleteFile(path: string, bucket: string = 'uploads') {
+export async function deleteFile(path: string, bucket: string = 'uploads'): Promise<boolean> {
   if (!supabase) {
     throw new Error('Supabase not configured')
   }
