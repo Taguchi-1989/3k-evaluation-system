@@ -1,0 +1,26 @@
+{
+  "name": "@3k/adapters-web",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@3k/ports": "workspace:*",
+    "@3k/core": "workspace:*",
+    "@supabase/supabase-js": "^2.39.0",
+    "idb": "^8.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

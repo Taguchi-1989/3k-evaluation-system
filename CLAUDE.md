@@ -1,10 +1,10 @@
 # 3K評価アプリケーション - Claude Code 引き継ぎ記録
 
-## 📅 最終更新: 2025-09-30 (Phase 1 完了)
+## 📅 最終更新: 2025-09-30 (Phase 2 完了)
 
 ---
 
-## 🏗️ アーキテクチャ移行 (Phase 0 & 1 完了)
+## 🏗️ アーキテクチャ移行 (Phase 0, 1, 2 完了)
 
 ### 現状の課題と目標
 **課題:**
@@ -54,10 +54,28 @@
   - Phase 1で21項目追加（計40項目）
   - Package boundaries確認済み（core → ports ✅, core → adapters ❌）
 
+### Phase 2 成果物 ✅
+- [x] **Webアダプターパッケージ作成** (`packages/adapters-web/`)
+  - [x] `src/config.ts`: WebConfigAdapter（環境変数読み込み）
+  - [x] `src/storage.ts`: WebStorageAdapter（IndexedDB + localStorage）
+  - [x] `src/auth.ts`: SupabaseAuthAdapter（OAuth対応）
+  - [x] `src/http.ts`: FetchHttpClient（Fetch API）
+  - [x] `src/logger.ts`: ConsoleLogger（ブラウザコンソール）
+  - [x] `src/repositories.ts`: Supabase + IDBハイブリッドリポジトリ
+  - [x] `src/index.ts`: createWebAdapters() 統合関数
+- [x] **実装詳細**
+  - **IndexedDB優先、localStorage フォールバック** (idb ライブラリ使用)
+  - **Supabaseクラウド + ローカルキャッシュ** ハイブリッド構成
+  - **型安全性**: 全アダプターがPort interfaceに準拠
+  - **依存性注入**: createWebAdapters()で全依存関係を組み立て
+- [x] **依存パッケージ**
+  - `@supabase/supabase-js`: ^2.39.0
+  - `idb`: ^8.0.0
+
 ### 次のフェーズ（予定）
-- **Phase 2**: Webアダプター実装（Supabase, IDB, ブラウザAPI）
 - **Phase 3**: Desktopアダプター実装（SQLite, OAuth, electron-store, keytar）
 - **Phase 4**: UI層のCore統合（Next.js/Reactコンポーネントから@3k/core使用）
+- **Phase 5**: テスト追加（Contract Tests, Unit Tests）
 
 詳細な移行計画・実装ガイドは **[chrome.md](./chrome.md)** を参照。
 
