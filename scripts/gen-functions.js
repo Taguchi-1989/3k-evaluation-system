@@ -10,7 +10,7 @@ const { glob } = require('glob')
 
 const SCAN_PATTERNS = [
   'packages/ports/**/*.ts',
-  'packages/core/**/usecases/**/*.ts'
+  'packages/core/src/**/*.ts'
 ]
 
 async function extractFunctions() {

@@ -112,5 +112,131 @@
     "type": "interface",
     "file": "packages\\ports\\auth.ts",
     "package": "ports"
+  },
+  {
+    "name": "Adapters",
+    "type": "interface",
+    "file": "packages\\core\\src\\app.ts",
+    "package": "core"
+  },
+  {
+    "name": "AppCore",
+    "type": "interface",
+    "file": "packages\\core\\src\\app.ts",
+    "package": "core"
+  },
+  {
+    "name": "bootstrap",
+    "type": "function",
+    "file": "packages\\core\\src\\app.ts",
+    "package": "core"
+  },
+  {
+    "name": "CalculationOptions",
+    "type": "interface",
+    "file": "packages\\core\\src\\services\\score-calculator.ts",
+    "package": "core"
+  },
+  {
+    "name": "calculatePhysicalScore",
+    "type": "function",
+    "file": "packages\\core\\src\\services\\score-calculator.ts",
+    "package": "core"
+  },
+  {
+    "name": "calculateMentalScore",
+    "type": "function",
+    "file": "packages\\core\\src\\services\\score-calculator.ts",
+    "package": "core"
+  },
+  {
+    "name": "calculateEnvironmentalScore",
+    "type": "function",
+    "file": "packages\\core\\src\\services\\score-calculator.ts",
+    "package": "core"
+  },
+  {
+    "name": "calculateHazardScore",
+    "type": "function",
+    "file": "packages\\core\\src\\services\\score-calculator.ts",
+    "package": "core"
+  },
+  {
+    "name": "calculateFinal3KIndex",
+    "type": "function",
+    "file": "packages\\core\\src\\services\\score-calculator.ts",
+    "package": "core"
+  },
+  {
+    "name": "ScoreResult",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "Posture",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "HazardEvent",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "EnvironmentalSubstance",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "PhysicalDetails",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "MentalDetails",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "EnvironmentalDetails",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "HazardDetails",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "WorkTimeFactor",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "ComprehensiveEvaluation",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "FinalScoreResult",
+    "type": "interface",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
+  },
+  {
+    "name": "ThreeKIndexLevel",
+    "type": "type",
+    "file": "packages\\core\\src\\domain\\evaluation.ts",
+    "package": "core"
   }
 ]

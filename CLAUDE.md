@@ -1,10 +1,10 @@
 # 3K評価アプリケーション - Claude Code 引き継ぎ記録
 
-## 📅 最終更新: 2025-09-30 (Phase 0 完了)
+## 📅 最終更新: 2025-09-30 (Phase 1 完了)
 
 ---
 
-## 🏗️ アーキテクチャ移行 (Phase 0: 基盤整備 完了)
+## 🏗️ アーキテクチャ移行 (Phase 0 & 1 完了)
 
 ### 現状の課題と目標
 **課題:**
@@ -28,16 +28,36 @@
   - `tsconfig.json`: strict + noUncheckedIndexedAccess + path aliases
   - `.eslintrc.cjs`: @typescript-eslint/no-explicit-any: error
 - [x] 関数レジストリ自動生成（`npm run gen:functions`）
-  - `docs/FUNCTIONS.md` (19 items)
+  - `docs/FUNCTIONS.md` (40 items: 19 ports + 21 core)
   - `docs/functions.base.json` (baseline snapshot)
 - [x] ガードスクリプト作成
   - `scripts/guards/check-functions.js` (関数削除検知)
   - `scripts/guards/no-mixed-ui-logic.js` (UI/Logic分離)
 
+### Phase 1 成果物 ✅
+- [x] **Core パッケージ作成** (`packages/core/`)
+  - [x] `src/app.ts`: bootstrap関数 + Adapters型定義
+  - [x] `src/domain/evaluation.ts`: ドメインモデル（11 interfaces + 1 type）
+  - [x] `src/services/score-calculator.ts`: 純粋計算ロジック（5関数）
+  - [x] `src/index.ts`: バレルエクスポート
+- [x] **スコア計算ロジック抽出**
+  - `calculatePhysicalScore()`: 肉体因スコア計算（純粋関数化）
+  - `calculateMentalScore()`: 精神因スコア計算（純粋関数化）
+  - `calculateEnvironmentalScore()`: 環境因スコア計算（純粋関数化）
+  - `calculateHazardScore()`: 危険因スコア計算（純粋関数化）
+  - `calculateFinal3KIndex()`: 最終3K指数算出（純粋関数化）
+- [x] **依存関係排除**
+  - 全計算ロジックから外部依存を除去（ポート経由で注入可能に）
+  - シングルトンパターンから関数型プログラミングへ変更
+  - 型安全性強化（readonly, 明示的型定義）
+- [x] **関数レジストリ更新**
+  - Phase 1で21項目追加（計40項目）
+  - Package boundaries確認済み（core → ports ✅, core → adapters ❌）
+
 ### 次のフェーズ（予定）
-- **Phase 1**: Core抽出（評価ロジックのPure TS化、bootstrap関数）
-- **Phase 2**: Webアダプター実装（Supabase, IDB）
-- **Phase 3**: Desktopアダプター実装（SQLite, OAuth, keytar）
+- **Phase 2**: Webアダプター実装（Supabase, IDB, ブラウザAPI）
+- **Phase 3**: Desktopアダプター実装（SQLite, OAuth, electron-store, keytar）
+- **Phase 4**: UI層のCore統合（Next.js/Reactコンポーネントから@3k/core使用）
 
 詳細な移行計画・実装ガイドは **[chrome.md](./chrome.md)** を参照。
 
