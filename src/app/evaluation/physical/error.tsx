@@ -14,7 +14,7 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <main className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center">
         <div className="mb-4">
           <div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
@@ -29,6 +29,9 @@ export default function Error({
         <p className="text-gray-600 mb-4">
           ページの読み込み中にエラーが発生しました。再試行してください。
         </p>
+        <p className="text-sm text-gray-500 mb-4">
+          エラー詳細: {error.message}
+        </p>
         <button
           onClick={reset}
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
@@ -36,6 +39,6 @@ export default function Error({
           再試行
         </button>
       </div>
-    </div>
+    </main>
   )
 }

@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
   // 画像最適化（Electron版では無効化）
   images: {
     unoptimized: isElectronBuild,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+    ],
   },
 
   // 環境変数をクライアントに公開

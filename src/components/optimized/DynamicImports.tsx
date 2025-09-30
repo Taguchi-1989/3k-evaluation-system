@@ -19,7 +19,7 @@ const LoadingSpinner = () => (
 
 // 評価ページコンポーネントの動的インポート
 export const PhysicalFactorDetailDynamic = dynamic(
-  () => import('@/components/evaluation/PhysicalFactorDetail'),
+  () => import('@/components/evaluation/PhysicalFactorDetail').then(mod => ({ default: mod.PhysicalFactorDetail })),
   {
     loading: () => <EvaluationSkeleton />,
     ssr: false, // パフォーマンス優先でSSR無効化
