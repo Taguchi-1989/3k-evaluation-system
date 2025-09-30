@@ -1,0 +1,26 @@
+{
+  "evaluation_standards": {
+    "environmental_factors": {
+      "chemical_substances": {
+        "general_chemicals": {
+          "standard_category": "environmental",
+          "standard_type": "chemical_exposure",
+          "substances": {
+            "toluene": {
+              "substance_name": "トルエン",
+              "cas_number": "108-88-3",
+              "permissible_concentration": 50,
+              "unit": "ppm",
+              "evaluation_thresholds": {
+                "low": 12.5,
+                "medium": 25.0,
+                "high": 37.5,
+                "danger": 50.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

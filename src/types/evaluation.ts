@@ -1,189 +1,331 @@
-/**
- * 3K評価システム - 型定義
- *
- * 3K: きつい（Kitsui）・汚い（Kitanai）・危険（Kiken）
- */
-
-// ========================================
-// 基本型定義
-// ========================================
-
-/**
- * 評価レベル（1-5段階）
- */
-export type EvaluationLevel = 1 | 2 | 3 | 4 | 5;
-
-/**
- * 評価ステータス
- */
-export type EvaluationStatus = 'not_started' | 'in_progress' | 'completed';
-
-// ========================================
-// 肉体因子評価（Physical Factor）
-// ========================================
-
-export interface PhysicalEvaluation {
-  id?: string;
-  // 重量物取扱い（1: 軽い～5: 非常に重い）
-  weightHandling: EvaluationLevel;
-  // 作業姿勢（1: 楽な姿勢～5: 無理な姿勢）
-  workPosture: EvaluationLevel;
-  // 反復動作（1: 少ない～5: 非常に多い）
-  repetitiveMotion: EvaluationLevel;
-  // 振動暴露（1: なし～5: 非常に強い）
-  vibrationExposure: EvaluationLevel;
-  // 温度環境（1: 快適～5: 極端）
-  temperatureEnvironment: EvaluationLevel;
-  // メモ
-  notes?: string;
-  // 評価日時
-  evaluatedAt: Date;
-}
-
-// ========================================
-// 精神因子評価（Mental Factor）
-// ========================================
-
-export interface MentalEvaluation {
-  id?: string;
-  // 時間的プレッシャー（1: 少ない～5: 非常に高い）
-  timePressure: EvaluationLevel;
-  // 精神的負荷（1: 軽い～5: 非常に重い）
-  mentalLoad: EvaluationLevel;
-  // 対人ストレス（1: 少ない～5: 非常に高い）
-  interpersonalStress: EvaluationLevel;
-  // 責任の重さ（1: 軽い～5: 非常に重い）
-  responsibility: EvaluationLevel;
-  // 単調さ（1: 変化あり～5: 非常に単調）
-  monotony: EvaluationLevel;
-  // メモ
-  notes?: string;
-  // 評価日時
-  evaluatedAt: Date;
-}
-
-// ========================================
-// 環境因子評価（Environmental Factor）
-// ========================================
-
-export interface EnvironmentalEvaluation {
-  id?: string;
-  // 騒音レベル（1: 静か～5: 非常にうるさい）
-  noiseLevel: EvaluationLevel;
-  // 照明状態（1: 良好～5: 非常に悪い）
-  lightingCondition: EvaluationLevel;
-  // 空気清浄度（1: 清潔～5: 非常に汚い）
-  airQuality: EvaluationLevel;
-  // 作業スペース（1: 広い～5: 非常に狭い）
-  workSpace: EvaluationLevel;
-  // 衛生状態（1: 清潔～5: 非常に不潔）
-  hygiene: EvaluationLevel;
-  // メモ
-  notes?: string;
-  // 評価日時
-  evaluatedAt: Date;
-}
-
-// ========================================
-// 危険因子評価（Hazard Factor）
-// ========================================
-
-export interface HazardEvaluation {
-  id?: string;
-  // 機械的危険（1: 低い～5: 非常に高い）
-  mechanicalHazard: EvaluationLevel;
-  // 化学物質暴露（1: なし～5: 非常に高い）
-  chemicalExposure: EvaluationLevel;
-  // 転倒・転落リスク（1: 低い～5: 非常に高い）
-  fallRisk: EvaluationLevel;
-  // 火災・爆発リスク（1: 低い～5: 非常に高い）
-  fireExplosionRisk: EvaluationLevel;
-  // 電気的危険（1: 低い～5: 非常に高い）
-  electricalHazard: EvaluationLevel;
-  // メモ
-  notes?: string;
-  // 評価日時
-  evaluatedAt: Date;
-}
-
-// ========================================
-// 作業時間評価（Work Time Factor）
-// ========================================
-
-export interface WorkTimeEvaluation {
-  id?: string;
-  // 労働時間（時間/日）
-  dailyWorkHours: number;
-  // 残業時間（時間/月）
-  overtimeHours: number;
-  // 休憩時間の充足度（1: 十分～5: 不足）
-  breakAdequacy: EvaluationLevel;
-  // 夜勤頻度（1: なし～5: 非常に多い）
-  nightShiftFrequency: EvaluationLevel;
-  // 休日数（日/月）
-  daysOffPerMonth: number;
-  // メモ
-  notes?: string;
-  // 評価日時
-  evaluatedAt: Date;
-}
-
-// ========================================
-// 総合評価
-// ========================================
-
-export interface ComprehensiveEvaluation {
-  id?: string;
-  // 職場名
-  workplaceName: string;
-  // 職種
-  occupation: string;
-  // 各因子評価
-  physical: PhysicalEvaluation;
-  mental: MentalEvaluation;
-  environmental: EnvironmentalEvaluation;
-  hazard: HazardEvaluation;
-  workTime: WorkTimeEvaluation;
-  // 総合スコア（計算値）
-  totalScore?: number;
-  // 3K分類（計算値）
-  classification?: '良好' | '普通' | '注意' | '改善要' | '危険';
-  // 評価ステータス
+// 評価システムの型定義
+export interface Evaluation {
+  id: string;
+  workName: string;
+  factoryName: string;
+  processName: string;
+  mainPhotoUrl?: string;
+  workHearing?: string;
+  remarks?: string;
+  finalScoreKitsusa: number;
+  finalScore3K: string;
   status: EvaluationStatus;
-  // 作成日時
+  creatorId: string;
+  checkerId?: string;
   createdAt: Date;
-  // 更新日時
   updatedAt: Date;
 }
 
-// ========================================
-// 評価サマリー（ダッシュボード用）
-// ========================================
+export type EvaluationStatus = 'draft' | 'pending' | 'approved' | 'rejected';
 
-export interface EvaluationSummary {
-  total: number;
-  completed: number;
-  inProgress: number;
-  notStarted: number;
-  averageScore: number;
-  latestEvaluations: ComprehensiveEvaluation[];
+export interface PhysicalFactor {
+  id: string;
+  evaluationId: string;
+  score: number;
+  details: PhysicalDetails;
+  strengthScore: number;
+  durationScore: number;
+  postureEvaluation: string;
 }
 
-// ========================================
-// ストレージインターフェース
-// ========================================
+export interface PhysicalDetails {
+  targetWeight?: {
+    bothHands?: { kg: number; percentage: number };
+    singleHand?: { kg: number; percentage: number };
+  };
+  muscleForce?: { kg: number; percentage: number };
+  protectiveGear?: { percentage: number };
+  eyeStrain?: { percentage: number };
+  manualInput?: {
+    strength: string;
+    duration: string;
+  };
+  checkboxes?: {
+    weightBoth: boolean;
+    weightSingle: boolean;
+    muscle: boolean;
+    gear: boolean;
+    eye: boolean;
+  };
+}
 
-export interface IEvaluationStorage {
-  // 評価の保存
-  save(evaluation: ComprehensiveEvaluation): Promise<string>;
-  // 評価の取得
-  get(id: string): Promise<ComprehensiveEvaluation | null>;
-  // 全評価の取得
-  getAll(): Promise<ComprehensiveEvaluation[]>;
-  // 評価の更新
-  update(id: string, evaluation: Partial<ComprehensiveEvaluation>): Promise<void>;
-  // 評価の削除
-  delete(id: string): Promise<void>;
-  // サマリー取得
-  getSummary(): Promise<EvaluationSummary>;
+export interface MentalFactor {
+  id: string;
+  evaluationId: string;
+  score: number;
+  details: MentalDetails;
+  strengthScore: number;
+  durationScore: number;
+}
+
+export interface MentalDetails {
+  workQuality?: {
+    failure?: { level: string; duration: string };
+    concentration?: { level: string; duration: string };
+    cognitiveLoad?: { level: string; duration: string };
+    emotionalBurden?: { level: string; duration: string };
+    skillUtilization?: { level: string; duration: string };
+    workControl?: { level: string; duration: string };
+  };
+  // 厚生労働省基準準拠の心理的負荷評価
+  psychologicalStress?: {
+    workloadChanges?: PsychologicalStressEvent[];
+    harassmentEvents?: PsychologicalStressEvent[];
+    interpersonalIssues?: PsychologicalStressEvent[];
+    workResponsibility?: PsychologicalStressEvent[];
+    workEnvironmentChanges?: PsychologicalStressEvent[];
+    accidentTrauma?: PsychologicalStressEvent[];
+  };
+  // 時間外労働評価
+  overtimeWork?: {
+    monthlyOvertimeHours: number;
+    consecutiveWorkDays: number;
+    nightShiftFrequency: number;
+  };
+  // ハラスメント評価
+  harassment?: {
+    powerHarassment?: HarassmentAssessment;
+    sexualHarassment?: HarassmentAssessment;
+    workplaceBullying?: HarassmentAssessment;
+  };
+  manualInput?: {
+    strength: string;
+    duration: string;
+  };
+}
+
+// 厚生労働省「心理的負荷による精神障害の認定基準」準拠
+export interface PsychologicalStressEvent {
+  eventType: string; // 出来事の種類
+  eventDescription: string; // 具体的な出来事
+  startDate: Date; // 発生日
+  duration: number; // 継続期間（日数）
+  stressIntensity: 'strong' | 'moderate' | 'weak'; // 厚労省基準：強・中・弱
+  fiveStageScore: number; // 5段階評価：1-5点（5点=最高リスク）
+  legalBasis: string; // 法的根拠（別表1の項目番号等）
+  mitigatingFactors?: string[]; // 緩衝要因
+  aggravatingFactors?: string[]; // 悪化要因
+}
+
+// ハラスメント評価
+export interface HarassmentAssessment {
+  occurred: boolean; // 発生有無
+  frequency: 'single' | 'occasional' | 'frequent' | 'continuous'; // 頻度
+  severity: 'mild' | 'moderate' | 'severe'; // 重篤度
+  duration: number; // 継続期間（日数）
+  reportedToAuthority: boolean; // 当局への報告有無
+  witnessesPresent: boolean; // 目撃者の有無
+  organizationalResponse: string; // 組織の対応
+  stressIntensity: 'strong' | 'moderate' | 'weak'; // 心理的負荷強度
+  fiveStageScore: number; // 5段階評価スコア
+}
+
+export interface EnvironmentalFactor {
+  id: string;
+  evaluationId: string;
+  score: number;
+  details: EnvironmentalDetails;
+  sdsUrl?: string;
+}
+
+export interface EnvironmentalDetails {
+  substances?: EnvironmentalSubstance[];
+  temperature?: number;
+  noise?: number;
+  dust?: number;
+  vibration?: number;
+  contamination?: number;
+}
+
+export interface EnvironmentalSubstance {
+  id: string;
+  environmentalFactorId: string;
+  substanceType: string;
+  substanceName: string;
+  permissibleConcentration: number;
+  concentrationUnit: string;
+  environmentalConcentration: number;
+  pollutionLevel?: number;
+  thresholdValue: number;
+  measuredValue: number;
+  measurementUnit: string;
+  substanceDetails: Record<string, unknown>;
+  isActive: boolean;
+}
+
+export interface HazardFactor {
+  id: string;
+  evaluationId: string;
+  score: number;
+  details: HazardDetails;
+  ohsmsUrl?: string;
+}
+
+export interface HazardDetails {
+  hazardEvents?: HazardEvent[];
+  // 労災履歴・安全管理ストレス要素（危険因子内で評価）
+  accidentHistory?: AccidentHistoryAssessment;
+  safetyManagementStress?: SafetyManagementStressAssessment;
+  // 現在進行中のリスク・再発可能性評価
+  ongoingRisks?: OngoingRiskAssessment[];
+}
+
+export interface HazardEvent {
+  id: string;
+  hazardFactorId: string;
+  hazardEvent: string;
+  encounterFrequency: number;
+  dangerPossibility: number;
+  occurrencePossibility: number;
+  harmSeverity: number;
+  riskPoint: number;
+  riskLevel: string;
+}
+
+// 労災履歴評価（危険因子軸で評価）
+export interface AccidentHistoryAssessment {
+  hasAccidentHistory: boolean; // 労災履歴の有無
+  accidentTypes: AccidentHistoryEvent[]; // 過去の労災事故詳細
+  totalAccidentCount: number; // 総事故件数
+  recentAccidentDate?: Date; // 最新事故日
+  recurrenceRisk: 'low' | 'moderate' | 'high' | 'critical'; // 再発リスク
+  fiveStageScore: number; // 5段階評価：1-5点（5点=最高リスク）
+  mitigationMeasures?: string[]; // 実施済み対策
+  remainingRisks?: string[]; // 未解消のリスク
+}
+
+// 労災事故履歴詳細
+export interface AccidentHistoryEvent {
+  accidentDate: Date; // 事故発生日
+  accidentType: string; // 事故の種類
+  severity: 'minor' | 'moderate' | 'serious' | 'fatal'; // 重篤度
+  rootCause: string; // 根本原因
+  preventiveMeasures: string[]; // 実施済み防止策
+  effectiveness: 'ineffective' | 'partial' | 'effective' | 'highly_effective'; // 防止策の効果
+  isRecurring: boolean; // 同種事故の再発有無
+}
+
+// 安全管理ストレス評価（危険因子軸で評価）
+export interface SafetyManagementStressAssessment {
+  managementGaps: SafetyGapAssessment[]; // 安全管理の欠陥
+  complianceLevel: 'non_compliant' | 'partially_compliant' | 'compliant' | 'excellent'; // 法令順守度
+  safetyTrainingAdequacy: 'inadequate' | 'minimal' | 'adequate' | 'excellent'; // 安全教育充実度
+  incidentReportingSystem: 'none' | 'basic' | 'adequate' | 'comprehensive'; // インシデント報告制度
+  riskAssessmentFrequency: 'never' | 'annual' | 'semi_annual' | 'quarterly' | 'monthly'; // リスク評価頻度
+  fiveStageScore: number; // 5段階評価：1-5点（5点=最高リスク）
+  urgentImprovements: string[]; // 緊急改善が必要な項目
+}
+
+// 安全管理欠陥評価
+export interface SafetyGapAssessment {
+  gapType: string; // 欠陥の種類
+  description: string; // 具体的な内容
+  riskLevel: 'low' | 'moderate' | 'high' | 'critical'; // リスクレベル
+  legalRequirement: boolean; // 法的要求事項か
+  timeToCorrect: number; // 是正に要する期間（日数）
+}
+
+// 現在進行中のリスク評価（未解消リスク・再発可能性）
+export interface OngoingRiskAssessment {
+  riskId: string; // リスクID
+  riskDescription: string; // リスクの内容
+  originDate: Date; // 発生・発見日
+  riskCategory: 'equipment' | 'environment' | 'human_factor' | 'process' | 'external'; // リスク分類
+  currentStatus: 'unaddressed' | 'in_progress' | 'partially_mitigated' | 'monitored'; // 現在の状況
+  recurrenceProbability: 'very_low' | 'low' | 'moderate' | 'high' | 'very_high'; // 再発確率
+  potentialImpact: 'minor' | 'moderate' | 'major' | 'catastrophic'; // 潜在的影響度
+  fiveStageScore: number; // 5段階評価：1-5点（5点=最高リスク）
+  mitigationActions: string[]; // 実施済み緩和策
+  monitoringFrequency: 'daily' | 'weekly' | 'monthly' | 'quarterly'; // 監視頻度
+  escalationTriggers: string[]; // エスカレーション条件
+}
+
+export interface WorkTimeFactor {
+  id: string;
+  evaluationId: string;
+  workHours: number;
+  timeCategory: string;
+  workerDetails: Record<string, unknown>;
+}
+
+export interface Posture {
+  id: string;
+  physicalFactorId: string;
+  postureName: string;
+  photoUrl?: string;
+  details: Record<string, unknown>;
+  rulaScore: number;
+  owasCategory: number;
+  wristAngles: Record<string, unknown>;
+}
+
+export interface PostureEvaluation {
+  id: string;
+  postureId: string;
+  evaluationType: string;
+  evaluationData: Record<string, unknown>;
+  analysisFileUrl?: string;
+}
+
+export interface EvaluationStandard {
+  id: string;
+  standardCategory: string;
+  standardType: string;
+  substanceName?: string;
+  standardValues: Record<string, any>;
+  unit: string;
+  referenceSource: string;
+  effectiveDate: Date;
+  expiryDate?: Date;
+  isActive: boolean;
+  version: number;
+}
+
+export interface CalculationRule {
+  ruleName: string;
+  version: number;
+  ruleData: Record<string, unknown>;
+  isActive: boolean;
+  ruleType: string;
+  referenceUrl?: string;
+  description?: string;
+  createdAt: Date;
+}
+
+// フォーム用の型
+export interface EvaluationForm {
+  workName: string;
+  factoryName: string;
+  processName: string;
+  workHearing?: string;
+  remarks?: string;
+  physicalFactor?: Partial<PhysicalDetails>;
+  mentalFactor?: Partial<MentalDetails>;
+  environmentalFactor?: Partial<EnvironmentalDetails>;
+  hazardFactor?: Partial<HazardDetails>;
+  workTime?: {
+    duration: number;
+    category: string;
+  };
+}
+
+// API レスポンス用の型
+export interface EvaluationResponse {
+  evaluation: Evaluation;
+  physicalFactor?: PhysicalFactor;
+  mentalFactor?: MentalFactor;
+  environmentalFactor?: EnvironmentalFactor;
+  hazardFactor?: HazardFactor;
+  workTimeFactor?: WorkTimeFactor;
+  postures?: Posture[];
+  uploadedFiles?: UploadedFile[];
+}
+
+export interface UploadedFile {
+  id: string;
+  evaluationId: string;
+  fileUrl: string;
+  fileType: string;
+  fileName: string;
+  uploadedAt: Date;
 }

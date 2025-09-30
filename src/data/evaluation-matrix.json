@@ -1,0 +1,167 @@
+{
+  "COMPREHENSIVE": {
+    "name": "総合評価マトリックス",
+    "description": "姿勢・持続時間・強度の総合評価",
+    "postureGroups": ["良い〜", "悪い", "とても悪い"],
+    "durationLevels": ["<10%", "10-50%", ">50%"],
+    "strengthLevels": ["軽い", "少しきつい", "きつい", "とてもきつい", "ほとんど限界"],
+    "matrix": {
+      "良い〜": {
+        "<10%": [1, 1, 2, 4, 7],
+        "10-50%": [1, 2, 4, 7, 10],
+        ">50%": [2, 4, 7, 10, 10]
+      },
+      "悪い": {
+        "<10%": [1, 2, 4, 7, 10],
+        "10-50%": [2, 4, 7, 10, 10],
+        ">50%": [4, 7, 10, 10, 10]
+      },
+      "とても悪い": {
+        "<10%": [1, 2, 4, 7, 10],
+        "10-50%": [4, 7, 10, 10, 10],
+        ">50%": [7, 10, 10, 10, 10]
+      }
+    },
+    "scoreColors": {
+      "1": "text-blue-800 bg-blue-100 dark:text-blue-200 dark:bg-blue-900",
+      "2": "text-blue-800 bg-blue-200 dark:text-blue-200 dark:bg-blue-800",
+      "4": "text-blue-900 bg-blue-300 dark:text-blue-100 dark:bg-blue-700",
+      "7": "text-white bg-blue-400 dark:text-white dark:bg-blue-600",
+      "10": "text-white bg-blue-500 dark:text-white dark:bg-blue-500"
+    }
+  },
+  "RULA": {
+    "name": "RULA評価マトリックス",
+    "description": "上肢作業の姿勢評価",
+    "rows": ["1", "2", "3", "4", "5", "6", "7", "8+"],
+    "columns": ["1", "2", "3", "4", "5", "6", "7", "8+"],
+    "matrix": [
+      [1, 2, 3, 3, 4, 5, 5, 5],
+      [2, 2, 3, 4, 4, 5, 5, 5],
+      [3, 3, 3, 4, 4, 5, 6, 6],
+      [3, 3, 3, 4, 5, 6, 6, 6],
+      [4, 4, 4, 5, 5, 6, 7, 7],
+      [4, 4, 4, 5, 6, 7, 7, 7],
+      [5, 5, 5, 6, 6, 7, 7, 7],
+      [5, 5, 5, 6, 6, 7, 7, 7]
+    ],
+    "scoreLabels": {
+      "1": "無視できる",
+      "2": "無視できる",
+      "3": "調査が必要",
+      "4": "調査が必要",
+      "5": "調査し変更が必要",
+      "6": "調査し変更が必要",
+      "7": "直ちに調査し変更が必要"
+    },
+    "scoreColors": {
+      "1": "text-green-800 bg-green-100 dark:text-green-200 dark:bg-green-900",
+      "2": "text-green-800 bg-green-200 dark:text-green-200 dark:bg-green-800",
+      "3": "text-yellow-800 bg-yellow-100 dark:text-yellow-200 dark:bg-yellow-900",
+      "4": "text-yellow-800 bg-yellow-200 dark:text-yellow-200 dark:bg-yellow-800",
+      "5": "text-orange-800 bg-orange-100 dark:text-orange-200 dark:bg-orange-900",
+      "6": "text-orange-800 bg-orange-200 dark:text-orange-200 dark:bg-orange-800",
+      "7": "text-red-800 bg-red-200 dark:text-red-200 dark:bg-red-800"
+    }
+  },
+  "OWAS": {
+    "name": "OWAS評価マトリックス",
+    "description": "全身姿勢の評価（背部・上肢・下肢・重量）",
+    "backPostures": ["1", "2", "3", "4"],
+    "armPostures": ["1", "2", "3"],
+    "legPostures": ["1", "2", "3", "4", "5", "6", "7"],
+    "loadLevels": ["1", "2", "3"],
+    "matrix": {
+      "1": {
+        "1": [[1,1,1],[1,1,1],[1,1,1],[2,2,2],[2,2,2],[2,2,2],[2,2,3]],
+        "2": [[1,1,1],[1,1,1],[1,1,1],[2,2,2],[2,2,2],[2,2,2],[3,3,3]],
+        "3": [[1,1,1],[1,1,1],[1,1,1],[2,2,2],[2,3,3],[3,3,3],[1,1,2]]
+      },
+      "2": {
+        "1": [[2,2,3],[2,2,3],[2,2,3],[3,3,3],[3,3,3],[3,3,3],[2,3,3]],
+        "2": [[2,2,3],[2,3,2],[2,3,2],[3,3,3],[3,3,4],[3,3,4],[2,3,4]],
+        "3": [[3,3,4],[2,2,3],[3,3,3],[3,3,4],[4,4,4],[4,4,4],[2,3,4]]
+      },
+      "3": {
+        "1": [[1,1,1],[1,1,1],[1,1,1],[2,3,3],[3,3,4],[4,4,4],[1,1,1]],
+        "2": [[2,2,3],[1,1,1],[1,1,2],[2,4,4],[4,4,4],[4,4,4],[3,3,3]],
+        "3": [[2,2,3],[1,1,1],[2,3,3],[3,4,4],[4,4,4],[4,4,4],[4,4,4]]
+      },
+      "4": {
+        "1": [[2,3,3],[2,2,3],[2,2,3],[3,4,4],[4,4,4],[4,4,4],[2,3,4]],
+        "2": [[3,3,4],[2,3,4],[3,3,4],[3,4,4],[4,4,4],[4,4,4],[2,3,4]],
+        "3": [[4,4,4],[2,3,4],[3,3,4],[3,4,4],[4,4,4],[4,4,4],[4,4,4]]
+      }
+    },
+    "scoreLabels": {
+      "1": "作業してよい",
+      "2": "要改善",
+      "3": "早期に要改善",
+      "4": "即時要改善"
+    },
+    "scoreColors": {
+      "1": "text-green-800 bg-green-100 dark:text-green-200 dark:bg-green-900",
+      "2": "text-yellow-800 bg-yellow-100 dark:text-yellow-200 dark:bg-yellow-900",
+      "3": "text-orange-800 bg-orange-100 dark:text-orange-200 dark:bg-orange-900",
+      "4": "text-red-800 bg-red-100 dark:text-red-200 dark:bg-red-900"
+    }
+  },
+  "NIOSH": {
+    "name": "NIOSH評価マトリックス", 
+    "description": "重量物取扱いの評価",
+    "rows": ["重量5kg", "重量10kg", "重量15kg", "重量20kg", "重量25kg"],
+    "columns": ["頻度低", "頻度中", "頻度高"],
+    "matrix": [
+      [10, 20, 30],
+      [20, 30, 40],
+      [30, 40, 50], 
+      [40, 50, 60],
+      [50, 60, 70]
+    ],
+    "scoreLabels": {
+      "10": "許容",
+      "20": "注意",
+      "30": "警告",
+      "40": "危険",
+      "50": "限界",
+      "60": "限界",
+      "70": "限界"
+    },
+    "scoreColors": {
+      "10": "text-green-800 bg-green-100 dark:text-green-200 dark:bg-green-900",
+      "20": "text-green-800 bg-green-100 dark:text-green-200 dark:bg-green-900",
+      "30": "text-yellow-800 bg-yellow-100 dark:text-yellow-200 dark:bg-yellow-900",
+      "40": "text-orange-800 bg-orange-100 dark:text-orange-200 dark:bg-orange-900",
+      "50": "text-red-800 bg-red-100 dark:text-red-200 dark:bg-red-900",
+      "60": "text-red-800 bg-red-100 dark:text-red-200 dark:bg-red-900", 
+      "70": "text-red-800 bg-red-100 dark:text-red-200 dark:bg-red-900"
+    }
+  },
+  "ENVIRONMENTAL": {
+    "name": "環境因評価マトリックス",
+    "description": "環境負荷の強度と持続時間による評価",
+    "rows": ["<10%", "10-50%", ">50%"],
+    "columns": ["どちらとも言えない", "比較的ある", "高い", "非常に高い", "ほとんど限界"],
+    "matrix": [
+      [1, 1, 2, 4, 7],
+      [1, 2, 4, 7, 10],
+      [1, 4, 7, 10, 10]
+    ],
+    "strengthLevels": ["どちらとも言えない", "比較的ある", "高い", "非常に高い", "ほとんど限界"],
+    "durationLevels": ["<10%", "10-50%", ">50%"],
+    "scoreLabels": {
+      "1": "良好",
+      "2": "軽度",
+      "4": "中度",
+      "7": "重度",
+      "10": "危険"
+    },
+    "scoreColors": {
+      "1": "text-green-800 bg-green-100 dark:text-green-200 dark:bg-green-900",
+      "2": "text-yellow-800 bg-yellow-100 dark:text-yellow-200 dark:bg-yellow-900",
+      "4": "text-orange-800 bg-orange-100 dark:text-orange-200 dark:bg-orange-900",
+      "7": "text-red-800 bg-red-100 dark:text-red-200 dark:bg-red-900",
+      "10": "text-red-900 bg-red-200 dark:text-red-100 dark:bg-red-800"
+    }
+  }
+}

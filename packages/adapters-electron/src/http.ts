@@ -92,12 +92,12 @@ export class ElectronHttpClient implements HttpClient {
           }
         })
 
-        response.on('error', (error) => {
+        response.on('error', (error: Error) => {
           reject(new Error(`Response error: ${error.message}`))
         })
       })
 
-      request.on('error', (error) => {
+      request.on('error', (error: Error) => {
         reject(new Error(`Request error: ${error.message}`))
       })
 

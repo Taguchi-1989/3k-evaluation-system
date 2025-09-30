@@ -1,0 +1,14 @@
+{
+  "work_case_examples": {
+    "individual_work_cases": {
+      "painting_booth_operator": {
+        "case_id": "case_001",
+        "work_description": "自動車塗装ブース作業員",
+        "final_evaluation": {
+          "kitsu_sa_score": 6,
+          "3k_index": "III"
+        }
+      }
+    }
+  }
+}

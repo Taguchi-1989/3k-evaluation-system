@@ -1,0 +1,306 @@
+/* 3K評価アプリ 統一タイポグラフィシステム */
+
+/* === 見出しレベル統一 === */
+
+.heading-xl {
+  font-size: var(--text-4xl); /* 36px */
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-6);
+  letter-spacing: -0.025em;
+}
+
+.heading-lg {
+  font-size: var(--text-3xl); /* 30px */
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-5);
+  letter-spacing: -0.015em;
+}
+
+.heading-md {
+  font-size: var(--text-2xl); /* 24px */
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-4);
+}
+
+.heading-sm {
+  font-size: var(--text-xl); /* 20px */
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-normal);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-3);
+}
+
+.heading-xs {
+  font-size: var(--text-lg); /* 18px */
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  color: var(--color-gray-800);
+  margin-bottom: var(--spacing-2);
+}
+
+/* === ボディテキスト統一 === */
+
+.body-lg {
+  font-size: var(--text-lg); /* 18px */
+  line-height: var(--leading-relaxed);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-4);
+}
+
+.body-md {
+  font-size: var(--text-base); /* 16px */
+  line-height: var(--leading-normal);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-3);
+}
+
+.body-sm {
+  font-size: var(--text-sm); /* 14px */
+  line-height: var(--leading-normal);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-2);
+}
+
+.body-xs {
+  font-size: var(--text-xs); /* 12px */
+  line-height: var(--leading-normal);
+  color: var(--color-gray-500);
+  margin-bottom: var(--spacing-2);
+}
+
+/* === キャプションテキスト === */
+
+.caption {
+  font-size: var(--text-xs); /* 12px */
+  font-weight: var(--font-medium);
+  line-height: var(--leading-tight);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.label {
+  font-size: var(--text-sm); /* 14px */
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-1);
+}
+
+/* === リンクテキスト === */
+
+.link {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--duration-fast) var(--easing-ease-out);
+}
+
+.link:hover {
+  color: var(--color-primary-700);
+}
+
+.link:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* === 特殊用途テキスト === */
+
+.text-error {
+  color: var(--color-error);
+  font-weight: var(--font-medium);
+}
+
+.text-success {
+  color: var(--color-success);
+  font-weight: var(--font-medium);
+}
+
+.text-warning {
+  color: var(--color-warning);
+  font-weight: var(--font-medium);
+}
+
+.text-info {
+  color: var(--color-info);
+  font-weight: var(--font-medium);
+}
+
+/* === 評価スコア専用テキスト === */
+
+.score-text {
+  font-family: var(--font-mono);
+  font-weight: var(--font-bold);
+  font-size: var(--text-lg);
+  letter-spacing: 0.1em;
+}
+
+.score-excellent {
+  color: var(--color-score-excellent);
+}
+
+.score-good {
+  color: var(--color-score-good);
+}
+
+.score-average {
+  color: var(--color-score-average);
+}
+
+.score-poor {
+  color: var(--color-score-poor);
+}
+
+.score-critical {
+  color: var(--color-score-critical);
+}
+
+/* === 日本語テキスト最適化 === */
+
+.japanese-text {
+  font-feature-settings: "palt" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* === レスポンシブタイポグラフィ === */
+
+@media (max-width: 768px) {
+  .heading-xl {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .heading-lg {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .heading-md {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .heading-sm {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .body-lg {
+    font-size: var(--text-base);
+    margin-bottom: var(--spacing-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .heading-xl {
+    font-size: var(--text-2xl);
+    line-height: var(--leading-normal);
+  }
+
+  .heading-lg {
+    font-size: var(--text-xl);
+    line-height: var(--leading-normal);
+  }
+
+  .heading-md {
+    font-size: var(--text-lg);
+  }
+}
+
+/* === ダークモード対応 === */
+
+@media (prefers-color-scheme: dark) {
+  .heading-xl,
+  .heading-lg,
+  .heading-md,
+  .heading-sm {
+    color: var(--color-gray-100);
+  }
+
+  .heading-xs {
+    color: var(--color-gray-200);
+  }
+
+  .body-lg,
+  .body-md {
+    color: var(--color-gray-300);
+  }
+
+  .body-sm {
+    color: var(--color-gray-400);
+  }
+
+  .body-xs {
+    color: var(--color-gray-500);
+  }
+
+  .caption {
+    color: var(--color-gray-500);
+  }
+
+  .label {
+    color: var(--color-gray-300);
+  }
+
+  .link {
+    color: var(--color-primary-400);
+  }
+
+  .link:hover {
+    color: var(--color-primary-300);
+  }
+}
+
+/* === ユーティリティクラス === */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-break {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* === 行間調整 === */
+
+.leading-tight {
+  line-height: var(--leading-tight);
+}
+
+.leading-normal {
+  line-height: var(--leading-normal);
+}
+
+.leading-relaxed {
+  line-height: var(--leading-relaxed);
+}

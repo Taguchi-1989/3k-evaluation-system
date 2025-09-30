@@ -22,6 +22,34 @@ const nextConfig: NextConfig = {
     // Web版のみの設定
     reactStrictMode: true,
   }),
+
+  // Monorepo packages をトランスパイル
+  transpilePackages: ['@3k/core', '@3k/adapters-web', '@3k/ports'],
+
+  // Webpack設定
+  webpack: (config, { isServer }) => {
+    // Electronパッケージをブラウザから除外
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'electron': false,
+        'electron-log': false,
+        'electron-store': false,
+        'better-sqlite3': false,
+      };
+    }
+
+    // Electronアダプターはブラウザから除外
+    config.externals = [...(config.externals || []), {
+      '@3k/adapters-electron': '@3k/adapters-electron',
+      'electron': 'electron',
+      'electron-log': 'electron-log',
+      'electron-store': 'electron-store',
+      'better-sqlite3': 'better-sqlite3',
+    }];
+
+    return config;
+  },
 };
 
 export default nextConfig;

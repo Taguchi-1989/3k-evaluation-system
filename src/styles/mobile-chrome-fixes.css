@@ -1,0 +1,315 @@
+/* Mobile Chrome フォーム表示問題修正 */
+
+/* Mobile Chrome特有の問題修正 */
+@supports (-webkit-touch-callout: none) {
+  /* Safari/Chrome iOS対応 */
+
+  /* フォーム要素の基本修正 */
+  input,
+  textarea,
+  select,
+  button {
+    /* iOS Safariでのズーム無効化（16px以上） */
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* タップ時のハイライト無効化 */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+
+    /* Mobile Chromeでのオートフィル背景色修正 */
+    background-color: transparent !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* オートフィル時の背景色修正（Mobile Chrome特有） */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: #1f2937 !important;
+  }
+
+  /* ダークモード時のオートフィル修正 */
+  @media (prefers-color-scheme: dark) {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px #1f2937 inset !important;
+      -webkit-text-fill-color: #f9fafb !important;
+    }
+  }
+
+  /* ボタンのタッチ応答性改善 */
+  button,
+  [role="button"],
+  .btn {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+    touch-action: manipulation;
+
+    /* Mobile Chrome でのクリックディレイ排除 */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* リンクの修正 */
+  a {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+  }
+}
+
+/* Android Chrome 特有の修正 */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .chrome-mobile-fix {
+    /* Android Chromeでのフォーカス時のズーム防止 */
+    input:focus,
+    textarea:focus,
+    select:focus {
+      transform: scale(1) !important;
+      -webkit-transform: scale(1) !important;
+    }
+  }
+}
+
+/* Mobile Chrome での viewport 修正 */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+  user-zoom: fixed;
+}
+
+/* Touch device 向けの修正 */
+@media (hover: none) and (pointer: coarse) {
+  /* タッチデバイスでのホバー状態を無効化 */
+  button:hover,
+  .btn:hover,
+  a:hover {
+    background-color: initial;
+    color: initial;
+    transform: none;
+  }
+
+  /* タッチデバイス用の大きなタップターゲット */
+  button,
+  .btn,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+
+  /* タッチデバイス用のフォーム要素サイズ */
+  input,
+  textarea,
+  select {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 16px; /* ズーム防止 */
+  }
+
+  /* チェックボックス・ラジオボタンのサイズ調整 */
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-width: 20px;
+    min-height: 20px;
+    transform: scale(1.2);
+  }
+}
+
+/* iOS Safari 特有の修正 */
+@supports (-webkit-overflow-scrolling: touch) {
+  /* iOS Safari でのスクロール改善 */
+  .scrollable,
+  .overflow-y-auto,
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* iOS Safari でのフィックスドポジション修正 */
+  .fixed {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+
+  /* iOS Safari でのスティッキー要素修正 */
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+/* Mobile Chrome での表示問題修正 */
+.mobile-chrome-visible {
+  /* Mobile Chrome での要素表示強制 */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  /* レンダリング最適化 */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* フォーム要素の Mobile Chrome 最適化 */
+.form-mobile-optimized {
+  /* Mobile Chrome での入力フィールド最適化 */
+  input, textarea, select {
+    /* フォントサイズでズーム防止 */
+    font-size: max(16px, 1rem);
+
+    /* Mobile Chrome でのボーダー修正 */
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    /* Mobile Chrome でのフォーカス修正 */
+    &:focus {
+      border-color: #3b82f6;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Mobile Chrome でのプレースホルダー修正 */
+    &::placeholder {
+      color: #9ca3af;
+      opacity: 1;
+    }
+  }
+
+  /* Mobile Chrome でのボタン最適化 */
+  button, .btn {
+    /* タッチターゲットサイズ確保 */
+    min-height: 44px;
+    padding: 12px 24px;
+
+    /* Mobile Chrome でのボタン境界修正 */
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    /* タッチフィードバック */
+    &:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+/* Mobile Chrome でのレスポンシブ修正 */
+@media screen and (max-width: 768px) {
+  /* Mobile Chrome でのコンテナ最適化 */
+  .container,
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl {
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: none;
+    width: 100%;
+  }
+
+  /* Mobile Chrome でのグリッド修正 */
+  .grid {
+    gap: 16px;
+  }
+
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  /* Mobile Chrome でのテキストサイズ最適化 */
+  h1 { font-size: 1.875rem; line-height: 2.25rem; }
+  h2 { font-size: 1.5rem; line-height: 2rem; }
+  h3 { font-size: 1.25rem; line-height: 1.75rem; }
+  h4 { font-size: 1.125rem; line-height: 1.75rem; }
+
+  body {
+    font-size: 16px; /* ズーム防止 */
+    line-height: 1.6;
+  }
+}
+
+/* Mobile Chrome での評価マトリックス修正 */
+.evaluation-matrix-mobile {
+  /* Mobile Chrome でのマトリックステーブル修正 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #d1d5db;
+    min-width: 44px; /* タッチターゲットサイズ */
+    min-height: 44px;
+  }
+
+  /* Mobile Chrome でのボタンマトリックス修正 */
+  .matrix-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    background: white;
+    cursor: pointer;
+
+    &:active {
+      background: #3b82f6;
+      color: white;
+      transform: scale(0.95);
+    }
+
+    &.selected {
+      background: #3b82f6;
+      color: white;
+      border-color: #2563eb;
+    }
+  }
+}
+
+/* Mobile Chrome での可視性強化 */
+.mobile-chrome-enhanced-visibility {
+  /* 重要な要素の視認性向上 */
+  .important,
+  .required,
+  .error {
+    border: 2px solid #ef4444 !important;
+    background-color: #fee2e2 !important;
+  }
+
+  .success {
+    border: 2px solid #10b981 !important;
+    background-color: #d1fae5 !important;
+  }
+
+  .warning {
+    border: 2px solid #f59e0b !important;
+    background-color: #fef3c7 !important;
+  }
+
+  /* フォーカス表示の強化 */
+  *:focus,
+  *:focus-visible {
+    outline: 3px solid #3b82f6 !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2) !important;
+  }
+}

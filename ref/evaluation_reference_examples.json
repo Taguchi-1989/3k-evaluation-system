@@ -1,0 +1,12 @@
+{
+  "reference_examples": {
+    "general_scoring_patterns": {
+      "environmental_scoring": {
+        "score_1": {
+          "condition": "許容濃度の25%未満",
+          "interpretation": "安全レベル"
+        }
+      }
+    }
+  }
+}
