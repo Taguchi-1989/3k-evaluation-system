@@ -1,10 +1,10 @@
 # 3K評価アプリケーション - Claude Code 引き継ぎ記録
 
-## 📅 最終更新: 2025-09-30 (Phase 3 完了)
+## 📅 最終更新: 2025-09-30 (Phase 4 完了)
 
 ---
 
-## 🏗️ アーキテクチャ移行 (Phase 0, 1, 2, 3 完了)
+## 🏗️ アーキテクチャ移行 (Phase 0, 1, 2, 3, 4 完了)
 
 ### 現状の課題と目標
 **課題:**
@@ -93,10 +93,26 @@
   - `electron-log`: ^5.0.0
   - `better-sqlite3`: ^9.2.0
 
+### Phase 4 成果物 ✅
+- [x] **UI層のCore統合** (`src/contexts/`, `src/components/providers/`, `src/hooks/`)
+  - [x] `src/contexts/AppContext.tsx`: AppCore React Context
+  - [x] `src/components/providers/AppBootstrap.tsx`: Webアダプター初期化
+  - [x] `src/hooks/useEvaluation.ts`: 評価計算カスタムフック
+  - [x] `src/app/layout.tsx`: AppBootstrap統合
+- [x] **実装詳細**
+  - **React Context API**: AppCoreをアプリ全体で共有
+  - **動的インポート**: @3k/coreと@3k/adapters-webを遅延ロード
+  - **初期化フロー**: アダプター作成 → bootstrap → Context提供
+  - **カスタムフック**: 評価計算ロジックをReactコンポーネントで使用可能に
+- [x] **統合ポイント**
+  - ルートレイアウトでAppBootstrapを配置
+  - 既存のThemeProvider, AuthProviderと併用
+  - ErrorBoundaryでエラーハンドリング
+
 ### 次のフェーズ（予定）
-- **Phase 4**: UI層のCore統合（Next.js/Reactコンポーネントから@3k/core使用）
 - **Phase 5**: テスト追加（Contract Tests, Unit Tests）
 - **Phase 6**: CI/CD パイプライン構築
+- **Phase 7**: 既存コンポーネントのCore移行（段階的リファクタリング）
 
 詳細な移行計画・実装ガイドは **[chrome.md](./chrome.md)** を参照。
 

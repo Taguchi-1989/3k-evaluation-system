@@ -33,11 +33,11 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-misused-promises': 'error',
 
-    // Prevent direct adapter imports in core
+    // Prevent direct adapter imports in core (but allow in src/)
     'no-restricted-imports': ['error', {
       patterns: [{
-        group: ['@3k/adapters-*', '../adapters-*', '../../adapters-*'],
-        message: 'Core should not import adapters directly. Use ports instead.'
+        group: ['packages/adapters-*/*', '../packages/adapters-*'],
+        message: 'Use @3k/adapters-* imports instead of relative paths to adapter packages.'
       }]
     }],
 
