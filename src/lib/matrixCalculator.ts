@@ -6,10 +6,11 @@
 import type { 
   EvaluationMatrix, 
   MatrixCell} from '../data/evaluationMatrices';
-import { 
-  getMatrix, 
-  findMatrixById,
-  evaluationMatrices 
+import {
+  getMatrix,
+  findMatrixById
+  // 将来実装予定: 全マトリックスの一覧表示機能
+  // evaluationMatrices
 } from '../data/evaluationMatrices';
 
 export interface MatrixCalculationInput {
@@ -61,6 +62,8 @@ export interface HazardMatrixInput {
 export class MatrixCalculator {
   private static instance: MatrixCalculator;
 
+  // シングルトンパターン - インスタンス化制御のため空実装
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): MatrixCalculator {
@@ -348,10 +351,11 @@ export class MatrixCalculator {
   /**
    * 推奨事項生成
    */
+  // 将来実装予定: inputの詳細パラメータを使用したカスタマイズされた推奨事項生成
   private generateRecommendations(
     category: 'physical' | 'mental' | 'environmental' | 'hazard',
     score: number,
-    input: MatrixCalculationInput
+    _input: MatrixCalculationInput
   ): string[] {
     const recommendations: string[] = [];
 

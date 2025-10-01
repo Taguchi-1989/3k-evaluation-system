@@ -11,13 +11,16 @@ export default function PhysicalFactorPage(): React.JSX.Element {
   const { getReturnPath } = useNavigation()
   const { setCurrentPath, pushToHistory } = useEvaluationStore()
 
+  // マウント時のみ実行（パス履歴の初期化）
+  // getReturnPath/pushToHistory/setCurrentPathは安定した関数のため依存配列から除外
   useEffect(() => {
     const returnPath = getReturnPath()
     if (returnPath) {
       pushToHistory(returnPath)
     }
     setCurrentPath('/evaluation/physical')
-  }, []) // Remove dependencies as this should only run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const breadcrumbItems = [
     { label: 'ホーム', path: '/' },

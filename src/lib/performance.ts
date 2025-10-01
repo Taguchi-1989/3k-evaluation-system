@@ -211,7 +211,7 @@ export const useStableMemo = <T>(factory: () => T, deps: React.DependencyList): 
   const lastDepsRef = useRef<React.DependencyList | undefined>(undefined);
   const lastResultRef = useRef<T | undefined>(undefined);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // deps/factoryは手動で変更検知を行うため、依存配列から意図的に除外
   return useMemo(() => {
     const depsChanged = !lastDepsRef.current ||
       deps.length !== lastDepsRef.current.length ||
@@ -223,8 +223,7 @@ export const useStableMemo = <T>(factory: () => T, deps: React.DependencyList): 
     }
 
     return lastResultRef.current!;
-    // deps is intentionally used here but not in the dependency array
-    // because we manually check for changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
@@ -237,14 +236,16 @@ export const useStableCallback = <T extends (...args: unknown[]) => unknown>(
 ): T => {
   const callbackRef = useRef<T>(callback);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // callbackRefの更新タイミングをdepsで制御（callbackは依存配列に含めない）
   useEffect(() => {
     callbackRef.current = callback;
-    // deps is used to track when callback should update
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
+  // 安定した参照を保つため空の依存配列（callbackRefを介して常に最新のcallbackを参照）
   return useCallback((...args: Parameters<T>) => {
     return callbackRef.current(...args);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) as T;
 };
 

@@ -33,8 +33,8 @@ export interface FactorPageLayoutProps {
 
 export function FactorPageLayout({
   children,
-  title,
-  breadcrumbLabel,
+  title: _title,  // 将来実装予定: ページタイトル表示機能
+  breadcrumbLabel: _breadcrumbLabel,  // 将来実装予定: パンくずナビゲーション
   evaluationNo = 'EV-2024-001',
   creator = {
     department: '生産技術企画部',

@@ -151,7 +151,7 @@ export class ScoreCalculationEngine {
             postureScore = matrixResult.score;
             calculationMethod = 'matrix';
             
-          } catch (_error) {
+          } catch {
             // マトリックス計算に失敗した場合は従来の方法にフォールバック
             const rulaEval = this.standardsService.getRulaEvaluation(posture.rulaScore);
             const owasEval = this.standardsService.getOwasEvaluation(posture.owasCategory);
@@ -248,7 +248,7 @@ export class ScoreCalculationEngine {
             const matrixResult = this.matrixCalculator.calculateMentalMatrix(matrixInput);
             failureScore = matrixResult.score;
             calculationMethod = 'matrix';
-          } catch (error) {
+          } catch {
             failureScore = this.calculateFailureScore(
               workQuality.failure.level,
               workQuality.failure.duration
@@ -401,7 +401,7 @@ export class ScoreCalculationEngine {
             const matrixResult = this.matrixCalculator.calculateEnvironmentalMatrix(matrixInput);
             score = matrixResult.score;
             calculationMethod = 'matrix';
-          } catch (error) {
+          } catch {
             score = this.standardsService.calculateChemicalScore(
               substance.substanceName,
               substance.measuredValue
@@ -518,7 +518,7 @@ export class ScoreCalculationEngine {
             const matrixResult = this.matrixCalculator.calculateHazardMatrix(matrixInput);
             riskScore = matrixResult.score;
             calculationMethod = 'matrix';
-          } catch (error) {
+          } catch {
             riskScore = this.standardsService.calculateRiskScore(
               event.encounterFrequency,
               event.dangerPossibility,

@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// 将来実装予定: ロゴ画像表示機能
+// import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 interface UnifiedHeaderProps {

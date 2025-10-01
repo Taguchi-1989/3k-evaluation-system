@@ -17,8 +17,8 @@ export interface MatrixDisplayProps {
 export function MatrixDisplay({
   title,
   type = 'COMPREHENSIVE',
-  selectedRow,
-  selectedCol,
+  selectedRow: _selectedRow,  // 将来実装予定: 選択行のハイライト表示
+  selectedCol: _selectedCol,  // 将来実装予定: 選択列のハイライト表示
   onCellClick,
   onScoreChange,
   className = ''

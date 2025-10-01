@@ -187,6 +187,8 @@ export function WorkTimeDetail({
         {/* 左列: 写真 & 書類アップロード */}
         <div className="w-4/12 flex flex-col h-full space-y-3">
           <div className="flex-grow bg-gray-100 rounded-lg flex items-center justify-center p-2">
+            {/* 将来実装予定: OptimizedImageコンポーネント使用 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={photoUrl} className="evaluation-photo rounded" alt="関連写真" />
           </div>
           <FileUpload

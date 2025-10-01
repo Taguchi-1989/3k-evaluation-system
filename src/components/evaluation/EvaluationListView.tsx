@@ -3,7 +3,9 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Header } from '@/components/layout'
-import { Card, CardContent, Button } from '@/components/ui'
+import { Card, CardContent } from '@/components/ui'
+// 将来実装予定: アクションボタン追加時に使用
+// import { Button } from '@/components/ui'
 import { EvaluationEditModal } from './EvaluationEditModal'
 import { useAuth } from '@/contexts/AuthContext'
 import { useEvaluationData } from '@/hooks/useEvaluationData'
@@ -156,12 +158,12 @@ export function EvaluationListView({
   workItems = defaultWorkItems,
   onItemSelect
 }: EvaluationListViewProps): React.JSX.Element {
-  const { evaluations, isLoading, error, saveEvaluation, deleteEvaluation, refreshData } = useEvaluationData()
+  const { evaluations, isLoading, error, saveEvaluation, deleteEvaluation, refreshData: _refreshData } = useEvaluationData()  // refreshDataは将来実装予定
   const items = evaluations.length > 0 ? evaluations : workItems
   const [selectedItem, setSelectedItem] = useState<WorkItem | null>(items[0] || null)
   const [editModalOpen, setEditModalOpen] = useState(false)
   const [editingItem, setEditingItem] = useState<WorkItem | null>(null)
-  const [isSaving, setIsSaving] = useState(false)
+  const [_isSaving, setIsSaving] = useState(false)  // 将来実装予定: 保存中インジケーター表示
   const { checkPermission } = useAuth()
 
   const handleItemClick = (item: WorkItem) => {
@@ -262,11 +264,13 @@ export function EvaluationListView({
     }
   }
 
-  const handleNavigateToEdit = (itemId: string) => {
+  // 将来実装予定: 編集ページへの遷移ボタン
+  const _handleNavigateToEdit = (itemId: string): void => {
     window.location.href = `/evaluation/edit/${itemId}`
   }
 
-  const handleBackToTop = () => {
+  // 将来実装予定: トップページへの戻るボタン
+  const _handleBackToTop = (): void => {
     window.location.href = '/'
   }
 
