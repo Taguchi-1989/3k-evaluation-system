@@ -4,36 +4,54 @@
  */
 
 import { useState, useCallback } from 'react';
-import { isElectron, electronDB } from '@/lib/electron/electronAPI';
+import { isElectron } from '@/lib/electron/electronAPI';
 import type { Evaluation, EvaluationForm } from '@/types/evaluation';
 
-interface DatabaseHook {
+/** 評価データフィルター */
+export interface EvaluationFilters {
+  factoryName?: string
+  workName?: string
+  processName?: string
+  dateFrom?: string
+  dateTo?: string
+}
+
+/** エクスポートデータ形式 */
+export interface ExportData {
+  version: string
+  exportDate: string
+  evaluations: Evaluation[]
+}
+
+/** データベース操作フック */
+export interface DatabaseHook {
   // 状態
-  isLoading: boolean;
-  error: string | null;
+  isLoading: boolean
+  error: string | null
 
   // 評価データ操作
-  saveEvaluation: (evaluation: EvaluationForm) => Promise<string | null>;
-  loadEvaluation: (id: string) => Promise<Evaluation | null>;
-  listEvaluations: (filters?: any) => Promise<Evaluation[]>;
-  deleteEvaluation: (id: string) => Promise<boolean>;
+  saveEvaluation: (evaluation: EvaluationForm) => Promise<string | null>
+  loadEvaluation: (id: string) => Promise<Evaluation | null>
+  listEvaluations: (filters?: EvaluationFilters) => Promise<Evaluation[]>
+  deleteEvaluation: (id: string) => Promise<boolean>
 
   // データエクスポート/インポート
-  exportEvaluations: () => Promise<string | null>;
-  importEvaluations: (data: string) => Promise<boolean>;
+  exportEvaluations: () => Promise<string | null>
+  importEvaluations: (data: string) => Promise<boolean>
 
   // 設定管理
-  getSetting: (key: string) => Promise<any>;
-  setSetting: (key: string, value: any) => Promise<boolean>;
+  getSetting: <T = unknown>(key: string) => Promise<T | null>
+  setSetting: <T = unknown>(key: string, value: T) => Promise<boolean>
 }
 
 export const useDatabase = (): DatabaseHook => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleError = useCallback((err: any) => {
+  const handleError = useCallback((err: unknown): null => {
     console.error('Database operation error:', err);
-    setError(err.message || 'データベース操作でエラーが発生しました');
+    const errorMessage = err instanceof Error ? err.message : 'データベース操作でエラーが発生しました';
+    setError(errorMessage);
     return null;
   }, []);
 
@@ -57,7 +75,7 @@ export const useDatabase = (): DatabaseHook => {
         };
 
         const existingData = localStorage.getItem('evaluations');
-        const evaluations = existingData ? JSON.parse(existingData) : [];
+        const evaluations: unknown[] = existingData ? JSON.parse(existingData) as unknown[] : [];
         evaluations.push(evaluationWithId);
         localStorage.setItem('evaluations', JSON.stringify(evaluations));
 
@@ -84,8 +102,8 @@ export const useDatabase = (): DatabaseHook => {
         const existingData = localStorage.getItem('evaluations');
         if (!existingData) return null;
 
-        const evaluations = JSON.parse(existingData);
-        return evaluations.find((evaluation: Evaluation) => evaluation.id === id) || null;
+        const evaluations = JSON.parse(existingData) as Evaluation[];
+        return evaluations.find((evaluation) => evaluation.id === id) ?? null;
       }
     } catch (err) {
       return handleError(err);
@@ -94,7 +112,7 @@ export const useDatabase = (): DatabaseHook => {
     }
   }, [handleError]);
 
-  const listEvaluations = useCallback(async (filters?: any): Promise<Evaluation[]> => {
+  const listEvaluations = useCallback(async (filters?: EvaluationFilters): Promise<Evaluation[]> => {
     setIsLoading(true);
     setError(null);
 
@@ -108,23 +126,23 @@ export const useDatabase = (): DatabaseHook => {
         const existingData = localStorage.getItem('evaluations');
         if (!existingData) return [];
 
-        let evaluations = JSON.parse(existingData);
+        let evaluations = JSON.parse(existingData) as Evaluation[];
 
         // フィルタリング処理
         if (filters) {
           if (filters.factoryName) {
-            evaluations = evaluations.filter((evaluation: Evaluation) =>
-              evaluation.factoryName?.includes(filters.factoryName)
+            evaluations = evaluations.filter((evaluation) =>
+              evaluation.factoryName?.includes(filters.factoryName ?? '')
             );
           }
           if (filters.workName) {
-            evaluations = evaluations.filter((evaluation: Evaluation) =>
-              evaluation.workName?.includes(filters.workName)
+            evaluations = evaluations.filter((evaluation) =>
+              evaluation.workName?.includes(filters.workName ?? '')
             );
           }
         }
 
-        return evaluations.sort((a: Evaluation, b: Evaluation) =>
+        return evaluations.sort((a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       }
@@ -150,8 +168,8 @@ export const useDatabase = (): DatabaseHook => {
         const existingData = localStorage.getItem('evaluations');
         if (!existingData) return false;
 
-        const evaluations = JSON.parse(existingData);
-        const filteredEvaluations = evaluations.filter((evaluation: Evaluation) => evaluation.id !== id);
+        const evaluations = JSON.parse(existingData) as Evaluation[];
+        const filteredEvaluations = evaluations.filter((evaluation) => evaluation.id !== id);
         localStorage.setItem('evaluations', JSON.stringify(filteredEvaluations));
 
         return true;
@@ -170,7 +188,7 @@ export const useDatabase = (): DatabaseHook => {
 
     try {
       const evaluations = await listEvaluations();
-      const exportData = {
+      const exportData: ExportData = {
         version: '1.0',
         exportDate: new Date().toISOString(),
         evaluations
@@ -189,7 +207,7 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      const importData = JSON.parse(data);
+      const importData = JSON.parse(data) as Partial<ExportData>;
 
       if (!importData.evaluations || !Array.isArray(importData.evaluations)) {
         throw new Error('無効なデータフォーマットです');
@@ -197,7 +215,7 @@ export const useDatabase = (): DatabaseHook => {
 
       // 各評価データを保存
       for (const evaluation of importData.evaluations) {
-        await saveEvaluation(evaluation);
+        await saveEvaluation(evaluation as EvaluationForm);
       }
 
       return true;
@@ -209,7 +227,7 @@ export const useDatabase = (): DatabaseHook => {
     }
   }, [saveEvaluation, handleError]);
 
-  const getSetting = useCallback(async (key: string): Promise<any> => {
+  const getSetting = useCallback(async <T = unknown>(key: string): Promise<T | null> => {
     setIsLoading(true);
     setError(null);
 
@@ -220,11 +238,11 @@ export const useDatabase = (): DatabaseHook => {
           'SELECT value FROM settings WHERE key = ?',
           [key]
         );
-        return result.data ? JSON.parse(result.data.value) : null;
+        return result.data ? (JSON.parse(result.data.value) as T) : null;
       } else {
         // Web環境: localStorageから設定取得
         const value = localStorage.getItem(`setting_${key}`);
-        return value ? JSON.parse(value) : null;
+        return value ? (JSON.parse(value) as T) : null;
       }
     } catch (err) {
       return handleError(err);
@@ -233,7 +251,7 @@ export const useDatabase = (): DatabaseHook => {
     }
   }, [handleError]);
 
-  const setSetting = useCallback(async (key: string, value: any): Promise<boolean> => {
+  const setSetting = useCallback(async <T = unknown>(key: string, value: T): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
 
