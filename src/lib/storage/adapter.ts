@@ -3,10 +3,15 @@
  * 環境に応じて適切なストレージ実装を返す
  */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type IEvaluationStorage = any;
+import type { IEvaluationStorage } from '@/types/storage';
 import { LocalStorage } from './local';
 import { ElectronStorage } from './electron';
+
+declare global {
+  interface Window {
+    electron?: unknown;
+  }
+}
 
 /**
  * 実行環境がElectronかどうかを判定

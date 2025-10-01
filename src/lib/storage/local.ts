@@ -4,38 +4,7 @@
  */
 
 import type { Evaluation } from '@/types/evaluation'
-
-// Legacy type aliases for backward compatibility
-type ComprehensiveEvaluation = Evaluation & {
-  id: string
-  createdAt: Date
-  updatedAt: Date
-  physical?: { evaluatedAt: Date; [key: string]: unknown }
-  mental?: { evaluatedAt: Date; [key: string]: unknown }
-  environmental?: { evaluatedAt: Date; [key: string]: unknown }
-  hazard?: { evaluatedAt: Date; [key: string]: unknown }
-  workTime?: { evaluatedAt: Date; [key: string]: unknown }
-  totalScore?: number
-  status?: 'completed' | 'in_progress' | 'not_started'
-}
-
-interface EvaluationSummary {
-  total: number
-  completed: number
-  inProgress: number
-  notStarted: number
-  averageScore: number
-  latestEvaluations: ComprehensiveEvaluation[]
-}
-
-interface IEvaluationStorage {
-  save(evaluation: ComprehensiveEvaluation): Promise<string>
-  get(id: string): Promise<ComprehensiveEvaluation | null>
-  getAll(): Promise<ComprehensiveEvaluation[]>
-  update(id: string, updates: Partial<ComprehensiveEvaluation>): Promise<void>
-  delete(id: string): Promise<void>
-  getSummary(): Promise<EvaluationSummary>
-}
+import type { ComprehensiveEvaluation, EvaluationSummary, IEvaluationStorage } from '@/types/storage'
 
 const STORAGE_KEY = '3k-evaluations';
 

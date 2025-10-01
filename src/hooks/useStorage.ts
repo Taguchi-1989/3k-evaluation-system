@@ -6,13 +6,21 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ComprehensiveEvaluation = any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type EvaluationSummary = any;
+import type { ComprehensiveEvaluation, EvaluationSummary } from '@/types/storage';
 import { getStorageInstance } from '@/lib/storage/adapter';
 
-export function useEvaluations() {
+/** useEvaluations フックの戻り値型 */
+export interface UseEvaluationsReturn {
+  evaluations: ComprehensiveEvaluation[]
+  loading: boolean
+  error: Error | null
+  saveEvaluation: (evaluation: ComprehensiveEvaluation) => Promise<string>
+  updateEvaluation: (id: string, updates: Partial<ComprehensiveEvaluation>) => Promise<void>
+  deleteEvaluation: (id: string) => Promise<void>
+  reload: () => Promise<void>
+}
+
+export function useEvaluations(): UseEvaluationsReturn {
   const [evaluations, setEvaluations] = useState<ComprehensiveEvaluation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -20,14 +28,15 @@ export function useEvaluations() {
   const storage = getStorageInstance();
 
   // 全評価を取得
-  const loadEvaluations = useCallback(async () => {
+  const loadEvaluations = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
       const data = await storage.getAll();
       setEvaluations(data);
       setError(null);
     } catch (err) {
-      setError(err as Error);
+      const errorObj = err instanceof Error ? err : new Error('評価の読み込みに失敗しました');
+      setError(errorObj);
     } finally {
       setLoading(false);
     }
@@ -35,19 +44,20 @@ export function useEvaluations() {
 
   // 初回ロード
   useEffect(() => {
-    loadEvaluations();
+    void loadEvaluations();
   }, [loadEvaluations]);
 
   // 評価を保存
   const saveEvaluation = useCallback(
-    async (evaluation: ComprehensiveEvaluation) => {
+    async (evaluation: ComprehensiveEvaluation): Promise<string> => {
       try {
         const id = await storage.save(evaluation);
         await loadEvaluations(); // 再読み込み
         return id;
       } catch (err) {
-        setError(err as Error);
-        throw err;
+        const errorObj = err instanceof Error ? err : new Error('評価の保存に失敗しました');
+        setError(errorObj);
+        throw errorObj;
       }
     },
     [storage, loadEvaluations]
@@ -55,13 +65,14 @@ export function useEvaluations() {
 
   // 評価を更新
   const updateEvaluation = useCallback(
-    async (id: string, updates: Partial<ComprehensiveEvaluation>) => {
+    async (id: string, updates: Partial<ComprehensiveEvaluation>): Promise<void> => {
       try {
         await storage.update(id, updates);
         await loadEvaluations(); // 再読み込み
       } catch (err) {
-        setError(err as Error);
-        throw err;
+        const errorObj = err instanceof Error ? err : new Error('評価の更新に失敗しました');
+        setError(errorObj);
+        throw errorObj;
       }
     },
     [storage, loadEvaluations]
@@ -69,13 +80,14 @@ export function useEvaluations() {
 
   // 評価を削除
   const deleteEvaluation = useCallback(
-    async (id: string) => {
+    async (id: string): Promise<void> => {
       try {
         await storage.delete(id);
         await loadEvaluations(); // 再読み込み
       } catch (err) {
-        setError(err as Error);
-        throw err;
+        const errorObj = err instanceof Error ? err : new Error('評価の削除に失敗しました');
+        setError(errorObj);
+        throw errorObj;
       }
     },
     [storage, loadEvaluations]
@@ -92,7 +104,14 @@ export function useEvaluations() {
   };
 }
 
-export function useEvaluation(id: string | null) {
+/** useEvaluation フックの戻り値型 */
+export interface UseEvaluationReturn {
+  evaluation: ComprehensiveEvaluation | null
+  loading: boolean
+  error: Error | null
+}
+
+export function useEvaluation(id: string | null): UseEvaluationReturn {
   const [evaluation, setEvaluation] = useState<ComprehensiveEvaluation | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -106,47 +125,57 @@ export function useEvaluation(id: string | null) {
       return;
     }
 
-    const loadEvaluation = async () => {
+    const loadEvaluation = async (): Promise<void> => {
       try {
         setLoading(true);
         const data = await storage.get(id);
         setEvaluation(data);
         setError(null);
       } catch (err) {
-        setError(err as Error);
+        const errorObj = err instanceof Error ? err : new Error('評価の読み込みに失敗しました');
+        setError(errorObj);
       } finally {
         setLoading(false);
       }
     };
 
-    loadEvaluation();
+    void loadEvaluation();
   }, [id, storage]);
 
   return { evaluation, loading, error };
 }
 
-export function useEvaluationSummary() {
+/** useEvaluationSummary フックの戻り値型 */
+export interface UseEvaluationSummaryReturn {
+  summary: EvaluationSummary | null
+  loading: boolean
+  error: Error | null
+  reload: () => Promise<void>
+}
+
+export function useEvaluationSummary(): UseEvaluationSummaryReturn {
   const [summary, setSummary] = useState<EvaluationSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   const storage = getStorageInstance();
 
-  const loadSummary = useCallback(async () => {
+  const loadSummary = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
       const data = await storage.getSummary();
       setSummary(data);
       setError(null);
     } catch (err) {
-      setError(err as Error);
+      const errorObj = err instanceof Error ? err : new Error('サマリーの読み込みに失敗しました');
+      setError(errorObj);
     } finally {
       setLoading(false);
     }
   }, [storage]);
 
   useEffect(() => {
-    loadSummary();
+    void loadSummary();
   }, [loadSummary]);
 
   return { summary, loading, error, reload: loadSummary };
