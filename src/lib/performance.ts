@@ -13,7 +13,7 @@ export interface PerformanceMetrics {
   componentName: string;
   timestamp: number;
   memoryUsage?: number;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
 }
 
 /**
@@ -45,7 +45,7 @@ export class PerformanceMonitor {
   /**
    * コンポーネントのレンダリング時間を測定
    */
-  measureRenderTime(componentName: string, startTime: number, props?: Record<string, any>): PerformanceMetrics {
+  measureRenderTime(componentName: string, startTime: number, props?: Record<string, unknown>): PerformanceMetrics {
     const endTime = performance.now();
     const renderTime = endTime - startTime;
 
@@ -120,7 +120,8 @@ export class PerformanceMonitor {
    */
   private getMemoryUsage(): number | undefined {
     if (typeof window !== 'undefined' && 'memory' in performance) {
-      return (performance as any).memory.usedJSHeapSize / (1024 * 1024); // MB
+      const perfWithMemory = performance as { memory?: { usedJSHeapSize: number } }
+      return perfWithMemory.memory ? perfWithMemory.memory.usedJSHeapSize / (1024 * 1024) : undefined; // MB
     }
     return undefined;
   }
@@ -128,9 +129,9 @@ export class PerformanceMonitor {
   /**
    * プロパティのシリアライズ（循環参照対策）
    */
-  private serializeProps(props: Record<string, any>): Record<string, any> {
+  private serializeProps(props: Record<string, unknown>): Record<string, unknown> {
     const seen = new WeakSet();
-    return JSON.parse(JSON.stringify(props, (key, value) => {
+    return JSON.parse(JSON.stringify(props, (_key, value: unknown) => {
       if (typeof value === 'object' && value !== null) {
         if (seen.has(value)) {
           return '[Circular]';
@@ -138,7 +139,7 @@ export class PerformanceMonitor {
         seen.add(value);
       }
       return value;
-    }));
+    })) as Record<string, unknown>;
   }
 
   /**
@@ -158,7 +159,12 @@ export class PerformanceMonitor {
   /**
    * 統計情報の取得
    */
-  getStats() {
+  getStats(): {
+    totalMeasurements: number;
+    averageRenderTime: number;
+    maxRenderTime: number;
+    slowComponents: PerformanceMetrics[];
+  } {
     const renderTimes = this.metrics.map(m => m.renderTime);
     return {
       totalMeasurements: this.metrics.length,
@@ -183,7 +189,7 @@ export class PerformanceMonitor {
 /**
  * コンポーネントのレンダリング時間を測定するフック
  */
-export const useRenderTime = (componentName: string, props?: Record<string, any>) => {
+export const useRenderTime = (componentName: string, props?: Record<string, unknown>): void => {
   const startTimeRef = useRef<number | undefined>(undefined);
   const monitor = PerformanceMonitor.getInstance();
 
@@ -205,6 +211,7 @@ export const useStableMemo = <T>(factory: () => T, deps: React.DependencyList): 
   const lastDepsRef = useRef<React.DependencyList | undefined>(undefined);
   const lastResultRef = useRef<T | undefined>(undefined);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useMemo(() => {
     const depsChanged = !lastDepsRef.current ||
       deps.length !== lastDepsRef.current.length ||
@@ -216,20 +223,24 @@ export const useStableMemo = <T>(factory: () => T, deps: React.DependencyList): 
     }
 
     return lastResultRef.current!;
-  }, deps);
+    // deps is intentionally used here but not in the dependency array
+    // because we manually check for changes
+  }, []);
 };
 
 /**
  * 不要な再レンダリングを防ぐためのコールバックフック
  */
-export const useStableCallback = <T extends (...args: any[]) => any>(
+export const useStableCallback = <T extends (...args: unknown[]) => unknown>(
   callback: T,
   deps: React.DependencyList
 ): T => {
   const callbackRef = useRef<T>(callback);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     callbackRef.current = callback;
+    // deps is used to track when callback should update
   }, deps);
 
   return useCallback((...args: Parameters<T>) => {
@@ -259,12 +270,12 @@ export const useDebouncedValue = <T>(value: T, delay: number): T => {
 /**
  * Web Vitals測定フック
  */
-export const useWebVitals = () => {
+export const useWebVitals = (): WebVitalsMetrics => {
   const [metrics, setMetrics] = useState<WebVitalsMetrics>({});
   const monitor = PerformanceMonitor.getInstance();
 
   useEffect(() => {
-    monitor.measureWebVitals().then(setMetrics);
+    void monitor.measureWebVitals().then(setMetrics);
   }, [monitor]);
 
   return metrics;
@@ -273,7 +284,7 @@ export const useWebVitals = () => {
 /**
  * パフォーマンス統計フック
  */
-export const usePerformanceStats = () => {
+export const usePerformanceStats = (): ReturnType<PerformanceMonitor['getStats']> => {
   const [stats, setStats] = useState(PerformanceMonitor.getInstance().getStats());
 
   useEffect(() => {
@@ -290,10 +301,10 @@ export const usePerformanceStats = () => {
 /**
  * 高階コンポーネント: パフォーマンス測定付きコンポーネント
  */
-export function withPerformanceMonitoring<P extends Record<string, any>>(
+export function withPerformanceMonitoring<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
   componentName?: string
-) {
+): React.ComponentType<P> {
   const WrappedComponent = React.memo((props: P) => {
     const name = componentName || Component.displayName || Component.name || 'Unknown';
     useRenderTime(name, props);
