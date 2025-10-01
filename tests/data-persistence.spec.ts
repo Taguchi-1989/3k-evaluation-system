@@ -50,12 +50,12 @@ test.describe('3K評価アプリケーション - データ永続化', () => {
       expect(await page.locator('[data-testid*="evaluation"], .evaluation-item, li').count()).toBeGreaterThan(0)
     } else {
       // データがない場合、空状態のメッセージが表示される
-      const emptyMessage = page.locator('text=/評価データがありません|データなし|No data/')
+      const _emptyMessage = page.locator('text=/評価データがありません|データなし|No data/')  // 将来実装予定: 空状態の検証
       // 空メッセージはあってもなくても良い（実装状態による）
     }
   })
 
-  test('ローカルストレージ/IndexedDBにデータが保存される', async ({ page, context }) => {
+  test('ローカルストレージ/IndexedDBにデータが保存される', async ({ page, context: _context }) => {  // contextは将来実装予定: クロスタブ通信テスト
     // テスト用のIDを生成
     const testId = `test-eval-${Date.now()}`
 
