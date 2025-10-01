@@ -56,7 +56,10 @@ export function ImageUpload({
     const newPreviews = previewUrls.filter((_, i) => i !== index)
     
     // 削除されるプレビューURLを解放
-    URL.revokeObjectURL(previewUrls[index])
+    const urlToRevoke = previewUrls[index];
+    if (urlToRevoke) {
+      URL.revokeObjectURL(urlToRevoke);
+    }
     
     setSelectedFiles(newFiles)
     setPreviewUrls(newPreviews)

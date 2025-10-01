@@ -38,9 +38,9 @@ export interface WorkTimeDetailProps {
 // デフォルトデータから作業時間項目を生成
 const generateWorkers = (): Worker[] => {
   const workTimeStandards = EVALUATION_STANDARDS.workTime
-  const defaultData = DEFAULT_EVALUATION_DATA.workTimeFactor
-  
-  return defaultData.workers.map((worker, index) => ({
+  const defaultData = (DEFAULT_EVALUATION_DATA as any).workTimeFactor ?? DEFAULT_EVALUATION_DATA.workTimeDefaults
+
+  return ((defaultData as any).workers ?? []).map((worker: any, index: number) => ({
     id: `${index + 1}`,
     name: worker.name,
     laborTime: worker.laborTime,
