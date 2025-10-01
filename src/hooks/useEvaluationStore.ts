@@ -97,8 +97,8 @@ export const useEvaluationStore = create<EvaluationStore>()(
         
       getLastPath: () => {
         const state = get();
-        return state.navigationHistory.length > 0 
-          ? state.navigationHistory[state.navigationHistory.length - 1] 
+        return state.navigationHistory.length > 0
+          ? (state.navigationHistory[state.navigationHistory.length - 1] ?? null)
           : null;
       },
       

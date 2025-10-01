@@ -152,7 +152,7 @@ export function getCategoryColor(category: string): string {
     '評価管理': 'bg-orange-100 text-orange-800',
     'その他': 'bg-gray-100 text-gray-800'
   }
-  return colorMap[category] || colorMap['その他']
+  return colorMap[category] ?? colorMap['その他'] ?? 'bg-gray-100 text-gray-800'
 }
 
 /**

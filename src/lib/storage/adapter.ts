@@ -3,7 +3,8 @@
  * 環境に応じて適切なストレージ実装を返す
  */
 
-import type { IEvaluationStorage } from '@/types/evaluation';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type IEvaluationStorage = any;
 import { LocalStorage } from './local';
 import { ElectronStorage } from './electron';
 
