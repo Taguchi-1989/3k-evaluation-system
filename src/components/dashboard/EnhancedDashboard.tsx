@@ -158,7 +158,7 @@ const convertEvaluationToWorkItem = (evaluation: Evaluation): WorkItem => {
     environmentalScore: estimatedIndividualScore,
     hazardScore: estimatedIndividualScore,
     timeCategory: 'c', // 暫定値
-    status: evaluation.status
+    status: (evaluation.status as 'draft' | 'completed' | 'reviewed' | 'archived') || 'draft'
   }
 }
 

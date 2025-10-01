@@ -32,12 +32,18 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
   const [accidentAssessment, setAccidentAssessment] = useState<AccidentHistoryAssessment>()
 
   // 安全管理状態
-  const [safetyManagement, setSafetyManagement] = useState({
-    complianceLevel: 'compliant' as const,
-    trainingAdequacy: 'adequate' as const,
-    reportingSystem: 'adequate' as const,
-    riskAssessmentFreq: 'quarterly' as const,
-    managementGaps: [] as SafetyGapAssessment[]
+  const [safetyManagement, setSafetyManagement] = useState<{
+    complianceLevel: 'non_compliant' | 'partially_compliant' | 'compliant' | 'excellent';
+    trainingAdequacy: 'inadequate' | 'minimal' | 'adequate' | 'excellent';
+    reportingSystem: 'none' | 'basic' | 'adequate' | 'comprehensive';
+    riskAssessmentFreq: 'never' | 'annual' | 'semi_annual' | 'quarterly' | 'monthly';
+    managementGaps: SafetyGapAssessment[];
+  }>({
+    complianceLevel: 'compliant',
+    trainingAdequacy: 'adequate',
+    reportingSystem: 'adequate',
+    riskAssessmentFreq: 'quarterly',
+    managementGaps: []
   })
   const [safetyAssessment, setSafetyAssessment] = useState<SafetyManagementStressAssessment>()
 

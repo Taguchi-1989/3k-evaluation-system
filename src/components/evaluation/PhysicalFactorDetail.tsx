@@ -6,6 +6,7 @@ import { Input, HelpTooltip } from '@/components/ui'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
 import { PostureList, MatrixDisplay } from '@/components/evaluation'
 import type { Posture } from '@/components/evaluation/PostureList'
+import type { Posture as EvaluationPosture } from '@/types/evaluation'
 import { StandardsLegend } from '@/components/evaluation/StandardsLegend'
 import { AIComprehensiveAssistant } from '@/components/ui/AIComprehensiveAssistant'
 import matrixData from '@/data/evaluation-matrix.json'
@@ -176,13 +177,13 @@ export function PhysicalFactorDetail({
         newCheckboxes.muscle = true
       }
 
-      setPhysicalDetails((prev: PhysicalDetails) => ({
+      setPhysicalDetails((prev) => ({
         ...prev,
         checkboxes: {
           ...prev.checkboxes,
           ...newCheckboxes
         }
-      }))
+      }) as PhysicalDetails)
 
       // 成功メッセージを表示
       showPopup('AI推奨設定適用', 'AI分析結果に基づいて肉体因子の設定が適用されました。')
@@ -196,7 +197,7 @@ export function PhysicalFactorDetail({
         'physical',
         physicalDetails,
         {
-          postures: (postures || []) as Posture[],
+          postures: (postures || []) as unknown as EvaluationPosture[],
           workTimeFactor: 1.0
         }
       )

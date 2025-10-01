@@ -197,10 +197,11 @@ export function MentalFactorDetail({
     if (mentalRecommendation && mentalRecommendation.recommendations) {
       setFactorItems(prev => {
         const updated = [...prev]
-        mentalRecommendation.recommendations.forEach((rec: Record<string, unknown>) => {
-          const itemIndex = updated.findIndex(item => item.id === rec.id)
-          if (itemIndex !== -1 && typeof rec.id === 'string') {
-            updated[itemIndex] = { ...updated[itemIndex], ...rec as Partial<MentalFactorItem> }
+        mentalRecommendation.recommendations.forEach((rec) => {
+          const recommendation = rec as Partial<MentalFactorItem> & { id?: string }
+          const itemIndex = updated.findIndex(item => item.id === recommendation.id)
+          if (itemIndex !== -1 && typeof recommendation.id === 'string') {
+            updated[itemIndex] = { ...updated[itemIndex], ...recommendation }
           }
         })
         return updated

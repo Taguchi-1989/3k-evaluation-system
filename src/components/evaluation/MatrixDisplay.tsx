@@ -27,7 +27,7 @@ export function MatrixDisplay({
 
   // JSONデータから該当する評価タイプのデータを取得
   const evalData = matrixData as unknown as EvaluationMatrixData
-  const currentMatrix = evalData[type] as ComprehensiveMatrixData | RULAMatrixData | undefined
+  const currentMatrix = (type in evalData ? evalData[type as keyof EvaluationMatrixData] : undefined) as ComprehensiveMatrixData | RULAMatrixData | undefined
   const displayTitle = title || (currentMatrix && 'name' in currentMatrix ? String(currentMatrix.name) : '')
 
   if (!currentMatrix) {
