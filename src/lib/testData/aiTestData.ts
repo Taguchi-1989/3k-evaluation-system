@@ -2,7 +2,7 @@
  * AI機能テスト用のサンプルデータ
  */
 
-import { WorkAnalysisInput } from '@/lib/aiAssistant'
+import type { WorkAnalysisInput } from '@/lib/aiAssistant'
 
 export const aiTestWorkScenarios: WorkAnalysisInput[] = [
   {

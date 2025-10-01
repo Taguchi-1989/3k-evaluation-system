@@ -272,6 +272,7 @@ export interface EvaluationStandard {
   standardCategory: string;
   standardType: string;
   substanceName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   standardValues: Record<string, any>;
   unit: string;
   referenceSource: string;

@@ -1,0 +1,1472 @@
+`next lint` is deprecated and will be removed in Next.js 16.
+For new projects, use create-next-app to choose your preferred linter.
+For existing projects, migrate to the ESLint CLI:
+npx @next/codemod@canary next-lint-to-eslint-cli .
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of c:\Users\tgch1\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * c:\Users\tgch1\Desktop\ZBC-migration-kit\3K-app\package-lock.json
+
+
+ ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/app/api-reference/config/eslint#migrating-existing-config
+
+./src/app/admin/page.tsx
+12:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+138:43  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/app/dashboard/error.tsx
+5:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/dashboard/loading.tsx
+1:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/dashboard/page.tsx
+12:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/edit/[id]/page.tsx
+16:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/environmental/chemical/page.tsx
+18:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/environmental/page.tsx
+17:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/hazard/page.tsx
+10:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/list/page.tsx
+5:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/mental/error.tsx
+5:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/mental/focus/page.tsx
+7:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/mental/loading.tsx
+1:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/mental/page.tsx
+10:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/mental/stress/page.tsx
+7:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/new/page.tsx
+4:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/physical/error.tsx
+5:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/physical/loading.tsx
+1:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/physical/page.tsx
+10:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+20:6  Warning: React Hook useEffect has missing dependencies: 'getReturnPath', 'pushToHistory', and 'setCurrentPath'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/app/evaluation/physical/posture/matrix/page.tsx
+8:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/physical/posture/page.tsx
+8:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/evaluation/worktime/page.tsx
+10:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/help/page.tsx
+167:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/home/page.tsx
+4:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/layout.tsx
+57:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+60:13  Error: 'React' is not defined.  no-undef
+
+./src/app/not-found.tsx
+8:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/page.tsx
+19:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/app/reports/page.tsx
+6:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+29:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+36:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+42:8  Error: Unsafe spread of an `any` value in an array.  @typescript-eslint/no-unsafe-assignment
+
+./src/app/settings/page.tsx
+7:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+17:33  Error: 'React' is not defined.  no-undef
+
+./src/app/test/ai-features/layout.tsx
+1:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+4:13  Error: 'React' is not defined.  no-undef
+
+./src/app/test/ai-features/page.tsx
+13:1  Error: Imports "AIAnalysisResult" are only used as type.  @typescript-eslint/consistent-type-imports
+18:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+108:7  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+149:23  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+158:23  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+166:23  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+220:23  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+325:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+
+./src/app/test/visibility/page.tsx
+6:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/auth/LoginForm.tsx
+11:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+18:34  Error: 'React' is not defined.  no-undef
+30:14  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+49:26  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/auth/PermissionGuard.tsx
+4:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+7:13  Error: 'React' is not defined.  no-undef
+9:14  Error: 'React' is not defined.  no-undef
+13:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/auth/UserRoleIndicator.tsx
+11:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/dashboard/DashboardCharts.tsx
+17:20  Warning: 'Line' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+18:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+39:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+49:11  Error: Unsafe spread of an `any` value in an array.  @typescript-eslint/no-unsafe-assignment
+314:22  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+314:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/dashboard/DashboardStats.tsx
+3:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+11:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/dashboard/EnhancedDashboard.tsx
+5:1  Error: Imports "Tab" are only used as type.  @typescript-eslint/consistent-type-imports
+6:1  Error: Imports "WorkItem" are only used as type.  @typescript-eslint/consistent-type-imports
+140:50  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+142:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+142:20  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+143:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+143:26  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+144:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+144:29  Error: Unsafe member access .factoryName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+145:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+145:29  Error: Unsafe member access .processName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+148:18  Error: Unsafe member access .physicalFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+149:18  Error: Unsafe member access .mentalFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+150:18  Error: Unsafe member access .environmentalFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+151:18  Error: Unsafe member access .hazardFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+154:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+154:31  Error: Unsafe member access .physicalFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+155:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+155:29  Error: Unsafe member access .mentalFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+156:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+156:36  Error: Unsafe member access .environmentalFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+157:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+157:29  Error: Unsafe member access .hazardFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+158:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+158:30  Error: Unsafe member access .workTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+159:24  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+163:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+165:10  Warning: 'evaluations' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+191:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+192:6  Warning: React Hook useEffect has a missing dependency: 'database'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+233:41  Warning: 'itemId' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/dashboard/ReportsDashboard.tsx
+5:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+13:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/electron/ElectronTitleBar.tsx
+27:7  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+37:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+41:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+46:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+230:7  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+231:7  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+
+./src/components/ErrorBoundary.tsx
+3:1  Error: Imports "ReactNode" are only used as type.  @typescript-eslint/consistent-type-imports
+51:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+62:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+66:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+83:5  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+220:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/AppHome.tsx
+27:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/DynamicMatrixDisplay.tsx
+4:1  Error: Imports "EvaluationMatrix" are only used as type.  @typescript-eslint/consistent-type-imports
+5:1  Error: Imports "MatrixCalculationResult" are only used as type.  @typescript-eslint/consistent-type-imports
+18:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/EnhancedEnvironmentalFactorDetail.tsx
+186:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+187:3  Warning: 'evaluationNo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+188:3  Warning: 'creator' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+189:3  Warning: 'checker' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+190:3  Warning: 'workInfo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+195:11  Warning: 'currentEvaluation' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+238:6  Warning: React Hook useEffect has a missing dependency: 'calculateOverallRisk'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+362:9  Warning: 'handleSave' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+374:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+378:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/evaluation/EnhancedWorkTimeDetail.tsx
+5:10  Warning: 'OptimizedImage' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+6:10  Warning: 'useEvaluationStore' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+144:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+145:3  Warning: 'evaluationNo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+146:3  Warning: 'creator' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+147:3  Warning: 'checker' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+148:3  Warning: 'workInfo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+156:25  Warning: 'setShiftPatterns' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+157:10  Warning: 'selectedShift' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+157:25  Warning: 'setSelectedShift' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+169:6  Warning: React Hook useEffect has missing dependencies: 'calculateMaxTime', 'calculateProductivity', and 'performAnalysis'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+306:9  Warning: 'handleSave' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+323:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+327:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+692:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/evaluation/EnvironmentalFactorDetail.tsx
+5:29  Warning: 'Button' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+7:10  Warning: 'EVALUATION_STANDARDS' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+7:32  Warning: 'DEFAULT_EVALUATION_DATA' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+57:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+81:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+85:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/evaluation/EvaluationEditModal.tsx
+7:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+16:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+267:29  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/evaluation/EvaluationListView.tsx
+6:29  Warning: 'Button' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+155:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+159:76  Warning: 'refreshData' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+164:10  Warning: 'isSaving' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+265:9  Warning: 'handleNavigateToEdit' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+269:9  Warning: 'handleBackToTop' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+348:33  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+493:18  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/evaluation/EvaluationMain.tsx
+7:10  Warning: 'Button' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+33:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+55:10  Warning: 'isSaving' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+56:10  Warning: 'saveMessage' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+73:6  Warning: React Hook useEffect has a missing dependency: 'updateEvaluationForm'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+75:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+85:9  Warning: 'handleSave' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+137:9  Warning: 'statusBadges' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/evaluation/FactorList.tsx
+26:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/GenericFactorDetail.tsx
+3:1  Error: Imports "ReactNode" are only used as type.  @typescript-eslint/consistent-type-imports
+7:10  Warning: 'Button' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+38:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+40:3  Warning: 'factorType' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+54:10  Warning: 'selectedPosture' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+56:9  Warning: 'handleChemicalEvaluation' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+60:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+64:9  Warning: 'handleBackToDashboard' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+115:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+141:31  Warning: 'row' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+141:36  Warning: 'col' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+141:41  Warning: 'value' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/evaluation/HazardFactorDetail.tsx
+42:9  Warning: 'hazardStandards' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+106:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+107:3  Warning: 'evaluationNo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+108:3  Warning: 'creator' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+109:3  Warning: 'checker' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+110:3  Warning: 'workInfo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+184:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+188:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/evaluation/HazardPsychologicalAssessment.tsx
+9:3  Warning: 'ACCIDENT_HISTORY_RISK_MAPPING' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+10:3  Warning: 'SAFETY_MANAGEMENT_SCORE_MAPPING' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+29:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+337:19  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+337:54  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+356:19  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+356:55  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+375:19  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+375:54  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+394:19  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+394:57  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+497:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+497:83  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+520:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+520:77  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+542:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+542:75  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/evaluation/MatrixDisplay.tsx
+16:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+19:3  Warning: 'selectedRow' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+20:3  Warning: 'selectedCol' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+53:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+56:18  Error: Unsafe member access .rows on an `any` value.  @typescript-eslint/no-unsafe-member-access
+56:33  Error: Unsafe member access .columns on an `any` value.  @typescript-eslint/no-unsafe-member-access
+57:30  Error: Unsafe member access .rows on an `any` value.  @typescript-eslint/no-unsafe-member-access
+57:53  Error: Unsafe member access .columns on an `any` value.  @typescript-eslint/no-unsafe-member-access
+62:44  Warning: 'rowIndex' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+62:62  Warning: 'colIndex' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+64:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+64:26  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+64:39  Error: Unsafe member access .scoreColors on an `any` value.  @typescript-eslint/no-unsafe-member-access
+65:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+65:38  Error: Unsafe member access [scoreStr] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+87:18  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+87:25  Error: Unsafe member access .columns on an `any` value.  @typescript-eslint/no-unsafe-member-access
+87:44  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+95:16  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+95:23  Error: Unsafe member access .rows on an `any` value.  @typescript-eslint/no-unsafe-member-access
+95:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+100:20  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+100:27  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+102:27  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+102:42  Error: Unsafe member access .scoreLabels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+127:20  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+140:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+140:24  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+140:40  Error: Unsafe member access .scoreColors on an `any` value.  @typescript-eslint/no-unsafe-member-access
+141:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+141:36  Error: Unsafe member access [scoreStr] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+153:20  Error: Unsafe member access .description on an `any` value.  @typescript-eslint/no-unsafe-member-access
+154:78  Error: Unsafe member access .description on an `any` value.  @typescript-eslint/no-unsafe-member-access
+163:12  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+163:22  Error: Unsafe member access .strengthLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+163:53  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+168:12  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+168:12  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+168:22  Error: Unsafe member access .postureGroups on an `any` value.  @typescript-eslint/no-unsafe-member-access
+168:51  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+169:25  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+171:13  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+171:23  Error: Unsafe member access .durationLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+171:58  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+179:59  Error: Unsafe member access .durationLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+189:20  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+189:30  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+189:39  Error: Computed name [posture] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+189:50  Error: Computed name [duration] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+194:70  Error: Unsafe member access .strengthLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+205:13  Error: Unsafe return of a value of type `any[]`.  @typescript-eslint/no-unsafe-return
+206:14  Error: Unsafe member access .flat on an `any` value.  @typescript-eslint/no-unsafe-member-access
+214:115  Error: Unsafe member access .strengthLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+216:26  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/components/evaluation/MatrixTestPage.tsx
+5:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+12:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+69:5  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+78:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+87:5  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+115:57  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/evaluation/MentalFactorDetail.tsx
+4:22  Warning: 'Input' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+8:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+10:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+63:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+63:20  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+63:40  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+63:46  Error: Unsafe member access .scales on an `any` value.  @typescript-eslint/no-unsafe-member-access
+63:72  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+63:80  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+63:82  Error: Unsafe member access .level on an `any` value.  @typescript-eslint/no-unsafe-member-access
+64:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+64:32  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+65:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+65:22  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+65:42  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+65:48  Error: Unsafe member access .scales on an `any` value.  @typescript-eslint/no-unsafe-member-access
+65:74  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+65:82  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+65:84  Error: Unsafe member access .level on an `any` value.  @typescript-eslint/no-unsafe-member-access
+131:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+132:3  Warning: 'evaluationNo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+133:3  Warning: 'creator' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+134:3  Warning: 'checker' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+141:79  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+162:9  Warning: 'handleInputChange' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+180:75  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+184:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+197:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+215:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+219:9  Warning: 'handleBackToDashboard' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+225:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+226:41  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+227:41  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+228:43  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+229:44  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+230:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+481:36  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+481:45  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+481:50  Error: Unsafe member access .durationValue on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/components/evaluation/OWASMatrix.tsx
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+30:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+30:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+34:18  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+34:37  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+34:73  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+35:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+35:34  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+39:21  Error: Unsafe member access [legIndex] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+39:44  Error: Unsafe member access [legIndex] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+40:9  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+40:26  Error: Unsafe member access [legIndex] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+46:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+57:19  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+59:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+59:29  Error: Unsafe member access .matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+66:10  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+66:19  Error: Unsafe member access .legPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+66:50  Warning: 'legIndex' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+78:10  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+78:19  Error: Unsafe member access .legPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+78:50  Warning: 'legIndex' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+79:11  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+79:11  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+79:20  Error: Unsafe member access .loadLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+79:50  Warning: 'loadIndex' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+93:5  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+93:14  Error: Unsafe member access .backPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+93:50  Warning: 'backIndex' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+94:7  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+94:16  Error: Unsafe member access .armPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+115:14  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+115:23  Error: Unsafe member access .legPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+116:15  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+116:15  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+116:24  Error: Unsafe member access .loadLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+117:23  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+117:38  Error: Unsafe member access [back] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+117:54  Error: Unsafe member access [back] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+117:76  Error: Unsafe member access [back] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+118:28  Error: Unsafe member access [back] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+123:23  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+123:34  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+123:40  Error: Unsafe member access .toString on an `any` value.  @typescript-eslint/no-unsafe-member-access
+124:23  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+124:45  Error: Unsafe member access .scoreColors on an `any` value.  @typescript-eslint/no-unsafe-member-access
+124:57  Error: Computed name [scoreStr] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+135:83  Error: Unsafe member access .scoreLabels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+135:95  Error: Computed name [scoreStr] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+153:90  Error: Unsafe member access .name on an `any` value.  @typescript-eslint/no-unsafe-member-access
+154:75  Error: Unsafe member access .description on an `any` value.  @typescript-eslint/no-unsafe-member-access
+162:14  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+162:23  Error: Unsafe member access .backPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+181:14  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+181:23  Error: Unsafe member access .armPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+200:14  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+200:23  Error: Unsafe member access .legPostures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+219:14  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+219:23  Error: Unsafe member access .loadLevels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:45  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+246:54  Error: Unsafe member access .scoreColors on an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:66  Error: Computed name [currentScore.toString()] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:66  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+246:79  Error: Unsafe member access .toString on an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:131  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+246:140  Error: Unsafe member access .scoreColors on an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:152  Error: Computed name [currentScore.toString()] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:152  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+246:165  Error: Unsafe member access .toString on an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:219  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+246:228  Error: Unsafe member access .scoreColors on an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:240  Error: Computed name [currentScore.toString()] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+246:240  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+246:253  Error: Unsafe member access .toString on an `any` value.  @typescript-eslint/no-unsafe-member-access
+250:21  Error: Unsafe member access .scoreLabels on an `any` value.  @typescript-eslint/no-unsafe-member-access
+250:33  Error: Computed name [currentScore.toString()] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+250:33  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+250:46  Error: Unsafe member access .toString on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/components/evaluation/PhotoViewer.tsx
+14:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+40:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+58:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/evaluation/PhysicalFactorDetail.tsx
+14:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+69:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+70:3  Warning: 'evaluationNo' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+71:3  Warning: 'creator' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+72:3  Warning: 'checker' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+85:9  Warning: 'defaultPhysicalData' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+108:10  Error: Unsafe array destructuring of a tuple element with an `any` value.  @typescript-eslint/no-unsafe-assignment
+108:10  Warning: 'realTimeEvaluation' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+108:64  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+180:41  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+182:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+183:19  Error: Unsafe member access .checkboxes on an `any` value.  @typescript-eslint/no-unsafe-member-access
+186:13  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+201:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+213:6  Warning: React Hook useCallback has unnecessary dependencies: 'calculatedScore', 'selectedComprehensivePosture', 'selectedDuration', 'selectedEvaluationMethod', 'selectedPosture', and 'selectedStrength'. Either exclude them or remove the dependency array.  react-hooks/exhaustive-deps
+234:7  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+238:6  Warning: React Hook useEffect has a missing dependency: 'performRealTimeEvaluation'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+244:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+248:9  Warning: 'handleBackToDashboard' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+625:23  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+721:27  Warning: 'posture' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+721:36  Warning: 'duration' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+721:46  Warning: 'value' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+722:29  Warning: 'score' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/evaluation/PostureList.tsx
+45:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/PsychologicalStressAssessment.tsx
+3:40  Warning: 'useCallback' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+6:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+12:6  Warning: 'StressIntensityLevel' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+19:3  Warning: 'getLegalBasisInfo' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+27:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+143:6  Warning: React Hook useEffect has missing dependencies: 'powerHarassmentAssessment.legalBasis', 'sexualHarassment.duration', 'sexualHarassment.organizationalResponse', and 'sexualHarassmentAssessment.legalBasis'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+151:41  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+153:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+153:28  Error: Unsafe member access .eventType on an `any` value.  @typescript-eslint/no-unsafe-member-access
+154:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+154:35  Error: Unsafe member access .description on an `any` value.  @typescript-eslint/no-unsafe-member-access
+157:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+157:34  Error: Unsafe member access .defaultIntensity on an `any` value.  @typescript-eslint/no-unsafe-member-access
+158:63  Error: Unsafe member access .defaultIntensity on an `any` value.  @typescript-eslint/no-unsafe-member-access
+159:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+159:29  Error: Unsafe member access .legalBasis on an `any` value.  @typescript-eslint/no-unsafe-member-access
+233:51  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+336:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+336:54  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+352:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+352:53  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+445:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+445:54  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+461:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+461:53  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+512:34  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+512:49  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/evaluation/RULAMatrix.tsx
+12:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/StandardsLegend.tsx
+11:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/evaluation/SummaryPanel.tsx
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+59:25  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+59:41  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/evaluation/WorkTimeDetail.tsx
+40:9  Warning: 'workTimeStandards' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+41:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+41:51  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+41:56  Error: Unsafe member access .workTimeFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:3  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+43:10  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+43:27  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+43:32  Error: Unsafe member access .workers on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:47  Error: Unsafe member access .map on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:60  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+45:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+45:18  Error: Unsafe member access .name on an `any` value.  @typescript-eslint/no-unsafe-member-access
+46:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+46:23  Error: Unsafe member access .laborTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+47:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+47:28  Error: Unsafe member access .actualWorkTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+48:31  Error: Unsafe member access .actualWorkTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+48:55  Error: Unsafe member access .laborTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+49:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+49:23  Error: Unsafe member access .timeClass on an `any` value.  @typescript-eslint/no-unsafe-member-access
+72:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+146:29  Warning: 'files' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+150:9  Warning: 'handleBackToMain' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+176:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/layout/EvaluationLayout.tsx
+3:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+4:1  Error: Imports "PageLayoutProps" are only used as type.  @typescript-eslint/consistent-type-imports
+23:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+84:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+99:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/layout/FactorPageLayout.tsx
+3:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+34:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+36:3  Warning: 'title' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+37:3  Warning: 'breadcrumbLabel' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/layout/Footer.tsx
+15:13  Error: 'React' is not defined.  no-undef
+20:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/layout/Header.tsx
+29:13  Error: 'React' is not defined.  no-undef
+33:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+45:11  Warning: 'user' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/layout/PageLayout.tsx
+3:1  Error: Imports "HeaderProps" are only used as type.  @typescript-eslint/consistent-type-imports
+4:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+13:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/layout/UnifiedEvaluationLayout.tsx
+16:13  Error: 'React' is not defined.  no-undef
+20:13  Error: 'React' is not defined.  no-undef
+23:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/layout/UnifiedHeader.tsx
+4:8  Warning: 'Image' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+24:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/navigation/UnifiedNavigationBar.tsx
+36:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/optimized/DynamicAIAssistant.tsx
+10:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+
+./src/components/optimized/DynamicEvaluationComponents.tsx
+93:46  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+108:46  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+123:44  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+138:51  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+153:44  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+170:18  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+188:1  Warning: Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+./src/components/optimized/DynamicImports.tsx
+142:13  Error: 'React' is not defined.  no-undef
+143:4  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+164:48  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+166:3  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+167:3  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+168:3  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+182:1  Warning: Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+./src/components/optimized/LazyLoadWrapper.tsx
+183:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+212:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+217:6  Warning: React Hook useEffect was passed a dependency list that is not an array literal. This means we can't statically verify whether you've passed the correct dependencies.  react-hooks/exhaustive-deps
+217:6  Warning: React Hook useEffect has a missing dependency: 'importFunction'. Either include it or remove the dependency array. If 'importFunction' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+238:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+
+./src/components/optimized/OptimizedImage.tsx
+204:9  Warning: Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images.  jsx-a11y/alt-text
+
+./src/components/optimized/PerformanceProvider.tsx
+9:1  Error: Imports "PerformanceMetrics" and "WebVitalsMetrics" are only used as type.  @typescript-eslint/consistent-type-imports
+25:34  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+60:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+70:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+72:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+74:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+76:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+78:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+94:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+96:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+98:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+100:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+102:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+104:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+108:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+110:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+112:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+114:11  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+117:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+
+./src/components/providers/AppBootstrap.tsx
+12:13  Error: 'React' is not defined.  no-undef
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/report/ReportGenerator.tsx
+3:20  Warning: 'useEffect' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+5:1  Error: Imports "ReportData", "ReportConfig" and "GeneratedReport" are only used as type.  @typescript-eslint/consistent-type-imports
+7:10  Warning: 'EvaluationResult' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+14:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+16:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+17:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+17:39  Error: Unsafe member access .evaluations on an `any` value.  @typescript-eslint/no-unsafe-member-access
+32:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+33:7  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+33:19  Error: Unsafe member access .find on an `any` value.  @typescript-eslint/no-unsafe-member-access
+33:28  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+33:38  Error: Unsafe member access .evaluationId on an `any` value.  @typescript-eslint/no-unsafe-member-access
+34:19  Error: Unsafe member access [0] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+48:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+48:43  Error: Unsafe member access .evaluationId on an `any` value.  @typescript-eslint/no-unsafe-member-access
+49:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+49:37  Error: Unsafe member access .scores on an `any` value.  @typescript-eslint/no-unsafe-member-access
+50:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+50:42  Error: Unsafe member access .finalResult on an `any` value.  @typescript-eslint/no-unsafe-member-access
+51:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+51:49  Error: Unsafe member access .calculationDetails on an `any` value.  @typescript-eslint/no-unsafe-member-access
+56:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+56:39  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+57:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+57:42  Error: Unsafe member access .factoryName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+58:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+58:42  Error: Unsafe member access .processName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+59:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+59:42  Error: Unsafe member access .updatedBy on an `any` value.  @typescript-eslint/no-unsafe-member-access
+60:53  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+61:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+61:41  Error: Unsafe member access .department on an `any` value.  @typescript-eslint/no-unsafe-member-access
+62:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+62:36  Error: Unsafe member access .shift on an `any` value.  @typescript-eslint/no-unsafe-member-access
+65:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+65:39  Error: Unsafe member access .physicalDetails on an `any` value.  @typescript-eslint/no-unsafe-member-access
+66:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+66:37  Error: Unsafe member access .mentalDetails on an `any` value.  @typescript-eslint/no-unsafe-member-access
+67:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+67:44  Error: Unsafe member access .environmentalDetails on an `any` value.  @typescript-eslint/no-unsafe-member-access
+68:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+68:37  Error: Unsafe member access .hazardDetails on an `any` value.  @typescript-eslint/no-unsafe-member-access
+69:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+69:39  Error: Unsafe member access .postures on an `any` value.  @typescript-eslint/no-unsafe-member-access
+70:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+70:41  Error: Unsafe member access .environmentalSubstances on an `any` value.  @typescript-eslint/no-unsafe-member-access
+71:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+71:39  Error: Unsafe member access .workTimeFactor on an `any` value.  @typescript-eslint/no-unsafe-member-access
+76:55  Error: Unsafe member access .length on an `any` value.  @typescript-eslint/no-unsafe-member-access
+77:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+77:39  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+77:39  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+77:39  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+78:12  Error: Unsafe member access .filter on an `any` value.  @typescript-eslint/no-unsafe-member-access
+78:23  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+78:33  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+78:64  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+79:12  Error: Unsafe member access .slice on an `any` value.  @typescript-eslint/no-unsafe-member-access
+80:12  Error: Unsafe member access .map on an `any` value.  @typescript-eslint/no-unsafe-member-access
+80:20  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+81:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+81:29  Error: Unsafe member access .evaluationId on an `any` value.  @typescript-eslint/no-unsafe-member-access
+82:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+82:23  Error: Unsafe member access .scores on an `any` value.  @typescript-eslint/no-unsafe-member-access
+83:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+83:28  Error: Unsafe member access .finalResult on an `any` value.  @typescript-eslint/no-unsafe-member-access
+84:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+84:35  Error: Unsafe member access .calculationDetails on an `any` value.  @typescript-eslint/no-unsafe-member-access
+85:35  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+86:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+86:29  Error: Unsafe member access .updatedBy on an `any` value.  @typescript-eslint/no-unsafe-member-access
+90:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+157:61  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+158:71  Error: Unsafe member access .factoryName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+160:51  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+171:62  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+171:88  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+185:62  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+185:90  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+239:21  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/report/ReportHistory.tsx
+5:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+18:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+51:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+51:32  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+84:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+85:20  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+85:27  Error: Unsafe member access .map on an `any` value.  @typescript-eslint/no-unsafe-member-access
+85:35  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+85:44  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+87:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+88:18  Error: Unsafe member access .metadata on an `any` value.  @typescript-eslint/no-unsafe-member-access
+89:37  Error: Unsafe member access .metadata on an `any` value.  @typescript-eslint/no-unsafe-member-access
+91:29  Error: Unsafe member access .lastDownloaded on an `any` value.  @typescript-eslint/no-unsafe-member-access
+91:57  Error: Unsafe member access .lastDownloaded on an `any` value.  @typescript-eslint/no-unsafe-member-access
+253:64  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/ui/AIComprehensiveAssistant.tsx
+7:1  Error: Imports "AIAnalysisResult" and "WorkAnalysisInput" are only used as type.  @typescript-eslint/consistent-type-imports
+8:1  Error: Imports "ImageAnalysisResult" are only used as type.  @typescript-eslint/consistent-type-imports
+23:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+33:10  Warning: 'uploadedImages' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+34:10  Warning: 'transcription' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+240:27  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+260:34  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/ui/AIResultPopup.tsx
+6:10  Warning: 'ImageUpload' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+7:1  Error: Imports "AIAnalysisResult" and "WorkAnalysisInput" are only used as type.  @typescript-eslint/consistent-type-imports
+8:10  Warning: 'ImageAnalysisResult' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+8:31  Warning: 'aiImageAnalysis' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+9:10  Warning: 'LazyLoadWrapper' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+17:7  Warning: 'BrainIcon' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+23:7  Warning: 'CameraIcon' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+29:7  Warning: 'UploadIcon' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+35:7  Warning: 'LightbulbIcon' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+41:7  Warning: 'FileTextIcon' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+47:7  Warning: 'DownloadIcon' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+64:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+200:27  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/ui/AspectContainer.tsx
+3:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+11:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+39:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+47:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+55:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/BackButton.tsx
+14:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+25:15  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+26:16  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+26:27  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+51:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+57:17  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/ui/Button.tsx
+1:1  Error: Imports "ButtonHTMLAttributes" are only used as type.  @typescript-eslint/consistent-type-imports
+
+./src/components/ui/Card.tsx
+1:1  Error: Imports "HTMLAttributes" are only used as type.  @typescript-eslint/consistent-type-imports
+
+./src/components/ui/DocumentViewer.tsx
+20:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+28:36  Error: 'React' is not defined.  no-undef
+135:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/ui/FilePreview.tsx
+14:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+81:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/ui/FileUpload.tsx
+31:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+49:30  Error: 'React' is not defined.  no-undef
+54:31  Error: 'React' is not defined.  no-undef
+59:26  Error: 'React' is not defined.  no-undef
+68:31  Error: 'React' is not defined.  no-undef
+249:3  Error: Unreachable code.  no-unreachable
+272:3  Error: Unreachable code.  no-unreachable
+280:3  Error: Unreachable code.  no-unreachable
+285:3  Error: Unreachable code.  no-unreachable
+
+./src/components/ui/HelpTooltip.tsx
+13:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/ImageUpload.tsx
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+27:36  Error: 'React' is not defined.  no-undef
+149:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+190:25  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+
+./src/components/ui/Input.tsx
+1:1  Error: Imports "InputHTMLAttributes" are only used as type.  @typescript-eslint/consistent-type-imports
+8:14  Error: 'React' is not defined.  no-undef
+9:15  Error: 'React' is not defined.  no-undef
+
+./src/components/ui/InteractiveButton.tsx
+8:35  Warning: 'useEffect' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/ui/LoadingSkeletons.tsx
+5:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+17:13  Error: Unsafe spread of an `any` value in an array.  @typescript-eslint/no-unsafe-assignment
+42:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+58:19  Error: Unsafe spread of an `any` value in an array.  @typescript-eslint/no-unsafe-assignment
+82:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+91:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/ScreenIdDisplay.tsx
+12:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/TabInterface.tsx
+3:1  Error: Imports "ReactNode" are only used as type.  @typescript-eslint/consistent-type-imports
+19:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/ThemeToggle.tsx
+13:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/UnifiedAIFloatingButton.tsx
+12:16  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+107:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/ValidatedForm.tsx
+3:1  Error: Imports "FormEvent" and "ReactNode" are only used as type.  @typescript-eslint/consistent-type-imports
+4:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+34:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+107:20  Error: Promise-returning function provided to attribute where a void return was expected.  @typescript-eslint/no-misused-promises
+236:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/components/ui/VoiceInput.tsx
+14:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+26:33  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+32:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+32:49  Error: Unsafe member access .webkitSpeechRecognition on an `any` value.  @typescript-eslint/no-unsafe-member-access
+32:92  Error: Unsafe member access .SpeechRecognition on an `any` value.  @typescript-eslint/no-unsafe-member-access
+33:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+33:32  Error: Unsafe construction of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+34:30  Error: Unsafe member access .continuous on an `any` value.  @typescript-eslint/no-unsafe-member-access
+35:30  Error: Unsafe member access .interimResults on an `any` value.  @typescript-eslint/no-unsafe-member-access
+36:30  Error: Unsafe member access .lang on an `any` value.  @typescript-eslint/no-unsafe-member-access
+38:30  Error: Unsafe member access .onresult on an `any` value.  @typescript-eslint/no-unsafe-member-access
+38:49  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+42:18  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+42:28  Error: Unsafe member access .resultIndex on an `any` value.  @typescript-eslint/no-unsafe-member-access
+42:51  Error: Unsafe member access .results on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:17  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+43:36  Error: Unsafe member access .results on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:44  Error: Computed name [i] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+44:21  Error: Unsafe member access .results on an `any` value.  @typescript-eslint/no-unsafe-member-access
+44:29  Error: Computed name [i] resolves to an `any` value.  @typescript-eslint/no-unsafe-member-access
+59:30  Error: Unsafe member access .onerror on an `any` value.  @typescript-eslint/no-unsafe-member-access
+59:48  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+60:58  Error: Unsafe member access .error on an `any` value.  @typescript-eslint/no-unsafe-member-access
+61:36  Error: Unsafe member access .error on an `any` value.  @typescript-eslint/no-unsafe-member-access
+65:30  Error: Unsafe member access .onend on an `any` value.  @typescript-eslint/no-unsafe-member-access
+72:9  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+72:32  Error: Unsafe member access .stop on an `any` value.  @typescript-eslint/no-unsafe-member-access
+107:9  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+107:32  Error: Unsafe member access .start on an `any` value.  @typescript-eslint/no-unsafe-member-access
+121:7  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+121:30  Error: Unsafe member access .stop on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/components/ui/__tests__/Card.test.tsx
+10:1  Error: 'describe' is not defined.  no-undef
+11:3  Error: 'it' is not defined.  no-undef
+23:5  Error: 'expect' is not defined.  no-undef
+24:5  Error: 'expect' is not defined.  no-undef
+27:3  Error: 'it' is not defined.  no-undef
+35:5  Error: 'expect' is not defined.  no-undef
+36:5  Error: 'expect' is not defined.  no-undef
+39:3  Error: 'it' is not defined.  no-undef
+52:5  Error: 'expect' is not defined.  no-undef
+53:5  Error: 'expect' is not defined.  no-undef
+54:5  Error: 'expect' is not defined.  no-undef
+58:1  Error: 'describe' is not defined.  no-undef
+59:3  Error: 'it' is not defined.  no-undef
+67:5  Error: 'expect' is not defined.  no-undef
+71:1  Error: 'describe' is not defined.  no-undef
+72:3  Error: 'it' is not defined.  no-undef
+76:5  Error: 'expect' is not defined.  no-undef
+77:5  Error: 'expect' is not defined.  no-undef
+81:1  Error: 'describe' is not defined.  no-undef
+82:3  Error: 'it' is not defined.  no-undef
+86:5  Error: 'expect' is not defined.  no-undef
+87:5  Error: 'expect' is not defined.  no-undef
+
+./src/contexts/AppContext.tsx
+23:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+36:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/contexts/AuthContext.tsx
+4:1  Error: Imports "User", "UserRole", "Permission" and "PermissionCheck" are only used as type.  @typescript-eslint/consistent-type-imports
+62:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+62:56  Error: 'React' is not defined.  no-undef
+71:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+178:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/contexts/ThemeContext.tsx
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+15:57  Error: 'React' is not defined.  no-undef
+76:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/data/defaultEvaluationData.ts
+6:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+
+./src/data/evaluationStandards.ts
+26:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+40:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+46:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+46:55  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+46:61  Error: Unsafe member access .general_chemicals on an `any` value.  @typescript-eslint/no-unsafe-member-access
+48:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+48:29  Error: Unsafe member access [substanceName as keyof typeof generalChemicals] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+53:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+53:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+53:45  Error: Unsafe member access .ammonia on an `any` value.  @typescript-eslint/no-unsafe-member-access
+60:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+64:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+64:35  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+64:41  Error: Unsafe member access .score_ranges on an `any` value.  @typescript-eslint/no-unsafe-member-access
+67:33  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+67:47  Error: Unsafe member access ['1_2'] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+68:33  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+68:47  Error: Unsafe member access ['3_4'] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+69:33  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+69:47  Error: Unsafe member access ['5_6'] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+70:20  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+70:34  Error: Unsafe member access ['7'] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+76:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+81:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+81:44  Error: Unsafe member access .categories on an `any` value.  @typescript-eslint/no-unsafe-member-access
+84:3  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+84:21  Error: Unsafe member access [category.toString() as keyof typeof categories] on an `any` value.  @typescript-eslint/no-unsafe-member-access
+88:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+93:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+93:40  Error: Unsafe member access .risk_matrix on an `any` value.  @typescript-eslint/no-unsafe-member-access
+96:41  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+96:55  Error: Unsafe member access .low_risk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+97:41  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+97:55  Error: Unsafe member access .medium_risk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+98:43  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+98:57  Error: Unsafe member access .high_risk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+99:43  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+99:57  Error: Unsafe member access .critical_risk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+105:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+116:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/hooks/useAutoSave.ts
+7:9  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+17:3  Warning: 'id' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+24:31  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+25:27  Error: 'NodeJS' is not defined.  no-undef
+43:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+79:36  Error: Promise returned in function argument where a void return was expected.  @typescript-eslint/no-misused-promises
+123:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+123:39  Error: Argument 'evaluationData' should be typed with a non-any type.  @typescript-eslint/explicit-module-boundary-types
+123:55  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+125:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+130:7  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+
+./src/hooks/useBackButton.ts
+13:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+52:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/hooks/useDatabase.ts
+7:22  Warning: 'electronDB' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+18:31  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+26:40  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+27:36  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+34:41  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+36:18  Error: Unsafe member access .message on an `any` value.  @typescript-eslint/no-unsafe-member-access
+60:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+61:9  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+61:21  Error: Unsafe member access .push on an `any` value.  @typescript-eslint/no-unsafe-member-access
+87:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+88:9  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+88:16  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+88:28  Error: Unsafe member access .find on an `any` value.  @typescript-eslint/no-unsafe-member-access
+97:56  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+111:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+115:23  Error: Unsafe member access .factoryName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+116:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+116:27  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+116:39  Error: Unsafe member access .filter on an `any` value.  @typescript-eslint/no-unsafe-member-access
+117:56  Error: Unsafe member access .factoryName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+120:23  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+121:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+121:27  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+121:39  Error: Unsafe member access .filter on an `any` value.  @typescript-eslint/no-unsafe-member-access
+122:53  Error: Unsafe member access .workName on an `any` value.  @typescript-eslint/no-unsafe-member-access
+127:9  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+127:16  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+127:28  Error: Unsafe member access .sort on an `any` value.  @typescript-eslint/no-unsafe-member-access
+153:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+154:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+154:37  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+154:49  Error: Unsafe member access .filter on an `any` value.  @typescript-eslint/no-unsafe-member-access
+192:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+194:23  Error: Unsafe member access .evaluations on an `any` value.  @typescript-eslint/no-unsafe-member-access
+194:64  Error: Unsafe member access .evaluations on an `any` value.  @typescript-eslint/no-unsafe-member-access
+199:43  Error: Unsafe member access .evaluations on an `any` value.  @typescript-eslint/no-unsafe-member-access
+212:63  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+236:61  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/hooks/useEvaluation.ts
+18:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/hooks/useEvaluationData.ts
+2:29  Warning: 'SavedEvaluation' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+3:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+117:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+118:6  Warning: React Hook useEffect has a missing dependency: 'loadEvaluations'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/hooks/useNavigation.ts
+12:33  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/hooks/useStorage.ts
+15:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+20:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+26:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+26:26  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+26:34  Error: Unsafe member access .getAll on an `any` value.  @typescript-eslint/no-unsafe-member-access
+38:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+45:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+45:26  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+45:34  Error: Unsafe member access .save on an `any` value.  @typescript-eslint/no-unsafe-member-access
+47:9  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+60:15  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+60:23  Error: Unsafe member access .update on an `any` value.  @typescript-eslint/no-unsafe-member-access
+74:15  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+74:23  Error: Unsafe member access .delete on an `any` value.  @typescript-eslint/no-unsafe-member-access
+95:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+96:10  Error: Unsafe array destructuring of a tuple element with an `any` value.  @typescript-eslint/no-unsafe-assignment
+100:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+112:15  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+112:28  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+112:36  Error: Unsafe member access .get on an `any` value.  @typescript-eslint/no-unsafe-member-access
+122:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+125:12  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+128:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+129:10  Error: Unsafe array destructuring of a tuple element with an `any` value.  @typescript-eslint/no-unsafe-assignment
+133:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+138:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+138:26  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+138:34  Error: Unsafe member access .getSummary on an `any` value.  @typescript-eslint/no-unsafe-member-access
+149:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+152:12  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+
+./src/hooks/__tests__/useBackButton.test.ts
+5:18  Error: 'jest' is not defined.  no-undef
+6:18  Error: 'jest' is not defined.  no-undef
+7:21  Error: 'jest' is not defined.  no-undef
+9:1  Error: 'jest' is not defined.  no-undef
+20:21  Error: 'jest' is not defined.  no-undef
+26:1  Error: 'describe' is not defined.  no-undef
+27:3  Error: 'beforeEach' is not defined.  no-undef
+28:5  Error: 'jest' is not defined.  no-undef
+32:3  Error: 'describe' is not defined.  no-undef
+33:5  Error: 'it' is not defined.  no-undef
+52:7  Error: 'expect' is not defined.  no-undef
+53:7  Error: 'expect' is not defined.  no-undef
+54:7  Error: 'expect' is not defined.  no-undef
+57:5  Error: 'it' is not defined.  no-undef
+70:7  Error: 'expect' is not defined.  no-undef
+73:5  Error: 'it' is not defined.  no-undef
+83:7  Error: 'expect' is not defined.  no-undef
+88:1  Error: 'describe' is not defined.  no-undef
+89:3  Error: 'beforeEach' is not defined.  no-undef
+90:5  Error: 'jest' is not defined.  no-undef
+94:3  Error: 'describe' is not defined.  no-undef
+95:5  Error: 'it' is not defined.  no-undef
+99:7  Error: 'expect' is not defined.  no-undef
+100:7  Error: 'expect' is not defined.  no-undef
+101:7  Error: 'expect' is not defined.  no-undef
+104:5  Error: 'it' is not defined.  no-undef
+112:7  Error: 'expect' is not defined.  no-undef
+115:5  Error: 'it' is not defined.  no-undef
+123:7  Error: 'expect' is not defined.  no-undef
+126:5  Error: 'it' is not defined.  no-undef
+137:7  Error: 'expect' is not defined.  no-undef
+138:7  Error: 'expect' is not defined.  no-undef
+
+./src/lib/aiAssistant.ts
+6:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+7:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+23:20  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+96:25  Warning: Unexpected empty constructor.  @typescript-eslint/no-empty-function
+235:34  Warning: 'audioBlob' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+305:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+311:18  Error: Unsafe member access .physicalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+316:44  Error: Unsafe member access .physicalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+321:18  Error: Unsafe member access .mentalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+326:46  Error: Unsafe member access .mentalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+331:18  Error: Unsafe member access .environmentalRisk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+336:44  Error: Unsafe member access .environmentalRisk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+343:43  Warning: 'keywords' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+343:63  Warning: 'analysis' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+343:73  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+343:79  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+348:36  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+348:41  Warning: 'recommendations' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+350:31  Error: Unsafe member access .physicalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+350:72  Error: Unsafe member access .physicalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+351:29  Error: Unsafe member access .mentalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+351:68  Error: Unsafe member access .mentalDemand on an `any` value.  @typescript-eslint/no-unsafe-member-access
+352:36  Error: Unsafe member access .environmentalRisk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+352:80  Error: Unsafe member access .environmentalRisk on an `any` value.  @typescript-eslint/no-unsafe-member-access
+353:29  Error: Unsafe member access .hazardLevel on an `any` value.  @typescript-eslint/no-unsafe-member-access
+353:67  Error: Unsafe member access .hazardLevel on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/lib/aiImageAnalysis.ts
+105:32  Warning: 'base64Data' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+204:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+231:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+254:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+270:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/lib/api.ts
+2:10  Warning: 'prisma' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+5:34  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+15:25  Warning: Unexpected empty constructor.  @typescript-eslint/no-empty-function
+163:26  Warning: 'id' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+170:21  Error: Unreachable code.  no-unreachable
+187:15  Warning: 'data' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/calculation.ts
+6:1  Error: Imports "EvaluationStandardsService" are only used as type.  @typescript-eslint/consistent-type-imports
+7:1  Error: Imports "MatrixCalculator", "MentalMatrixInput" and "HazardMatrixInput" are only used as type.  @typescript-eslint/consistent-type-imports
+10:3  Warning: 'PhysicalMatrixInput' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+12:3  Warning: 'EnvironmentalMatrixInput' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+15:1  Error: Imports "PhysicalDetails", "MentalDetails", "EnvironmentalDetails", "HazardDetails", "Posture" and "EnvironmentalSubstance" are only used as type.  @typescript-eslint/consistent-type-imports
+17:12  Warning: 'HazardEvent' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+17:49  Warning: 'WorkTimeFactor' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+22:27  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+34:38  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+65:46  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+154:20  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+226:46  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+251:20  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+385:46  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+404:20  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+504:46  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+521:20  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/lib/database/evaluationService.ts
+2:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+18:35  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+55:15  Error: Unsafe object destructuring of a property with an `any` value.  @typescript-eslint/no-unsafe-assignment
+64:7  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+64:19  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+67:15  Error: Unsafe object destructuring of a property with an `any` value.  @typescript-eslint/no-unsafe-assignment
+77:7  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+77:19  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+87:13  Error: Unsafe object destructuring of a property with an `any` value.  @typescript-eslint/no-unsafe-assignment
+99:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+115:5  Error: Unsafe return of a value of type `any[]`.  @typescript-eslint/no-unsafe-return
+
+./src/lib/errorHandling.ts
+436:25  Warning: Unexpected empty constructor.  @typescript-eslint/no-empty-function
+464:9  Warning: Unused eslint-disable directive (no problems were reported from 'no-console').
+471:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+472:7  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+472:20  Error: Unsafe member access .push on an `any` value.  @typescript-eslint/no-unsafe-member-access
+477:57  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+477:70  Error: Unsafe member access .slice on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/lib/evaluationEngine.ts
+6:1  Error: Imports "EvaluationStandardsService" are only used as type.  @typescript-eslint/consistent-type-imports
+7:1  Error: Imports "ScoreCalculationEngine" and "FinalScoreResult" are only used as type.  @typescript-eslint/consistent-type-imports
+8:1  Error: Imports "EvaluationHistoryService" are only used as type.  @typescript-eslint/consistent-type-imports
+9:1  Error: Imports "MatrixCalculator" are only used as type.  @typescript-eslint/consistent-type-imports
+11:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+32:20  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+46:38  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+164:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+301:11  Warning: 'timestamp' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+432:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+440:24  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+441:22  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+442:29  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+443:22  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+474:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+489:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+491:5  Error: Argument 'inputs' should be typed with a non-any type.  @typescript-eslint/explicit-module-boundary-types
+491:13  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+528:100  Error: Argument 'inputs' should be typed with a non-any type.  @typescript-eslint/explicit-module-boundary-types
+528:108  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+528:113  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+532:93  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/lib/hazardPsychologicalMapping.ts
+337:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+337:72  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+370:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+
+./src/lib/history.ts
+6:1  Error: Imports "Posture" are only used as type.  @typescript-eslint/consistent-type-imports
+7:3  Warning: 'PhysicalFactor' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+7:19  Warning: 'MentalFactor' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+7:33  Warning: 'EnvironmentalFactor' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+7:54  Warning: 'HazardFactor' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+8:12  Warning: 'Evaluation' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+15:33  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+17:33  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+29:33  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+30:37  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+34:33  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+35:37  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+42:16  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+43:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+72:25  Warning: Unexpected empty constructor.  @typescript-eslint/no-empty-function
+87:35  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+89:34  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+366:28  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+367:27  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+373:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+374:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+380:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+387:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+395:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+396:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+408:18  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+409:17  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/lib/matrixCalculator.ts
+6:1  Error: Imports "EvaluationMatrix" and "MatrixCell" are only used as type.  @typescript-eslint/consistent-type-imports
+11:3  Warning: 'evaluationMatrices' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+63:25  Warning: Unexpected empty constructor.  @typescript-eslint/no-empty-function
+353:5  Warning: 'input' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/performance.ts
+16:26  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+48:86  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+123:30  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+123:35  Error: Unsafe member access .memory on an `any` value.  @typescript-eslint/no-unsafe-member-access
+131:48  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+131:70  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+133:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+140:7  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+161:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+186:77  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+186:83  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+219:6  Warning: React Hook useMemo was passed a dependency list that is not an array literal. This means we can't statically verify whether you've passed the correct dependencies.  react-hooks/exhaustive-deps
+219:6  Warning: React Hook useMemo has missing dependencies: 'deps' and 'factory'. Either include them or remove the dependency array. If 'factory' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+225:55  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+225:65  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+233:6  Warning: React Hook useEffect was passed a dependency list that is not an array literal. This means we can't statically verify whether you've passed the correct dependencies.  react-hooks/exhaustive-deps
+233:6  Warning: React Hook useEffect has a missing dependency: 'callback'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+236:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+262:32  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+267:5  Error: Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.  @typescript-eslint/no-floating-promises
+276:39  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+293:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+293:68  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/lib/prisma.ts
+7:14  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+7:49  Error: Unsafe construction of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+9:44  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+
+./src/lib/psychologicalStressMapping.ts
+382:41  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+404:3  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+
+./src/lib/reportGenerator.ts
+6:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+7:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+92:25  Warning: Unexpected empty constructor.  @typescript-eslint/no-empty-function
+200:65  Warning: 'config' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+236:72  Warning: 'config' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+350:61  Warning: 'config' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+420:55  Warning: 'config' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+663:30  Warning: 'historicalData' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+691:42  Warning: 'reportData' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/standards.ts
+84:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+91:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+98:3  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+106:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+306:11  Warning: 'riskStandards' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/storage/adapter.ts
+37:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+
+./src/lib/storage/electron.ts
+19:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+20:35  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+34:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+38:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+38:12  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+38:17  Error: Unsafe member access .map on an `any` value.  @typescript-eslint/no-unsafe-member-access
+38:25  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+38:34  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+40:29  Error: Unsafe member access .createdAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+41:29  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+42:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+42:24  Error: Unsafe member access .physical on an `any` value.  @typescript-eslint/no-unsafe-member-access
+42:58  Error: Unsafe member access .physical on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+43:22  Error: Unsafe member access .mental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+43:54  Error: Unsafe member access .mental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+44:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+44:29  Error: Unsafe member access .environmental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+44:68  Error: Unsafe member access .environmental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+45:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+45:22  Error: Unsafe member access .hazard on an `any` value.  @typescript-eslint/no-unsafe-member-access
+45:54  Error: Unsafe member access .hazard on an `any` value.  @typescript-eslint/no-unsafe-member-access
+46:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+46:24  Error: Unsafe member access .workTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+46:58  Error: Unsafe member access .workTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+59:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+59:27  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+60:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+62:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+63:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+63:29  Error: Unsafe member access .createdAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+70:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+75:36  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+84:48  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+90:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+101:48  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+113:49  Error: Unsafe member access .status on an `any` value.  @typescript-eslint/no-unsafe-member-access
+114:50  Error: Unsafe member access .status on an `any` value.  @typescript-eslint/no-unsafe-member-access
+115:50  Error: Unsafe member access .status on an `any` value.  @typescript-eslint/no-unsafe-member-access
+117:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+117:55  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+117:64  Error: Unsafe member access .totalScore on an `any` value.  @typescript-eslint/no-unsafe-member-access
+121:32  Error: Unsafe spread of an `any` value in an array.  @typescript-eslint/no-unsafe-assignment
+122:23  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+122:25  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+122:47  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+122:49  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/lib/storage/local.ts
+23:13  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+25:7  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+25:14  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+25:21  Error: Unsafe member access .map on an `any` value.  @typescript-eslint/no-unsafe-member-access
+25:29  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+25:38  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+27:31  Error: Unsafe member access .createdAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+28:31  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+29:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+29:26  Error: Unsafe member access .physical on an `any` value.  @typescript-eslint/no-unsafe-member-access
+29:60  Error: Unsafe member access .physical on an `any` value.  @typescript-eslint/no-unsafe-member-access
+30:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+30:24  Error: Unsafe member access .mental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+30:56  Error: Unsafe member access .mental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+31:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+31:31  Error: Unsafe member access .environmental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+31:70  Error: Unsafe member access .environmental on an `any` value.  @typescript-eslint/no-unsafe-member-access
+32:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+32:24  Error: Unsafe member access .hazard on an `any` value.  @typescript-eslint/no-unsafe-member-access
+32:56  Error: Unsafe member access .hazard on an `any` value.  @typescript-eslint/no-unsafe-member-access
+33:9  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+33:26  Error: Unsafe member access .workTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+33:60  Error: Unsafe member access .workTime on an `any` value.  @typescript-eslint/no-unsafe-member-access
+48:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+48:27  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+49:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+51:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+52:7  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+52:29  Error: Unsafe member access .createdAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+59:5  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+64:36  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+73:48  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+79:5  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+90:48  Error: Unsafe member access .id on an `any` value.  @typescript-eslint/no-unsafe-member-access
+102:49  Error: Unsafe member access .status on an `any` value.  @typescript-eslint/no-unsafe-member-access
+103:50  Error: Unsafe member access .status on an `any` value.  @typescript-eslint/no-unsafe-member-access
+104:50  Error: Unsafe member access .status on an `any` value.  @typescript-eslint/no-unsafe-member-access
+106:11  Error: Unsafe assignment of an `any` value.  @typescript-eslint/no-unsafe-assignment
+106:55  Error: Unsafe return of a value of type `any`.  @typescript-eslint/no-unsafe-return
+106:64  Error: Unsafe member access .totalScore on an `any` value.  @typescript-eslint/no-unsafe-member-access
+110:32  Error: Unsafe spread of an `any` value in an array.  @typescript-eslint/no-unsafe-assignment
+111:23  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+111:25  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+111:47  Error: Unsafe call of a(n) `any` typed value.  @typescript-eslint/no-unsafe-call
+111:49  Error: Unsafe member access .updatedAt on an `any` value.  @typescript-eslint/no-unsafe-member-access
+
+./src/lib/testData/aiTestData.ts
+5:1  Error: All imports in the declaration are only used as types. Use `import type`.  @typescript-eslint/consistent-type-imports
+
+./src/lib/utils.ts
+4:8  Error: Missing return type on function.  @typescript-eslint/explicit-module-boundary-types
+
+./src/types/evaluation.ts
+275:34  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
