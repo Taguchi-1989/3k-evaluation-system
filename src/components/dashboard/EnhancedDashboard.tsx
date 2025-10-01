@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Header, Footer } from '@/components/layout'
 import type { Tab } from '@/components/ui/TabInterface';
 import { TabInterface } from '@/components/ui/TabInterface'
@@ -139,38 +139,38 @@ const defaultWorkItems: WorkItem[] = [
   }
 ]
 
-const convertEvaluationToWorkItem = (evaluation: any): WorkItem => {
+const convertEvaluationToWorkItem = (evaluation: Evaluation): WorkItem => {
+  // Evaluation型にはphysicalFactor等が無いため、暫定値を使用
+  // 実際のスコアはfinalScoreKitsusaから算出
+  const kitsusaScore = evaluation.finalScoreKitsusa ?? 0
+  const estimatedIndividualScore = Math.floor(kitsusaScore / 4) // 4因子の平均値として推定
+
   return {
     id: evaluation.id,
     workName: evaluation.workName || '未設定',
     factoryName: evaluation.factoryName || '未設定',
     processName: evaluation.processName || '未設定',
-    photoUrl: 'https://placehold.co/400x300/e5e7eb/4b5563?text=Work+Item',
-    kitsusaScore: Math.max(
-      evaluation.physicalFactor?.totalScore || 0,
-      evaluation.mentalFactor?.totalScore || 0,
-      evaluation.environmentalFactor?.totalScore || 0,
-      evaluation.hazardFactor?.totalScore || 0
-    ),
-    threekIndex: 'C', // 暫定値
-    physicalScore: evaluation.physicalFactor?.totalScore || 0,
-    mentalScore: evaluation.mentalFactor?.totalScore || 0,
-    environmentalScore: evaluation.environmentalFactor?.totalScore || 0,
-    hazardScore: evaluation.hazardFactor?.totalScore || 0,
-    timeCategory: evaluation.workTime?.category || 'c',
-    status: evaluation.id ? 'completed' : 'draft'
-  };
-};
+    photoUrl: evaluation.mainPhotoUrl || 'https://placehold.co/400x300/e5e7eb/4b5563?text=Work+Item',
+    kitsusaScore,
+    threekIndex: evaluation.finalScore3K || 'C',
+    physicalScore: estimatedIndividualScore,
+    mentalScore: estimatedIndividualScore,
+    environmentalScore: estimatedIndividualScore,
+    hazardScore: estimatedIndividualScore,
+    timeCategory: 'c', // 暫定値
+    status: evaluation.status
+  }
+}
 
-export function EnhancedDashboard({ workItems }: EnhancedDashboardProps) {
+export function EnhancedDashboard({ workItems }: EnhancedDashboardProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState('overview')
-  const [evaluations, setEvaluations] = useState<Evaluation[]>([])
+  const [_evaluations, setEvaluations] = useState<Evaluation[]>([])
   const [displayWorkItems, setDisplayWorkItems] = useState<WorkItem[]>(workItems || defaultWorkItems)
   const database = useDatabase()
 
   // データベースから評価データを読み込み
   useEffect(() => {
-    const loadEvaluations = async () => {
+    const loadEvaluations = async (): Promise<void> => {
       try {
         const data = await database.listEvaluations()
         setEvaluations(data)
@@ -190,8 +190,8 @@ export function EnhancedDashboard({ workItems }: EnhancedDashboardProps) {
       }
     }
 
-    loadEvaluations()
-  }, [database.listEvaluations, workItems])
+    void loadEvaluations()
+  }, [database, workItems])
 
   const tabs: Tab[] = [
     {
@@ -232,7 +232,7 @@ export function EnhancedDashboard({ workItems }: EnhancedDashboardProps) {
     }
   ]
 
-  const handleItemSelect = useCallback((itemId: string) => {
+  const handleItemSelect = useCallback((_itemId: string): void => {
     // Handle item selection
     // 詳細画面への遷移などの処理
   }, [])
