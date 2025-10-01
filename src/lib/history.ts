@@ -3,19 +3,16 @@
  * 3K指数評価の変更履歴の保存、取得、比較機能を提供
  */
 
-import type { 
+import type {
   Posture} from '../types/evaluation';
-import { 
-  PhysicalFactor, MentalFactor, EnvironmentalFactor, HazardFactor, Evaluation 
-} from '../types/evaluation';
 
 export interface EvaluationHistory {
   id: string;
   factorTable: string;
   factorId: string;
-  detailsBefore: Record<string, any>;
+  detailsBefore: Record<string, unknown>;
   scoreBefore: number;
-  detailsAfter?: Record<string, any>;
+  detailsAfter?: Record<string, unknown>;
   scoreAfter?: number;
   updatedBy: string;
   archivedAt: Date;
@@ -27,21 +24,21 @@ export interface PostureHistory {
   postureNameBefore: string;
   rulaScoreBefore: number;
   owasScoreBefore: number;
-  detailsBefore: Record<string, any>;
-  wristAnglesBefore: Record<string, any>;
+  detailsBefore: Record<string, unknown>;
+  wristAnglesBefore: Record<string, unknown>;
   postureNameAfter?: string;
   rulaScoreAfter?: number;
   owasScoreAfter?: number;
-  detailsAfter?: Record<string, any>;
-  wristAnglesAfter?: Record<string, any>;
+  detailsAfter?: Record<string, unknown>;
+  wristAnglesAfter?: Record<string, unknown>;
   updatedBy: string;
   archivedAt: Date;
 }
 
 export interface HistoryComparison {
   field: string;
-  beforeValue: any;
-  afterValue: any;
+  beforeValue: unknown;
+  afterValue: unknown;
   changeType: 'added' | 'removed' | 'modified' | 'unchanged';
   impact: 'high' | 'medium' | 'low';
 }
@@ -70,6 +67,7 @@ export class EvaluationHistoryService {
   private histories: Map<string, EvaluationHistory[]> = new Map();
   private postureHistories: Map<string, PostureHistory[]> = new Map();
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): EvaluationHistoryService {
@@ -85,9 +83,9 @@ export class EvaluationHistoryService {
   public async saveHistory(
     factorTable: string,
     factorId: string,
-    detailsBefore: Record<string, any>,
+    detailsBefore: Record<string, unknown>,
     scoreBefore: number,
-    detailsAfter: Record<string, any>,
+    detailsAfter: Record<string, unknown>,
     scoreAfter: number,
     updatedBy: string
   ): Promise<string> {
@@ -364,15 +362,15 @@ export class EvaluationHistoryService {
   }
 
   private compareObjects(
-    before: Record<string, any>,
-    after: Record<string, any>
+    before: Record<string, unknown>,
+    after: Record<string, unknown>
   ): HistoryComparison[] {
     const changes: HistoryComparison[] = [];
     const allKeys = new Set([...Object.keys(before), ...Object.keys(after)]);
 
     for (const key of allKeys) {
-      const beforeValue = before[key];
-      const afterValue = after[key];
+      const beforeValue: unknown = before[key]
+      const afterValue: unknown = after[key]
 
       if (beforeValue === undefined && afterValue !== undefined) {
         changes.push({
@@ -405,9 +403,9 @@ export class EvaluationHistoryService {
   }
 
   private assessChangeImpact(
-    field: string, 
-    beforeValue: any, 
-    afterValue: any
+    field: string,
+    beforeValue: unknown,
+    afterValue: unknown
   ): 'high' | 'medium' | 'low' {
     // スコア関連の変更は高影響
     if (field.includes('score') || field.includes('Score')) {
