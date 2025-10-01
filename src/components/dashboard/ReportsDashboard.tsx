@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
-import { WorkItem } from '@/components/evaluation/EvaluationListView'
+import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 import Link from 'next/link'
 
 interface ReportsDashboardProps {

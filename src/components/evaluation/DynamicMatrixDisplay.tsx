@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { EvaluationMatrix, getMatrix } from '@/data/evaluationMatrices'
-import { matrixCalculator, MatrixCalculationResult } from '@/lib/matrixCalculator'
+import type { EvaluationMatrix} from '@/data/evaluationMatrices';
+import { getMatrix } from '@/data/evaluationMatrices'
+import type { MatrixCalculationResult } from '@/lib/matrixCalculator';
+import { matrixCalculator } from '@/lib/matrixCalculator'
 
 export interface DynamicMatrixDisplayProps {
   category: 'physical' | 'mental' | 'environmental' | 'hazard'

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { evaluationService, SavedEvaluation } from '@/lib/database/evaluationService'
-import { WorkItem } from '@/components/evaluation/EvaluationListView'
+import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 import { useAuth } from '@/contexts/AuthContext'
 
 export interface UseEvaluationDataReturn {

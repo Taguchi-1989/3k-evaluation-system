@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
 import { HelpTooltip } from '@/components/ui'
-import {
+import type {
   PsychologicalStressEvent,
   HarassmentAssessment
 } from '@/types/evaluation'

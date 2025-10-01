@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { PermissionGuard } from '@/components/auth/PermissionGuard'
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@/components/ui'
-import { WorkItem } from './EvaluationListView'
+import type { WorkItem } from './EvaluationListView'
 
 interface EvaluationEditModalProps {
   workItem: WorkItem

@@ -461,7 +461,7 @@ export class ErrorHandler {
         console.warn('🟡 MEDIUM SEVERITY ERROR:', error)
         break
       case ErrorSeverity.LOW:
-        // eslint-disable-next-line no-console
+         
         console.log('🟢 LOW SEVERITY ERROR:', error)
         break
     }

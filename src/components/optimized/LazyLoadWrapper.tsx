@@ -235,7 +235,7 @@ export const HeavyComponentWrapper: React.FC<{
     onLoad={() => {
       // Component loaded successfully
       if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
+         
         console.log(`${componentName} loaded`);
       }
     }}

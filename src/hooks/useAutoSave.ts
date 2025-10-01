@@ -127,7 +127,7 @@ export function useEvaluationAutoSave(evaluationData: any, evaluationId?: string
     interval: 30000, // 30秒
     enabled: true,
     onSave: (id) => {
-      // eslint-disable-next-line no-console
+       
       console.log(`評価データが自動保存されました: ${id}`);
     },
     onError: (error) => console.error('自動保存エラー:', error)

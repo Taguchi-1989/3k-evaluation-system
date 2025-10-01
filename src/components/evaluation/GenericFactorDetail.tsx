@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, ReactNode } from 'react'
+import type { ReactNode } from 'react';
+import { useState } from 'react'
 import { Header } from '@/components/layout'
 import { TabInterface, type Tab } from '@/components/ui/TabInterface'
 import { PostureList, MatrixDisplay, type Posture } from '@/components/evaluation'

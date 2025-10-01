@@ -11,7 +11,7 @@ import { AIComprehensiveAssistant } from '@/components/ui/AIComprehensiveAssista
 import matrixData from '@/data/evaluation-matrix.json'
 import { evaluationEngine } from '@/lib/evaluationEngine'
 import { EVALUATION_STANDARDS, DEFAULT_EVALUATION_DATA } from '@/data/defaultEvaluationData'
-import { AIAnalysisResult } from '@/lib/aiAssistant'
+import type { AIAnalysisResult } from '@/lib/aiAssistant'
 import { useEvaluationDataStore } from '@/stores/evaluationDataStore'
 import { useEvaluationAutoSave } from '@/hooks/useAutoSave'
 import { OptimizedImage } from '@/components/optimized/OptimizedImage'

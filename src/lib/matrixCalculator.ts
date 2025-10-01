@@ -3,9 +3,10 @@
  * JSON定義されたマトリックスを使用してスコア計算を実行
  */
 
-import { 
+import type { 
   EvaluationMatrix, 
-  MatrixCell, 
+  MatrixCell} from '../data/evaluationMatrices';
+import { 
   getMatrix, 
   findMatrixById,
   evaluationMatrices 

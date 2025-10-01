@@ -1,7 +1,8 @@
 'use client'
 
-import { ReactNode } from 'react'
-import { PageLayout, PageLayoutProps } from './PageLayout'
+import type { ReactNode } from 'react'
+import type { PageLayoutProps } from './PageLayout';
+import { PageLayout } from './PageLayout'
 import { NavigationButtons } from '@/components/ui/BackButton'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 

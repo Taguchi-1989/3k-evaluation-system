@@ -4,8 +4,10 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { VoiceInput } from '@/components/ui/VoiceInput'
 import { ImageUpload } from '@/components/ui/ImageUpload'
-import { AIAnalysisResult, WorkAnalysisInput, aiAssistant } from '@/lib/aiAssistant'
-import { ImageAnalysisResult, aiImageAnalysis } from '@/lib/aiImageAnalysis'
+import type { AIAnalysisResult, WorkAnalysisInput} from '@/lib/aiAssistant';
+import { aiAssistant } from '@/lib/aiAssistant'
+import type { ImageAnalysisResult} from '@/lib/aiImageAnalysis';
+import { aiImageAnalysis } from '@/lib/aiImageAnalysis'
 import { LazyLoadWrapper } from '@/components/optimized/LazyLoadWrapper'
 // アイコンはTextで代替表示
 

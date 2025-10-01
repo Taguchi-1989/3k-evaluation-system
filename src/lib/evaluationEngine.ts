@@ -3,12 +3,16 @@
  * 基準値管理、スコア計算、履歴管理を統合したAPIを提供
  */
 
-import { standardsService, EvaluationStandardsService } from './standards';
-import { calculationEngine, ScoreCalculationEngine, FinalScoreResult } from './calculation';
-import { historyService, EvaluationHistoryService } from './history';
-import { matrixCalculator, MatrixCalculator } from './matrixCalculator';
+import type { EvaluationStandardsService } from './standards';
+import { standardsService } from './standards';
+import type { ScoreCalculationEngine, FinalScoreResult } from './calculation';
+import { calculationEngine } from './calculation';
+import type { EvaluationHistoryService } from './history';
+import { historyService } from './history';
+import type { MatrixCalculator } from './matrixCalculator';
+import { matrixCalculator } from './matrixCalculator';
 import { getMatrix } from '../data/evaluationMatrices';
-import { 
+import type { 
   PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails,
   Posture, EnvironmentalSubstance, WorkTimeFactor,
   PhysicalFactor, MentalFactor, EnvironmentalFactor, HazardFactor

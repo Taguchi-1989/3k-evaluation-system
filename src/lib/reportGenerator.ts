@@ -3,8 +3,8 @@
  * 包括的なレポート作成、PDF出力、データ分析機能を提供
  */
 
-import { EvaluationResult } from './evaluationEngine';
-import { 
+import type { EvaluationResult } from './evaluationEngine';
+import type { 
   PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails,
   Posture, EnvironmentalSubstance, WorkTimeFactor
 } from '../types/evaluation';

@@ -3,7 +3,7 @@
 import { useState, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/Button'
-import { GeneratedReport } from '@/lib/reportGenerator'
+import type { GeneratedReport } from '@/lib/reportGenerator'
 import { useEvaluationData } from '@/hooks/useEvaluationData'
 
 const ReportGenerator = dynamic(() => import('@/components/report/ReportGenerator'), {

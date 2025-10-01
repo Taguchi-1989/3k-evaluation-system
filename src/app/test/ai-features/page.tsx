@@ -10,7 +10,8 @@ import {
   createMockImageFile,
   integrationTestScenarios
 } from '@/lib/testData/aiTestData'
-import { AIAnalysisResult, aiAssistant } from '@/lib/aiAssistant'
+import type { AIAnalysisResult} from '@/lib/aiAssistant';
+import { aiAssistant } from '@/lib/aiAssistant'
 import { aiImageAnalysis } from '@/lib/aiImageAnalysis'
 import { LazyLoadWrapper } from '@/components/optimized/LazyLoadWrapper'
 // アイコンはTextで代替表示
@@ -105,7 +106,7 @@ export default function AIFeaturesTestPage() {
         throw new Error('Scenario is undefined')
       }
       const result = await aiAssistant.analyzeWork(scenario)
-      // eslint-disable-next-line no-console
+       
       console.log(`シナリオ「${scenario.workName}」の分析結果:`, result)
       alert(`シナリオテスト完了: ${scenario.workName}\n推奨事項: ${result.recommendations.length}件`)
     } catch (error) {
@@ -322,7 +323,7 @@ export default function AIFeaturesTestPage() {
         isOpen={isAIOpen}
         onClose={() => setIsAIOpen(false)}
         onApplyRecommendations={(result: AIAnalysisResult) => {
-          // eslint-disable-next-line no-console
+           
           console.log('推奨設定が適用されました:', result)
           alert(`推奨設定を適用しました: ${result.recommendations.length}件の推奨事項`)
         }}

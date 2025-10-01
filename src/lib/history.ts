@@ -3,9 +3,10 @@
  * 3K指数評価の変更履歴の保存、取得、比較機能を提供
  */
 
+import type { 
+  Posture} from '../types/evaluation';
 import { 
-  PhysicalFactor, MentalFactor, EnvironmentalFactor, HazardFactor, 
-  Posture, Evaluation 
+  PhysicalFactor, MentalFactor, EnvironmentalFactor, HazardFactor, Evaluation 
 } from '../types/evaluation';
 
 export interface EvaluationHistory {

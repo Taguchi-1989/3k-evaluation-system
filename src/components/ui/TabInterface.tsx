@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, ReactNode } from 'react'
+import type { ReactNode } from 'react';
+import { useState } from 'react'
 
 export interface Tab {
   id: string

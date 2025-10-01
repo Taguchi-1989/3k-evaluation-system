@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { DynamicMatrixDisplay } from './DynamicMatrixDisplay'
-import { MatrixCalculationResult } from '@/lib/matrixCalculator'
+import type { MatrixCalculationResult } from '@/lib/matrixCalculator'
 import { Button } from '@/components/ui/Button'
 
 /**
@@ -66,7 +66,7 @@ export function MatrixTestPage() {
       { category: 'hazard' as const, x: '5', y: '5', expected: 10 }
     ]
 
-    // eslint-disable-next-line no-console
+     
     console.log('自動テスト開始')
     let passCount = 0
     let failCount = 0
@@ -75,7 +75,7 @@ export function MatrixTestPage() {
       try {
         // ここで実際のマトリックス計算をテスト
         // 実装は matrixCalculator を直接呼び出し
-        // eslint-disable-next-line no-console
+         
         console.log(`テストケース ${index + 1}: ${testCase.category} (${testCase.y}, ${testCase.x})`)
         passCount++
       } catch (error) {
@@ -84,7 +84,7 @@ export function MatrixTestPage() {
       }
     })
 
-    // eslint-disable-next-line no-console
+     
     console.log(`自動テスト完了: ${passCount}件成功, ${failCount}件失敗`)
     alert(`自動テスト完了\n成功: ${passCount}件\n失敗: ${failCount}件\n詳細はコンソールを確認してください`)
   }

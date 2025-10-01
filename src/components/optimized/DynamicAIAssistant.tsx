@@ -7,7 +7,7 @@
 
 import React, { Suspense } from 'react';
 import { LazyLoadWrapper, useDynamicImport } from '@/components/optimized/LazyLoadWrapper';
-import { AIAnalysisResult } from '@/lib/aiAssistant';
+import type { AIAnalysisResult } from '@/lib/aiAssistant';
 
 interface DynamicAIAssistantProps {
   isOpen: boolean;

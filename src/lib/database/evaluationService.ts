@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import { WorkItem } from '@/components/evaluation/EvaluationListView'
+import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 
 export interface SavedEvaluation {
   id: string

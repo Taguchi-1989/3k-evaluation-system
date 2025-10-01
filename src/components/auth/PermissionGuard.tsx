@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from '@/contexts/AuthContext'
-import { Permission } from '@/types/permissions'
+import type { Permission } from '@/types/permissions'
 
 interface PermissionGuardProps {
   children: React.ReactNode

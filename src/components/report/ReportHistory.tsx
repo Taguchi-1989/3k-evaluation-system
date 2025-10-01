@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
-import { GeneratedReport } from '@/lib/reportGenerator'
+import type { GeneratedReport } from '@/lib/reportGenerator'
 
 interface ReportHistoryItem extends GeneratedReport {
   downloadCount: number;

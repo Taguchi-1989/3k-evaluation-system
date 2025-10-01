@@ -1,6 +1,6 @@
 'use client'
 
-import { WorkItem } from '@/components/evaluation/EvaluationListView'
+import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 import { ThumbnailOptimizedImage } from '@/components/optimized/OptimizedImage'
 
 export interface DashboardStatsProps {

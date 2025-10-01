@@ -1,7 +1,8 @@
 'use client'
 
-import { Header, HeaderProps } from './Header'
-import { ReactNode } from 'react'
+import type { HeaderProps } from './Header';
+import { Header } from './Header'
+import type { ReactNode } from 'react'
 
 export interface PageLayoutProps extends HeaderProps {
   children: ReactNode

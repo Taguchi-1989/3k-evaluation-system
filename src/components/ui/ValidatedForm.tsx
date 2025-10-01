@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useCallback, FormEvent, ReactNode } from 'react'
-import { ValidationResult, ValidationError, ValidationWarning } from '@/lib/errorHandling'
+import type { FormEvent, ReactNode } from 'react';
+import { useState, useCallback } from 'react'
+import type { ValidationResult, ValidationError, ValidationWarning } from '@/lib/errorHandling'
 import { Button } from './Button'
 
 interface ValidatedFormProps {

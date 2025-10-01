@@ -6,7 +6,8 @@
  */
 
 import React, { useEffect, createContext, useContext, useState } from 'react';
-import { PerformanceMonitor, PerformanceMetrics, WebVitalsMetrics } from '@/lib/performance';
+import type { PerformanceMetrics, WebVitalsMetrics } from '@/lib/performance';
+import { PerformanceMonitor } from '@/lib/performance';
 
 interface PerformanceContextType {
   monitor: PerformanceMonitor;
@@ -67,15 +68,15 @@ export const PerformanceProvider: React.FC<PerformanceProviderProps> = ({
       if (enableLogging) {
         const currentStats = monitor.getStats();
         if (currentStats.slowComponents.length > 0) {
-          // eslint-disable-next-line no-console
+           
           console.group('🐌 Performance Report');
-          // eslint-disable-next-line no-console
+           
           console.log('Average render time:', currentStats.averageRenderTime.toFixed(2) + 'ms');
-          // eslint-disable-next-line no-console
+           
           console.log('Slow components:', currentStats.slowComponents.length);
-          // eslint-disable-next-line no-console
+           
           console.table(currentStats.slowComponents.slice(0, 5));
-          // eslint-disable-next-line no-console
+           
           console.groupEnd();
         }
       }
@@ -91,30 +92,30 @@ export const PerformanceProvider: React.FC<PerformanceProviderProps> = ({
         const finalStats = monitor.getStats();
         const finalWebVitals = monitor.getWebVitals();
 
-        // eslint-disable-next-line no-console
+         
         console.group('📊 Final Performance Report');
-        // eslint-disable-next-line no-console
+         
         console.log('Session summary:');
-        // eslint-disable-next-line no-console
+         
         console.log('- Total measurements:', finalStats.totalMeasurements);
-        // eslint-disable-next-line no-console
+         
         console.log('- Average render time:', finalStats.averageRenderTime.toFixed(2) + 'ms');
-        // eslint-disable-next-line no-console
+         
         console.log('- Max render time:', finalStats.maxRenderTime.toFixed(2) + 'ms');
-        // eslint-disable-next-line no-console
+         
         console.log('- Slow components:', finalStats.slowComponents.length);
 
         if (finalWebVitals.fcp) {
-          // eslint-disable-next-line no-console
+           
           console.log('Web Vitals:');
-          // eslint-disable-next-line no-console
+           
           console.log('- FCP:', finalWebVitals.fcp.toFixed(2) + 'ms');
-          // eslint-disable-next-line no-console
+           
           console.log('- LCP:', (finalWebVitals.lcp || 0).toFixed(2) + 'ms');
-          // eslint-disable-next-line no-console
+           
           console.log('- TTFB:', (finalWebVitals.ttfb || 0).toFixed(2) + 'ms');
         }
-        // eslint-disable-next-line no-console
+         
         console.groupEnd();
       }
     };

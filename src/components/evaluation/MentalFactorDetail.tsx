@@ -5,9 +5,9 @@ import { FileUpload, Input, HelpTooltip } from '@/components/ui'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
 import { PhotoViewer, PsychologicalStressAssessment } from '@/components/evaluation'
 import { calculationEngine } from '@/lib/calculation'
-import { MentalDetails, PsychologicalStressEvent } from '@/types/evaluation'
+import type { MentalDetails, PsychologicalStressEvent } from '@/types/evaluation'
 import { AIResultPopup } from '@/components/ui/AIResultPopup'
-import { AIAnalysisResult } from '@/lib/aiAssistant'
+import type { AIAnalysisResult } from '@/lib/aiAssistant'
 import { EVALUATION_STANDARDS, DEFAULT_EVALUATION_DATA } from '@/data/defaultEvaluationData'
 
 export interface MentalFactorItem {

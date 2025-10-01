@@ -3,7 +3,7 @@
  * 評価基準、凡例、サンプルデータを含む包括的なデータセット
  */
 
-import { 
+import type { 
   PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails,
   Posture, EnvironmentalSubstance, WorkTimeFactor 
 } from '@/types/evaluation'

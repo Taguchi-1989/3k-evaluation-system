@@ -3,8 +3,8 @@
  * 作業内容から適切な評価項目と値を推定する
  */
 
-import { MentalFactorItem } from '@/components/evaluation/MentalFactorDetail'
-import { EnvironmentalItem } from '@/components/evaluation/EnvironmentalFactorDetail'
+import type { MentalFactorItem } from '@/components/evaluation/MentalFactorDetail'
+import type { EnvironmentalItem } from '@/components/evaluation/EnvironmentalFactorDetail'
 
 export interface WorkAnalysisInput {
   workName: string

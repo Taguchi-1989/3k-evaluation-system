@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { Header, Footer } from '@/components/layout'
-import { TabInterface, Tab } from '@/components/ui/TabInterface'
-import { EvaluationListView, WorkItem } from '@/components/evaluation/EvaluationListView'
+import type { Tab } from '@/components/ui/TabInterface';
+import { TabInterface } from '@/components/ui/TabInterface'
+import type { WorkItem } from '@/components/evaluation/EvaluationListView';
+import { EvaluationListView } from '@/components/evaluation/EvaluationListView'
 import { DashboardCharts } from './DashboardCharts'
 import { DashboardStats } from './DashboardStats'
 import { ReportsDashboard } from './ReportsDashboard'

@@ -1,6 +1,7 @@
 'use client'
 
-import React, { Component, ReactNode } from 'react'
+import type { ReactNode } from 'react';
+import React, { Component } from 'react'
 import { handleReactError, ErrorHandler } from '@/lib/errorHandling'
 import { Button } from '@/components/ui/Button'
 
@@ -80,7 +81,7 @@ export class ErrorBoundary extends Component<Props, State> {
       recentErrors: errorLog.slice(-5)
     }
     
-    // eslint-disable-next-line no-console
+     
     console.log('エラーレポート:', reportData)
     alert('エラーレポートが生成されました（開発モード）')
   }

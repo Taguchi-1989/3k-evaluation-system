@@ -3,18 +3,22 @@
  * 3K指数評価アプリの各因子スコア計算と最終3K指数算出を担当
  */
 
-import { standardsService, EvaluationStandardsService } from './standards';
-import { 
-  matrixCalculator, 
-  MatrixCalculator, 
-  PhysicalMatrixInput,
+import type { EvaluationStandardsService } from './standards';
+import { standardsService } from './standards';
+import type { 
+  MatrixCalculator,
   MentalMatrixInput,
-  EnvironmentalMatrixInput,
   HazardMatrixInput 
 } from './matrixCalculator';
 import { 
+  matrixCalculator, 
+  PhysicalMatrixInput,
+  EnvironmentalMatrixInput 
+} from './matrixCalculator';
+import type { 
   PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails, 
-  Posture, HazardEvent, EnvironmentalSubstance, WorkTimeFactor 
+  Posture, EnvironmentalSubstance} from '../types/evaluation';
+import { HazardEvent, WorkTimeFactor 
 } from '../types/evaluation';
 
 export interface ScoreCalculationResult {

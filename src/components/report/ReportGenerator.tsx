@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
-import { reportGenerator, ReportData, ReportConfig, GeneratedReport } from '@/lib/reportGenerator'
+import type { ReportData, ReportConfig, GeneratedReport } from '@/lib/reportGenerator';
+import { reportGenerator } from '@/lib/reportGenerator'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
 import { EvaluationResult } from '@/lib/evaluationEngine'
 

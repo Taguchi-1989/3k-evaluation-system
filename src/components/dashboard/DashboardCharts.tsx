@@ -15,7 +15,7 @@ import {
   RadialLinearScale,
 } from 'chart.js'
 import { Bar, Pie, Line, Radar } from 'react-chartjs-2'
-import { WorkItem } from '@/components/evaluation/EvaluationListView'
+import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 
 // Chart.js コンポーネントの登録
 ChartJS.register(
