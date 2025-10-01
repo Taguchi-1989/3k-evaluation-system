@@ -296,7 +296,7 @@ export const universalEvaluationStorage = {
     } else {
       // Web版: IndexedDBまたはローカルストレージに保存
       const key = `evaluation_${evaluation.id}`;
-      return await universalStorage.save(key, evaluation);
+      return await universalStorage.save(key, evaluation) as APIResponse<T>;
     }
   },
 
@@ -341,7 +341,7 @@ export const universalEvaluationStorage = {
     } else {
       // Web版: ローカルストレージから削除
       const key = `evaluation_${id}`;
-      return await universalStorage.remove(key);
+      return await universalStorage.remove(key) as APIResponse<void>;
     }
   }
 };

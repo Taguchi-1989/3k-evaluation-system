@@ -114,8 +114,8 @@ test.describe('Electron環境テスト', () => {
     // ウィンドウサイズを確認
     const size = await window.evaluate(() => {
       return {
-        width: window.innerWidth,
-        height: window.innerHeight
+        width: globalThis.window.innerWidth,
+        height: globalThis.window.innerHeight
       }
     })
 

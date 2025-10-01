@@ -24,8 +24,8 @@ export function useAutoSave({
   const savedDataRef = useRef<any>(null)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const isFirstSave = useRef(true)
-  const hasDataChangedRef = useRef<() => boolean>()
-  const manualSaveRef = useRef<() => Promise<string | undefined>>()
+  const hasDataChangedRef = useRef<(() => boolean) | undefined>(undefined)
+  const manualSaveRef = useRef<(() => Promise<string | undefined>) | undefined>(undefined)
 
   // データが変更されたかチェック
   const hasDataChanged = useCallback(() => {

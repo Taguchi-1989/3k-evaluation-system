@@ -293,8 +293,8 @@ class AIAssistantService {
 
     // 作業時間による補正
     if (input.workHours && input.workHours > 8) {
-      if (physicalDemand === 'medium') physicalDemand = 'high'
-      if (mentalDemand === 'medium') mentalDemand = 'high'
+      if (physicalDemand === 'low') physicalDemand = 'high'
+      if (mentalDemand === 'low') mentalDemand = 'high'
     }
 
     return { complexity, physicalDemand, mentalDemand, environmentalRisk, hazardLevel }
