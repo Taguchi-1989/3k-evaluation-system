@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
 import { HelpTooltip } from '@/components/ui'
 import type {
@@ -8,15 +8,12 @@ import type {
   HarassmentAssessment
 } from '@/types/evaluation'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type StressIntensityLevel = any
 import {
   WORKPLACE_STRESS_EVENTS,
   mapStressIntensityToFiveStage,
   calculateIntegratedStressScore,
   assessOvertimeWorkStress,
-  assessHarassmentStress,
-  getLegalBasisInfo
+  assessHarassmentStress
 } from '@/lib/psychologicalStressMapping'
 
 export interface PsychologicalStressAssessmentProps {
@@ -27,7 +24,7 @@ export interface PsychologicalStressAssessmentProps {
 export function PsychologicalStressAssessment({
   onScoreChange,
   initialEvents = []
-}: PsychologicalStressAssessmentProps) {
+}: PsychologicalStressAssessmentProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<'workload' | 'harassment' | 'interpersonal' | 'overtime'>('workload')
   const [stressEvents, setStressEvents] = useState<PsychologicalStressEvent[]>(initialEvents)
   const [overtimeHours, setOvertimeHours] = useState(0)
@@ -140,7 +137,24 @@ export function PsychologicalStressAssessment({
       const filtered = prev.filter(e => !e.eventType.includes('ハラスメント'))
       return [...filtered, ...harassmentEvents]
     })
-  }, [powerHarassment.occurred, powerHarassment.severity, powerHarassment.frequency, powerHarassment.duration, powerHarassment.organizationalResponse, sexualHarassment.occurred, sexualHarassment.severity, sexualHarassment.frequency, powerHarassmentAssessment.stressIntensity, powerHarassmentAssessment.fiveStageScore, sexualHarassmentAssessment.stressIntensity, sexualHarassmentAssessment.fiveStageScore])
+  }, [
+    powerHarassment.occurred,
+    powerHarassment.severity,
+    powerHarassment.frequency,
+    powerHarassment.duration,
+    powerHarassment.organizationalResponse,
+    sexualHarassment.occurred,
+    sexualHarassment.severity,
+    sexualHarassment.frequency,
+    sexualHarassment.duration,
+    sexualHarassment.organizationalResponse,
+    powerHarassmentAssessment.stressIntensity,
+    powerHarassmentAssessment.fiveStageScore,
+    powerHarassmentAssessment.legalBasis,
+    sexualHarassmentAssessment.stressIntensity,
+    sexualHarassmentAssessment.fiveStageScore,
+    sexualHarassmentAssessment.legalBasis
+  ])
 
   useEffect(() => {
     if (onScoreChange) {
@@ -148,7 +162,14 @@ export function PsychologicalStressAssessment({
     }
   }, [integratedScore.totalScore, stressEvents, onScoreChange])
 
-  const addWorkplaceEvent = (eventData: any) => {
+  interface WorkplaceEventData {
+    eventType: string
+    description: string
+    defaultIntensity: 'strong' | 'moderate' | 'weak'
+    legalBasis: string
+  }
+
+  const addWorkplaceEvent = (eventData: WorkplaceEventData): void => {
     const newEvent: PsychologicalStressEvent = {
       eventType: eventData.eventType,
       eventDescription: eventData.description,
@@ -230,7 +251,7 @@ export function PsychologicalStressAssessment({
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as 'workload' | 'harassment' | 'interpersonal' | 'overtime')}
             className={`px-4 py-2 text-sm font-medium ${
               activeTab === tab.id
                 ? 'text-blue-600 border-b-2 border-blue-600'
@@ -333,7 +354,7 @@ export function PsychologicalStressAssessment({
                       value={powerHarassment.frequency}
                       onChange={(e) => setPowerHarassment(prev => ({
                         ...prev,
-                        frequency: e.target.value as any
+                        frequency: e.target.value as 'single' | 'occasional' | 'frequent' | 'continuous'
                       }))}
                       className="w-full px-2 py-1 border rounded text-sm"
                     >
@@ -349,7 +370,7 @@ export function PsychologicalStressAssessment({
                       value={powerHarassment.severity}
                       onChange={(e) => setPowerHarassment(prev => ({
                         ...prev,
-                        severity: e.target.value as any
+                        severity: e.target.value as 'mild' | 'moderate' | 'severe'
                       }))}
                       className="w-full px-2 py-1 border rounded text-sm"
                     >
@@ -442,7 +463,7 @@ export function PsychologicalStressAssessment({
                       value={sexualHarassment.frequency}
                       onChange={(e) => setSexualHarassment(prev => ({
                         ...prev,
-                        frequency: e.target.value as any
+                        frequency: e.target.value as 'single' | 'occasional' | 'frequent' | 'continuous'
                       }))}
                       className="w-full px-2 py-1 border rounded text-sm"
                     >
@@ -458,7 +479,7 @@ export function PsychologicalStressAssessment({
                       value={sexualHarassment.severity}
                       onChange={(e) => setSexualHarassment(prev => ({
                         ...prev,
-                        severity: e.target.value as any
+                        severity: e.target.value as 'mild' | 'moderate' | 'severe'
                       }))}
                       className="w-full px-2 py-1 border rounded text-sm"
                     >
@@ -509,9 +530,9 @@ export function PsychologicalStressAssessment({
                         <p className="text-xs text-gray-500">{event.description}</p>
                       </div>
                       <InteractiveButton
-                        variant={"secondary" as any}
+                        variant="secondary"
                         size="sm"
-                        onClick={() => addWorkplaceEvent(event)}
+                        onClick={() => addWorkplaceEvent(event as WorkplaceEventData)}
                         className="ml-2 text-xs"
                       >
                         追加
