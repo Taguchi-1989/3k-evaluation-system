@@ -325,9 +325,6 @@ function createInMemoryStorage(): StoragePort {
       remove: async (key: string): Promise<void> => {
         store.delete(key)
       },
-      clear: async (): Promise<void> => {
-        store.clear()
-      },
       keys: async (): Promise<string[]> => {
         return Array.from(store.keys())
       }
