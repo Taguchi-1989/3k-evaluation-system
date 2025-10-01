@@ -28,7 +28,8 @@
       "@/ref/*": ["./ref/*"],
       "@3k/ports": ["./packages/ports"],
       "@3k/core": ["./packages/core"],
-      "@3k/ui": ["./packages/ui"]
+      "@3k/ui": ["./packages/ui"],
+      "@3k/adapters-web": ["./packages/adapters-web"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "packages/ports/**/*.ts", "packages/core/**/*.ts", "packages/adapters-web/**/*.ts"],

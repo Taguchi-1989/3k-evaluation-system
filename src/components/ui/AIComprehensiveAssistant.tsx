@@ -65,11 +65,11 @@ export function AIComprehensiveAssistant({
       )
       
       if (analysisResults.length > 0) {
-        setImageAnalysisResult(analysisResults[0])
-        
+        setImageAnalysisResult(analysisResults[0] ?? null)
+
         const combinedInput: WorkAnalysisInput = {
           ...workInput,
-          workDescription: `${workInput.workDescription} 画像から検出: ${analysisResults[0].workType}`,
+          workDescription: `${workInput.workDescription} 画像から検出: ${analysisResults[0]?.workType ?? ''}`,
           photos: files.map(f => f.name)
         }
         

@@ -355,7 +355,7 @@ export function EnhancedEnvironmentalFactorDetail({
 
   const handleMatrixClick = (strength: number, duration: number) => {
     setSelectedMatrix({ strength, duration })
-    const matrixScore = environmentalMatrix[duration][strength]
+    const matrixScore = environmentalMatrix[duration]?.[strength] ?? 0
     setFinalScore(Math.max(matrixScore, environmentalData.overallRiskAssessment.combinedRisk))
   }
 

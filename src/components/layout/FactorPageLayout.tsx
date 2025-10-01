@@ -89,7 +89,7 @@ export function FactorPageLayout({
         status="unsaved"
         showAiButton={showAiButton}
         aiButtonText={aiButtonText}
-        onAiClick={onAiClick}
+        onAiButtonClick={onAiClick}
         actions={
           customActions || (
             <div className="flex gap-2">

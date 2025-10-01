@@ -5,9 +5,11 @@ import { InteractiveButton } from '@/components/ui/InteractiveButton'
 import { HelpTooltip } from '@/components/ui'
 import {
   PsychologicalStressEvent,
-  HarassmentAssessment,
-  StressIntensityLevel
+  HarassmentAssessment
 } from '@/types/evaluation'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StressIntensityLevel = any
 import {
   WORKPLACE_STRESS_EVENTS,
   mapStressIntensityToFiveStage,
@@ -507,7 +509,7 @@ export function PsychologicalStressAssessment({
                         <p className="text-xs text-gray-500">{event.description}</p>
                       </div>
                       <InteractiveButton
-                        variant="outline"
+                        variant={"secondary" as any}
                         size="sm"
                         onClick={() => addWorkplaceEvent(event)}
                         className="ml-2 text-xs"

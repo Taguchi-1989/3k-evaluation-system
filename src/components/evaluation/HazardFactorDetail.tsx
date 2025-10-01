@@ -190,9 +190,11 @@ export function HazardFactorDetail({
   }
 
   const getMaxRiskEvent = () => {
-    return events.reduce((max, event) => 
-      event.riskPoint > max.riskPoint ? event : max
-    , events[0])
+    if (events.length === 0) return null
+    return events.reduce((max, event) => {
+      if (!max) return event
+      return event.riskPoint > max.riskPoint ? event : max
+    }, events[0])
   }
 
   const maxRiskEvent = getMaxRiskEvent()
@@ -430,7 +432,7 @@ export function HazardFactorDetail({
                   { range: "5-9", points: [5, 6, 7, 8, 9], evaluation: 2 },
                   { range: "1-4", points: [1, 2, 3, 4], evaluation: 1 }
                 ].map((item) => {
-                  const isSelected = maxRiskEvent && item.points.includes(maxRiskEvent.riskPoint)
+                  const isSelected = maxRiskEvent ? item.points.includes(maxRiskEvent.riskPoint) : false
                   return (
                     <div key={`risk-${item.range}`} className="grid grid-cols-2 gap-1">
                       <div className={`text-center p-1 text-[10px] ${isSelected ? 'bg-yellow-100' : 'bg-gray-100'}`}>

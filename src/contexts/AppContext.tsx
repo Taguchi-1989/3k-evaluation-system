@@ -43,6 +43,9 @@ export function AppProvider({ children, adapters }: AppProviderProps) {
 
     async function initializeApp() {
       try {
+        // adaptersがnullの場合は何もしない
+        if (!adapters) return
+
         // 動的インポートでbootstrap関数を取得
         const { bootstrap } = await import('@3k/core')
         const appCore = await bootstrap(adapters)

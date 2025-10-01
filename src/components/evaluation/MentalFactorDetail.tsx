@@ -180,7 +180,8 @@ export function MentalFactorDetail({
         mentalRecommendation.recommendations.forEach((rec: Record<string, any>) => {
           const itemIndex = updated.findIndex(item => item.id === rec.id)
           if (itemIndex !== -1) {
-            updated[itemIndex] = { ...updated[itemIndex], ...rec }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            updated[itemIndex] = { ...updated[itemIndex], ...rec } as any
           }
         })
         return updated

@@ -176,7 +176,7 @@ export function DynamicMatrixDisplay({
                       <div className="font-bold text-sm">{cell.value}</div>
                       {matrix.colorScheme[cell.value] && (
                         <div className="text-[9px] leading-none mt-0.5">
-                          {matrix.colorScheme[cell.value].level}
+                          {matrix.colorScheme[cell.value]?.level ?? ''}
                         </div>
                       )}
                     </td>

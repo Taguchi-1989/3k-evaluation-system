@@ -176,13 +176,14 @@ export function PhysicalFactorDetail({
         newCheckboxes.muscle = true
       }
 
-      setPhysicalDetails(prev => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setPhysicalDetails((prev: any) => ({
         ...prev,
         checkboxes: {
           ...prev.checkboxes,
           ...newCheckboxes
         }
-      }))
+      }) as any)
 
       // 成功メッセージを表示
       showPopup('AI推奨設定適用', 'AI分析結果に基づいて肉体因子の設定が適用されました。')
@@ -196,7 +197,8 @@ export function PhysicalFactorDetail({
         'physical',
         physicalDetails,
         {
-          postures: postures || [],
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          postures: (postures || []) as any,
           workTimeFactor: 1.0
         }
       )

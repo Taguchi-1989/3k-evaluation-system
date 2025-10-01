@@ -95,7 +95,7 @@ export function EnvironmentalFactorDetail({
   ]
 
   const getMatrixValue = (strength: number, duration: number) => {
-    return environmentalMatrix[duration][strength]
+    return environmentalMatrix[duration]?.[strength] ?? 0
   }
 
   const handleMatrixClick = (strength: number, duration: number) => {

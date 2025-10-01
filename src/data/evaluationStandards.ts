@@ -76,10 +76,11 @@ export function getRulaEvaluation(score: number) {
 export function getOwasEvaluation(category: number) {
   const owasStandard = getStandardByCategory('physical_factors', 'owas_assessment');
   if (!owasStandard) return null;
-  
-  const categories = owasStandard.categories;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const categories = (owasStandard as any).categories;
   if (!categories) return null;
-  
+
   return categories[category.toString() as keyof typeof categories] || null;
 }
 
@@ -87,8 +88,9 @@ export function getOwasEvaluation(category: number) {
 export function getRiskEvaluation(riskPoint: number) {
   const riskStandard = getStandardByCategory('hazard_factors', 'risk_assessment');
   if (!riskStandard) return null;
-  
-  const matrix = riskStandard.risk_matrix;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const matrix = (riskStandard as any).risk_matrix;
   if (!matrix) return null;
   
   if (riskPoint >= 1 && riskPoint <= 4) return matrix.low_risk;

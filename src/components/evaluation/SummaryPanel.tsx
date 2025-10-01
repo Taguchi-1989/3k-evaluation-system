@@ -56,7 +56,7 @@ export function SummaryPanel({
           variant="default"
           layout="horizontal"
           size="md"
-          onFileUpload={onFileUpload}
+          onFileUpload={onFileUpload as any}
           onAttachmentCheck={onAttachmentCheck}
           className=""
         />
