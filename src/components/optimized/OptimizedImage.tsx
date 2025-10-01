@@ -202,7 +202,18 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {/* メイン画像 */}
       {isInView && (
         <Image
-          {...imageProps}
+          src={imageProps.src}
+          alt={imageProps.alt}
+          width={imageProps.width}
+          height={imageProps.height}
+          priority={imageProps.priority}
+          loading={imageProps.loading}
+          sizes={imageProps.sizes}
+          quality={imageProps.quality}
+          onLoad={imageProps.onLoad}
+          onError={imageProps.onError}
+          className={imageProps.className}
+          {...(imageProps.placeholder && { placeholder: imageProps.placeholder, blurDataURL: imageProps.blurDataURL })}
           style={{
             objectFit: 'cover',
             objectPosition: 'center'

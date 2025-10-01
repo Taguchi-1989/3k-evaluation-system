@@ -5,7 +5,9 @@
  * TDD Green Phase実装 - ボタンフィードバック問題の解決
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+// 将来実装予定: エフェクト処理（アニメーション完了後のクリーンアップ等）
+// import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface InteractiveButtonProps {

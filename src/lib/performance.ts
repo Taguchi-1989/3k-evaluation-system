@@ -245,7 +245,6 @@ export const useStableCallback = <T extends (...args: unknown[]) => unknown>(
   // 安定した参照を保つため空の依存配列（callbackRefを介して常に最新のcallbackを参照）
   return useCallback((...args: Parameters<T>) => {
     return callbackRef.current(...args);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) as T;
 };
 

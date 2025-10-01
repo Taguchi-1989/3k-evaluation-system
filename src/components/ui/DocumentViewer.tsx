@@ -132,6 +132,8 @@ export function DocumentViewer({
                     title={selectedDocument.name}
                   />
                 ) : selectedDocument.type.includes('image') ? (
+                  /* 将来実装予定: OptimizedImageコンポーネント使用 */
+                  /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     src={selectedDocument.url}
                     alt={selectedDocument.name}
