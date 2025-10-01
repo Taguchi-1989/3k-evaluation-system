@@ -78,7 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else {
       // デモ用：デフォルトでアドミンユーザーでログイン
       const defaultUser = DEMO_USERS[0]
-      setUser(defaultUser)
+      setUser(defaultUser ?? null)
       setIsAuthenticated(true)
       localStorage.setItem('auth_user', JSON.stringify(defaultUser))
     }
@@ -143,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // デモ用：実際の実装ではAPIを呼び出す
     const userIndex = DEMO_USERS.findIndex(u => u.id === userId)
-    if (userIndex !== -1) {
+    if (userIndex !== -1 && DEMO_USERS[userIndex]) {
       DEMO_USERS[userIndex].role = newRole
       DEMO_USERS[userIndex].updatedAt = new Date()
       

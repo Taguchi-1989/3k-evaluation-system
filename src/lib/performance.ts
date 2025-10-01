@@ -184,7 +184,7 @@ export class PerformanceMonitor {
  * コンポーネントのレンダリング時間を測定するフック
  */
 export const useRenderTime = (componentName: string, props?: Record<string, any>) => {
-  const startTimeRef = useRef<number>();
+  const startTimeRef = useRef<number | undefined>(undefined);
   const monitor = PerformanceMonitor.getInstance();
 
   useEffect(() => {
@@ -202,8 +202,8 @@ export const useRenderTime = (componentName: string, props?: Record<string, any>
  * 不要な再レンダリングを防ぐためのメモ化フック
  */
 export const useStableMemo = <T>(factory: () => T, deps: React.DependencyList): T => {
-  const lastDepsRef = useRef<React.DependencyList>();
-  const lastResultRef = useRef<T>();
+  const lastDepsRef = useRef<React.DependencyList | undefined>(undefined);
+  const lastResultRef = useRef<T | undefined>(undefined);
 
   return useMemo(() => {
     const depsChanged = !lastDepsRef.current ||

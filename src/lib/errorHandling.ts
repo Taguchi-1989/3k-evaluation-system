@@ -594,7 +594,11 @@ export const createValidationError = (
   if (validationResult.isValid) return null
 
   const firstError = validationResult.errors[0]
-  
+
+  if (!firstError) {
+    throw new Error('Validation errors array is empty')
+  }
+
   return new AppError({
     message: `Validation failed: ${firstError.message}`,
     type: ErrorType.VALIDATION,
