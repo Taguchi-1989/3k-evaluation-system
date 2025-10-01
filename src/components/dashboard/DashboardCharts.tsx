@@ -15,7 +15,9 @@ import {
   RadialLinearScale,
   type ChartData,
 } from 'chart.js'
-import { Bar, Pie, Line, Radar } from 'react-chartjs-2'
+import { Bar, Pie, Radar } from 'react-chartjs-2'
+// 将来実装予定: 時系列データ（月次推移、改善トレンド等）の折れ線グラフ表示用
+// import { Line } from 'react-chartjs-2'
 import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 
 // Chart.js コンポーネントの登録

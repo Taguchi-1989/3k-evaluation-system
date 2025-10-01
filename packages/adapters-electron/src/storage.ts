@@ -53,7 +53,7 @@ class FileSystemBlobStore implements BlobStore {
   async ensureBlobDir(): Promise<void> {
     try {
       await fs.mkdir(this.blobDir, { recursive: true })
-    } catch (error) {
+    } catch {
       // ディレクトリが既に存在する場合は無視
     }
   }

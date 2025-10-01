@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react'
 import { Header } from '@/components/layout'
-import { FileUpload, Input, Button } from '@/components/ui'
+import { FileUpload, Input } from '@/components/ui'
+// 将来実装予定: アクションボタン追加時に使用
+// import { Button } from '@/components/ui'
 import { PhotoViewer } from '@/components/evaluation'
-import { EVALUATION_STANDARDS, DEFAULT_EVALUATION_DATA } from '@/data/defaultEvaluationData'
+// 将来実装予定: 評価基準表示・初期データ設定機能
+// import { EVALUATION_STANDARDS, DEFAULT_EVALUATION_DATA } from '@/data/defaultEvaluationData'
 
 export interface EnvironmentalItem {
   id: string
@@ -78,11 +81,15 @@ export function EnvironmentalFactorDetail({
     ))
   }
 
-  const handleFileUpload = (files: FileList) => {
+  // 将来実装予定: ファイル処理機能（SDS/測定結果の自動解析等）
+  const handleFileUpload = (_files: FileList): void => {
     // TODO: Process uploaded files
+    // - PDF/画像からのデータ抽出
+    // - 自動入力機能
   }
 
-  const handleBackToMain = () => {
+  // 将来実装予定: 戻るボタン実装時に使用
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 

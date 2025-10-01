@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { FileUpload, Input, Button } from '@/components/ui'
-import { OptimizedImage } from '@/components/optimized/OptimizedImage'
-import { useEvaluationStore } from '@/hooks/useEvaluationStore'
+// 将来実装予定: パフォーマンス最適化 - <img>タグをOptimizedImageに置き換え（line 692）
+// import { OptimizedImage } from '@/components/optimized/OptimizedImage'
+// 将来実装予定: グローバル状態管理（評価データの一元管理）
+// import { useEvaluationStore } from '@/hooks/useEvaluationStore'
 
 export interface Worker {
   id: string
@@ -142,10 +144,10 @@ const defaultShiftPatterns: ShiftPattern[] = [
 ]
 
 export function EnhancedWorkTimeDetail({
-  evaluationNo,
-  creator,
-  checker,
-  workInfo,
+  evaluationNo: _evaluationNo,  // 将来実装予定: ヘッダー表示用
+  creator: _creator,              // 将来実装予定: 作成者情報表示用
+  checker: _checker,              // 将来実装予定: 確認者情報表示用
+  workInfo: _workInfo,            // 将来実装予定: 作業情報表示用
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Work+Time+Analysis',
   workers = defaultWorkers
 }: EnhancedWorkTimeDetailProps): React.JSX.Element {
@@ -153,8 +155,8 @@ export function EnhancedWorkTimeDetail({
   // const { updateEvaluationData } = useEvaluationStore()
   
   const [workerList, setWorkerList] = useState(workers)
-  const [shiftPatterns, setShiftPatterns] = useState(defaultShiftPatterns)
-  const [selectedShift, setSelectedShift] = useState('1')
+  const [shiftPatterns, _setShiftPatterns] = useState(defaultShiftPatterns)  // 将来実装予定: シフトパターン編集機能
+  const [_selectedShift, _setSelectedShift] = useState('1')  // 将来実装予定: シフト選択機能
   const [maxTime, setMaxTime] = useState(0)
   const [maxTimeClass, setMaxTimeClass] = useState('')
   const [maxWorkerId, setMaxWorkerId] = useState('')
@@ -162,10 +164,13 @@ export function EnhancedWorkTimeDetail({
   const [productivity, setProductivity] = useState<ProductivityMetrics | null>(null)
   const [activeTab, setActiveTab] = useState<'workers' | 'shifts' | 'analysis' | 'productivity'>('workers')
 
+  // workerList/shiftPatterns変更時に再計算
+  // 関数定義は安定しているため依存配列から除外（無限ループ防止）
   useEffect(() => {
     calculateMaxTime()
     performAnalysis()
     calculateProductivity()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workerList, shiftPatterns])
 
   const getTimeClass = (hours: number): string => {
@@ -303,7 +308,8 @@ export function EnhancedWorkTimeDetail({
     setWorkerList(prev => prev.filter(w => w.id !== id))
   }
 
-  const handleSave = () => {
+  // 将来実装予定: 保存ボタン追加時に使用
+  const _handleSave = (): void => {
     const evaluationData = {
       workTimeDetails: {
         workers: workerList,
@@ -315,16 +321,21 @@ export function EnhancedWorkTimeDetail({
       workTimeScore: analysis?.fatigueIndex || 1
     }
 
+    // TODO: useEvaluationStoreと連携して保存
     // updateEvaluationData(evaluationData)
     console.log('作業時間データが保存されました', evaluationData)
     alert('作業時間データが保存されました')
   }
 
-  const handleFileUpload = (files: FileList) => {
+  // 将来実装予定: ファイル処理機能（勤怠データCSVインポート等）
+  const handleFileUpload = (_files: FileList): void => {
     // TODO: Process uploaded files
+    // - 勤怠データCSVの読み込み
+    // - 作業時間の自動計算
   }
 
-  const handleBackToMain = () => {
+  // 将来実装予定: 戻るボタン実装時に使用
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 
@@ -689,6 +700,8 @@ export function EnhancedWorkTimeDetail({
           <div className="lg:col-span-1">
             <div className="card p-4">
               <h3 className="text-lg font-semibold mb-4">作業写真・資料</h3>
+              {/* 将来実装予定: OptimizedImageコンポーネント使用（line 5参照） */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photoUrl}
                 alt="Work time analysis"

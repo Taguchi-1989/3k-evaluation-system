@@ -184,15 +184,15 @@ const defaultConditions: EnvironmentalCondition[] = [
 ]
 
 export function EnhancedEnvironmentalFactorDetail({
-  evaluationNo,
-  creator,
-  checker,
-  workInfo,
+  evaluationNo: _evaluationNo,  // 将来実装予定: ヘッダー表示用
+  creator: _creator,              // 将来実装予定: 作成者情報表示用
+  checker: _checker,              // 将来実装予定: 確認者情報表示用
+  workInfo: _workInfo,            // 将来実装予定: 作業情報表示用
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Environmental+Assessment',
   initialData
 }: EnhancedEnvironmentalFactorDetailProps): React.JSX.Element {
-  
-  const { currentEvaluation } = useEvaluationStore()
+
+  const { currentEvaluation: _currentEvaluation } = useEvaluationStore()  // 将来実装予定: 評価データ連携
   
   const [environmentalData, setEnvironmentalData] = useState<EnvironmentalDetails>({
     checkboxes: {
@@ -233,8 +233,11 @@ export function EnhancedEnvironmentalFactorDetail({
     [1, 4, 7, 10, 10]     // 重度の暴露
   ]
 
+  // substances/conditions変更時にリスク再計算
+  // 関数定義は安定しているため依存配列から除外（無限ループ防止）
   useEffect(() => {
     calculateOverallRisk()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [environmentalData.substances, environmentalData.conditions])
 
   const calculateOverallRisk = () => {
@@ -359,23 +362,29 @@ export function EnhancedEnvironmentalFactorDetail({
     setFinalScore(Math.max(matrixScore, environmentalData.overallRiskAssessment.combinedRisk))
   }
 
-  const handleSave = () => {
+  // 将来実装予定: 保存ボタン追加時に使用
+  const _handleSave = (): void => {
     const evaluationData = {
       environmentalDetails: environmentalData,
       environmentalScore: finalScore,
       environmentalMatrix: selectedMatrix
     }
 
+    // TODO: useEvaluationStoreと連携して保存
     // updateEvaluationData(evaluationData)
     console.log('環境因子データが保存されました', evaluationData)
     alert('環境因子データが保存されました')
   }
 
-  const handleFileUpload = (files: FileList) => {
+  // 将来実装予定: ファイル処理機能（SDS/測定データ自動解析等）
+  const handleFileUpload = (_files: FileList): void => {
     // TODO: Process uploaded files
+    // - SDS（安全データシート）の自動解析
+    // - 測定データの自動入力
   }
 
-  const handleBackToMain = () => {
+  // 将来実装予定: 戻るボタン実装時に使用
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 
