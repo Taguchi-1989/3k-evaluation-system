@@ -89,6 +89,8 @@ export interface ReportAttachment {
 export class ReportGenerator {
   private static instance: ReportGenerator;
 
+  // シングルトンパターン - インスタンス化制御のため空実装
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): ReportGenerator {
@@ -197,7 +199,7 @@ ${this.generateQuickRecommendations(evaluationResult).map(rec => `- ${rec}`).joi
   /**
    * 詳細分析セクション生成
    */
-  private async generateAnalysisSection(reportData: ReportData, config: ReportConfig): Promise<ReportSection> {
+  private async generateAnalysisSection(reportData: ReportData, _config: ReportConfig): Promise<ReportSection> {
     const { evaluationResult, detailsData } = reportData;
     
     const content = `
@@ -233,7 +235,7 @@ ${detailsData?.hazard ? this.analyzeHazardFactor(detailsData.hazard) : '評価�
   /**
    * 推奨事項セクション生成
    */
-  private async generateRecommendationsSection(reportData: ReportData, config: ReportConfig): Promise<ReportSection> {
+  private async generateRecommendationsSection(reportData: ReportData, _config: ReportConfig): Promise<ReportSection> {
     const { evaluationResult } = reportData;
     const report = this.generateEvaluationReport(evaluationResult);
 
@@ -347,7 +349,7 @@ ${historicalData ? this.generateTrendChart(historicalData) : '履歴データな
   /**
    * データ詳細セクション生成
    */
-  private async generateDataSection(reportData: ReportData, config: ReportConfig): Promise<ReportSection> {
+  private async generateDataSection(reportData: ReportData, _config: ReportConfig): Promise<ReportSection> {
     const { evaluationResult, detailsData } = reportData;
 
     const content = `
@@ -417,7 +419,7 @@ ${JSON.stringify(evaluationResult.calculationDetails, null, 2)}
     return `report_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private generateReportTitle(reportData: ReportData, config: ReportConfig): string {
+  private generateReportTitle(reportData: ReportData, _config: ReportConfig): string {
     const { workInfo } = reportData;
     return `3K評価レポート - ${workInfo.workName} (${workInfo.factoryName})`;
   }
@@ -660,7 +662,8 @@ ${JSON.stringify(evaluationResult.calculationDetails, null, 2)}
     return nextDate.toLocaleDateString('ja-JP');
   }
 
-  private generateTrendChart(historicalData: Record<string, unknown>): string {
+  // 将来実装予定: 実際のhistoricalDataを使用したトレンドチャート生成
+  private generateTrendChart(_historicalData: Record<string, unknown>): string {
     return `
 \`\`\`chart
 {
@@ -688,7 +691,8 @@ ${JSON.stringify(evaluationResult.calculationDetails, null, 2)}
     return [low, medium, high, critical];
   }
 
-  private async generateChartAttachments(reportData: ReportData): Promise<ReportAttachment[]> {
+  // 将来実装予定: Chart.js等を使用した実際のチャート画像生成
+  private async generateChartAttachments(_reportData: ReportData): Promise<ReportAttachment[]> {
     // チャート画像生成（実際の実装では Chart.js などを使用）
     const attachments: ReportAttachment[] = [];
     

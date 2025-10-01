@@ -39,7 +39,7 @@ export interface HazardFactorDetailProps {
 
 // デフォルトデータから危険因子項目を生成
 const generateHazardEvents = (): HazardEvent[] => {
-  const hazardStandards = EVALUATION_STANDARDS.hazard
+  const _hazardStandards = EVALUATION_STANDARDS.hazard  // 将来実装予定: 基準値表示機能
   const defaultData = DEFAULT_EVALUATION_DATA.hazardDefaults
 
   // データが存在しない場合はデフォルトの危険因子イベントを返す
@@ -104,10 +104,10 @@ const defaultHazardEvents: HazardEvent[] = generateHazardEvents() || [
 ]
 
 export function HazardFactorDetail({
-  evaluationNo,
-  creator,
-  checker,
-  workInfo,
+  evaluationNo: _evaluationNo,  // 将来実装予定: ヘッダー表示用
+  creator: _creator,              // 将来実装予定: 作成者情報表示用
+  checker: _checker,              // 将来実装予定: 確認者情報表示用
+  workInfo: _workInfo,            // 将来実装予定: 作業情報表示用
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Photo',
   hazardEvents = defaultHazardEvents
 }: HazardFactorDetailProps): React.JSX.Element {
@@ -181,11 +181,14 @@ export function HazardFactorDetail({
     setEvents(prev => prev.filter(event => event.id !== id))
   }
 
-  const handleFileUpload = (files: FileList) => {
+  const handleFileUpload = (_files: FileList): void => {
     // TODO: Process uploaded files
+    // - SDS（安全データシート）の自動解析
+    // - 危険事象の自動抽出
   }
 
-  const handleBackToMain = () => {
+  // 将来実装予定: 戻るボタン実装時に使用
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 

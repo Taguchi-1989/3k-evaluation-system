@@ -4,7 +4,8 @@ import React, { type ReactNode, useState } from 'react'
 import { Header } from '@/components/layout'
 import { TabInterface, type Tab } from '@/components/ui/TabInterface'
 import { PostureList, MatrixDisplay, type Posture } from '@/components/evaluation'
-import { Button } from '@/components/ui'
+// 将来実装予定: アクションボタン追加時に使用
+// import { Button } from '@/components/ui'
 
 export interface GenericFactorDetailProps {
   title: string
@@ -37,7 +38,7 @@ export interface GenericFactorDetailProps {
 
 export function GenericFactorDetail({
   title,
-  factorType,
+  factorType: _factorType,  // 将来実装予定: 因子タイプ別のカスタマイズ
   evaluationNo,
   creator,
   checker,
@@ -51,17 +52,20 @@ export function GenericFactorDetail({
   resultColor = 'text-blue-600',
   rightPanelContent
 }: GenericFactorDetailProps): React.JSX.Element {
-  const [selectedPosture, setSelectedPosture] = useState<string>('')
+  const [_selectedPosture, setSelectedPosture] = useState<string>('')  // 将来実装予定: 姿勢選択時のハイライト表示
 
-  const handleChemicalEvaluation = () => {
+  // 将来実装予定: 化学物質評価ページへの遷移ボタン
+  const _handleChemicalEvaluation = (): void => {
     window.location.href = '/evaluation/environmental/chemical'
   }
 
-  const handleBackToMain = () => {
+  // 将来実装予定: メイン評価ページへの戻るボタン
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 
-  const handleBackToDashboard = () => {
+  // 将来実装予定: ダッシュボードへの戻るボタン
+  const _handleBackToDashboard = (): void => {
     window.location.href = '/dashboard'
   }
 
@@ -112,6 +116,8 @@ export function GenericFactorDetail({
         {/* 左列: 写真 & 姿勢リスト */}
         <div className="w-1/3 flex flex-col h-full space-y-3">
           <div className="flex-shrink-0 bg-gray-100 rounded-lg flex items-center justify-center p-2 h-40">
+            {/* 将来実装予定: OptimizedImageコンポーネント使用（line 8参照） */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={photoUrl} className="evaluation-photo rounded" alt="関連写真" />
           </div>
           <PostureList
@@ -138,7 +144,7 @@ export function GenericFactorDetail({
             <>
               <MatrixDisplay
                 title={matrixTitle}
-                onCellClick={(row, col, value) => {/* Handle cell selection */}}
+                onCellClick={(_row, _col, _value) => {/* TODO: マトリクスセル選択時の処理 */}}
               />
               
               {/* 結果表示エリア */}

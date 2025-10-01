@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Header } from '@/components/layout'
 import { PhotoViewer, FactorList, SummaryPanel, type FactorItem } from '@/components/evaluation'
-import { Button } from '@/components/ui'
+// 将来実装予定: 保存ボタン等のアクション追加時に使用
+// import { Button } from '@/components/ui'
 import { DocumentViewer } from '@/components/ui/DocumentViewer'
 import { useDatabase } from '@/hooks/useDatabase'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
@@ -52,8 +53,8 @@ export function EvaluationMain({
 }: EvaluationMainProps): React.JSX.Element {
   const [remarks, setRemarks] = useState('')
   const [, setSelectedPhoto] = useState(0)
-  const [isSaving, setIsSaving] = useState(false)
-  const [saveMessage, setSaveMessage] = useState('')
+  const [_isSaving, setIsSaving] = useState(false)  // 将来実装予定: 保存中インジケーター表示
+  const [_saveMessage, setSaveMessage] = useState('')  // 将来実装予定: 保存結果メッセージ表示
 
   const router = useRouter()
   const database = useDatabase()
@@ -63,6 +64,7 @@ export function EvaluationMain({
   const { evaluationForm, updateEvaluationForm } = evaluationStore
 
   // workInfoをZustandに同期
+  // updateEvaluationFormは安定した関数のため依存配列から除外（無限ループ防止）
   useEffect(() => {
     updateEvaluationForm({
       workName: workInfo.workName,
@@ -70,9 +72,10 @@ export function EvaluationMain({
       processName: workInfo.processName,
       remarks
     })
-  }, [workInfo.workName, workInfo.factoryName, workInfo.processName, remarks]) // updateEvaluationFormを依存配列から削除
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workInfo.workName, workInfo.factoryName, workInfo.processName, remarks])
 
-  const handleFileUpload = (files: File[]) => {
+  const handleFileUpload = (_files: File[]): void => {
     // ファイルアップロード処理
     // TODO: Process uploaded files
   }
@@ -82,7 +85,8 @@ export function EvaluationMain({
     // TODO: Implement attachments validation
   }
 
-  const handleSave = async () => {
+  // 将来実装予定: 保存ボタン追加時に使用
+  const _handleSave = async (): Promise<void> => {
     setIsSaving(true)
     setSaveMessage('')
 
@@ -134,7 +138,8 @@ export function EvaluationMain({
     }
   }
 
-  const statusBadges = [
+  // 将来実装予定: ステータスバッジ表示機能
+  const _statusBadges = [
     { label: '未記入あり', color: 'gray' as const },
     { label: 'エイヤ記入部', color: 'lime' as const },
     { label: '記入完了', color: 'green' as const },
