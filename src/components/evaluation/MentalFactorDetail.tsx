@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
-import { FileUpload, Input, HelpTooltip } from '@/components/ui'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import { FileUpload, HelpTooltip } from '@/components/ui'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
 import { PhotoViewer, PsychologicalStressAssessment } from '@/components/evaluation'
 import { calculationEngine } from '@/lib/calculation'
@@ -17,6 +17,7 @@ export interface MentalFactorItem {
   hasDetail?: boolean
   selectValue?: string
   inputValue?: string
+  durationValue?: string
   selectOptions?: string[]
   category: 'failure' | 'concentration' | 'cognitiveLoad' | 'emotionalBurden' | 'skillUtilization' | 'workControl'
   durationOptions?: string[]
@@ -43,16 +44,35 @@ export interface MentalFactorDetailProps {
   mentalFactorItems?: MentalFactorItem[]
 }
 
+// 精神因子評価スケール型定義
+interface MentalEvaluationScale {
+  level: string
+  score: number
+}
+
+interface MentalEvaluationScales {
+  severity?: MentalEvaluationScale[]
+  duration?: MentalEvaluationScale[]
+}
+
+interface MentalStandards {
+  scales?: MentalEvaluationScales
+  [key: string]: unknown
+}
+
 // デフォルトデータから精神因子項目を生成
 const generateMentalFactorItems = (): MentalFactorItem[] => {
-  const mentalStandards = EVALUATION_STANDARDS.mental
+  const mentalStandards = EVALUATION_STANDARDS.mental as MentalStandards | undefined
   const defaultData = DEFAULT_EVALUATION_DATA.mentalFactor
-  
+
   // データが存在しない場合はデフォルトの空配列を返す
   if (!defaultData || !defaultData.categories) {
     return []
   }
-  
+
+  const severityOptions = mentalStandards?.scales?.severity?.map((s) => s.level) || ['軽微', '中程度', '重大', '深刻']
+  const durationOptions = mentalStandards?.scales?.duration?.map((d) => d.level) || ['短時間', '中時間', '長時間', '継続的']
+
   return defaultData.categories.map((category, index) => ({
     id: `${index + 1}`,
     label: category.name,
@@ -60,9 +80,9 @@ const generateMentalFactorItems = (): MentalFactorItem[] => {
     hasDetail: category.hasSubItems || false,
     selectValue: category.defaultSeverity || '',
     inputValue: '',
-    selectOptions: (mentalStandards as any)?.scales?.severity?.map((s: any) => s.level) || ['軽微', '中程度', '重大', '深刻'],
-    category: category.type as any,
-    durationOptions: (mentalStandards as any)?.scales?.duration?.map((d: any) => d.level) || ['短時間', '中時間', '長時間', '継続的']
+    selectOptions: severityOptions,
+    category: category.type as 'failure' | 'concentration' | 'cognitiveLoad' | 'emotionalBurden' | 'skillUtilization' | 'workControl',
+    durationOptions
   }))
 }
 
@@ -129,16 +149,16 @@ const defaultMentalFactorItems: MentalFactorItem[] = generateMentalFactorItems()
 ]
 
 export function MentalFactorDetail({
-  evaluationNo,
-  creator,
-  checker, 
+  evaluationNo: _evaluationNo,
+  creator: _creator,
+  checker: _checker,
   workInfo,
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Photo',
   mentalFactorItems = defaultMentalFactorItems
-}: MentalFactorDetailProps) {
+}: MentalFactorDetailProps): React.JSX.Element {
   const [factorItems, setFactorItems] = useState(mentalFactorItems)
   const [calculatedScore, setCalculatedScore] = useState(1)
-  const [calculationDetails, setCalculationDetails] = useState<Record<string, any> | null>(null)
+  const [calculationDetails, setCalculationDetails] = useState<Record<string, unknown> | null>(null)
   const [workTimeHours, setWorkTimeHours] = useState(8)
   const [showAIPopup, setShowAIPopup] = useState(false)
 
@@ -159,7 +179,7 @@ export function MentalFactorDetail({
     ))
   }
 
-  const handleInputChange = (itemId: string, value: string) => {
+  const _handleInputChange = (itemId: string, value: string): void => {
     setFactorItems(prev => prev.map(item =>
       item.id === itemId ? { ...item, inputValue: value } : item
     ))
@@ -171,30 +191,29 @@ export function MentalFactorDetail({
     ))
   }
 
-  const handleAIRecommendations = (result: AIAnalysisResult) => {
+  const handleAIRecommendations = (result: AIAnalysisResult): void => {
     // AI推奨に基づいてフォームを更新
     const mentalRecommendation = result.recommendations.find(r => r.factorType === 'mental')
     if (mentalRecommendation && mentalRecommendation.recommendations) {
       setFactorItems(prev => {
         const updated = [...prev]
-        mentalRecommendation.recommendations.forEach((rec: Record<string, any>) => {
+        mentalRecommendation.recommendations.forEach((rec: Record<string, unknown>) => {
           const itemIndex = updated.findIndex(item => item.id === rec.id)
-          if (itemIndex !== -1) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            updated[itemIndex] = { ...updated[itemIndex], ...rec } as any
+          if (itemIndex !== -1 && typeof rec.id === 'string') {
+            updated[itemIndex] = { ...updated[itemIndex], ...rec as Partial<MentalFactorItem> }
           }
         })
         return updated
       })
     }
-    
+
     // 作業時間も更新
     if (result.estimatedScore) {
       setWorkTimeHours(8) // デフォルトまたは推定値
     }
   }
 
-  const handleFileUpload = (files: FileList) => {
+  const _handleFileUpload = (_files: FileList): void => {
     // TODO: Process uploaded files
   }
 
@@ -212,22 +231,22 @@ export function MentalFactorDetail({
     window.location.href = '/evaluation/mental/focus'
   }
 
-  const handleBackToMain = () => {
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 
-  const handleBackToDashboard = () => {
+  const _handleBackToDashboard = (): void => {
     window.location.href = '/dashboard'
   }
 
   // 精神因子の計算ロジック
   const mentalDetails: MentalDetails = useMemo(() => {
-    const workQuality: Record<string, any> = {}
-    const concentration: Record<string, any> = {}
-    const cognitiveLoad: Record<string, any> = {}
-    const emotionalBurden: Record<string, any> = {}
-    const skillUtilization: Record<string, any> = {}
-    const workControl: Record<string, any> = {}
+    const workQuality: Record<string, unknown> = {}
+    const concentration: Record<string, unknown> = {}
+    const cognitiveLoad: Record<string, unknown> = {}
+    const emotionalBurden: Record<string, unknown> = {}
+    const skillUtilization: Record<string, unknown> = {}
+    const workControl: Record<string, unknown> = {}
     
     factorItems.forEach(item => {
       if (!item.isChecked) return
@@ -338,7 +357,7 @@ export function MentalFactorDetail({
               variant="photo"
               layout="grid"
               size="sm"
-              onFileUpload={handleFileUpload}
+              onFileUpload={_handleFileUpload}
               showButton={false}
               className="min-h-[100px]"
             />
@@ -478,7 +497,7 @@ export function MentalFactorDetail({
                           </select>
                           <select
                             className="border rounded-md p-1 text-xs w-20 bg-white dark:bg-gray-600"
-                            value={(item as any).durationValue || item.inputValue || '20%'}
+                            value={item.durationValue || item.inputValue || '20%'}
                             onChange={(e) => handleDurationChange(item.id, e.target.value)}
                             disabled={!item.isChecked}
                           >
