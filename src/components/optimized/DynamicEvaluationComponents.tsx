@@ -22,15 +22,15 @@ const DynamicPhysicalFactorDetail = lazy(() =>
 );
 
 const DynamicMentalFactorDetail = lazy(() =>
-  import('@/components/evaluation/MentalFactorDetail')
+  import('@/components/evaluation/MentalFactorDetail').then(mod => ({ default: mod.MentalFactorDetail }))
 );
 
 const DynamicEnvironmentalFactorDetail = lazy(() =>
-  import('@/components/evaluation/EnvironmentalFactorDetail')
+  import('@/components/evaluation/EnvironmentalFactorDetail').then(mod => ({ default: mod.EnvironmentalFactorDetail }))
 );
 
 const DynamicHazardFactorDetail = lazy(() =>
-  import('@/components/evaluation/HazardFactorDetail')
+  import('@/components/evaluation/HazardFactorDetail').then(mod => ({ default: mod.HazardFactorDetail }))
 );
 
 /**

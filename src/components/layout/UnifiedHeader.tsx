@@ -77,7 +77,7 @@ export default function UnifiedHeader({
                   className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-opacity-80 transition-colors ${
                     pathname === '/'
                       ? 'bg-blue-100 text-blue-700'
-                      : variant === 'home'
+                      : (variant as string) === 'home'
                         ? 'text-blue-100 hover:text-white'
                         : 'text-gray-600 hover:text-gray-900'
                   }`}
@@ -89,7 +89,7 @@ export default function UnifiedHeader({
                   className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-opacity-80 transition-colors ${
                     pathname === '/dashboard'
                       ? 'bg-blue-100 text-blue-700'
-                      : variant === 'home'
+                      : (variant as string) === 'home'
                         ? 'text-blue-100 hover:text-white'
                         : 'text-gray-600 hover:text-gray-900'
                   }`}
@@ -97,7 +97,7 @@ export default function UnifiedHeader({
                   ダッシュボード
                 </Link>
                 <div className={`px-3 py-2 text-sm ${
-                  variant === 'home' ? 'text-blue-200' : 'text-gray-400'
+                  (variant as string) === 'home' ? 'text-blue-200' : 'text-gray-400'
                 }`}>
                   ログアウト
                 </div>
