@@ -109,7 +109,7 @@ export const LazyLoadWrapper: React.FC<LazyLoadWrapperProps> = ({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setIsIntersecting(true);
           onIntersect?.();
 

@@ -302,7 +302,7 @@ export function DashboardCharts({ workItems, className = '' }: DashboardChartsPr
         </div>
         <div className="mt-4 text-sm text-gray-600">
           <p>最高平均: <span className="font-semibold">
-            {Math.max(...factorScoreData.datasets[0].data).toFixed(1)}点
+            {Math.max(...(factorScoreData.datasets[0]?.data ?? [0])).toFixed(1)}点
           </span></p>
         </div>
       </div>
@@ -329,8 +329,8 @@ export function DashboardCharts({ workItems, className = '' }: DashboardChartsPr
         <div className="mt-4 text-sm text-gray-600">
           <p>最高リスク因子: <span className="font-semibold text-red-600">
             {['肉体因', '精神因', '環境因', '危険因'][
-              radarData.datasets[0].data.indexOf(Math.max(...radarData.datasets[0].data))
-            ]}
+              (radarData.datasets[0]?.data ?? []).indexOf(Math.max(...(radarData.datasets[0]?.data ?? [0])))
+            ] ?? '不明'}
           </span></p>
         </div>
       </div>
