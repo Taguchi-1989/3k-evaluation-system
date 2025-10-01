@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import matrixData from '@/data/evaluation-matrix.json'
+import type { EvaluationMatrixData, OWASMatrixData } from '@/types/evaluation-matrix'
 
 export interface OWASMatrixProps {
   selectedBack?: string
-  selectedArms?: string  
+  selectedArms?: string
   selectedLegs?: string
   selectedLoad?: string
   onSelectionChange?: (back: string, arms: string, legs: string, load: string, score: number) => void
@@ -14,12 +15,12 @@ export interface OWASMatrixProps {
 
 export function OWASMatrix({
   selectedBack = '1',
-  selectedArms = '1', 
+  selectedArms = '1',
   selectedLegs = '3',
   selectedLoad = '1',
   onSelectionChange,
   className = ''
-}: OWASMatrixProps) {
+}: OWASMatrixProps): React.JSX.Element {
   const [selections, setSelections] = useState({
     back: selectedBack,
     arms: selectedArms,
@@ -27,20 +28,24 @@ export function OWASMatrix({
     load: selectedLoad
   })
 
-  const owasData = matrixData.OWAS as any
+  const owasData: OWASMatrixData = (matrixData as EvaluationMatrixData).OWAS
 
   // Calculate score based on current selections
-  const calculateScore = () => {
-    if (owasData.matrix && owasData.matrix[selections.back] && owasData.matrix[selections.back][selections.arms]) {
-      const legMatrix = owasData.matrix[selections.back][selections.arms]
-      const legIndex = parseInt(selections.legs) - 1
-      const loadIndex = parseInt(selections.load) - 1
-      
-      if (legMatrix[legIndex] && legMatrix[legIndex][loadIndex] !== undefined) {
-        return legMatrix[legIndex][loadIndex]
-      }
-    }
-    return 1
+  const calculateScore = (): number => {
+    const backMatrix = owasData.matrix[selections.back]
+    if (!backMatrix) return 1
+
+    const armsMatrix = backMatrix[selections.arms]
+    if (!armsMatrix) return 1
+
+    const legIndex = parseInt(selections.legs) - 1
+    const loadIndex = parseInt(selections.load) - 1
+
+    const legRow = armsMatrix[legIndex]
+    if (!legRow) return 1
+
+    const score = legRow[loadIndex]
+    return score !== undefined ? score : 1
   }
 
   const currentScore = calculateScore()
@@ -49,21 +54,21 @@ export function OWASMatrix({
     onSelectionChange?.(selections.back, selections.arms, selections.legs, selections.load, currentScore)
   }, [selections, currentScore, onSelectionChange])
 
-  const handleOptionClick = (group: string, code: string) => {
+  const handleOptionClick = (group: string, code: string): void => {
     setSelections(prev => ({ ...prev, [group]: code }))
   }
 
-  const renderMatrix = () => {
+  const renderMatrix = (): React.JSX.Element[] | null => {
     if (!owasData.matrix) return null
 
     const matrix = owasData.matrix
-    const html = []
+    const html: React.JSX.Element[] = []
 
     // Header row
     html.push(
       <div key="header" className="contents">
         <div className="col-span-2"></div>
-        {owasData.legPostures.map((legs: string, legIndex: number) => (
+        {owasData.legPostures.map((legs: string) => (
           <div key={`leg-header-${legs}`} className="col-span-3 font-bold bg-gray-100 dark:bg-gray-700 text-center text-xs p-1 border border-gray-300 dark:border-gray-600">
             ③-{legs}
           </div>
@@ -75,11 +80,11 @@ export function OWASMatrix({
     html.push(
       <div key="sub-header" className="contents">
         <div className="col-span-2"></div>
-        {owasData.legPostures.map((legs: string, legIndex: number) => 
-          owasData.loadLevels.map((load: string, loadIndex: number) => (
+        {owasData.legPostures.map((legs: string) =>
+          owasData.loadLevels.map((load: string) => (
             <div key={`load-header-${legs}-${load}`} className={`font-bold text-center text-xs p-1 border border-gray-300 dark:border-gray-600 ${
-              selections.legs === legs && selections.load === load 
-                ? 'bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200' 
+              selections.legs === legs && selections.load === load
+                ? 'bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200'
                 : 'bg-gray-50 dark:bg-gray-800'
             }`}>
               {load}
@@ -90,15 +95,15 @@ export function OWASMatrix({
     )
 
     // Data rows
-    owasData.backPostures.forEach((back: string, backIndex: number) => {
+    owasData.backPostures.forEach((back: string) => {
       owasData.armPostures.forEach((arms: string, armsIndex: number) => {
         const isFirstArmsForBack = armsIndex === 0
-        
+
         html.push(
           <div key={`row-${back}-${arms}`} className="contents">
             {isFirstArmsForBack && (
               <div className={`row-span-3 font-bold flex items-center justify-center text-xs p-1 border border-gray-300 dark:border-gray-600 ${
-                selections.back === back 
+                selections.back === back
                   ? 'bg-indigo-200 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-200'
                   : 'bg-gray-100 dark:bg-gray-700'
               }`} style={{ gridRow: `span 3` }}>
@@ -106,7 +111,7 @@ export function OWASMatrix({
               </div>
             )}
             <div className={`font-bold flex items-center justify-center text-xs p-1 border border-gray-300 dark:border-gray-600 ${
-              selections.arms === arms 
+              selections.arms === arms
                 ? 'bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200'
                 : 'bg-gray-100 dark:bg-gray-700'
             }`}>
@@ -114,15 +119,16 @@ export function OWASMatrix({
             </div>
             {owasData.legPostures.map((legs: string, legIndex: number) =>
               owasData.loadLevels.map((load: string, loadIndex: number) => {
-                const score = matrix[back] && matrix[back][arms] && matrix[back][arms][legIndex] 
-                  ? matrix[back][arms][legIndex][loadIndex] 
-                  : 1
-                
-                const isHighlighted = selections.back === back && selections.arms === arms && 
+                const backMat = matrix[back]
+                const armsMat = backMat?.[arms]
+                const legRow = armsMat?.[legIndex]
+                const score = legRow?.[loadIndex] ?? 1
+
+                const isHighlighted = selections.back === back && selections.arms === arms &&
                                     selections.legs === legs && selections.load === load
                 const scoreStr = score.toString()
-                const colorClass = owasData.scoreColors[scoreStr] || 'text-gray-600 bg-gray-50'
-                
+                const colorClass = owasData.scoreColors[scoreStr] ?? 'text-gray-600 bg-gray-50'
+
                 return (
                   <div
                     key={`cell-${back}-${arms}-${legs}-${load}`}
@@ -132,7 +138,7 @@ export function OWASMatrix({
                     onClick={() => {
                       setSelections({ back, arms, legs, load })
                     }}
-                    title={`${back}-${arms}-${legs}-${load}: ${score} (${owasData.scoreLabels[scoreStr]})`}
+                    title={`${back}-${arms}-${legs}-${load}: ${score} (${owasData.scoreLabels[scoreStr] ?? ''})`}
                   >
                     {score}
                   </div>
@@ -159,7 +165,7 @@ export function OWASMatrix({
         <div>
           <p className="font-bold mb-1">① 背部</p>
           <div className="grid grid-cols-2 gap-1">
-            {owasData.backPostures.map((back: string) => (
+            {owasData.backPostures.map((back) => (
               <button
                 key={back}
                 onClick={() => handleOptionClick('back', back)}
@@ -178,7 +184,7 @@ export function OWASMatrix({
         <div>
           <p className="font-bold mb-1">② 上肢</p>
           <div className="grid grid-cols-3 gap-1">
-            {owasData.armPostures.map((arms: string) => (
+            {owasData.armPostures.map((arms) => (
               <button
                 key={arms}
                 onClick={() => handleOptionClick('arms', arms)}
@@ -197,7 +203,7 @@ export function OWASMatrix({
         <div>
           <p className="font-bold mb-1">③ 下肢</p>
           <div className="grid grid-cols-3 gap-1">
-            {owasData.legPostures.map((legs: string) => (
+            {owasData.legPostures.map((legs) => (
               <button
                 key={legs}
                 onClick={() => handleOptionClick('legs', legs)}
@@ -216,7 +222,7 @@ export function OWASMatrix({
         <div>
           <p className="font-bold mb-1">④ 重量</p>
           <div className="grid grid-cols-1 gap-1">
-            {owasData.loadLevels.map((load: string) => (
+            {owasData.loadLevels.map((load) => (
               <button
                 key={load}
                 onClick={() => handleOptionClick('load', load)}

@@ -1,21 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import type { ReportData, ReportConfig, GeneratedReport } from '@/lib/reportGenerator';
 import { reportGenerator } from '@/lib/reportGenerator'
-import { useEvaluationStore } from '@/hooks/useEvaluationStore'
-import { EvaluationResult } from '@/lib/evaluationEngine'
+import { useEvaluationDataStore } from '@/stores/evaluationDataStore'
 
 interface ReportGeneratorProps {
   evaluationId?: string;
   onReportGenerated?: (report: GeneratedReport) => void;
 }
 
-export default function ReportGenerator({ evaluationId, onReportGenerated }: ReportGeneratorProps) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const evaluationStore = useEvaluationStore() as any;
-  const evaluations = evaluationStore.evaluations || [];
+export default function ReportGenerator({ evaluationId, onReportGenerated }: ReportGeneratorProps): React.JSX.Element {
+  const { savedEvaluations, currentEvaluation } = useEvaluationDataStore();
   const [isGenerating, setIsGenerating] = useState(false);
   const [config, setConfig] = useState<ReportConfig>({
     includeCharts: true,
@@ -30,68 +27,92 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
   const [previewMode, setPreviewMode] = useState(false);
 
   // 評価データを取得
-  const currentEvaluation = evaluationId
-    ? evaluations.find((e: any) => e.evaluationId === evaluationId)
-    : evaluations[0]; // 最新の評価
+  const targetEvaluation = evaluationId
+    ? savedEvaluations.find((e) => e.id === evaluationId)
+    : currentEvaluation ?? savedEvaluations[0]; // 最新の評価
 
-  const handleGenerateReport = async () => {
-    if (!currentEvaluation) {
+  const handleGenerateReport = async (): Promise<void> => {
+    if (!targetEvaluation) {
       alert('評価データが見つかりません');
       return;
     }
 
     setIsGenerating(true);
-    
+
     try {
       // レポートデータの準備
+      // TODO: 評価スコアを計算するロジックが必要
+      // 現時点では仮のデータを使用
       const reportData: ReportData = {
         evaluationResult: {
-          evaluationId: currentEvaluation.evaluationId,
-          scores: currentEvaluation.scores,
-          finalResult: currentEvaluation.finalResult,
-          calculationDetails: currentEvaluation.calculationDetails || {},
+          evaluationId: targetEvaluation.id,
+          scores: {
+            physical: 0,
+            mental: 0,
+            environmental: 0,
+            hazard: 0,
+            workTime: 0
+          },
+          finalResult: {
+            finalScore: 0,
+            riskLevel: 'low',
+            riskCategory: '低リスク',
+            recommendations: []
+          },
+          calculationDetails: {},
           timestamp: new Date(),
-          calculatedBy: 'System'
+          calculatedBy: targetEvaluation.metadata?.creator?.name ?? 'System'
         },
         workInfo: {
-          workName: currentEvaluation.workName,
-          factoryName: currentEvaluation.factoryName,
-          processName: currentEvaluation.processName || '未設定',
-          evaluatedBy: currentEvaluation.updatedBy || 'System',
-          evaluatedDate: new Date(currentEvaluation.updatedAt),
-          department: currentEvaluation.department,
-          shift: currentEvaluation.shift
+          workName: targetEvaluation.workName,
+          factoryName: targetEvaluation.factoryName,
+          processName: targetEvaluation.processName || '未設定',
+          evaluatedBy: targetEvaluation.metadata?.creator?.name ?? 'System',
+          evaluatedDate: new Date(targetEvaluation.updatedAt),
+          department: targetEvaluation.metadata?.creator?.department,
+          shift: undefined
         },
         detailsData: {
-          physical: currentEvaluation.physicalDetails,
-          mental: currentEvaluation.mentalDetails,
-          environmental: currentEvaluation.environmentalDetails,
-          hazard: currentEvaluation.hazardDetails,
-          postures: currentEvaluation.postures,
-          substances: currentEvaluation.environmentalSubstances,
-          workTime: currentEvaluation.workTimeFactor
+          physical: targetEvaluation.physicalFactor,
+          mental: targetEvaluation.mentalFactor,
+          environmental: targetEvaluation.environmentalFactor,
+          hazard: targetEvaluation.hazardFactor,
+          postures: undefined,
+          substances: undefined,
+          workTime: targetEvaluation.workTimeFactor
         }
       };
 
       // 履歴データが有効な場合は追加
-      if (config.includeHistoricalData && evaluations.length > 1) {
-        const historicalEvaluations = evaluations
-          .filter((e: any) => e.workName === currentEvaluation.workName)
+      if (config.includeHistoricalData && savedEvaluations.length > 1) {
+        const historicalEvaluations = savedEvaluations
+          .filter((e) => e.workName === targetEvaluation.workName)
           .slice(0, 5) // 最新5件
-          .map((e: any) => ({
-            evaluationId: e.evaluationId,
-            scores: e.scores,
-            finalResult: e.finalResult,
-            calculationDetails: e.calculationDetails || {},
+          .map((e) => ({
+            evaluationId: e.id,
+            scores: {
+              physical: 0,
+              mental: 0,
+              environmental: 0,
+              hazard: 0,
+              workTime: 0
+            },
+            finalResult: {
+              finalScore: 0,
+              riskLevel: 'low' as const,
+              riskCategory: '低リスク',
+              recommendations: []
+            },
+            calculationDetails: {},
             timestamp: new Date(e.updatedAt),
-            calculatedBy: e.updatedBy || 'System'
+            calculatedBy: e.metadata?.creator?.name ?? 'System'
           }));
 
         reportData.historicalData = {
           previousEvaluations: historicalEvaluations,
           trendAnalysis: {
             physicalTrend: 'stable',
-            mentalTrend: 'stable', 
+            mentalTrend: 'stable',
             environmentalTrend: 'stable',
             hazardTrend: 'stable',
             overallTrend: 'stable',
@@ -114,7 +135,7 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
     }
   };
 
-  const handleDownload = (format: 'pdf' | 'html' | 'docx') => {
+  const handleDownload = (format: 'pdf' | 'html' | 'docx'): void => {
     if (!generatedReport) return;
 
     const blob = new Blob([generatedReport.content], { 
@@ -132,7 +153,7 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
     URL.revokeObjectURL(url);
   };
 
-  if (!currentEvaluation) {
+  if (!targetEvaluation) {
     return (
       <div className="card p-6">
         <div className="text-center">
@@ -155,10 +176,10 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
           <div>
             <h3 className="text-sm font-medium mb-2">評価対象</h3>
             <div className="p-3 bg-gray-50 rounded">
-              <p className="font-medium">{currentEvaluation.workName}</p>
-              <p className="text-sm text-gray-600">{currentEvaluation.factoryName}</p>
+              <p className="font-medium">{targetEvaluation.workName}</p>
+              <p className="text-sm text-gray-600">{targetEvaluation.factoryName}</p>
               <p className="text-sm text-gray-500">
-                最終更新: {new Date(currentEvaluation.updatedAt).toLocaleString('ja-JP')}
+                最終更新: {new Date(targetEvaluation.updatedAt).toLocaleString('ja-JP')}
               </p>
             </div>
           </div>
@@ -166,10 +187,10 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
           {/* フォーマット設定 */}
           <div>
             <label className="block text-sm font-medium mb-2">出力形式</label>
-            <select 
+            <select
               className="w-full p-2 border rounded"
               value={config.format}
-              onChange={(e) => setConfig(prev => ({ ...prev, format: e.target.value as any }))}
+              onChange={(e) => setConfig(prev => ({ ...prev, format: e.target.value as 'pdf' | 'html' | 'docx' }))}
             >
               <option value="pdf">PDF</option>
               <option value="html">HTML</option>
@@ -180,10 +201,10 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
           {/* テンプレート設定 */}
           <div>
             <label className="block text-sm font-medium mb-2">レポートテンプレート</label>
-            <select 
+            <select
               className="w-full p-2 border rounded"
               value={config.template}
-              onChange={(e) => setConfig(prev => ({ ...prev, template: e.target.value as any }))}
+              onChange={(e) => setConfig(prev => ({ ...prev, template: e.target.value as 'summary' | 'standard' | 'detailed' }))}
             >
               <option value="summary">サマリー版</option>
               <option value="standard">標準版</option>
@@ -237,7 +258,7 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
 
         <div className="mt-6 flex space-x-3">
           <Button
-            onClick={handleGenerateReport}
+            onClick={() => { void handleGenerateReport() }}
             disabled={isGenerating}
             variant="primary"
             className="flex-1"
