@@ -33,7 +33,7 @@ export interface CompleteEvaluationData {
   updatedBy: string;
   additionalParams?: {
     useMatrixCalculation?: boolean;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
@@ -47,7 +47,7 @@ export interface EvaluationResult {
     workTime: number;
   };
   finalResult: FinalScoreResult;
-  calculationDetails: Record<string, any>;
+  calculationDetails: Record<string, unknown>;
   timestamp: Date;
   calculatedBy: string;
 }
@@ -173,7 +173,7 @@ export class EvaluationEngine {
       substances?: EnvironmentalSubstance[];
       workTimeFactor?: number;
     }
-  ) {
+  ): Promise<{ score: number; details: Record<string, unknown> }> {
     const workTimeFactor = additionalData?.workTimeFactor || 1.0;
 
     switch (factorType) {
@@ -302,7 +302,7 @@ export class EvaluationEngine {
       hazard?: HazardFactor;
     }
   ): Promise<void> {
-    const timestamp = new Date();
+    const _timestamp = new Date();
 
     // 各因子の履歴を保存
     if (previousData?.physical) {
@@ -433,7 +433,7 @@ export class EvaluationEngine {
    * 統計情報の取得
    */
   public async getEvaluationStatistics(evaluationId: string): Promise<{
-    historyStats: any;
+    historyStats: Record<string, unknown>;
     currentStatus: {
       lastCalculated: Date;
       totalCalculations: number;
@@ -441,10 +441,10 @@ export class EvaluationEngine {
       trend: 'improving' | 'stable' | 'declining';
     };
     matrixStatistics?: {
-      physicalMatrix?: any;
-      mentalMatrix?: any;
-      environmentalMatrix?: any;
-      hazardMatrix?: any;
+      physicalMatrix?: Record<string, unknown>;
+      mentalMatrix?: Record<string, unknown>;
+      environmentalMatrix?: Record<string, unknown>;
+      hazardMatrix?: Record<string, unknown>;
     };
   }> {
     const historyStats = await this.historyService.getHistoryStatistics(evaluationId);
@@ -475,7 +475,10 @@ export class EvaluationEngine {
   /**
    * マトリックス情報の取得
    */
-  public getMatrixInformation(category: 'physical' | 'mental' | 'environmental' | 'hazard') {
+  public getMatrixInformation(category: 'physical' | 'mental' | 'environmental' | 'hazard'): {
+    matrix: ReturnType<typeof getMatrix>;
+    statistics: ReturnType<MatrixCalculator['getMatrixStatistics']>;
+  } {
     const matrix = getMatrix(category);
     if (!matrix) {
       throw new Error(`Matrix for category ${category} not found`);
@@ -492,8 +495,8 @@ export class EvaluationEngine {
    */
   public calculateMatrixScore(
     category: 'physical' | 'mental' | 'environmental' | 'hazard',
-    inputs: any
-  ) {
+    inputs: Record<string, unknown>
+  ): number {
     switch (category) {
       case 'physical':
         return this.matrixCalculator.calculatePhysicalMatrix(inputs);
@@ -529,11 +532,11 @@ export const validateEvaluation = (data: CompleteEvaluationData): ValidationResu
 };
 
 // マトリックス関連の便利な関数
-export const calculateMatrixScore = (category: 'physical' | 'mental' | 'environmental' | 'hazard', inputs: any) => {
+export const calculateMatrixScore = (category: 'physical' | 'mental' | 'environmental' | 'hazard', inputs: Record<string, unknown>): number => {
   return evaluationEngine.calculateMatrixScore(category, inputs);
 };
 
-export const getMatrixInfo = (category: 'physical' | 'mental' | 'environmental' | 'hazard') => {
+export const getMatrixInfo = (category: 'physical' | 'mental' | 'environmental' | 'hazard'): ReturnType<typeof evaluationEngine.getMatrixInformation> => {
   return evaluationEngine.getMatrixInformation(category);
 };
 
