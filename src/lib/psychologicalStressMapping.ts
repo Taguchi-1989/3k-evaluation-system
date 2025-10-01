@@ -225,7 +225,7 @@ export function calculateIntegratedStressScore(
 
   let totalScore: number;
   let highestIntensity: StressIntensityLevel;
-  let dominantEvent: PsychologicalStressEvent;
+  let dominantEvent: PsychologicalStressEvent | undefined;
 
   if (strongEvents.length > 0) {
     // 「強」の事象が存在する場合は自動的に4-5点
@@ -400,7 +400,7 @@ export function getLegalBasisInfo(legalBasis: string): {
     }
   };
 
-  const prefix = legalBasis.split('-(')[0];
+  const prefix = legalBasis.split('-(')[0] ?? '';
   return legalReferences[prefix] || {
     title: '心理的負荷評価',
     description: '労働による心理的負荷の評価',

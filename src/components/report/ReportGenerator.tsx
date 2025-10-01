@@ -12,7 +12,9 @@ interface ReportGeneratorProps {
 }
 
 export default function ReportGenerator({ evaluationId, onReportGenerated }: ReportGeneratorProps) {
-  const { evaluations } = useEvaluationStore();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const evaluationStore = useEvaluationStore() as any;
+  const evaluations = evaluationStore.evaluations || [];
   const [isGenerating, setIsGenerating] = useState(false);
   const [config, setConfig] = useState<ReportConfig>({
     includeCharts: true,
@@ -27,8 +29,8 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
   const [previewMode, setPreviewMode] = useState(false);
 
   // 評価データを取得
-  const currentEvaluation = evaluationId 
-    ? evaluations.find(e => e.evaluationId === evaluationId)
+  const currentEvaluation = evaluationId
+    ? evaluations.find((e: any) => e.evaluationId === evaluationId)
     : evaluations[0]; // 最新の評価
 
   const handleGenerateReport = async () => {
@@ -73,9 +75,9 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
       // 履歴データが有効な場合は追加
       if (config.includeHistoricalData && evaluations.length > 1) {
         const historicalEvaluations = evaluations
-          .filter(e => e.workName === currentEvaluation.workName)
+          .filter((e: any) => e.workName === currentEvaluation.workName)
           .slice(0, 5) // 最新5件
-          .map(e => ({
+          .map((e: any) => ({
             evaluationId: e.evaluationId,
             scores: e.scores,
             finalResult: e.finalResult,

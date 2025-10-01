@@ -101,10 +101,11 @@ export function assessAccidentHistoryRisk(
   }
 
   // 事故重篤度の最高レベルを特定
-  const maxSeverity = accidentHistory.reduce((max, event) => {
-    const severityOrder = { minor: 1, moderate: 2, serious: 3, fatal: 4 };
+  type SeverityType = 'minor' | 'moderate' | 'serious' | 'fatal';
+  const maxSeverity = accidentHistory.reduce((max: SeverityType, event) => {
+    const severityOrder: Record<SeverityType, number> = { minor: 1, moderate: 2, serious: 3, fatal: 4 };
     return severityOrder[event.severity] > severityOrder[max] ? event.severity : max;
-  }, 'minor' as const);
+  }, 'minor' as SeverityType);
 
   // 再発パターンの検出
   const accidentTypes = [...new Set(accidentHistory.map(e => e.accidentType))];
