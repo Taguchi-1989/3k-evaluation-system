@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { FileUpload } from '@/components/ui'
 
 export interface SummaryPanelProps {
@@ -20,7 +21,7 @@ export function SummaryPanel({
   onAttachmentCheck,
   onFileUpload,
   className = ''
-}: SummaryPanelProps) {
+}: SummaryPanelProps): React.JSX.Element {
 
   return (
     <div className={`w-1/3 space-y-3 flex flex-col h-full ${className}`}>
@@ -56,7 +57,7 @@ export function SummaryPanel({
           variant="default"
           layout="horizontal"
           size="md"
-          onFileUpload={onFileUpload as any}
+          onFileUpload={onFileUpload}
           onAttachmentCheck={onAttachmentCheck}
           className=""
         />

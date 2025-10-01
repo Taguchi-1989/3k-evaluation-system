@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import UnifiedHeader from './UnifiedHeader'
 import UnifiedNavigationBar from '../navigation/UnifiedNavigationBar'
 
@@ -29,7 +30,7 @@ export default function UnifiedEvaluationLayout({
   customBackAction,
   variant = 'simple',
   sidebar
-}: UnifiedEvaluationLayoutProps) {
+}: UnifiedEvaluationLayoutProps): React.JSX.Element {
   const getLayoutContent = () => {
     switch (variant) {
       case 'sidebar':

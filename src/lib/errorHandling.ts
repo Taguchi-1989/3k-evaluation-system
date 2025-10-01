@@ -433,6 +433,7 @@ export class ErrorHandler {
   private static instance: ErrorHandler
   private errorLog: AppError[] = []
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): ErrorHandler {
@@ -468,7 +469,7 @@ export class ErrorHandler {
 
     // ローカルストレージに保存（開発用）
     try {
-      const storedErrors = JSON.parse(localStorage.getItem('app_errors') || '[]')
+      const storedErrors = JSON.parse(localStorage.getItem('app_errors') || '[]') as unknown[]
       storedErrors.push({
         ...error,
         message: error.message,

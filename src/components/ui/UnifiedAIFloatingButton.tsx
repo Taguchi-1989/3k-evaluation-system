@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 interface UnifiedAIFloatingButtonProps {
   onAIAssist?: () => void
@@ -14,7 +14,7 @@ export default function UnifiedAIFloatingButton({
   variant = 'default',
   position = 'bottom-right',
   disabled = false
-}: UnifiedAIFloatingButtonProps) {
+}: UnifiedAIFloatingButtonProps): React.JSX.Element {
   const [isHovered, setIsHovered] = useState(false)
 
   const getPositionClasses = () => {
@@ -104,7 +104,7 @@ export default function UnifiedAIFloatingButton({
 }
 
 // 使用例コンポーネント
-export function AIFloatingButtonWithModal() {
+export function AIFloatingButtonWithModal(): React.JSX.Element {
   const [showModal, setShowModal] = useState(false)
 
   const handleAIAssist = () => {

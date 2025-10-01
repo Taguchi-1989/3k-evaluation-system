@@ -334,7 +334,7 @@ export function calculateIntegratedHazardScore(
 
   // 最高スコア優先で評価
   const maxScore = Math.max(...scores.map(s => s.score));
-  const dominantRisk = scores.find(s => s.score === maxScore)?.type as any;
+  const dominantRisk = (scores.find(s => s.score === maxScore)?.type ?? 'unknown') as string;
 
   // リスクレベル判定
   let riskLevel: 'low' | 'moderate' | 'high' | 'critical';

@@ -7,9 +7,11 @@ import type { AuthPort, Session } from '@3k/ports'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
 export class SupabaseAuthAdapter implements AuthPort {
-  private supabase: SupabaseClient
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private supabase: SupabaseClient<any, 'public', any>
 
   constructor(supabaseUrl: string, supabaseAnonKey: string) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.supabase = createClient(supabaseUrl, supabaseAnonKey)
   }
 

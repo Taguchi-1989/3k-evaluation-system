@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { Header } from '@/components/layout'
 import { Card, CardContent, Button } from '@/components/ui'
@@ -155,7 +155,7 @@ const defaultWorkItems: WorkItem[] = [
 export function EvaluationListView({
   workItems = defaultWorkItems,
   onItemSelect
-}: EvaluationListViewProps) {
+}: EvaluationListViewProps): React.JSX.Element {
   const { evaluations, isLoading, error, saveEvaluation, deleteEvaluation, refreshData } = useEvaluationData()
   const items = evaluations.length > 0 ? evaluations : workItems
   const [selectedItem, setSelectedItem] = useState<WorkItem | null>(items[0] || null)
@@ -342,10 +342,10 @@ export function EvaluationListView({
                             </button>
                           )}
                           {checkPermission('canAdmin') && evaluations.length > 0 && (
-                            <button 
+                            <button
                               onClick={(e) => {
                                 e.stopPropagation()
-                                handleDeleteEvaluation(item.id)
+                                void handleDeleteEvaluation(item.id)
                               }}
                               className="px-1 py-0.5 text-[8px] text-red-600 hover:text-red-800 bg-transparent hover:bg-red-50 rounded border border-red-200 hover:border-red-300 transition-colors"
                             >
@@ -490,7 +490,7 @@ export function EvaluationListView({
             setEditModalOpen(false)
             setEditingItem(null)
           }}
-          onSave={handleSaveEvaluation}
+          onSave={(data) => { void handleSaveEvaluation(data) }}
         />
       )}
 

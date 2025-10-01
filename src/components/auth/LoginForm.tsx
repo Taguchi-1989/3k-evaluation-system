@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useAuth, DEMO_USERS } from '@/contexts/AuthContext'
 import { Button, Input, Card, CardContent, CardHeader, CardTitle } from '@/components/ui'
 
@@ -8,14 +8,14 @@ interface LoginFormProps {
   onSuccess?: () => void
 }
 
-export function LoginForm({ onSuccess }: LoginFormProps) {
+export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
   const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
@@ -27,14 +27,14 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       } else {
         setError('メールアドレスまたはパスワードが正しくありません')
       }
-    } catch (err) {
+    } catch {
       setError('ログインに失敗しました')
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleDemoLogin = (userEmail: string) => {
+  const handleDemoLogin = (userEmail: string): void => {
     setEmail(userEmail)
     setPassword('demo123')
   }
@@ -46,7 +46,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           <CardTitle className="text-center">3K評価システム ログイン</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={(e) => { void handleSubmit(e) }} className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 メールアドレス

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { TabInterface } from '@/components/ui/TabInterface'
 import { Input, HelpTooltip } from '@/components/ui'
 import { InteractiveButton } from '@/components/ui/InteractiveButton'
@@ -23,7 +23,7 @@ const InfoPopup = ({ isOpen, onClose, title, content }: {
   onClose: () => void
   title: string
   content: string
-}) => {
+}): React.JSX.Element | null => {
   if (!isOpen) return null
   
   return (
@@ -67,13 +67,13 @@ export interface PhysicalFactorDetailProps {
 }
 
 export function PhysicalFactorDetail({
-  evaluationNo,
-  creator,
-  checker,
+  evaluationNo: _evaluationNo,
+  creator: _creator,
+  checker: _checker,
   workInfo,
   photoUrl = 'https://placehold.co/400x300/e5e7eb/4b5563?text=Photo',
   postures
-}: PhysicalFactorDetailProps) {
+}: PhysicalFactorDetailProps): React.JSX.Element {
   // Work information state for editable inputs
   const [workName, setWorkName] = useState(workInfo?.workName || '')
   const [factoryName, setFactoryName] = useState(workInfo?.factoryName || '')
@@ -82,7 +82,7 @@ export function PhysicalFactorDetail({
   // Help modal state
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
   // デフォルトデータの初期化
-  const defaultPhysicalData = DEFAULT_EVALUATION_DATA.physicalDefaults
+  const _defaultPhysicalData = DEFAULT_EVALUATION_DATA.physicalDefaults
   const physicalStandards = EVALUATION_STANDARDS.physical
   const [selectedPosture, setSelectedPosture] = useState<string>('')
   const [selectedEvaluationMethod, setSelectedEvaluationMethod] = useState<string>('RULA評価')
@@ -105,7 +105,7 @@ export function PhysicalFactorDetail({
     protectiveGear: { percentage: 0 },
     eyeStrain: { percentage: 0 }
   })
-  const [realTimeEvaluation, setRealTimeEvaluation] = useState<any>(null)
+  const [_realTimeEvaluation, setRealTimeEvaluation] = useState<unknown>(null)
   
   // ポップアップ状態
   const [popupInfo, setPopupInfo] = useState<{isOpen: boolean, title: string, content: string}>({
@@ -138,16 +138,16 @@ export function PhysicalFactorDetail({
   // 自動保存機能
   const { manualSave, hasUnsavedChanges } = useEvaluationAutoSave(evaluationData, currentEvaluation?.id)
 
-  const showPopup = (title: string, content: string) => {
+  const showPopup = (title: string, content: string): void => {
     setPopupInfo({ isOpen: true, title, content })
   }
 
-  const closePopup = () => {
+  const closePopup = (): void => {
     setPopupInfo({ isOpen: false, title: '', content: '' })
   }
 
   // AI推奨設定を適用するハンドラー
-  const handleApplyAIRecommendations = (result: AIAnalysisResult) => {
+  const handleApplyAIRecommendations = (result: AIAnalysisResult): void => {
     // 肉体因子の推奨設定を適用
     if (result.recommendations.some(rec => rec.factorType === 'physical')) {
       // 推定スコアに基づいて姿勢評価を設定
@@ -176,14 +176,13 @@ export function PhysicalFactorDetail({
         newCheckboxes.muscle = true
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setPhysicalDetails((prev: any) => ({
+      setPhysicalDetails((prev: PhysicalDetails) => ({
         ...prev,
         checkboxes: {
           ...prev.checkboxes,
           ...newCheckboxes
         }
-      }) as any)
+      }))
 
       // 成功メッセージを表示
       showPopup('AI推奨設定適用', 'AI分析結果に基づいて肉体因子の設定が適用されました。')
@@ -197,8 +196,7 @@ export function PhysicalFactorDetail({
         'physical',
         physicalDetails,
         {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          postures: (postures || []) as any,
+          postures: (postures || []) as Posture[],
           workTimeFactor: 1.0
         }
       )
@@ -210,7 +208,7 @@ export function PhysicalFactorDetail({
     } catch (error) {
       console.error('Evaluation error:', error)
     }
-  }, [physicalDetails, postures, updateFactorData, selectedComprehensivePosture, selectedStrength, selectedDuration, calculatedScore, selectedPosture, selectedEvaluationMethod])
+  }, [physicalDetails, postures, updateFactorData])
 
   // Calculate comprehensive score when selections change
   useEffect(() => {
@@ -231,21 +229,21 @@ export function PhysicalFactorDetail({
   // Trigger real-time evaluation when physical details change
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      performRealTimeEvaluation()
+      void performRealTimeEvaluation()
     }, 500) // 500ms debounce
 
     return () => clearTimeout(debounceTimer)
-  }, [physicalDetails, selectedComprehensivePosture, selectedStrength, selectedDuration, calculatedScore, selectedPosture, selectedEvaluationMethod])
+  }, [physicalDetails, performRealTimeEvaluation])
 
-  const handlePostureInput = () => {
+  const handlePostureInput = (): void => {
     window.location.href = '/evaluation/physical/posture'
   }
 
-  const handleBackToMain = () => {
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 
-  const handleBackToDashboard = () => {
+  const _handleBackToDashboard = (): void => {
     window.location.href = '/dashboard'
   }
 
@@ -622,7 +620,7 @@ export function PhysicalFactorDetail({
               </div>
             )}
             <button
-              onClick={manualSave}
+              onClick={() => { void manualSave() }}
               className="mt-1 text-xs text-blue-600 hover:text-blue-800 underline"
             >
               手動保存
@@ -718,8 +716,8 @@ export function PhysicalFactorDetail({
           <MatrixDisplay
             type="COMPREHENSIVE"
             title="評価マトリクス"
-            onCellClick={(posture, duration, value) => {/* Handle cell selection */}}
-            onScoreChange={(score) => {/* Handle score change */}}
+            onCellClick={(_posture, _duration, _value) => {/* Handle cell selection */}}
+            onScoreChange={(_score) => {/* Handle score change */}}
           />
           
           {/* 結果表示エリア */}

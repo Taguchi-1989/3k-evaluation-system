@@ -1,13 +1,13 @@
 'use client'
 
+import React, { useEffect } from 'react'
 import { PhysicalFactorDetailDynamic } from '@/components/optimized/DynamicImports'
 import { EvaluationLayout, EvaluationContentContainer } from '@/components/layout/EvaluationLayout'
 import { Footer } from '@/components/layout'
 import { useNavigation } from '@/hooks/useNavigation'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
-import { useEffect } from 'react'
 
-export default function PhysicalFactorPage() {
+export default function PhysicalFactorPage(): React.JSX.Element {
   const { getReturnPath } = useNavigation()
   const { setCurrentPath, pushToHistory } = useEvaluationStore()
 

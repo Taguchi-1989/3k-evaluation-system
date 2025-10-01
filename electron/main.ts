@@ -38,12 +38,12 @@ function createWindow() {
   // 開発モードとプロダクションモードで読み込むURLを切り替え
   if (isDevelopment()) {
     // 開発モード: Next.js devサーバーに接続
-    mainWindow.loadURL('http://localhost:3000');
+    void mainWindow.loadURL('http://localhost:3000');
     // DevToolsを開く
     mainWindow.webContents.openDevTools();
   } else {
     // プロダクションモード: ビルド済みファイルを読み込み
-    mainWindow.loadFile(path.join(__dirname, '../../out/index.html'));
+    void mainWindow.loadFile(path.join(__dirname, '../../out/index.html'));
   }
 
   mainWindow.on('closed', () => {
@@ -52,7 +52,7 @@ function createWindow() {
 }
 
 // Electronアプリの準備完了
-app.whenReady().then(() => {
+void app.whenReady().then(() => {
   createWindow();
 
   app.on('activate', () => {

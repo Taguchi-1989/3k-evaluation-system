@@ -1,8 +1,8 @@
 'use client'
 
+import React, { type ReactNode } from 'react'
 import type { HeaderProps } from './Header';
 import { Header } from './Header'
-import type { ReactNode } from 'react'
 
 export interface PageLayoutProps extends HeaderProps {
   children: ReactNode
@@ -17,7 +17,7 @@ export function PageLayout({
   sidebar,
   className = '',
   ...headerProps
-}: PageLayoutProps) {
+}: PageLayoutProps): React.JSX.Element {
   return (
     <div className="page-container">
       <Header {...headerProps} />

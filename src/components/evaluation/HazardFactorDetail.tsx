@@ -110,7 +110,7 @@ export function HazardFactorDetail({
   workInfo,
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Photo',
   hazardEvents = defaultHazardEvents
-}: HazardFactorDetailProps) {
+}: HazardFactorDetailProps): React.JSX.Element {
   const [events, setEvents] = useState(hazardEvents)
   const [highlightedCell, setHighlightedCell] = useState<{ p: string, s: string } | null>(null)
 

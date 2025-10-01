@@ -4,7 +4,7 @@
  * AppContext - アプリケーションコアをReactで使用するためのContext
  */
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import React, { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import type { AppCore } from '@3k/core'
 import type { Adapters } from '@3k/adapters-web'
 
@@ -20,7 +20,7 @@ const AppContext = createContext<AppContextValue>({
   error: null
 })
 
-export function useApp() {
+export function useApp(): AppContextValue {
   const context = useContext(AppContext)
   if (!context.isInitialized) {
     throw new Error('App not initialized. Make sure AppProvider is mounted.')
@@ -33,7 +33,7 @@ interface AppProviderProps {
   adapters: Adapters | null
 }
 
-export function AppProvider({ children, adapters }: AppProviderProps) {
+export function AppProvider({ children, adapters }: AppProviderProps): React.JSX.Element {
   const [app, setApp] = useState<AppCore | null>(null)
   const [isInitialized, setIsInitialized] = useState(false)
   const [error, setError] = useState<Error | null>(null)

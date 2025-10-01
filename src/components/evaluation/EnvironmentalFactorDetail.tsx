@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header } from '@/components/layout'
 import { FileUpload, Input, Button } from '@/components/ui'
 import { PhotoViewer } from '@/components/evaluation'
@@ -61,7 +61,7 @@ export function EnvironmentalFactorDetail({
   workInfo,
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Photo',
   environmentalItems = defaultEnvironmentalItems
-}: EnvironmentalFactorDetailProps) {
+}: EnvironmentalFactorDetailProps): React.JSX.Element {
   const [items, setItems] = useState(environmentalItems)
   const [selectedMatrix, setSelectedMatrix] = useState({ strength: 1, duration: 1 })
   const [finalScore, setFinalScore] = useState(1)

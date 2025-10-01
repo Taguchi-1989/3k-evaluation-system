@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Header } from '@/components/layout'
 import { PhotoViewer, FactorList, SummaryPanel, type FactorItem } from '@/components/evaluation'
@@ -49,7 +49,7 @@ export function EvaluationMain({
   },
   photos,
   factors
-}: EvaluationMainProps) {
+}: EvaluationMainProps): React.JSX.Element {
   const [remarks, setRemarks] = useState('')
   const [, setSelectedPhoto] = useState(0)
   const [isSaving, setIsSaving] = useState(false)

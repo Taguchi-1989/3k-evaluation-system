@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { Button, Input } from '@/components/ui'
 
-export default function FocusEvaluationPage() {
+export default function FocusEvaluationPage(): React.JSX.Element {
   const [focusLevel, setFocusLevel] = useState<string>('medium')
   const [distractionFactors, setDistractionFactors] = useState<{[key: string]: boolean}>({
     noise: false,

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { Button, Input } from '@/components/ui'
 
@@ -15,7 +15,7 @@ interface ChemicalSubstance {
   hazardCategory: 'low' | 'medium' | 'high' | 'critical'
 }
 
-export default function ChemicalEvaluationPage() {
+export default function ChemicalEvaluationPage(): React.JSX.Element {
   const [selectedSubstances, setSelectedSubstances] = useState<ChemicalSubstance[]>([
     {
       id: '1',

@@ -1,7 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react';
-import { useState } from 'react'
+import React, { type ReactNode, useState } from 'react'
 
 export interface Tab {
   id: string
@@ -22,7 +21,7 @@ export function TabInterface({
   defaultTab,
   onTabChange,
   className = ''
-}: TabInterfaceProps) {
+}: TabInterfaceProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id || '')
 
   const handleTabClick = (tabId: string) => {

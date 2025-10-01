@@ -1,8 +1,8 @@
 'use client'
 
+import React, { use } from 'react'
 import { EvaluationMain } from '@/components/evaluation'
 import { AspectContainer } from '@/components/ui'
-import { use } from 'react'
 
 interface EditEvaluationPageProps {
   params: Promise<{
@@ -13,7 +13,7 @@ interface EditEvaluationPageProps {
 // クライアントコンポーネントの場合はgenerateStaticParamsは使用不可
 // 動的importでビルド時の静的生成問題を回避
 
-export default function EditEvaluationPage({ params }: EditEvaluationPageProps) {
+export default function EditEvaluationPage({ params }: EditEvaluationPageProps): React.JSX.Element {
   const resolvedParams = use(params)
   const evaluationId = resolvedParams.id
   

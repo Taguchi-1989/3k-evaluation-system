@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { Button } from '@/components/ui'
 
 export interface FactorItem {
@@ -26,7 +27,7 @@ const defaultFactors: FactorItem[] = [
 export function FactorList({
   factors = defaultFactors,
   className = ''
-}: FactorListProps) {
+}: FactorListProps): React.JSX.Element {
   
   const getColorClasses = (colorScheme: string) => {
     const colorMap = {

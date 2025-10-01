@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 import { ThumbnailOptimizedImage } from '@/components/optimized/OptimizedImage'
 
@@ -8,7 +9,7 @@ export interface DashboardStatsProps {
   className?: string
 }
 
-export function DashboardStats({ workItems, className = '' }: DashboardStatsProps) {
+export function DashboardStats({ workItems, className = '' }: DashboardStatsProps): React.JSX.Element {
   // 統計計算
   const totalItems = workItems.length
   const highRiskItems = workItems.filter(item => item.kitsusaScore >= 7).length

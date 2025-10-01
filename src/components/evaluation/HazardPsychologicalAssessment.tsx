@@ -1,13 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   assessAccidentHistoryRisk,
   assessSafetyManagementStress,
   assessOngoingRisk,
-  calculateIntegratedHazardScore,
-  ACCIDENT_HISTORY_RISK_MAPPING,
-  SAFETY_MANAGEMENT_SCORE_MAPPING
+  calculateIntegratedHazardScore
 } from '@/lib/hazardPsychologicalMapping'
 import type {
   AccidentHistoryAssessment,
@@ -26,7 +24,7 @@ export interface HazardPsychologicalAssessmentProps {
   }) => void;
 }
 
-export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsychologicalAssessmentProps) {
+export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsychologicalAssessmentProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<'accident' | 'safety' | 'ongoing'>('accident')
 
   // 労災履歴状態
@@ -334,7 +332,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 value={safetyManagement.complianceLevel}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
-                  complianceLevel: e.target.value as any
+                  complianceLevel: e.target.value as 'non_compliant' | 'partially_compliant' | 'compliant' | 'excellent'
                 })}
                 className="w-full p-3 border border-gray-300 rounded-md"
               >
@@ -353,7 +351,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 value={safetyManagement.trainingAdequacy}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
-                  trainingAdequacy: e.target.value as any
+                  trainingAdequacy: e.target.value as 'inadequate' | 'minimal' | 'adequate' | 'excellent'
                 })}
                 className="w-full p-3 border border-gray-300 rounded-md"
               >
@@ -372,7 +370,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 value={safetyManagement.reportingSystem}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
-                  reportingSystem: e.target.value as any
+                  reportingSystem: e.target.value as 'none' | 'basic' | 'adequate' | 'comprehensive'
                 })}
                 className="w-full p-3 border border-gray-300 rounded-md"
               >
@@ -391,7 +389,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 value={safetyManagement.riskAssessmentFreq}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
-                  riskAssessmentFreq: e.target.value as any
+                  riskAssessmentFreq: e.target.value as 'never' | 'annual' | 'semi_annual' | 'quarterly' | 'monthly'
                 })}
                 className="w-full p-3 border border-gray-300 rounded-md"
               >
@@ -494,7 +492,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
                       if (newRisks[index]) {
-                        newRisks[index].recurrenceProbability = e.target.value as any
+                        newRisks[index].recurrenceProbability = e.target.value as 'very_low' | 'low' | 'moderate' | 'high' | 'very_high'
                       }
                       setOngoingRisks(newRisks)
                     }}
@@ -517,7 +515,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
                       if (newRisks[index]) {
-                        newRisks[index].potentialImpact = e.target.value as any
+                        newRisks[index].potentialImpact = e.target.value as 'minor' | 'moderate' | 'major' | 'catastrophic'
                       }
                       setOngoingRisks(newRisks)
                     }}
@@ -539,7 +537,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
                       if (newRisks[index]) {
-                        newRisks[index].currentStatus = e.target.value as any
+                        newRisks[index].currentStatus = e.target.value as 'unaddressed' | 'in_progress' | 'partially_mitigated' | 'monitored'
                       }
                       setOngoingRisks(newRisks)
                     }}

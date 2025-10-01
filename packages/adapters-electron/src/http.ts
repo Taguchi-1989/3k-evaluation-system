@@ -6,6 +6,13 @@
 import type { HttpClient } from '@3k/ports'
 import { net } from 'electron'
 
+// Electron環境用のリクエストオプション型
+interface HttpRequestInit {
+  method?: string
+  headers?: Record<string, string>
+  body?: string
+}
+
 export class ElectronHttpClient implements HttpClient {
   private baseUrl: string
 
@@ -13,14 +20,14 @@ export class ElectronHttpClient implements HttpClient {
     this.baseUrl = baseUrl
   }
 
-  async get<T>(url: string, init?: RequestInit): Promise<T> {
+  async get<T>(url: string, init?: HttpRequestInit): Promise<T> {
     return this.request<T>(this.resolveUrl(url), {
       ...init,
       method: 'GET'
     })
   }
 
-  async post<T>(url: string, body: unknown, init?: RequestInit): Promise<T> {
+  async post<T>(url: string, body: unknown, init?: HttpRequestInit): Promise<T> {
     return this.request<T>(this.resolveUrl(url), {
       ...init,
       method: 'POST',
@@ -28,7 +35,7 @@ export class ElectronHttpClient implements HttpClient {
     })
   }
 
-  async put<T>(url: string, body: unknown, init?: RequestInit): Promise<T> {
+  async put<T>(url: string, body: unknown, init?: HttpRequestInit): Promise<T> {
     return this.request<T>(this.resolveUrl(url), {
       ...init,
       method: 'PUT',
@@ -36,14 +43,14 @@ export class ElectronHttpClient implements HttpClient {
     })
   }
 
-  async delete<T>(url: string, init?: RequestInit): Promise<T> {
+  async delete<T>(url: string, init?: HttpRequestInit): Promise<T> {
     return this.request<T>(this.resolveUrl(url), {
       ...init,
       method: 'DELETE'
     })
   }
 
-  async patch<T>(url: string, body: unknown, init?: RequestInit): Promise<T> {
+  async patch<T>(url: string, body: unknown, init?: HttpRequestInit): Promise<T> {
     return this.request<T>(this.resolveUrl(url), {
       ...init,
       method: 'PATCH',
@@ -51,7 +58,7 @@ export class ElectronHttpClient implements HttpClient {
     })
   }
 
-  private async request<T>(url: string, init: RequestInit): Promise<T> {
+  private async request<T>(url: string, init: HttpRequestInit): Promise<T> {
     return new Promise((resolve, reject) => {
       const request = net.request({
         url,
@@ -85,8 +92,8 @@ export class ElectronHttpClient implements HttpClient {
           }
 
           try {
-            const json = JSON.parse(body)
-            resolve(json as T)
+            const json = JSON.parse(body) as T
+            resolve(json)
           } catch (error) {
             reject(new Error(`Failed to parse JSON response: ${error}`))
           }

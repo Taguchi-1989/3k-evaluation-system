@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Button } from '@/components/ui/Button'
 
 interface DocumentFile {
@@ -21,11 +21,11 @@ export function DocumentViewer({
   documents = [],
   onFileUpload,
   className = ''
-}: DocumentViewerProps) {
+}: DocumentViewerProps): React.JSX.Element {
   const [selectedDocument, setSelectedDocument] = useState<DocumentFile | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const files = Array.from(event.target.files || [])
     if (files.length > 0 && onFileUpload) {
       onFileUpload(files)

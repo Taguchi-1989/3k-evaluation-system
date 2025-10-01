@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 
-export default function VisibilityTestPage() {
+export default function VisibilityTestPage(): React.JSX.Element {
   const [selectedCard, setSelectedCard] = useState<number | null>(null)
   const [selectedRow, setSelectedRow] = useState<number | null>(null)
 

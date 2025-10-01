@@ -180,7 +180,11 @@ export const LazyLoadWrapper: React.FC<LazyLoadWrapperProps> = ({
 export const useDynamicImport = <T,>(
   importFunction: () => Promise<{ default: T }>,
   deps: React.DependencyList = []
-) => {
+): {
+  component: T | null
+  loading: boolean
+  error: Error | null
+} => {
   const [component, setComponent] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -209,11 +213,12 @@ export const useDynamicImport = <T,>(
       }
     };
 
-    loadComponent();
+    void loadComponent();
 
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return { component, loading, error };

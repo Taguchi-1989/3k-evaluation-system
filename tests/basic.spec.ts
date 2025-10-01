@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('3K評価アプリケーション - 基本動作テスト', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3002')
+    await page.goto('/')
   })
 
   test('ホームページが正常に表示される', async ({ page }) => {

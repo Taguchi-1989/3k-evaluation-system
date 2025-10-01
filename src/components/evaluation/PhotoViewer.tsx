@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export interface PhotoViewerProps {
   mainPhoto?: string
@@ -25,10 +25,10 @@ export function PhotoViewer({
   className = '',
   showGalleryInfo = false,
   galleryTitle = '登録済み写真'
-}: PhotoViewerProps) {
+}: PhotoViewerProps): React.JSX.Element {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const handleThumbnailClick = (index: number) => {
+  const handleThumbnailClick = (index: number): void => {
     setSelectedIndex(index)
     onPhotoSelect?.(index)
   }
@@ -37,9 +37,10 @@ export function PhotoViewer({
     <div className={`w-full sm:w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/3 flex flex-col h-full space-y-2 ${className}`}>
       {/* メイン写真表示エリア */}
       <div className="flex-grow bg-gray-900 rounded-lg flex items-center justify-center p-2">
-        <img 
-          src={thumbnails[selectedIndex] || mainPhoto} 
-          className="photo-viewer-main rounded" 
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={thumbnails[selectedIndex] || mainPhoto}
+          className="photo-viewer-main rounded"
           alt="メイン表示写真"
         />
       </div>
@@ -55,11 +56,12 @@ export function PhotoViewer({
         <div className="flex space-x-2 overflow-x-auto pb-1 scrollbar-thin max-w-full">
           {thumbnails.map((thumbnail, index) => (
             <div key={index} className="flex-shrink-0 relative">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={thumbnail}
                 className={`photo-viewer-thumbnail rounded-md h-12 w-auto max-w-16 cursor-pointer transition-all duration-200 ${
-                  index === selectedIndex 
-                    ? 'border-2 border-blue-500 opacity-100 highlight-selected dark:border-blue-400' 
+                  index === selectedIndex
+                    ? 'border-2 border-blue-500 opacity-100 highlight-selected dark:border-blue-400'
                     : 'opacity-70 hover:opacity-100 border-2 border-transparent hover:border-gray-300 dark:hover:border-gray-500'
                 }`}
                 alt={`サムネイル${index + 1}`}

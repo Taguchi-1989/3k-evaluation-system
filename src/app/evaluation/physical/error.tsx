@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 export default function Error({
   error,
@@ -8,7 +8,7 @@ export default function Error({
 }: {
   error: Error & { digest?: string }
   reset: () => void
-}) {
+}): React.JSX.Element {
   useEffect(() => {
     console.error('Physical evaluation page error:', error)
   }, [error])

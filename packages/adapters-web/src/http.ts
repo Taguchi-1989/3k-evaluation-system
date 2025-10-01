@@ -26,7 +26,7 @@ export class FetchHttpClient implements HttpClient {
       throw new Error(`HTTP GET failed: ${response.status} ${response.statusText}`)
     }
 
-    return response.json()
+    return await response.json() as T
   }
 
   async post<T>(url: string, body: unknown, init?: RequestInit): Promise<T> {
@@ -44,7 +44,7 @@ export class FetchHttpClient implements HttpClient {
       throw new Error(`HTTP POST failed: ${response.status} ${response.statusText}`)
     }
 
-    return response.json()
+    return await response.json() as T
   }
 
   async put<T>(url: string, body: unknown, init?: RequestInit): Promise<T> {
@@ -62,7 +62,7 @@ export class FetchHttpClient implements HttpClient {
       throw new Error(`HTTP PUT failed: ${response.status} ${response.statusText}`)
     }
 
-    return response.json()
+    return await response.json() as T
   }
 
   async delete<T>(url: string, init?: RequestInit): Promise<T> {
@@ -79,7 +79,7 @@ export class FetchHttpClient implements HttpClient {
       throw new Error(`HTTP DELETE failed: ${response.status} ${response.statusText}`)
     }
 
-    return response.json()
+    return await response.json() as T
   }
 
   async patch<T>(url: string, body: unknown, init?: RequestInit): Promise<T> {
@@ -97,7 +97,7 @@ export class FetchHttpClient implements HttpClient {
       throw new Error(`HTTP PATCH failed: ${response.status} ${response.statusText}`)
     }
 
-    return response.json()
+    return await response.json() as T
   }
 
   private resolveUrl(url: string): string {

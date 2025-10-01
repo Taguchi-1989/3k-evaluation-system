@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { evaluationService, SavedEvaluation } from '@/lib/database/evaluationService'
+import { evaluationService } from '@/lib/database/evaluationService'
 import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -114,7 +114,8 @@ export function useEvaluationData(): UseEvaluationDataReturn {
   }
 
   useEffect(() => {
-    loadEvaluations()
+    void loadEvaluations()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id])
 
   return {

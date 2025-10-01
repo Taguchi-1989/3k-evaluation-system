@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { AspectContainer, AspectHeader, AspectMain, AspectFooter, Button, Input } from '@/components/ui'
 import { PostureList } from '@/components/evaluation'
 
-export default function PostureInputPage() {
+export default function PostureInputPage(): React.JSX.Element {
   const [selectedPosture, setSelectedPosture] = useState<string>('')
 
   const handlePostureSelect = (postureId: string) => {

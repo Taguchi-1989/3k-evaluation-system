@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { EVALUATION_STANDARDS } from '@/data/defaultEvaluationData'
 
 interface StandardsLegendProps {
@@ -8,7 +8,7 @@ interface StandardsLegendProps {
   className?: string
 }
 
-export function StandardsLegend({ factorType, className = '' }: StandardsLegendProps) {
+export function StandardsLegend({ factorType, className = '' }: StandardsLegendProps): React.JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false)
   
   const standards = EVALUATION_STANDARDS[factorType]

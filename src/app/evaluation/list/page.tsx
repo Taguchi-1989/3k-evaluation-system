@@ -1,8 +1,9 @@
 'use client'
 
+import React from 'react'
 import { EvaluationListView } from '@/components/evaluation'
 
-export default function EvaluationListPage() {
+export default function EvaluationListPage(): React.JSX.Element {
   const handleItemSelect = (itemId: string) => {
     window.location.href = `/evaluation/${itemId}`
   }

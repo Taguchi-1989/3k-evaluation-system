@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +13,7 @@ import {
   PointElement,
   LineElement,
   RadialLinearScale,
+  type ChartData,
 } from 'chart.js'
 import { Bar, Pie, Line, Radar } from 'react-chartjs-2'
 import type { WorkItem } from '@/components/evaluation/EvaluationListView'
@@ -36,7 +37,7 @@ export interface DashboardChartsProps {
   className?: string
 }
 
-export function DashboardCharts({ workItems, className = '' }: DashboardChartsProps) {
+export function DashboardCharts({ workItems, className = '' }: DashboardChartsProps): React.JSX.Element {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export function DashboardCharts({ workItems, className = '' }: DashboardChartsPr
   if (!mounted) {
     return (
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 ${className}`}>
-        {[...Array(4)].map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <div key={index} className="bg-white rounded-lg p-6 border">
             <div className="animate-pulse">
               <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -311,7 +312,7 @@ export function DashboardCharts({ workItems, className = '' }: DashboardChartsPr
       <div className="bg-white rounded-lg p-6 border shadow-sm">
         <h3 className="text-lg font-semibold mb-4 text-gray-800">工場別作業分析</h3>
         <div className="h-64">
-          <Bar data={factoryData() as any} options={dualAxisOptions} />
+          <Bar data={factoryData() as ChartData<'bar'>} options={dualAxisOptions} />
         </div>
         <div className="mt-4 text-sm text-gray-600">
           <p>総工場数: <span className="font-semibold">

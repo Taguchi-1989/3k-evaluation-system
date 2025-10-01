@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { Button, Breadcrumb, ThemeToggle } from '@/components/ui'
 import { ScreenIdDisplay } from '@/components/ui/ScreenIdDisplay'
 import { UserRoleIndicator } from '@/components/auth/UserRoleIndicator'
@@ -39,10 +40,10 @@ export function Header({
   workInfo,
   actions,
   showConfirmation = true
-}: HeaderProps) {
+}: HeaderProps): React.JSX.Element {
   const pathname = usePathname()
   const breadcrumbItems = generateBreadcrumb(pathname)
-  const { user, logout } = useAuth()
+  const { logout } = useAuth()
   
   if (variant === 'app') {
     return (

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { AIComprehensiveAssistant } from '@/components/ui/AIComprehensiveAssistant'
 import {
@@ -16,7 +16,7 @@ import { aiImageAnalysis } from '@/lib/aiImageAnalysis'
 import { LazyLoadWrapper } from '@/components/optimized/LazyLoadWrapper'
 // アイコンはTextで代替表示
 
-export default function AIFeaturesTestPage() {
+export default function AIFeaturesTestPage(): React.JSX.Element {
   const [isAIOpen, setIsAIOpen] = useState(false)
   const [testResults, setTestResults] = useState<Record<string, Record<string, unknown>>>({})
   const [isRunningTests, setIsRunningTests] = useState(false)
@@ -147,7 +147,7 @@ export default function AIFeaturesTestPage() {
               AI Assistant を開く
             </Button>
             <Button
-              onClick={runAllTests}
+              onClick={() => { void runAllTests() }}
               disabled={isRunningTests}
               className="flex items-center gap-2 h-20"
               variant="outline"
@@ -156,7 +156,7 @@ export default function AIFeaturesTestPage() {
               {isRunningTests ? 'テスト実行中...' : '全自動テスト実行'}
             </Button>
             <Button
-              onClick={() => runScenarioTest(selectedScenario)}
+              onClick={() => { void runScenarioTest(selectedScenario) }}
               className="flex items-center gap-2 h-20"
               variant="outline"
             >
@@ -164,7 +164,7 @@ export default function AIFeaturesTestPage() {
               シナリオテスト実行
             </Button>
             <Button
-              onClick={runImageAnalysisTest}
+              onClick={() => { void runImageAnalysisTest() }}
               className="flex items-center gap-2 h-20"
               variant="outline"
             >
@@ -218,7 +218,7 @@ export default function AIFeaturesTestPage() {
                   <p className="text-sm text-gray-700">{input}</p>
                   <Button
                     onClick={() => {
-                      navigator.clipboard.writeText(input)
+                      void navigator.clipboard.writeText(input)
                       alert('テキストをクリップボードにコピーしました')
                     }}
                     size="sm"

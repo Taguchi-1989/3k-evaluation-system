@@ -1,7 +1,6 @@
 'use client'
 
-import type { FormEvent, ReactNode } from 'react';
-import { useState, useCallback } from 'react'
+import React, { type FormEvent, type ReactNode, useState, useCallback } from 'react'
 import type { ValidationResult, ValidationError, ValidationWarning } from '@/lib/errorHandling'
 import { Button } from './Button'
 
@@ -40,7 +39,7 @@ export function ValidatedForm({
   submitLabel = '送信',
   enableRealTimeValidation = true,
   showWarnings = true
-}: ValidatedFormProps) {
+}: ValidatedFormProps): React.JSX.Element {
   const [formData, setFormData] = useState<Record<string, unknown>>({})
   const [errors, setErrors] = useState<ValidationError[]>([])
   const [warnings, setWarnings] = useState<ValidationWarning[]>([])
@@ -105,7 +104,7 @@ export function ValidatedForm({
   const hasErrors = errors.length > 0
 
   return (
-    <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
+    <form onSubmit={(e) => { void handleSubmit(e) }} className={`space-y-6 ${className}`}>
       {/* エラーサマリー */}
       {hasErrors && hasValidated && (
         <div className="card p-4 border-red-300 bg-red-50">
@@ -249,7 +248,7 @@ export function FormField({
   disabled = false,
   onChange,
   children
-}: FormFieldProps) {
+}: FormFieldProps): React.JSX.Element {
   const { formData, onFieldChange, getFieldError, getFieldWarning, showWarnings } = useFormContext()
   
   const fieldError = getFieldError(name)

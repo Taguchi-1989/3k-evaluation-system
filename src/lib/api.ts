@@ -1,8 +1,7 @@
 import type { Evaluation, EvaluationForm } from '@/types/evaluation';
-import { prisma } from './prisma';
 import { supabase } from './supabase';
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -12,6 +11,7 @@ export interface ApiResponse<T = any> {
 export class ApiService {
   private static instance: ApiService;
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): ApiService {
@@ -160,31 +160,24 @@ export class ApiService {
     }
   }
 
-  async deleteEvaluation(id: string): Promise<ApiResponse<void>> {
-    try {
-      // 実際の実装ではDBからデータを削除
-      return {
-        success: true,
-        message: '評価が削除されました'
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : '削除に失敗しました'
-      };
-    }
+  async deleteEvaluation(_id: string): Promise<ApiResponse<void>> {
+    // 実際の実装ではDBからデータを削除
+    return {
+      success: true,
+      message: '評価が削除されました'
+    };
   }
 
   async uploadPhoto(file: File): Promise<ApiResponse<{path: string, url: string}>> {
     try {
       // Supabaseにファイルをアップロード
       const filePath = `evaluations/${Date.now()}-${file.name}`;
-      
+
       if (!supabase) {
         throw new Error('Supabase client is not initialized');
       }
 
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('photos')
         .upload(filePath, file);
 

@@ -1,9 +1,9 @@
 'use client'
 
+import React, { useEffect, Suspense } from 'react'
 import UnifiedHeader from '@/components/layout/UnifiedHeader'
 import { Footer } from '@/components/layout/Footer'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
-import { useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
 // 動的インポートでコード分割
@@ -16,7 +16,7 @@ const AppHome = dynamic(() => import('@/components/evaluation').then(mod => ({ d
   ssr: true
 })
 
-export default function Home() {
+export default function Home(): React.JSX.Element {
   const { setCurrentPath, clearHistory } = useEvaluationStore()
 
   useEffect(() => {

@@ -26,9 +26,9 @@ export function MatrixDisplay({
   const [highlightedCell, setHighlightedCell] = useState<{ posture: string, duration: string, strength: number } | null>(null)
 
   // JSONデータから該当する評価タイプのデータを取得
-  const evalData = matrixData as EvaluationMatrixData
-  const currentMatrix = evalData[type]
-  const displayTitle = title || currentMatrix?.name
+  const evalData = matrixData as unknown as EvaluationMatrixData
+  const currentMatrix = evalData[type] as ComprehensiveMatrixData | RULAMatrixData | undefined
+  const displayTitle = title || (currentMatrix && 'name' in currentMatrix ? String(currentMatrix.name) : '')
 
   if (!currentMatrix) {
     return <div className="p-4 text-center text-red-500">評価データが見つかりません</div>
@@ -76,8 +76,8 @@ export function MatrixDisplay({
       <div className={`text-xs bg-gray-50 dark:bg-gray-800 p-3 rounded border dark:border-gray-600 flex-grow flex flex-col ${className}`}>
         <div className="mb-3 text-center">
           <p className="font-bold text-sm text-gray-800 dark:text-gray-200 mb-1">{displayTitle}</p>
-          {currentMatrix.description && (
-            <p className="text-xs text-gray-600 dark:text-gray-400">{currentMatrix.description}</p>
+          {currentMatrix && 'description' in currentMatrix && currentMatrix.description && (
+            <p className="text-xs text-gray-600 dark:text-gray-400">{String(currentMatrix.description)}</p>
           )}
         </div>
         

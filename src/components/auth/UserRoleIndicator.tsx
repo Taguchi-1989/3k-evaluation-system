@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { ROLE_LABELS } from '@/types/permissions'
 
@@ -11,7 +12,7 @@ interface UserRoleIndicatorProps {
 export function UserRoleIndicator({
   variant = 'badge',
   className = ''
-}: UserRoleIndicatorProps) {
+}: UserRoleIndicatorProps): React.JSX.Element | null {
   const { user, isAuthenticated } = useAuth()
 
   if (!isAuthenticated || !user) {

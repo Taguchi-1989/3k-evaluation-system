@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header } from '@/components/layout'
 import { Card, CardContent, Button, Input, ThemeToggle } from '@/components/ui'
 
-export default function SettingsPage() {
+export default function SettingsPage(): React.JSX.Element {
   const [formData, setFormData] = useState({
     userName: '',
     department: '',

@@ -3,8 +3,8 @@
 import { useEffect, useRef, useCallback } from 'react'
 import { useDatabase } from './useDatabase'
 
-interface AutoSaveOptions {
-  data: any
+interface AutoSaveOptions<T = unknown> {
+  data: T
   id?: string
   interval?: number // 自動保存間隔（ミリ秒）
   enabled?: boolean
@@ -12,17 +12,21 @@ interface AutoSaveOptions {
   onError?: (error: string) => void
 }
 
-export function useAutoSave({
+export function useAutoSave<T = unknown>({
   data,
-  id,
+  id: _id,
   interval = 30000, // 30秒間隔
   enabled = true,
   onSave,
   onError
-}: AutoSaveOptions) {
+}: AutoSaveOptions<T>): {
+  manualSave: () => Promise<string | undefined>
+  hasUnsavedChanges: boolean
+  isAutoSaving: boolean
+} {
   const { saveEvaluation, isLoading } = useDatabase()
-  const savedDataRef = useRef<any>(null)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const savedDataRef = useRef<T | null>(null)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isFirstSave = useRef(true)
   const hasDataChangedRef = useRef<(() => boolean) | undefined>(undefined)
   const manualSaveRef = useRef<(() => Promise<string | undefined>) | undefined>(undefined)
@@ -40,13 +44,14 @@ export function useAutoSave({
     try {
       const savedId = await saveEvaluation(data)
       if (savedId) {
-        savedDataRef.current = { ...data }
+        savedDataRef.current = data
         onSave?.(savedId)
         return savedId
       }
     } catch (error) {
       onError?.(error instanceof Error ? error.message : 'Save error')
     }
+    return undefined
   }, [data, enabled, isLoading, hasDataChanged, saveEvaluation, onSave, onError])
 
   // Update refs when functions change
@@ -76,7 +81,7 @@ export function useAutoSave({
     }
 
     // 新しいタイマーを設定
-    timerRef.current = setInterval(performAutoSave, interval)
+    timerRef.current = setInterval(() => { void performAutoSave() }, interval)
 
     return () => {
       if (timerRef.current) {
@@ -120,14 +125,18 @@ export function useAutoSave({
 }
 
 // 評価専用の自動保存フック
-export function useEvaluationAutoSave(evaluationData: any, evaluationId?: string) {
-  return useAutoSave({
+export function useEvaluationAutoSave<T = unknown>(evaluationData: T, evaluationId?: string): {
+  manualSave: () => Promise<string | undefined>
+  hasUnsavedChanges: boolean
+  isAutoSaving: boolean
+} {
+  return useAutoSave<T>({
     data: evaluationData,
     id: evaluationId,
     interval: 30000, // 30秒
     enabled: true,
     onSave: (id) => {
-       
+
       console.log(`評価データが自動保存されました: ${id}`);
     },
     onError: (error) => console.error('自動保存エラー:', error)

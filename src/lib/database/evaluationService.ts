@@ -15,7 +15,7 @@ export interface SavedEvaluation {
   hazard_score: number
   time_category: string
   status: 'draft' | 'completed' | 'reviewed' | 'archived'
-  evaluation_data: Record<string, any>
+  evaluation_data: Record<string, unknown>
   user_id: string
   created_at: string
   updated_at: string
@@ -58,7 +58,7 @@ export class EvaluationService {
         .eq('id', workItem.id)
         .eq('user_id', userId)
         .select()
-        .single()
+        .single<SavedEvaluation>()
 
       if (error) throw error
       return data.id
@@ -71,7 +71,7 @@ export class EvaluationService {
           created_at: new Date().toISOString()
         })
         .select()
-        .single()
+        .single<SavedEvaluation>()
 
       if (error) throw error
       return data.id
@@ -89,7 +89,7 @@ export class EvaluationService {
       .select('*')
       .eq('id', id)
       .eq('user_id', userId)
-      .single()
+      .single<SavedEvaluation>()
 
     if (error) {
       if (error.code === 'PGRST116') return null // Not found
@@ -110,6 +110,7 @@ export class EvaluationService {
       .select('*')
       .eq('user_id', userId)
       .order('updated_at', { ascending: false })
+      .returns<SavedEvaluation[]>()
 
     if (error) throw error
     return data || []

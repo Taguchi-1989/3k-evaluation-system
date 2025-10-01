@@ -2,13 +2,13 @@ import { test, expect } from '@playwright/test'
 
 test.describe('3K評価アプリケーション - データ永続化', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000')
+    await page.goto('/')
     await page.waitForLoadState('networkidle')
   })
 
   test('評価データを作成して保存できる', async ({ page }) => {
     // ダッシュボードに移動
-    await page.goto('http://localhost:3000/dashboard')
+    await page.goto('/dashboard')
     await page.waitForLoadState('networkidle')
 
     // 新規評価作成ボタンを探す（存在する場合）
@@ -17,7 +17,7 @@ test.describe('3K評価アプリケーション - データ永続化', () => {
       await newEvalButton.click()
     } else {
       // ボタンがない場合は直接評価ページへ
-      await page.goto('http://localhost:3000/evaluation/physical')
+      await page.goto('/evaluation/physical')
     }
 
     await page.waitForLoadState('networkidle')
@@ -35,7 +35,7 @@ test.describe('3K評価アプリケーション - データ永続化', () => {
   })
 
   test('評価リストページでデータを表示できる', async ({ page }) => {
-    await page.goto('http://localhost:3000/evaluation/list')
+    await page.goto('/evaluation/list')
     await page.waitForLoadState('networkidle')
 
     // ページが正常に表示される
@@ -84,7 +84,7 @@ test.describe('3K評価アプリケーション - データ永続化', () => {
     // LocalStorageからデータを取得
     const savedData = await page.evaluate((id) => {
       const data = localStorage.getItem(`eval:${id}`)
-      return data ? JSON.parse(data) : null
+      return data ? JSON.parse(data) as unknown : null
     }, testId)
 
     // データが永続化されていることを確認

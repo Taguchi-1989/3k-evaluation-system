@@ -10,20 +10,16 @@ import type {
   MentalMatrixInput,
   HazardMatrixInput 
 } from './matrixCalculator';
-import { 
-  matrixCalculator, 
-  PhysicalMatrixInput,
-  EnvironmentalMatrixInput 
+import {
+  matrixCalculator
 } from './matrixCalculator';
-import type { 
-  PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails, 
+import type {
+  PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails,
   Posture, EnvironmentalSubstance} from '../types/evaluation';
-import { HazardEvent, WorkTimeFactor 
-} from '../types/evaluation';
 
 export interface ScoreCalculationResult {
   score: number;
-  details: Record<string, any>;
+  details: Record<string, unknown>;
   factors?: Record<string, number>;
 }
 
@@ -35,7 +31,7 @@ export interface FinalScoreResult {
   workTimeScore: number;
   final3KIndex: string;
   finalKitsusaScore: number;
-  calculationDetails: Record<string, any>;
+  calculationDetails: Record<string, unknown>;
 }
 
 export class ScoreCalculationEngine {
@@ -66,7 +62,7 @@ export class ScoreCalculationEngine {
   ): ScoreCalculationResult {
     let totalScore = 1;
     const factors: Record<string, number> = {};
-    const calculationDetails: Record<string, any> = {};
+    const calculationDetails: Record<string, unknown> = {};
 
     // 重量取扱いスコア計算
     if (details.targetWeight) {
@@ -155,7 +151,7 @@ export class ScoreCalculationEngine {
             postureScore = matrixResult.score;
             calculationMethod = 'matrix';
             
-          } catch (error) {
+          } catch (_error) {
             // マトリックス計算に失敗した場合は従来の方法にフォールバック
             const rulaEval = this.standardsService.getRulaEvaluation(posture.rulaScore);
             const owasEval = this.standardsService.getOwasEvaluation(posture.owasCategory);
@@ -227,7 +223,7 @@ export class ScoreCalculationEngine {
   ): ScoreCalculationResult {
     let totalScore = 1;
     const factors: Record<string, number> = {};
-    const calculationDetails: Record<string, any> = {};
+    const calculationDetails: Record<string, unknown> = {};
 
     if (details.workQuality) {
       const workQuality = details.workQuality;
@@ -386,7 +382,7 @@ export class ScoreCalculationEngine {
   ): ScoreCalculationResult {
     let totalScore = 1;
     const factors: Record<string, number> = {};
-    const calculationDetails: Record<string, any> = {};
+    const calculationDetails: Record<string, unknown> = {};
 
     // 化学物質スコア計算（マトリックス対応）
     if (substances.length > 0) {
@@ -505,7 +501,7 @@ export class ScoreCalculationEngine {
   public calculateHazardScore(details: HazardDetails, useMatrixCalculation: boolean = true): ScoreCalculationResult {
     let totalScore = 1;
     const factors: Record<string, number> = {};
-    const calculationDetails: Record<string, any> = {};
+    const calculationDetails: Record<string, unknown> = {};
 
     if (details.hazardEvents && details.hazardEvents.length > 0) {
       const hazardScores = details.hazardEvents.map(event => {

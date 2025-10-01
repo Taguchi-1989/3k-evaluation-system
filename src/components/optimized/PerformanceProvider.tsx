@@ -23,7 +23,7 @@ interface PerformanceContextType {
 
 const PerformanceContext = createContext<PerformanceContextType | null>(null);
 
-export const usePerformance = () => {
+export const usePerformance = (): PerformanceContextType => {
   const context = useContext(PerformanceContext);
   if (!context) {
     throw new Error('usePerformance must be used within a PerformanceProvider');
@@ -58,7 +58,7 @@ export const PerformanceProvider: React.FC<PerformanceProviderProps> = ({
 
   useEffect(() => {
     // Web Vitals測定開始
-    monitor.measureWebVitals().then(setWebVitals);
+    void monitor.measureWebVitals().then(setWebVitals);
 
     // 定期的な統計更新
     const interval = setInterval(() => {

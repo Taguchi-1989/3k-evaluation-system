@@ -31,7 +31,7 @@ ${files.filter(isLogic).map(f => '  - ' + f).join('\n')}
   }
 
   console.log('✅ UI/Logic separation check passed')
-} catch (err) {
+} catch {
   // git diff が失敗した場合はスキップ（例: 初回コミット）
   console.log('⚠️  Git check skipped')
 }

@@ -3,6 +3,10 @@
  * better-sqlite3 (SQLite)
  */
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import type { EvaluationRepository, NotesRepository, ComprehensiveEvaluation, Note } from '@3k/ports'
 import Database from 'better-sqlite3'
 import { app } from 'electron'

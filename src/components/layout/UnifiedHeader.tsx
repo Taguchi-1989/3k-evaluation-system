@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -26,7 +27,7 @@ export default function UnifiedHeader({
   score,
   showLogo = true,
   variant = 'evaluation'
-}: UnifiedHeaderProps) {
+}: UnifiedHeaderProps): React.JSX.Element {
   const pathname = usePathname()
 
   const getHeaderStyles = () => {

@@ -81,21 +81,21 @@ export class EvaluationStandardsService {
   /**
    * 精神因基準値を取得
    */
-  public getMentalStandards() {
+  public getMentalStandards(): Record<string, unknown> {
     return this.standards.mental_factors;
   }
 
   /**
    * 危険因基準値を取得
    */
-  public getHazardStandards() {
+  public getHazardStandards(): Record<string, unknown> {
     return this.standards.hazard_factors;
   }
 
   /**
    * 作業時間因基準値を取得
    */
-  public getWorkTimeStandards() {
+  public getWorkTimeStandards(): Record<string, unknown> {
     return this.standards.work_time_factors;
   }
 
@@ -302,9 +302,9 @@ export class EvaluationStandardsService {
   public calculateRiskScore(encounterFrequency: number, dangerPossibility: number, occurrencePossibility: number, harmSeverity: number): number {
     // リスクポイントの計算（最大値を使用）
     const riskPoint = Math.max(encounterFrequency, dangerPossibility, occurrencePossibility, harmSeverity);
-    
-    const riskStandards = this.standards.hazard_factors.risk_assessment;
-    
+
+    const _riskStandards = this.standards.hazard_factors.risk_assessment;
+
     if (riskPoint >= 4) return 7;
     if (riskPoint >= 3) return 4;
     if (riskPoint >= 2) return 2;

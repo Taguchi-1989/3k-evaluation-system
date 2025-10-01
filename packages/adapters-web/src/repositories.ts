@@ -3,6 +3,10 @@
  * Supabase (クラウド) + IndexedDB (ローカルキャッシュ)
  */
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+
 import type { EvaluationRepository, NotesRepository } from '@3k/ports'
 import type { ComprehensiveEvaluation, Note } from '@3k/ports'
 import type { SupabaseClient } from '@supabase/supabase-js'
@@ -331,9 +335,9 @@ function createInMemoryStorage(): StoragePort {
     },
     blobs: {
       read: async (): Promise<Uint8Array> => new Uint8Array(),
-      write: async (): Promise<void> => {},
+      write: async (): Promise<void> => { /* TODO: implement blob write */ },
       exists: async (): Promise<boolean> => false,
-      delete: async (): Promise<void> => {},
+      delete: async (): Promise<void> => { /* TODO: implement blob delete */ },
       list: async (): Promise<string[]> => []
     }
   }

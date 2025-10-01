@@ -44,12 +44,6 @@ const filesToFix = [
   './src/lib/reportGenerator.ts',
 ];
 
-// Type-only importsを検出するパターン
-const typeOnlyPatterns = [
-  // import { Type, ... } from 'module' を import type { Type, ... } from 'module' に
-  /^import\s+\{([^}]+)\}\s+from\s+['"]([^'"]+)['"]/gm,
-];
-
 function fixFile(filePath) {
   const fullPath = path.resolve(process.cwd(), filePath);
 

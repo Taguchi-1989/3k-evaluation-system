@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import React, { useState, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/Button'
 import type { GeneratedReport } from '@/lib/reportGenerator'
@@ -26,14 +26,14 @@ const ReportHistory = dynamic(() => import('@/components/report/ReportHistory'),
 
 type TabType = 'generate' | 'history' | 'templates' | 'analytics';
 
-export default function ReportsPage() {
+export default function ReportsPage(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<TabType>('generate');
   const [selectedEvaluationId, setSelectedEvaluationId] = useState<string>('');
   const { evaluations } = useEvaluationData();
 
-  const handleReportGenerated = (report: GeneratedReport) => {
+  const handleReportGenerated = (report: GeneratedReport): void => {
     // localStorage に保存
-    const existingReports = JSON.parse(localStorage.getItem('3k_report_history') || '[]');
+    const existingReports = JSON.parse(localStorage.getItem('3k_report_history') || '[]') as unknown[];
     const updatedReports = [{
       ...report,
       downloadCount: 0,

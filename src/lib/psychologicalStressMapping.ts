@@ -373,13 +373,15 @@ export function assessHarassmentStress(assessment: HarassmentAssessment): {
 /**
  * 法的根拠情報を取得
  */
-export function getLegalBasisInfo(legalBasis: string): {
+interface LegalReference {
   title: string;
   description: string;
   reference: string;
   lastUpdated: string;
-} {
-  const legalReferences: Record<string, any> = {
+}
+
+export function getLegalBasisInfo(legalBasis: string): LegalReference {
+  const legalReferences: Record<string, LegalReference> = {
     '別表1-1': {
       title: '事故や災害の体験',
       description: '生命の危険を感じるような、または極度の恐怖を感じるような事故災害',
@@ -401,7 +403,7 @@ export function getLegalBasisInfo(legalBasis: string): {
   };
 
   const prefix = legalBasis.split('-(')[0] ?? '';
-  return legalReferences[prefix] || {
+  return legalReferences[prefix] ?? {
     title: '心理的負荷評価',
     description: '労働による心理的負荷の評価',
     reference: '心理的負荷による精神障害の認定基準',

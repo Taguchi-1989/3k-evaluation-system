@@ -15,7 +15,13 @@ import type {
   FinalScoreResult
 } from '@3k/core'
 
-export function useEvaluation() {
+export function useEvaluation(): {
+  calculatePhysical: (details: PhysicalDetails, postures?: Posture[], workTimeFactor?: number) => Promise<unknown>
+  calculateMental: (details: MentalDetails, workTimeFactor?: number) => Promise<unknown>
+  calculateEnvironmental: (details: EnvironmentalDetails, substances?: EnvironmentalSubstance[]) => Promise<unknown>
+  calculateHazard: (details: HazardDetails) => Promise<unknown>
+  calculateFinal3K: (physicalScore: number, mentalScore: number, environmentalScore: number, hazardScore: number, workTimeFactor?: number) => Promise<FinalScoreResult>
+} {
   const calculatePhysical = useCallback(
     async (details: PhysicalDetails, postures: Posture[] = [], workTimeFactor: number = 1.0) => {
       const { calculatePhysicalScore } = await import('@3k/core')

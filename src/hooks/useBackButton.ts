@@ -10,7 +10,11 @@ interface BackButtonOptions {
   onBeforeBack?: () => boolean | Promise<boolean>
 }
 
-export function useBackButton(options: BackButtonOptions = {}) {
+export function useBackButton(options: BackButtonOptions = {}): {
+  goBack: () => Promise<void>
+  goToPath: (path: string) => void
+  router: ReturnType<typeof useRouter>
+} {
   const router = useRouter()
   const { fallbackPath = '/dashboard', confirmMessage, hasUnsavedChanges, onBeforeBack } = options
 
@@ -49,7 +53,13 @@ export function useBackButton(options: BackButtonOptions = {}) {
 }
 
 // 評価ページ専用のカスタムフック
-export function useEvaluationNavigation(hasUnsavedChanges?: boolean) {
+export function useEvaluationNavigation(hasUnsavedChanges?: boolean): {
+  goBack: () => Promise<void>
+  goToDashboard: () => void
+  goToEvaluationList: () => void
+  goToHome: () => void
+  goToPath: (path: string) => void
+} {
   const { goBack, goToPath } = useBackButton({
     fallbackPath: '/dashboard',
     confirmMessage: '編集中のデータは保存されていません。このページを離れますか？',

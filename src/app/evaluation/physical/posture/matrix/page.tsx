@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { AspectContainer, AspectHeader, AspectMain, AspectFooter, Button } from '@/components/ui'
 import { MatrixDisplay, OWASMatrix, RULAMatrix } from '@/components/evaluation'
 
-export default function MatrixEvaluationPage() {
+export default function MatrixEvaluationPage(): React.JSX.Element {
   const [selectedMatrix, setSelectedMatrix] = useState<'RULA' | 'OWAS'>('RULA')
   const [matrixScore, setMatrixScore] = useState<number | null>(null)
 

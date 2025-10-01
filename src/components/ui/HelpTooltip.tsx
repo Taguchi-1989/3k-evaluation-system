@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export interface HelpTooltipProps {
   content: string
@@ -16,7 +16,7 @@ export function HelpTooltip({
   className = '',
   iconSize = 'md',
   displayMode = 'overlay'
-}: HelpTooltipProps) {
+}: HelpTooltipProps): React.JSX.Element {
   const [isVisible, setIsVisible] = useState(false)
 
   const getSizeClasses = () => {

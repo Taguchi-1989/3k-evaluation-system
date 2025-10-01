@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
 import type { GeneratedReport } from '@/lib/reportGenerator'
 
@@ -15,7 +15,7 @@ interface ReportHistoryProps {
   onDeleteReport?: (reportId: string) => void;
 }
 
-export default function ReportHistory({ onSelectReport, onDeleteReport }: ReportHistoryProps) {
+export default function ReportHistory({ onSelectReport, onDeleteReport }: ReportHistoryProps): React.JSX.Element {
   const [reports, setReports] = useState<ReportHistoryItem[]>([]);
   const [filteredReports, setFilteredReports] = useState<ReportHistoryItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -48,8 +48,9 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
 
     // ソート
     filtered.sort((a, b) => {
-      let aValue: any, bValue: any;
-      
+      let aValue: string | number | Date;
+      let bValue: string | number | Date;
+
       switch (sortBy) {
         case 'title':
           aValue = a.title;
@@ -76,19 +77,19 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
     setFilteredReports(filtered);
   }, [reports, searchQuery, filterFormat, sortBy, sortOrder]);
 
-  const loadReportHistory = () => {
+  const loadReportHistory = (): void => {
     // 実際の実装ではAPIやlocalStorageから読み込み
     const savedReports = localStorage.getItem('3k_report_history');
     if (savedReports) {
       try {
-        const parsed = JSON.parse(savedReports);
-        setReports(parsed.map((r: any) => ({
-          ...r,
+        const parsed = JSON.parse(savedReports) as Array<Record<string, unknown>>;
+        setReports(parsed.map((r): ReportHistoryItem => ({
+          ...(r as ReportHistoryItem),
           metadata: {
-            ...r.metadata,
-            generatedAt: new Date(r.metadata.generatedAt)
+            ...((r.metadata as Record<string, unknown>) || {}),
+            generatedAt: new Date((r.metadata as { generatedAt: string }).generatedAt)
           },
-          lastDownloaded: r.lastDownloaded ? new Date(r.lastDownloaded) : undefined
+          lastDownloaded: r.lastDownloaded ? new Date(r.lastDownloaded as string) : undefined
         })));
       } catch (error) {
         console.error('レポート履歴の読み込みエラー:', error);
@@ -250,7 +251,7 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
                 <label className="text-sm">並び順:</label>
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
+                  onChange={(e) => setSortBy(e.target.value as 'date' | 'title' | 'downloads')}
                   className="p-1 border rounded text-sm"
                 >
                   <option value="date">生成日時</option>

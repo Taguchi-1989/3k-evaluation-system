@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { Button } from '@/components/ui'
 
-export default function StressEvaluationPage() {
+export default function StressEvaluationPage(): React.JSX.Element {
   const [stressLevel, setStressLevel] = useState<string>('medium')
   const [stressFactors, setStressFactors] = useState<{[key: string]: boolean}>({
     timeConstraint: false,

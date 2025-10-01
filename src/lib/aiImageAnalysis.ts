@@ -102,7 +102,7 @@ class AIImageAnalysisService {
   /**
    * Base64画像データの分析
    */
-  async analyzeImageFromBase64(base64Data: string): Promise<ImageAnalysisResult> {
+  async analyzeImageFromBase64(_base64Data: string): Promise<ImageAnalysisResult> {
     // Base64からファイル情報を抽出
     const fileName = 'uploaded_image.jpg'
     return new Promise((resolve) => {
@@ -200,8 +200,8 @@ class AIImageAnalysisService {
     return suggestions
   }
 
-  private generatePhysicalSuggestions(analysis: ImageAnalysisResult) {
-    const suggestions: Record<string, any> = {}
+  private generatePhysicalSuggestions(analysis: ImageAnalysisResult): Record<string, unknown> {
+    const suggestions: Record<string, unknown> = {}
     
     // 姿勢分析から物理的負荷を推定
     if (analysis.postureAnalysis.riskLevel >= 6) {
@@ -227,8 +227,8 @@ class AIImageAnalysisService {
     return suggestions
   }
 
-  private generateMentalSuggestions(analysis: ImageAnalysisResult) {
-    const suggestions: Record<string, any> = {}
+  private generateMentalSuggestions(analysis: ImageAnalysisResult): Record<string, unknown> {
+    const suggestions: Record<string, unknown> = {}
     
     // 作業タイプから精神的負荷を推定
     if (analysis.workType.includes('デスクワーク')) {
@@ -250,8 +250,8 @@ class AIImageAnalysisService {
     return suggestions
   }
 
-  private generateEnvironmentalSuggestions(analysis: ImageAnalysisResult) {
-    const suggestions: Record<string, any> = {}
+  private generateEnvironmentalSuggestions(analysis: ImageAnalysisResult): Record<string, unknown> {
+    const suggestions: Record<string, unknown> = {}
     
     analysis.environmentalFactors.forEach(factor => {
       if (factor.level === 'poor') {
@@ -266,8 +266,8 @@ class AIImageAnalysisService {
     return suggestions
   }
 
-  private generateHazardSuggestions(analysis: ImageAnalysisResult) {
-    const suggestions: Record<string, any> = {}
+  private generateHazardSuggestions(analysis: ImageAnalysisResult): Record<string, unknown> {
+    const suggestions: Record<string, unknown> = {}
     
     analysis.riskFactors.forEach(risk => {
       if (risk.severity === 'high') {

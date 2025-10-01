@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { Button } from '@/components/ui'
 
 export interface FooterProps {
@@ -27,7 +28,7 @@ export function Footer({
   actions,
   copyright = 'Copyright © 2024 Asahi KASEI All rights reserved.',
   asContent = false
-}: FooterProps) {
+}: FooterProps): React.JSX.Element {
 
   const appFooterContent = (
     <>

@@ -1,7 +1,8 @@
+import React from 'react'
 import { AppHome } from '@/components/evaluation'
 import { AspectContainer } from '@/components/ui'
 
-export default function HomePage() {
+export default function HomePage(): React.JSX.Element {
   const handleNavigate = (destination: string) => {
     switch (destination) {
       case 'new-evaluation':

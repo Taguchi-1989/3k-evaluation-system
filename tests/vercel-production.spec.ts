@@ -229,7 +229,7 @@ test.describe('Vercel本番環境テスト', () => {
     // データが永続化されているか確認
     const retrieved = await page.evaluate((key) => {
       const data = localStorage.getItem(key)
-      return data ? JSON.parse(data) : null
+      return data ? JSON.parse(data) as unknown : null
     }, testKey)
 
     expect(retrieved).toEqual(testValue)

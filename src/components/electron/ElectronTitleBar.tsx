@@ -24,7 +24,7 @@ export const ElectronTitleBar: React.FC<ElectronTitleBarProps> = ({
 
   useEffect(() => {
     if (isElectron()) {
-      electronSystem.getPlatform().then(setPlatform);
+      void electronSystem.getPlatform().then(setPlatform);
     }
   }, []);
 
@@ -33,17 +33,17 @@ export const ElectronTitleBar: React.FC<ElectronTitleBarProps> = ({
     return null;
   }
 
-  const handleMinimize = () => {
-    electronApp.minimize();
+  const handleMinimize = (): void => {
+    void electronApp.minimize();
   };
 
-  const handleMaximize = () => {
-    electronApp.maximize();
+  const handleMaximize = (): void => {
+    void electronApp.maximize();
     setIsMaximized(!isMaximized);
   };
 
-  const handleClose = () => {
-    electronApp.quit();
+  const handleClose = (): void => {
+    void electronApp.quit();
   };
 
   // macOSかどうか判定
@@ -227,8 +227,8 @@ export const ElectronStatusBar: React.FC = () => {
 
   useEffect(() => {
     if (isElectron()) {
-      electronSystem.getVersion().then(setVersion);
-      electronSystem.getPlatform().then(setPlatform);
+      void electronSystem.getVersion().then(setVersion);
+      void electronSystem.getPlatform().then(setPlatform);
     }
   }, []);
 

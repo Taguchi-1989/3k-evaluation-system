@@ -1,13 +1,13 @@
 'use client'
 
+import React, { useEffect } from 'react'
 import { MentalFactorDetail } from '@/components/evaluation/MentalFactorDetail'
 import { EvaluationLayout, EvaluationContentContainer } from '@/components/layout/EvaluationLayout'
 import { Footer } from '@/components/layout'
 import { useNavigation } from '@/hooks/useNavigation'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
-import { useEffect } from 'react'
 
-export default function MentalFactorPage() {
+export default function MentalFactorPage(): React.JSX.Element {
   const { getReturnPath } = useNavigation()
   const { setCurrentPath, pushToHistory } = useEvaluationStore()
 

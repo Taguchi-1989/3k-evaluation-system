@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { User, UserRole, Permission, PermissionCheck } from '@/types/permissions';
 import { ROLE_PERMISSIONS } from '@/types/permissions'
 
@@ -60,7 +60,7 @@ const DEMO_USERS: User[] = [
   }
 ]
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
   const [user, setUser] = useState<User | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const savedUser = localStorage.getItem('auth_user')
     if (savedUser) {
       try {
-        const userData = JSON.parse(savedUser)
+        const userData = JSON.parse(savedUser) as User
         setUser(userData)
         setIsAuthenticated(true)
       } catch (error) {
@@ -176,7 +176,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function useAuth() {
+export function useAuth(): AuthContextType {
   const context = useContext(AuthContext)
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider')

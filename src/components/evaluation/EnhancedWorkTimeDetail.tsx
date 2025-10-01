@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FileUpload, Input, Button } from '@/components/ui'
 import { OptimizedImage } from '@/components/optimized/OptimizedImage'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
@@ -148,7 +148,7 @@ export function EnhancedWorkTimeDetail({
   workInfo,
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Work+Time+Analysis',
   workers = defaultWorkers
-}: EnhancedWorkTimeDetailProps) {
+}: EnhancedWorkTimeDetailProps): React.JSX.Element {
   
   // const { updateEvaluationData } = useEvaluationStore()
   

@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import type { Permission } from '@/types/permissions'
 
@@ -15,7 +16,7 @@ export function PermissionGuard({
   requiredPermission,
   fallback,
   showMessage = true
-}: PermissionGuardProps) {
+}: PermissionGuardProps): React.JSX.Element | null {
   const { hasPermission } = useAuth()
   const permissionCheck = hasPermission(requiredPermission)
 

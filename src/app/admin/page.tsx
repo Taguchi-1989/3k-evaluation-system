@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useAuth, DEMO_USERS } from '@/contexts/AuthContext'
 import { PermissionGuard } from '@/components/auth/PermissionGuard'
 import { UserRoleIndicator } from '@/components/auth/UserRoleIndicator'
@@ -9,7 +9,7 @@ import type { User, UserRole } from '@/types/permissions'
 import { ROLE_LABELS } from '@/types/permissions'
 import { Header } from '@/components/layout/Header'
 
-export default function AdminPage() {
+export default function AdminPage(): React.JSX.Element {
   const { user, updateUserRole } = useAuth()
   const [users, setUsers] = useState<User[]>(DEMO_USERS)
   const [editingUser, setEditingUser] = useState<string | null>(null)
@@ -135,7 +135,7 @@ export default function AdminPage() {
                               <div className="flex gap-2">
                                 <Button
                                   size="sm"
-                                  onClick={() => handleRoleUpdate(userItem.id)}
+                                  onClick={() => { void handleRoleUpdate(userItem.id) }}
                                   className="bg-blue-600 hover:bg-blue-700 text-white"
                                 >
                                   保存

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import type { EvaluationMatrix} from '@/data/evaluationMatrices';
 import { getMatrix } from '@/data/evaluationMatrices'
 import type { MatrixCalculationResult } from '@/lib/matrixCalculator';
@@ -26,7 +26,7 @@ export function DynamicMatrixDisplay({
   className = '',
   showStatistics = false,
   showRecommendations = true
-}: DynamicMatrixDisplayProps) {
+}: DynamicMatrixDisplayProps): React.JSX.Element {
   const [matrix, setMatrix] = useState<EvaluationMatrix | null>(null)
   const [highlightedCell, setHighlightedCell] = useState<{ x: string; y: string } | null>(null)
   const [currentResult, setCurrentResult] = useState<MatrixCalculationResult | null>(null)

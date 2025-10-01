@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { DynamicMatrixDisplay } from './DynamicMatrixDisplay'
 import type { MatrixCalculationResult } from '@/lib/matrixCalculator'
 import { Button } from '@/components/ui/Button'
@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button'
  * マトリックステスト用コンポーネント
  * 統合テスト時に各マトリックスの動作確認に使用
  */
-export function MatrixTestPage() {
+export function MatrixTestPage(): React.JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState<'physical' | 'mental' | 'environmental' | 'hazard'>('physical')
   const [selectedX, setSelectedX] = useState<string>('')
   const [selectedY, setSelectedY] = useState<string>('')
@@ -112,7 +112,7 @@ export function MatrixTestPage() {
             <Button
               key={key}
               variant={selectedCategory === key ? 'primary' : 'secondary'}
-              onClick={() => setSelectedCategory(key as any)}
+              onClick={() => setSelectedCategory(key as 'physical' | 'mental' | 'environmental' | 'hazard')}
             >
               {label}マトリックス
             </Button>

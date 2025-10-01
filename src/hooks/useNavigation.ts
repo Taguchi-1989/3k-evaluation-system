@@ -9,7 +9,17 @@ interface NavigationOptions {
   replace?: boolean;
 }
 
-export const useNavigation = () => {
+export const useNavigation = (): {
+  navigate: (destination: string, options?: NavigationOptions) => void
+  goBack: (fallbackPath?: string) => void
+  navigateToDetail: (factorType: 'physical' | 'mental' | 'environmental' | 'hazard' | 'worktime', returnPath?: string) => void
+  getReturnPath: () => string
+  navigateHome: () => void
+  navigateToDashboard: () => void
+  navigateToNewEvaluation: () => void
+  navigateToEvaluationList: () => void
+  navigateToEditEvaluation: (id: string) => void
+} => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { pushToHistory, getLastPath, setReturnPath } = useEvaluationStore();

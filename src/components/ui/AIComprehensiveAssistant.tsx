@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { VoiceInput } from '@/components/ui/VoiceInput'
 import { ImageUpload } from '@/components/ui/ImageUpload'
@@ -27,13 +27,13 @@ export function AIComprehensiveAssistant({
   onClose,
   onApplyRecommendations,
   workInfo
-}: AIComprehensiveAssistantProps) {
+}: AIComprehensiveAssistantProps): React.JSX.Element | null {
   const [isLoading, setIsLoading] = useState(false)
   const [analysisResult, setAnalysisResult] = useState<AIAnalysisResult | null>(null)
   const [imageAnalysisResult, setImageAnalysisResult] = useState<ImageAnalysisResult | null>(null)
   const [activeTab, setActiveTab] = useState<'voice' | 'image' | 'analysis'>('voice')
-  const [uploadedImages, setUploadedImages] = useState<File[]>([])
-  const [transcription, setTranscription] = useState('')
+  const [_uploadedImages, setUploadedImages] = useState<File[]>([])
+  const [_transcription, setTranscription] = useState('')
   const [workInput, setWorkInput] = useState<WorkAnalysisInput>({
     workName: workInfo?.workName || '',
     workDescription: '',
@@ -239,7 +239,7 @@ export function AIComprehensiveAssistant({
 
               <div className="flex justify-end">
                 <Button
-                  onClick={handleAnalyze}
+                  onClick={() => { void handleAnalyze() }}
                   disabled={!workInput.workName}
                   variant="primary"
                   className="px-6 py-2"
@@ -259,7 +259,7 @@ export function AIComprehensiveAssistant({
               <div className="space-y-6">
                 <ImageUpload
                   onImageSelect={setUploadedImages}
-                  onImageAnalyze={handleImageAnalyze}
+                  onImageAnalyze={(files) => { void handleImageAnalyze(files) }}
                   maxFiles={5}
                 />
 

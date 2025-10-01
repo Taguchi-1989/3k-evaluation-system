@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 
 export interface AspectContainerProps {
   children: ReactNode
@@ -8,11 +8,11 @@ export interface AspectContainerProps {
   includeBackground?: boolean
 }
 
-export function AspectContainer({ 
-  children, 
-  className = '', 
-  includeBackground = true 
-}: AspectContainerProps) {
+export function AspectContainer({
+  children,
+  className = '',
+  includeBackground = true
+}: AspectContainerProps): React.JSX.Element {
   return (
     <div className={`${includeBackground ? 'bg-gray-800 dark:bg-gray-900 min-h-screen' : ''} flex items-center justify-center p-4`}>
       <div className={`
@@ -36,7 +36,7 @@ export function AspectContainer({
   )
 }
 
-export function AspectHeader({ children, className = '' }: { children: ReactNode, className?: string }) {
+export function AspectHeader({ children, className = '' }: { children: ReactNode, className?: string }): React.JSX.Element {
   return (
     <header className={`p-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 ${className}`}>
       {children}
@@ -44,7 +44,7 @@ export function AspectHeader({ children, className = '' }: { children: ReactNode
   )
 }
 
-export function AspectMain({ children, className = '' }: { children: ReactNode, className?: string }) {
+export function AspectMain({ children, className = '' }: { children: ReactNode, className?: string }): React.JSX.Element {
   return (
     <section className={`flex-grow p-3 flex flex-row gap-3 overflow-hidden bg-white dark:bg-gray-900 ${className}`}>
       {children}
@@ -52,7 +52,7 @@ export function AspectMain({ children, className = '' }: { children: ReactNode, 
   )
 }
 
-export function AspectFooter({ children, className = '' }: { children: ReactNode, className?: string }) {
+export function AspectFooter({ children, className = '' }: { children: ReactNode, className?: string }): React.JSX.Element {
   return (
     <footer className={`p-2 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between flex-shrink-0 ${className}`}>
       {children}

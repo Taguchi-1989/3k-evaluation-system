@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { PermissionGuard } from '@/components/auth/PermissionGuard'
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@/components/ui'
@@ -18,7 +18,7 @@ export function EvaluationEditModal({
   isOpen,
   onClose,
   onSave
-}: EvaluationEditModalProps) {
+}: EvaluationEditModalProps): React.JSX.Element | null {
   const { checkPermission } = useAuth()
   const [editedItem, setEditedItem] = useState<WorkItem>(workItem)
   const [isLoading, setIsLoading] = useState(false)
@@ -264,7 +264,7 @@ export function EvaluationEditModal({
                   showMessage={false}
                 >
                   <Button
-                    onClick={handleSave}
+                    onClick={() => { void handleSave() }}
                     disabled={isLoading}
                     loading={isLoading}
                   >

@@ -5,12 +5,12 @@
  * Code Splitting実装によるパフォーマンス向上
  */
 
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
 import { EvaluationSkeleton, DashboardSkeleton, CompactSkeleton } from '@/components/ui/LoadingSkeletons'
 
 // Loading コンポーネント
-const LoadingSpinner = () => (
+const LoadingSpinner = (): React.JSX.Element => (
   <div className="flex items-center justify-center min-h-[400px]">
     <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
     <span className="ml-3 text-gray-600">読み込み中...</span>
@@ -140,7 +140,7 @@ export const DynamicComponentWrapper = ({
   children
 }: {
   children: React.ReactNode
-}) => (
+}): React.JSX.Element => (
   <Suspense fallback={<LoadingSpinner />}>
     {children}
   </Suspense>
@@ -161,11 +161,11 @@ export const DynamicComponentWrapper = ({
 /**
  * 事前読み込み（Prefetch）対応の動的インポート
  */
-export const prefetchEvaluationComponents = () => {
+export const prefetchEvaluationComponents = (): void => {
   // ユーザーがホームページを訪れた時に、評価ページを事前読み込み
-  import('@/components/evaluation/PhysicalFactorDetail')
-  import('@/components/evaluation/HazardFactorDetail')
-  import('@/components/evaluation/EnvironmentalFactorDetail')
+  void import('@/components/evaluation/PhysicalFactorDetail')
+  void import('@/components/evaluation/HazardFactorDetail')
+  void import('@/components/evaluation/EnvironmentalFactorDetail')
 }
 
 // ルート別の最適化
@@ -179,7 +179,7 @@ export const routeBasedDynamicImports = {
   '/evaluation/list': EvaluationListViewDynamic,
 }
 
-export default {
+const DynamicImports = {
   PhysicalFactorDetailDynamic,
   MentalFactorDetailDynamic,
   EnvironmentalFactorDetailDynamic,
@@ -194,4 +194,6 @@ export default {
   // ConditionalDynamicImport,
   prefetchEvaluationComponents,
   routeBasedDynamicImports,
-}
+};
+
+export default DynamicImports;

@@ -49,7 +49,7 @@ export class ErrorBoundary extends Component<Props, State> {
     }
   }
 
-  handleRetry = () => {
+  handleRetry = (): void => {
     if (this.state.retryCount < this.maxRetries) {
       this.setState({
         hasError: false,
@@ -60,11 +60,11 @@ export class ErrorBoundary extends Component<Props, State> {
     }
   }
 
-  handleReload = () => {
+  handleReload = (): void => {
     window.location.reload()
   }
 
-  handleReportError = () => {
+  handleReportError = (): void => {
     const errorHandler = ErrorHandler.getInstance()
     const errorLog = errorHandler.getErrorLog()
     
@@ -218,8 +218,8 @@ export class ErrorBoundary extends Component<Props, State> {
 export const withErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,
   fallback?: ReactNode
-) => {
-  const WrappedComponent = (props: P) => (
+): React.ComponentType<P> => {
+  const WrappedComponent = (props: P): React.JSX.Element => (
     <ErrorBoundary fallback={fallback}>
       <Component {...props} />
     </ErrorBoundary>

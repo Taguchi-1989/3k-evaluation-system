@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { useEvaluationNavigation } from '@/hooks/useBackButton'
 import { Button } from '@/components/ui/Button'
 
@@ -17,13 +18,13 @@ export function BackButton({
   size = 'md',
   showText = true,
   customText
-}: BackButtonProps) {
+}: BackButtonProps): React.JSX.Element {
   const { goBack } = useEvaluationNavigation()
 
   return (
     <Button
-      onClick={goBack}
-      variant={variant as any}
+      onClick={() => { void goBack() }}
+      variant={variant}
       size={size}
       className={`flex items-center gap-2 ${className}`}
     >
@@ -48,13 +49,13 @@ export function BackButton({
 }
 
 // ナビゲーションボタンセット
-export function NavigationButtons({ className = '' }: { className?: string }) {
+export function NavigationButtons({ className = '' }: { className?: string }): React.JSX.Element {
   const { goBack, goToDashboard, goToHome } = useEvaluationNavigation()
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <Button
-        onClick={goBack}
+        onClick={() => { void goBack() }}
         variant="outline"
         size="sm"
         className="flex items-center gap-2"

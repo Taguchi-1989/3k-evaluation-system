@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FileUpload, Input, Button } from '@/components/ui'
 import { PhotoViewer } from '@/components/evaluation'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
@@ -190,7 +190,7 @@ export function EnhancedEnvironmentalFactorDetail({
   workInfo,
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Environmental+Assessment',
   initialData
-}: EnhancedEnvironmentalFactorDetailProps) {
+}: EnhancedEnvironmentalFactorDetailProps): React.JSX.Element {
   
   const { currentEvaluation } = useEvaluationStore()
   

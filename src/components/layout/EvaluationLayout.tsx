@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 import type { PageLayoutProps } from './PageLayout';
 import { PageLayout } from './PageLayout'
 import { NavigationButtons } from '@/components/ui/BackButton'
@@ -29,7 +29,7 @@ export function EvaluationLayout({
   showBackButton = true,
   breadcrumbItems,
   ...pageLayoutProps
-}: EvaluationLayoutProps) {
+}: EvaluationLayoutProps): React.JSX.Element {
   if (!showGrid) {
     return (
       <PageLayout {...pageLayoutProps}>
@@ -82,13 +82,13 @@ export function EvaluationLayout({
 }
 
 // 16:9対応のコンテンツコンテナ
-export function EvaluationContentContainer({ 
-  children, 
-  className = '' 
-}: { 
+export function EvaluationContentContainer({
+  children,
+  className = ''
+}: {
   children: ReactNode
-  className?: string 
-}) {
+  className?: string
+}): React.JSX.Element {
   return (
     <div className={`card mobile-chrome-visible form-mobile-optimized ${className}`}>
       {children}
@@ -97,15 +97,15 @@ export function EvaluationContentContainer({
 }
 
 // 評価フォームのグリッドレイアウト
-export function EvaluationFormGrid({ 
+export function EvaluationFormGrid({
   children,
   columns = 1,
-  className = '' 
-}: { 
+  className = ''
+}: {
   children: ReactNode
   columns?: 1 | 2 | 3 | 4
   className?: string
-}) {
+}): React.JSX.Element {
   const gridCols = {
     1: 'grid-cols-1',
     2: 'grid-cols-1 lg:grid-cols-2',

@@ -7,6 +7,7 @@
 
 import React, { Suspense, lazy } from 'react';
 import { LazyLoadWrapper } from '@/components/optimized/LazyLoadWrapper';
+import type { PhysicalFactorDetailProps } from '@/components/evaluation/PhysicalFactorDetail';
 
 /**
  * 動的インポートでコンポーネントを遅延読み込み
@@ -90,7 +91,7 @@ const EvaluationErrorFallback: React.FC<{
 /**
  * 作業時間詳細の動的コンポーネント
  */
-export const DynamicWorkTimeDetail: React.FC<any> = (props) => (
+export const DynamicWorkTimeDetail: React.FC<Record<string, unknown>> = (props) => (
   <LazyLoadWrapper
     rootMargin="200px"
     threshold={0.25}
@@ -105,7 +106,7 @@ export const DynamicWorkTimeDetail: React.FC<any> = (props) => (
 /**
  * 肉体因子詳細の動的コンポーネント
  */
-export const DynamicPhysicalDetail: React.FC<any> = (props) => (
+export const DynamicPhysicalDetail: React.FC<PhysicalFactorDetailProps> = (props) => (
   <LazyLoadWrapper
     rootMargin="150px"
     threshold={0.3}
@@ -120,7 +121,7 @@ export const DynamicPhysicalDetail: React.FC<any> = (props) => (
 /**
  * 精神因子詳細の動的コンポーネント
  */
-export const DynamicMentalDetail: React.FC<any> = (props) => (
+export const DynamicMentalDetail: React.FC<Record<string, unknown>> = (props) => (
   <LazyLoadWrapper
     rootMargin="150px"
     threshold={0.3}
@@ -135,7 +136,7 @@ export const DynamicMentalDetail: React.FC<any> = (props) => (
 /**
  * 環境因子詳細の動的コンポーネント
  */
-export const DynamicEnvironmentalDetail: React.FC<any> = (props) => (
+export const DynamicEnvironmentalDetail: React.FC<Record<string, unknown>> = (props) => (
   <LazyLoadWrapper
     rootMargin="150px"
     threshold={0.3}
@@ -150,7 +151,7 @@ export const DynamicEnvironmentalDetail: React.FC<any> = (props) => (
 /**
  * 危険因子詳細の動的コンポーネント
  */
-export const DynamicHazardDetail: React.FC<any> = (props) => (
+export const DynamicHazardDetail: React.FC<Record<string, unknown>> = (props) => (
   <LazyLoadWrapper
     rootMargin="150px"
     threshold={0.3}
@@ -167,8 +168,7 @@ export const DynamicHazardDetail: React.FC<any> = (props) => (
  */
 export const DynamicEvaluationRouter: React.FC<{
   evaluationType: 'physical' | 'mental' | 'environmental' | 'hazard' | 'worktime';
-  [key: string]: any;
-}> = ({ evaluationType, ...props }) => {
+} & Record<string, unknown>> = ({ evaluationType, ...props }) => {
   switch (evaluationType) {
     case 'physical':
       return <DynamicPhysicalDetail {...props} />;
@@ -185,7 +185,7 @@ export const DynamicEvaluationRouter: React.FC<{
   }
 };
 
-export default {
+const DynamicEvaluationComponents = {
   DynamicWorkTimeDetail,
   DynamicPhysicalDetail,
   DynamicMentalDetail,
@@ -193,3 +193,5 @@ export default {
   DynamicHazardDetail,
   DynamicEvaluationRouter
 };
+
+export default DynamicEvaluationComponents;

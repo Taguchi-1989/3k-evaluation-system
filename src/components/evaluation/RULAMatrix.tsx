@@ -12,7 +12,7 @@ export interface RULAMatrixProps {
 export function RULAMatrix({
   onSelectionChange,
   className = ''
-}: RULAMatrixProps) {
+}: RULAMatrixProps): React.JSX.Element {
   const [selectedTabA, setSelectedTabA] = useState<number>(3) // 上肢・手首スコア
   const [selectedTabB, setSelectedTabB] = useState<number>(3) // 首・体幹・脚スコア
   const [highlightedCell, setHighlightedCell] = useState<{ row: number, col: number } | null>(null)

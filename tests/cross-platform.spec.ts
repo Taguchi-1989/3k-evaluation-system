@@ -1,4 +1,5 @@
-import { test, expect, Page } from '@playwright/test'
+import { test, expect } from '@playwright/test'
+import type { Page } from '@playwright/test'
 
 /**
  * クロスプラットフォーム互換性テスト
@@ -87,7 +88,7 @@ test.describe('クロスプラットフォーム互換性テスト', () => {
     // データを取得
     const retrieved = await page.evaluate((key) => {
       const data = localStorage.getItem(key)
-      return data ? JSON.parse(data) : null
+      return data ? JSON.parse(data) as unknown : null
     }, testKey)
 
     expect(retrieved).toEqual(testValue)
@@ -299,8 +300,8 @@ test.describe('パフォーマンステスト', () => {
 
       // 計算ロジック実行
       for (let i = 0; i < 1000; i++) {
-        const score = Math.max(5, 6, 4, 3)
-        const index = score >= 7 ? 'A' : score >= 4 ? 'B' : score >= 2 ? 'C' : 'D'
+        const _score = Math.max(5, 6, 4, 3)
+        const _index = _score >= 7 ? 'A' : _score >= 4 ? 'B' : _score >= 2 ? 'C' : 'D'
       }
 
       return performance.now() - start

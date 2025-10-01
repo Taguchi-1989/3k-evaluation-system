@@ -1,11 +1,12 @@
 'use client'
 
+import React from 'react'
 import { Button } from '@/components/ui'
 import { Footer } from '@/components/layout/Footer'
 import UnifiedHeader from '@/components/layout/UnifiedHeader'
 import Link from 'next/link'
 
-export default function NotFound() {
+export default function NotFound(): React.JSX.Element {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <UnifiedHeader

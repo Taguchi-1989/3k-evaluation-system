@@ -4,7 +4,7 @@
  * AppBootstrap - Webアダプターを初期化してAppProviderに渡す
  */
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppProvider } from '@/contexts/AppContext'
 import type { Adapters } from '@3k/adapters-web'
 
@@ -12,7 +12,7 @@ interface AppBootstrapProps {
   children: React.ReactNode
 }
 
-export function AppBootstrap({ children }: AppBootstrapProps) {
+export function AppBootstrap({ children }: AppBootstrapProps): React.JSX.Element {
   const [adapters, setAdapters] = useState<Adapters | null>(null)
   const [error, setError] = useState<Error | null>(null)
 

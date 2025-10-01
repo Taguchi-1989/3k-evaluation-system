@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export interface FilePreviewProps {
   fileName: string
@@ -18,7 +18,7 @@ export function FilePreview({
   isOpen,
   onClose,
   className = ''
-}: FilePreviewProps) {
+}: FilePreviewProps): React.JSX.Element | null {
   const [isLoading, setIsLoading] = useState(true)
 
   if (!isOpen) return null
@@ -78,6 +78,7 @@ export function FilePreview({
             {isLoading && (
               <div className="text-gray-500 dark:text-gray-400">画像を読み込み中...</div>
             )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={fileUrl}
               alt={fileName}

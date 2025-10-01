@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { Header, Footer } from '@/components/layout'
 import { Button } from '@/components/ui'
@@ -55,7 +55,7 @@ export function FactorPageLayout({
   aiButtonText = 'AIで自動選択する',
   onAiClick,
   customActions
-}: FactorPageLayoutProps) {
+}: FactorPageLayoutProps): React.JSX.Element {
   const router = useRouter()
 
   const handleBackToMain = () => {

@@ -1,7 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react';
-import { useState } from 'react'
+import React, { type ReactNode, useState } from 'react'
 import { Header } from '@/components/layout'
 import { TabInterface, type Tab } from '@/components/ui/TabInterface'
 import { PostureList, MatrixDisplay, type Posture } from '@/components/evaluation'
@@ -51,7 +50,7 @@ export function GenericFactorDetail({
   resultUnit = 'スコア',
   resultColor = 'text-blue-600',
   rightPanelContent
-}: GenericFactorDetailProps) {
+}: GenericFactorDetailProps): React.JSX.Element {
   const [selectedPosture, setSelectedPosture] = useState<string>('')
 
   const handleChemicalEvaluation = () => {

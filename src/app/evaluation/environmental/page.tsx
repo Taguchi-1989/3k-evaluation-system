@@ -1,12 +1,11 @@
 'use client'
 
+import React, { Suspense, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
 import { EvaluationLayout, EvaluationContentContainer } from '@/components/layout/EvaluationLayout'
 import { Footer } from '@/components/layout'
 import { useNavigation } from '@/hooks/useNavigation'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
-import { useEffect } from 'react'
 import { EvaluationSkeleton } from '@/components/ui/LoadingSkeletons'
 
 const EnhancedEnvironmentalFactorDetail = dynamic(() => import('@/components/evaluation/EnhancedEnvironmentalFactorDetail').then(mod => ({ default: mod.EnhancedEnvironmentalFactorDetail })), {
@@ -14,7 +13,7 @@ const EnhancedEnvironmentalFactorDetail = dynamic(() => import('@/components/eva
   ssr: false
 })
 
-export default function EnvironmentalFactorPage() {
+export default function EnvironmentalFactorPage(): React.JSX.Element {
   const { getReturnPath } = useNavigation()
   const { setCurrentPath, pushToHistory } = useEvaluationStore()
 

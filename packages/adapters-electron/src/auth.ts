@@ -6,6 +6,20 @@
 import type { AuthPort, Session, StoragePort } from '@3k/ports'
 import { shell } from 'electron'
 
+// Supabase APIレスポンス型
+interface SupabaseAuthResponse {
+  user: {
+    id: string
+    email?: string
+  }
+  access_token: string
+  expires_at: number
+}
+
+interface SupabaseErrorResponse {
+  message: string
+}
+
 export class ElectronAuthAdapter implements AuthPort {
   private storage: StoragePort
   private supabaseUrl: string
@@ -62,11 +76,11 @@ export class ElectronAuthAdapter implements AuthPort {
     })
 
     if (!response.ok) {
-      const error = await response.json()
+      const error = await response.json() as SupabaseErrorResponse
       throw new Error(`Password sign in failed: ${error.message || response.statusText}`)
     }
 
-    const data = await response.json()
+    const data = await response.json() as SupabaseAuthResponse
 
     const session: Session = {
       userId: data.user.id,
@@ -87,9 +101,11 @@ export class ElectronAuthAdapter implements AuthPort {
 
   onAuthStateChange(callback: (session: Session | null) => void): () => void {
     // Electron環境では定期的にセッションをチェック
-    const interval = setInterval(async () => {
-      const session = await this.getSession()
-      callback(session)
+    const interval = setInterval(() => {
+      void (async () => {
+        const session = await this.getSession()
+        callback(session)
+      })()
     }, 5000) // 5秒ごとにチェック
 
     return () => {

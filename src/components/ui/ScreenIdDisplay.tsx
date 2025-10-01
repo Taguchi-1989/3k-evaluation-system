@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import { getScreenInfo, getCategoryColor } from '@/lib/screenMapping'
 
@@ -13,7 +14,7 @@ export function ScreenIdDisplay({
   variant = 'badge',
   showCategory = true,
   className = ''
-}: ScreenIdDisplayProps) {
+}: ScreenIdDisplayProps): React.JSX.Element {
   const pathname = usePathname()
   const screenInfo = getScreenInfo(pathname)
 

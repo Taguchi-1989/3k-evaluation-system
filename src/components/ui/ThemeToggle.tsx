@@ -1,7 +1,7 @@
 'use client'
 
+import React, { useState } from 'react'
 import { useTheme } from '@/contexts/ThemeContext'
-import { useState } from 'react'
 
 export interface ThemeToggleProps {
   variant?: 'button' | 'dropdown' | 'switch'
@@ -15,7 +15,7 @@ export function ThemeToggle({
   size = 'md',
   showLabel = false,
   className = ''
-}: ThemeToggleProps) {
+}: ThemeToggleProps): React.JSX.Element {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
 

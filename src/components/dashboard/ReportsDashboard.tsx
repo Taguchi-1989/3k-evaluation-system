@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import type { WorkItem } from '@/components/evaluation/EvaluationListView'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ interface ReportsDashboardProps {
   className?: string
 }
 
-export function ReportsDashboard({ workItems, className = '' }: ReportsDashboardProps) {
+export function ReportsDashboard({ workItems, className = '' }: ReportsDashboardProps): React.JSX.Element {
   const [selectedWorkItems, setSelectedWorkItems] = useState<string[]>([])
 
   // レポート生成統計

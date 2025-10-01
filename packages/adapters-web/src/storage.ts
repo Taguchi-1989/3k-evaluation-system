@@ -3,6 +3,9 @@
  * IndexedDB (idb) + localStorage
  */
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+
 import type { StoragePort, KV, BlobStore } from '@3k/ports'
 import { openDB, type IDBPDatabase } from 'idb'
 

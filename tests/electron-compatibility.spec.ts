@@ -224,7 +224,7 @@ test.describe('Electron vs Web 互換性テスト', () => {
     // Electronでデータ取得
     const retrieved = await window.evaluate((key) => {
       const data = localStorage.getItem(key)
-      return data ? JSON.parse(data) : null
+      return data ? JSON.parse(data) as unknown : null
     }, testKey)
 
     expect(retrieved).toEqual(testValue)

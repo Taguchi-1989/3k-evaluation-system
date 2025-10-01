@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { Header } from '@/components/layout'
 import { Card, CardContent, ThemeToggle } from '@/components/ui'
 import { useRouter } from 'next/navigation'
@@ -27,7 +28,7 @@ const defaultStats: SummaryStats = {
 export function AppHome({
   stats = defaultStats,
   onNavigate
-}: AppHomeProps) {
+}: AppHomeProps): React.JSX.Element {
   const router = useRouter()
   const { navigateToNewEvaluation, navigateToEvaluationList, navigateToDashboard } = useNavigation()
 

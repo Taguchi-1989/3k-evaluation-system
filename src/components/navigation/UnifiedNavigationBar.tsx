@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 // アイコンコンポーネント
@@ -37,7 +38,7 @@ export default function UnifiedNavigationBar({
   breadcrumbItems = [],
   showBackButton = true,
   customBackAction
-}: UnifiedNavigationBarProps) {
+}: UnifiedNavigationBarProps): React.JSX.Element {
   const router = useRouter()
 
   const handleBack = () => {

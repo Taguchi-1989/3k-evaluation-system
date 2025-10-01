@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui'
 
 export interface Posture {
@@ -47,7 +47,7 @@ export function PostureList({
   onPostureSelect,
   onAddPosture,
   className = ''
-}: PostureListProps) {
+}: PostureListProps): React.JSX.Element {
   const [selectedId, setSelectedId] = useState(
     postures.find(p => p.isSelected)?.id || postures[0]?.id
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Button } from '@/components/ui/Button'
 // アイコンはTextで代替表示
 
@@ -18,7 +18,7 @@ export function ImageUpload({
   maxFiles = 5,
   acceptedTypes = ['image/jpeg', 'image/png', 'image/webp'],
   className = ''
-}: ImageUploadProps) {
+}: ImageUploadProps): React.JSX.Element {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const [previewUrls, setPreviewUrls] = useState<string[]>([])
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -146,6 +146,7 @@ export function ImageUpload({
             {selectedFiles.map((file, index) => (
               <div key={index} className="relative border rounded-lg overflow-hidden bg-gray-50">
                 <div className="aspect-square">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={previewUrls[index]}
                     alt={`プレビュー ${index + 1}`}
@@ -187,7 +188,7 @@ export function ImageUpload({
           {onImageAnalyze && (
             <div className="flex justify-center">
               <Button
-                onClick={handleAnalyze}
+                onClick={() => { void handleAnalyze() }}
                 disabled={isAnalyzing || selectedFiles.length === 0}
                 variant="primary"
                 className="flex items-center gap-2"
