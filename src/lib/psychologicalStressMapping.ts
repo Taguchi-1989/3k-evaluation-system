@@ -275,7 +275,7 @@ export function calculateIntegratedStressScore(
   return {
     totalScore: Math.round(totalScore * 10) / 10,
     highestIntensity,
-    dominantEvent,
+    dominantEvent: dominantEvent ?? null,
     riskLevel
   };
 }
