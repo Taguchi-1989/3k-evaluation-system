@@ -1,7 +1,13 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
+import type {
+  SpeechRecognition,
+  SpeechRecognitionEvent,
+  SpeechRecognitionErrorEvent
+} from '@/types/web-speech-api'
+import { getSpeechRecognition, isSpeechRecognitionSupported } from '@/types/web-speech-api'
 
 export interface VoiceInputProps {
   onTranscription?: (text: string) => void
@@ -17,57 +23,59 @@ export function VoiceInput({
   disabled = false,
   className = '',
   placeholder = '音声で作業内容を説明してください'
-}: VoiceInputProps) {
+}: VoiceInputProps): React.JSX.Element {
   const [isRecording, setIsRecording] = useState(false)
   const [transcribedText, setTranscribedText] = useState('')
   const [error, setError] = useState<string | null>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
-  const recognitionRef = useRef<any>(null)
+  const recognitionRef = useRef<SpeechRecognition | null>(null)
 
   useEffect(() => {
     // Web Speech API の初期化
-    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition
-      recognitionRef.current = new SpeechRecognition()
+    if (isSpeechRecognitionSupported()) {
+      const SpeechRecognitionConstructor = getSpeechRecognition()
+      if (!SpeechRecognitionConstructor) return
+
+      recognitionRef.current = new SpeechRecognitionConstructor()
       recognitionRef.current.continuous = true
       recognitionRef.current.interimResults = true
       recognitionRef.current.lang = 'ja-JP'
 
-      recognitionRef.current.onresult = (event: any) => {
+      recognitionRef.current.onresult = (event: SpeechRecognitionEvent): void => {
         let finalTranscript = ''
         let interimTranscript = ''
 
         for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcript = event.results[i][0].transcript
-          if (event.results[i].isFinal) {
-            finalTranscript += transcript
+          const result = event.results[i]
+          const alternative = result[0]
+          if (result.isFinal) {
+            finalTranscript += alternative.transcript
           } else {
-            interimTranscript += transcript
+            interimTranscript += alternative.transcript
           }
         }
 
         const fullTranscript = finalTranscript || interimTranscript
         setTranscribedText(fullTranscript)
-        
+
         if (finalTranscript && onTranscription) {
           onTranscription(finalTranscript)
         }
       }
 
-      recognitionRef.current.onerror = (event: any) => {
+      recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent): void => {
         console.error('Speech recognition error:', event.error)
         setError(`音声認識エラー: ${event.error}`)
         setIsRecording(false)
       }
 
-      recognitionRef.current.onend = () => {
+      recognitionRef.current.onend = (): void => {
         setIsRecording(false)
       }
     }
 
-    return () => {
+    return (): void => {
       if (recognitionRef.current) {
         recognitionRef.current.stop()
       }
@@ -77,26 +85,26 @@ export function VoiceInput({
     }
   }, [onTranscription])
 
-  const startRecording = async () => {
+  const startRecording = async (): Promise<void> => {
     try {
       setError(null)
-      
+
       // 音声録音の開始
       if (onAudioCapture) {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
         mediaRecorderRef.current = new MediaRecorder(stream)
         audioChunksRef.current = []
 
-        mediaRecorderRef.current.ondataavailable = (event) => {
+        mediaRecorderRef.current.ondataavailable = (event: BlobEvent): void => {
           if (event.data.size > 0) {
             audioChunksRef.current.push(event.data)
           }
         }
 
-        mediaRecorderRef.current.onstop = () => {
+        mediaRecorderRef.current.onstop = (): void => {
           const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' })
           onAudioCapture(audioBlob)
-          stream.getTracks().forEach(track => track.stop())
+          stream.getTracks().forEach(track => { track.stop() })
         }
 
         mediaRecorderRef.current.start()
@@ -112,11 +120,12 @@ export function VoiceInput({
       setIsRecording(true)
     } catch (error) {
       console.error('Recording error:', error)
-      setError('マイクへのアクセスが拒否されました')
+      const errorMessage = error instanceof Error ? error.message : 'マイクへのアクセスが拒否されました'
+      setError(errorMessage)
     }
   }
 
-  const stopRecording = () => {
+  const stopRecording = (): void => {
     if (recognitionRef.current) {
       recognitionRef.current.stop()
     }
@@ -126,7 +135,7 @@ export function VoiceInput({
     setIsRecording(false)
   }
 
-  const clearTranscription = () => {
+  const clearTranscription = (): void => {
     setTranscribedText('')
     setError(null)
   }
@@ -135,7 +144,7 @@ export function VoiceInput({
     <div className={`bg-white border rounded-lg p-4 ${className}`}>
       <div className="flex items-center gap-3 mb-3">
         <Button
-          onClick={isRecording ? stopRecording : startRecording}
+          onClick={(): void => { void (isRecording ? stopRecording() : startRecording()) }}
           disabled={disabled}
           variant={isRecording ? "secondary" : "primary"}
           className={`flex items-center gap-2 ${isRecording ? 'bg-red-500 hover:bg-red-600' : ''}`}
@@ -154,7 +163,7 @@ export function VoiceInput({
             </>
           )}
         </Button>
-        
+
         {transcribedText && (
           <Button
             onClick={clearTranscription}
