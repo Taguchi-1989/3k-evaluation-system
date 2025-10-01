@@ -13,6 +13,10 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   plugins: ['@typescript-eslint'],
+  globals: {
+    React: 'readonly',
+    JSX: 'readonly',
+  },
   rules: {
     // Enforce type safety
     '@typescript-eslint/no-explicit-any': 'error',
@@ -55,5 +59,30 @@ module.exports = {
     '*.config.ts',
     '*.config.mjs',
     '3k-evaluation-app'
+  ],
+  overrides: [
+    {
+      // テストファイル用の設定
+      files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+      env: {
+        jest: true,
+        node: true
+      },
+      rules: {
+        'no-undef': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off'
+      }
+    },
+    {
+      // Next.jsページコンポーネント用の設定
+      files: ['src/app/**/page.tsx', 'src/app/**/layout.tsx', 'src/app/**/error.tsx', 'src/app/**/loading.tsx'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off'
+      }
+    }
   ]
 }

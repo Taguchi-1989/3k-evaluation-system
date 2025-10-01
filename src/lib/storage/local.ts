@@ -3,12 +3,39 @@
  * Web版（Vercel）で使用
  */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ComprehensiveEvaluation = any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type EvaluationSummary = any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type IEvaluationStorage = any;
+import type { Evaluation } from '@/types/evaluation'
+
+// Legacy type aliases for backward compatibility
+type ComprehensiveEvaluation = Evaluation & {
+  id: string
+  createdAt: Date
+  updatedAt: Date
+  physical?: { evaluatedAt: Date; [key: string]: unknown }
+  mental?: { evaluatedAt: Date; [key: string]: unknown }
+  environmental?: { evaluatedAt: Date; [key: string]: unknown }
+  hazard?: { evaluatedAt: Date; [key: string]: unknown }
+  workTime?: { evaluatedAt: Date; [key: string]: unknown }
+  totalScore?: number
+  status?: 'completed' | 'in_progress' | 'not_started'
+}
+
+interface EvaluationSummary {
+  total: number
+  completed: number
+  inProgress: number
+  notStarted: number
+  averageScore: number
+  latestEvaluations: ComprehensiveEvaluation[]
+}
+
+interface IEvaluationStorage {
+  save(evaluation: ComprehensiveEvaluation): Promise<string>
+  get(id: string): Promise<ComprehensiveEvaluation | null>
+  getAll(): Promise<ComprehensiveEvaluation[]>
+  update(id: string, updates: Partial<ComprehensiveEvaluation>): Promise<void>
+  delete(id: string): Promise<void>
+  getSummary(): Promise<EvaluationSummary>
+}
 
 const STORAGE_KEY = '3k-evaluations';
 
@@ -20,17 +47,20 @@ export class LocalStorage implements IEvaluationStorage {
     if (!data) return [];
 
     try {
-      const parsed = JSON.parse(data);
+      const parsed = JSON.parse(data) as Array<Record<string, unknown>>;
       // Date型を復元
-      return parsed.map((e: any) => ({
-        ...e,
-        createdAt: new Date(e.createdAt),
-        updatedAt: new Date(e.updatedAt),
-        physical: { ...e.physical, evaluatedAt: new Date(e.physical.evaluatedAt) },
-        mental: { ...e.mental, evaluatedAt: new Date(e.mental.evaluatedAt) },
-        environmental: { ...e.environmental, evaluatedAt: new Date(e.environmental.evaluatedAt) },
-        hazard: { ...e.hazard, evaluatedAt: new Date(e.hazard.evaluatedAt) },
-        workTime: { ...e.workTime, evaluatedAt: new Date(e.workTime.evaluatedAt) },
+      return parsed.map((e): ComprehensiveEvaluation => ({
+        ...(e as Evaluation),
+        id: (e.id as string) || '',
+        createdAt: new Date(e.createdAt as string),
+        updatedAt: new Date(e.updatedAt as string),
+        physical: e.physical ? { ...(e.physical as Record<string, unknown>), evaluatedAt: new Date((e.physical as { evaluatedAt: string }).evaluatedAt) } : undefined,
+        mental: e.mental ? { ...(e.mental as Record<string, unknown>), evaluatedAt: new Date((e.mental as { evaluatedAt: string }).evaluatedAt) } : undefined,
+        environmental: e.environmental ? { ...(e.environmental as Record<string, unknown>), evaluatedAt: new Date((e.environmental as { evaluatedAt: string }).evaluatedAt) } : undefined,
+        hazard: e.hazard ? { ...(e.hazard as Record<string, unknown>), evaluatedAt: new Date((e.hazard as { evaluatedAt: string }).evaluatedAt) } : undefined,
+        workTime: e.workTime ? { ...(e.workTime as Record<string, unknown>), evaluatedAt: new Date((e.workTime as { evaluatedAt: string }).evaluatedAt) } : undefined,
+        totalScore: e.totalScore as number | undefined,
+        status: e.status as 'completed' | 'in_progress' | 'not_started' | undefined,
       }));
     } catch (error) {
       console.error('Failed to parse evaluations from localStorage:', error);
