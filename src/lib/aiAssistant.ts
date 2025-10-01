@@ -20,7 +20,7 @@ export interface WorkAnalysisInput {
 export interface AIRecommendation {
   factorType: 'physical' | 'mental' | 'environmental' | 'hazard'
   confidence: number // 0-100の信頼度
-  recommendations: any[]
+  recommendations: Array<MentalFactorItem | EnvironmentalItem | Record<string, unknown>>
   reasoning: string
 }
 
@@ -93,6 +93,7 @@ class AIAssistantService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): AIAssistantService {
@@ -232,7 +233,7 @@ class AIAssistantService {
   /**
    * 音声入力からの推定（プロトタイプ）
    */
-  public async processVoiceInput(audioBlob: Blob): Promise<{
+  public async processVoiceInput(_audioBlob: Blob): Promise<{
     transcription: string
     analysis: AIAnalysisResult
   }> {
@@ -301,8 +302,8 @@ class AIAssistantService {
   }
 
   private generateRecommendations(
-    keywords: string[], 
-    analysis: any, 
+    _keywords: string[],
+    analysis: AIAnalysisResult['workAnalysis'],
     input: WorkAnalysisInput
   ): AIRecommendation[] {
     const recommendations: AIRecommendation[] = []
@@ -312,7 +313,7 @@ class AIAssistantService {
       recommendations.push({
         factorType: 'physical',
         confidence: 75,
-        recommendations: this.generatePhysicalRecommendations(keywords, analysis),
+        recommendations: this.generatePhysicalRecommendations(_keywords, analysis),
         reasoning: `作業内容から物理的負荷が${analysis.physicalDemand}レベルと推定されます`
       })
     }
@@ -340,12 +341,12 @@ class AIAssistantService {
     return recommendations
   }
 
-  private generatePhysicalRecommendations(keywords: string[], analysis: any): any[] {
+  private generatePhysicalRecommendations(_keywords: string[], _analysis: AIAnalysisResult['workAnalysis']): Array<Record<string, unknown>> {
     // 物理因子の推奨値生成ロジック（省略）
     return []
   }
 
-  private estimateScores(analysis: any, recommendations: AIRecommendation[]) {
+  private estimateScores(analysis: AIAnalysisResult['workAnalysis'], _recommendations: AIRecommendation[]) {
     // スコア推定ロジック
     const physical = analysis.physicalDemand === 'high' ? 6 : analysis.physicalDemand === 'medium' ? 3 : 1
     const mental = analysis.mentalDemand === 'high' ? 5 : analysis.mentalDemand === 'medium' ? 3 : 1  
