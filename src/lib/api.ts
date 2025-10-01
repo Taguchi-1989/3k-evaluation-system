@@ -27,10 +27,16 @@ export class ApiService {
       // 現在はモックデータを返す
       const evaluation: Evaluation = {
         id: `eval_${Date.now()}`,
-        ...form,
+        workName: form.workName || '',
+        factoryName: form.factoryName || '',
+        processName: form.processName || '',
+        workHearing: form.workHearing,
+        remarks: form.remarks,
+        finalScoreKitsusa: 0,
+        finalScore3K: 'E',
         createdAt: new Date(),
         updatedAt: new Date(),
-        createdBy: 'current_user', // 実際の実装では認証から取得
+        creatorId: 'current_user', // 実際の実装では認証から取得
         status: 'draft'
       };
 
@@ -55,16 +61,13 @@ export class ApiService {
         workName: form.workName || '',
         factoryName: form.factoryName || '',
         processName: form.processName || '',
-        workHearing: form.workHearing || '',
-        remarks: form.remarks || '',
-        physicalFactor: form.physicalFactor || {},
-        mentalFactor: form.mentalFactor || {},
-        environmentalFactor: form.environmentalFactor || {},
-        hazardFactor: form.hazardFactor || {},
-        workTime: form.workTime || { duration: 8, category: 'c' },
+        workHearing: form.workHearing,
+        remarks: form.remarks,
+        finalScoreKitsusa: 0,
+        finalScore3K: 'E',
         createdAt: new Date(),
         updatedAt: new Date(),
-        createdBy: 'current_user',
+        creatorId: 'current_user',
         status: 'draft'
       };
 
@@ -91,14 +94,11 @@ export class ApiService {
         processName: '△△工程',
         workHearing: '',
         remarks: '',
-        physicalFactor: {},
-        mentalFactor: {},
-        environmentalFactor: {},
-        hazardFactor: {},
-        workTime: { duration: 8, category: 'c' },
+        finalScoreKitsusa: 0,
+        finalScore3K: 'E',
         createdAt: new Date(),
         updatedAt: new Date(),
-        createdBy: 'current_user',
+        creatorId: 'current_user',
         status: 'draft'
       };
 
@@ -125,15 +125,12 @@ export class ApiService {
           processName: '△△工程',
           workHearing: '',
           remarks: '',
-          physicalFactor: {},
-          mentalFactor: {},
-          environmentalFactor: {},
-          hazardFactor: {},
-          workTime: { duration: 8, category: 'c' },
+          finalScoreKitsusa: 5,
+          finalScore3K: 'B',
           createdAt: new Date(),
           updatedAt: new Date(),
-          createdBy: 'current_user',
-          status: 'completed'
+          creatorId: 'current_user',
+          status: 'approved'
         },
         {
           id: 'eval_2',
@@ -142,14 +139,11 @@ export class ApiService {
           processName: '□□工程',
           workHearing: '',
           remarks: '',
-          physicalFactor: {},
-          mentalFactor: {},
-          environmentalFactor: {},
-          hazardFactor: {},
-          workTime: { duration: 6, category: 'b' },
+          finalScoreKitsusa: 3,
+          finalScore3K: 'D',
           createdAt: new Date(),
           updatedAt: new Date(),
-          createdBy: 'current_user',
+          creatorId: 'current_user',
           status: 'draft'
         }
       ];
@@ -186,6 +180,10 @@ export class ApiService {
       // Supabaseにファイルをアップロード
       const filePath = `evaluations/${Date.now()}-${file.name}`;
       
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+
       const { data, error } = await supabase.storage
         .from('photos')
         .upload(filePath, file);

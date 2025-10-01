@@ -216,7 +216,7 @@ export class EvaluationStandardsService {
    * 汚染レベルスコアを取得
    */
   public getContaminationScore(level: number): number {
-    const contaminationStandards = this.standards.environmental_factors.physical_conditions.contamination_levels;
+    const contaminationStandards = (this.standards.environmental_factors as { physical_conditions: { contamination_levels: { levels: Record<string, { score: number }> } } }).physical_conditions.contamination_levels;
     const levelKey = `level_${level}`;
     return contaminationStandards.levels[levelKey]?.score || 1;
   }
@@ -224,23 +224,23 @@ export class EvaluationStandardsService {
   /**
    * RULAスコア評価を取得
    */
-  public getRulaEvaluation(score: number) {
-    const rulaStandard = this.standards.physical_factors.rula_assessment;
+  public getRulaEvaluation(score: number): { level: string; score: number; action: string } {
+    const rulaStandard = (this.standards.physical_factors as { rula_assessment: { score_ranges: Record<string, { level: string; action: string }> } }).rula_assessment;
     const ranges = rulaStandard.score_ranges;
 
-    if (score >= 1 && score <= 2) return { level: ranges['1_2'].level, score: 1, action: ranges['1_2'].action };
-    if (score >= 3 && score <= 4) return { level: ranges['3_4'].level, score: 2, action: ranges['3_4'].action };
-    if (score >= 5 && score <= 6) return { level: ranges['5_6'].level, score: 4, action: ranges['5_6'].action };
-    if (score === 7) return { level: ranges['7'].level, score: 7, action: ranges['7'].action };
-    
+    if (score >= 1 && score <= 2) return { level: ranges['1_2']?.level ?? 'unknown', score: 1, action: ranges['1_2']?.action ?? 'unknown' };
+    if (score >= 3 && score <= 4) return { level: ranges['3_4']?.level ?? 'unknown', score: 2, action: ranges['3_4']?.action ?? 'unknown' };
+    if (score >= 5 && score <= 6) return { level: ranges['5_6']?.level ?? 'unknown', score: 4, action: ranges['5_6']?.action ?? 'unknown' };
+    if (score === 7) return { level: ranges['7']?.level ?? 'unknown', score: 7, action: ranges['7']?.action ?? 'unknown' };
+
     return { level: 'unknown', score: 1, action: 'unknown' };
   }
 
   /**
    * OWASカテゴリ評価を取得
    */
-  public getOwasEvaluation(category: number) {
-    const owasStandard = this.standards.physical_factors.owas_assessment;
+  public getOwasEvaluation(category: number): { level: string; score: number; action: string } {
+    const owasStandard = (this.standards.physical_factors as { owas_assessment: { categories: Record<string, { level: string; action: string }> } }).owas_assessment;
     const categories = owasStandard.categories;
     
     const categoryData = categories[category.toString()];
@@ -260,13 +260,13 @@ export class EvaluationStandardsService {
    * 重量取扱いスコアを計算
    */
   public calculateWeightScore(weight: number, handType: 'both_hands' | 'single_hand', workType: 'light_work' | 'moderate_work' | 'heavy_work', frequency: 'continuous' | 'frequent' | 'occasional' | 'rare', posture: 'optimal' | 'good' | 'fair' | 'poor'): number {
-    const weightStandards = this.standards.physical_factors.weight_limits;
-    const limits = weightStandards.lifting_limits[handType];
-    const frequencyFactor = weightStandards.frequency_factors[frequency];
-    const postureFactor = weightStandards.posture_factors[posture];
+    const weightStandards = (this.standards.physical_factors as { weight_limits: { lifting_limits: Record<string, Record<string, number>>; frequency_factors: Record<string, number>; posture_factors: Record<string, number> } }).weight_limits;
+    const limits = weightStandards.lifting_limits[handType] || {};
+    const frequencyFactor = weightStandards.frequency_factors[frequency] || 1;
+    const postureFactor = weightStandards.posture_factors[posture] || 1;
     
     // 調整後の制限重量を計算
-    const adjustedLimit = limits[workType] * frequencyFactor * postureFactor;
+    const adjustedLimit = (limits[workType] || 25) * frequencyFactor * postureFactor;
     
     // スコア計算
     if (weight >= adjustedLimit * 1.5) return 7;
@@ -279,11 +279,11 @@ export class EvaluationStandardsService {
    * 精神因の仕事の質スコアを計算
    */
   public calculateWorkQualityScore(failureLevel: 'very_low' | 'low' | 'medium' | 'high', lossLevel: 'minimal' | 'moderate' | 'significant' | 'critical'): number {
-    const workQualityStandards = this.standards.mental_factors.work_quality_assessment.failure_assessment;
-    
-    const failureScore = workQualityStandards.failure_frequency_levels[failureLevel].score;
-    const lossScore = workQualityStandards.loss_impact_levels[lossLevel].score;
-    
+    const workQualityStandards = (this.standards.mental_factors as { work_quality_assessment: { failure_assessment: { failure_frequency_levels: Record<string, { score: number }>; loss_impact_levels: Record<string, { score: number }> } } }).work_quality_assessment.failure_assessment;
+
+    const failureScore = workQualityStandards.failure_frequency_levels[failureLevel]?.score ?? 1;
+    const lossScore = workQualityStandards.loss_impact_levels[lossLevel]?.score ?? 1;
+
     // 失敗頻度と損失影響度の積で最終スコアを計算
     return Math.min(failureScore * lossScore, 10);
   }
@@ -292,8 +292,8 @@ export class EvaluationStandardsService {
    * 精神因の集中度スコアを計算
    */
   public calculateConcentrationScore(concentrationLevel: 'very_low' | 'low' | 'moderate' | 'high' | 'very_high'): number {
-    const concentrationStandards = this.standards.mental_factors.work_quality_assessment.concentration_levels;
-    return concentrationStandards[concentrationLevel].score;
+    const concentrationStandards = (this.standards.mental_factors as { work_quality_assessment: { concentration_levels: Record<string, { score: number }> } }).work_quality_assessment.concentration_levels;
+    return concentrationStandards[concentrationLevel]?.score || 1;
   }
 
   /**
@@ -314,13 +314,13 @@ export class EvaluationStandardsService {
   /**
    * 作業時間スコアファクターを取得
    */
-  public getWorkTimeScoreFactor(hours: number): { category: string, factor: number } {
-    const timeStandards = this.standards.work_time_factors.time_classification.time_categories;
-    
-    if (hours >= 8) return { category: 'd', factor: timeStandards.d.score_factor };
-    if (hours >= 4) return { category: 'c', factor: timeStandards.c.score_factor };
-    if (hours >= 1) return { category: 'b', factor: timeStandards.b.score_factor };
-    return { category: 'a', factor: timeStandards.a.score_factor };
+  public getWorkTimeScoreFactor(hours: number): { category: string; factor: number } {
+    const timeStandards = (this.standards.work_time_factors as { time_classification: { time_categories: Record<string, { score_factor: number }> } }).time_classification.time_categories;
+
+    if (hours >= 8) return { category: 'd', factor: timeStandards.d?.score_factor ?? 1.0 };
+    if (hours >= 4) return { category: 'c', factor: timeStandards.c?.score_factor ?? 0.75 };
+    if (hours >= 1) return { category: 'b', factor: timeStandards.b?.score_factor ?? 0.5 };
+    return { category: 'a', factor: timeStandards.a?.score_factor ?? 0.25 };
   }
 
   /**
@@ -334,7 +334,7 @@ export class EvaluationStandardsService {
    * 特定カテゴリの基準値を検索
    */
   public findStandardsByCategory(category: string): Record<string, unknown> {
-    return getStandardByCategory(category);
+    return getStandardByCategory(category) as unknown as Record<string, unknown>;
   }
 }
 

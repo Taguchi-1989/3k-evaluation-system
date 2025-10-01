@@ -46,6 +46,10 @@ export class EvaluationService {
       updated_at: new Date().toISOString()
     }
 
+    if (!supabase) {
+      throw new Error('Supabase client is not initialized')
+    }
+
     if (workItem.id && workItem.id !== 'new') {
       // 既存データの更新
       const { data, error } = await supabase
@@ -76,6 +80,10 @@ export class EvaluationService {
 
   // 評価データを取得
   async getEvaluation(id: string, userId: string): Promise<SavedEvaluation | null> {
+    if (!supabase) {
+      throw new Error('Supabase client is not initialized')
+    }
+
     const { data, error } = await supabase
       .from('evaluations')
       .select('*')
@@ -93,6 +101,10 @@ export class EvaluationService {
 
   // ユーザーの評価データ一覧を取得
   async getUserEvaluations(userId: string): Promise<SavedEvaluation[]> {
+    if (!supabase) {
+      throw new Error('Supabase client is not initialized')
+    }
+
     const { data, error } = await supabase
       .from('evaluations')
       .select('*')
@@ -105,6 +117,10 @@ export class EvaluationService {
 
   // 評価データを削除
   async deleteEvaluation(id: string, userId: string): Promise<boolean> {
+    if (!supabase) {
+      throw new Error('Supabase client is not initialized')
+    }
+
     const { error } = await supabase
       .from('evaluations')
       .delete()

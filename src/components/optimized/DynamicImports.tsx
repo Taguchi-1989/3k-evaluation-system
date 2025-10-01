@@ -27,7 +27,7 @@ export const PhysicalFactorDetailDynamic = dynamic(
 )
 
 export const MentalFactorDetailDynamic = dynamic(
-  () => import('@/components/evaluation/MentalFactorDetail'),
+  () => import('@/components/evaluation/MentalFactorDetail').then(mod => ({ default: mod.MentalFactorDetail })),
   {
     loading: () => <EvaluationSkeleton />,
     ssr: false, // 重いコンポーネントはSSR無効化
@@ -35,7 +35,7 @@ export const MentalFactorDetailDynamic = dynamic(
 )
 
 export const EnvironmentalFactorDetailDynamic = dynamic(
-  () => import('@/components/evaluation/EnvironmentalFactorDetail'),
+  () => import('@/components/evaluation/EnvironmentalFactorDetail').then(mod => ({ default: mod.EnvironmentalFactorDetail })),
   {
     loading: () => <EvaluationSkeleton />,
     ssr: false,
@@ -43,7 +43,7 @@ export const EnvironmentalFactorDetailDynamic = dynamic(
 )
 
 export const HazardFactorDetailDynamic = dynamic(
-  () => import('@/components/evaluation/HazardFactorDetail'),
+  () => import('@/components/evaluation/HazardFactorDetail').then(mod => ({ default: mod.HazardFactorDetail })),
   {
     loading: () => <EvaluationSkeleton />,
     ssr: false,
@@ -51,7 +51,7 @@ export const HazardFactorDetailDynamic = dynamic(
 )
 
 export const WorkTimeDetailDynamic = dynamic(
-  () => import('@/components/evaluation/WorkTimeDetail'),
+  () => import('@/components/evaluation/WorkTimeDetail').then(mod => ({ default: mod.WorkTimeDetail })),
   {
     loading: () => <EvaluationSkeleton />,
     ssr: false,
@@ -102,7 +102,7 @@ export const DashboardChartsDynamic = dynamic(
 
 // 評価リストビューの動的インポート
 export const EvaluationListViewDynamic = dynamic(
-  () => import('@/components/evaluation/EvaluationListView'),
+  () => import('@/components/evaluation/EvaluationListView').then(mod => ({ default: mod.EvaluationListView })),
   {
     loading: () => <LoadingSpinner />,
     ssr: false,
@@ -111,7 +111,7 @@ export const EvaluationListViewDynamic = dynamic(
 
 // AI機能コンポーネントの動的インポート（特に重い）
 export const AIComprehensiveAssistantDynamic = dynamic(
-  () => import('@/components/ui/AIComprehensiveAssistant'),
+  () => import('@/components/ui/AIComprehensiveAssistant').then(mod => ({ default: mod.AIComprehensiveAssistant })),
   {
     loading: () => <LoadingSpinner />,
     ssr: false,
@@ -128,7 +128,7 @@ export const AIComprehensiveAssistantDynamic = dynamic(
 // )
 
 export const PhotoViewerDynamic = dynamic(
-  () => import('@/components/evaluation/PhotoViewer'),
+  () => import('@/components/evaluation/PhotoViewer').then(mod => ({ default: mod.PhotoViewer })),
   {
     loading: () => <LoadingSpinner />,
     ssr: false,

@@ -173,7 +173,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       value={event.accidentDate.toISOString().split('T')[0]}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
-                        newHistory[index].accidentDate = new Date(e.target.value)
+                        if (newHistory[index]) {
+                          newHistory[index].accidentDate = new Date(e.target.value)
+                        }
                         setAccidentHistory(newHistory)
                       }}
                       className="w-full p-2 border border-gray-300 rounded-md"
@@ -189,7 +191,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       value={event.accidentType}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
-                        newHistory[index].accidentType = e.target.value
+                        if (newHistory[index]) {
+                          newHistory[index].accidentType = e.target.value
+                        }
                         setAccidentHistory(newHistory)
                       }}
                       placeholder="例：挟まれ・巻き込まれ"
@@ -205,7 +209,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       value={event.severity}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
-                        newHistory[index].severity = e.target.value as AccidentHistoryEvent['severity']
+                        if (newHistory[index]) {
+                          newHistory[index].severity = e.target.value as AccidentHistoryEvent['severity']
+                        }
                         setAccidentHistory(newHistory)
                       }}
                       className="w-full p-2 border border-gray-300 rounded-md"
@@ -226,7 +232,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       value={event.rootCause}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
-                        newHistory[index].rootCause = e.target.value
+                        if (newHistory[index]) {
+                          newHistory[index].rootCause = e.target.value
+                        }
                         setAccidentHistory(newHistory)
                       }}
                       placeholder="例：安全装置の未使用、手順書の不備"
@@ -242,7 +250,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       value={event.effectiveness}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
-                        newHistory[index].effectiveness = e.target.value as AccidentHistoryEvent['effectiveness']
+                        if (newHistory[index]) {
+                          newHistory[index].effectiveness = e.target.value as AccidentHistoryEvent['effectiveness']
+                        }
                         setAccidentHistory(newHistory)
                       }}
                       className="w-full p-2 border border-gray-300 rounded-md"
@@ -466,7 +476,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     value={risk.riskDescription}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
-                      newRisks[index].riskDescription = e.target.value
+                      if (newRisks[index]) {
+                        newRisks[index].riskDescription = e.target.value
+                      }
                       setOngoingRisks(newRisks)
                     }}
                     className="w-full p-2 border border-gray-300 rounded-md"
@@ -481,7 +493,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     value={risk.recurrenceProbability}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
-                      newRisks[index].recurrenceProbability = e.target.value as any
+                      if (newRisks[index]) {
+                        newRisks[index].recurrenceProbability = e.target.value as any
+                      }
                       setOngoingRisks(newRisks)
                     }}
                     className="w-full p-2 border border-gray-300 rounded-md"
@@ -502,7 +516,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     value={risk.potentialImpact}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
-                      newRisks[index].potentialImpact = e.target.value as any
+                      if (newRisks[index]) {
+                        newRisks[index].potentialImpact = e.target.value as any
+                      }
                       setOngoingRisks(newRisks)
                     }}
                     className="w-full p-2 border border-gray-300 rounded-md"
@@ -522,7 +538,9 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     value={risk.currentStatus}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
-                      newRisks[index].currentStatus = e.target.value as any
+                      if (newRisks[index]) {
+                        newRisks[index].currentStatus = e.target.value as any
+                      }
                       setOngoingRisks(newRisks)
                     }}
                     className="w-full p-2 border border-gray-300 rounded-md"

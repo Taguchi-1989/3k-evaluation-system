@@ -42,10 +42,10 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      if (isElectron()) {
+      if (isElectron() && window.electronAPI) {
         // Electron環境: SQLiteデータベースに保存
-        const result = await electronDB.saveEvaluation(evaluation);
-        return result.id;
+        const result = await window.electronAPI.evaluation.save(evaluation as unknown as Evaluation);
+        return (result.data as Evaluation | undefined)?.id ?? null;
       } else {
         // Web環境: localStorageに保存
         const id = `eval_${Date.now()}`;
@@ -75,9 +75,10 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      if (isElectron()) {
+      if (isElectron() && window.electronAPI) {
         // Electron環境: SQLiteから読み込み
-        return await electronDB.loadEvaluation(id);
+        const result = await window.electronAPI.evaluation.load<Evaluation>(id);
+        return result.data ?? null;
       } else {
         // Web環境: localStorageから読み込み
         const existingData = localStorage.getItem('evaluations');
@@ -98,9 +99,10 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      if (isElectron()) {
+      if (isElectron() && window.electronAPI) {
         // Electron環境: SQLiteから一覧取得
-        return await electronDB.listEvaluations(filters);
+        const result = await window.electronAPI.evaluation.list<Evaluation>(filters);
+        return result.data ?? [];
       } else {
         // Web環境: localStorageから一覧取得
         const existingData = localStorage.getItem('evaluations');
@@ -139,10 +141,10 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      if (isElectron()) {
+      if (isElectron() && window.electronAPI) {
         // Electron環境: SQLiteから削除
-        await electronDB.deleteEvaluation(id);
-        return true;
+        const result = await window.electronAPI.evaluation.delete(id);
+        return result.success;
       } else {
         // Web環境: localStorageから削除
         const existingData = localStorage.getItem('evaluations');
@@ -212,9 +214,13 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      if (isElectron()) {
+      if (isElectron() && window.electronAPI) {
         // Electron環境: SQLiteから設定取得
-        return await electronDB.getSetting(key);
+        const result = await window.electronAPI.database.query<{ value: string }>(
+          'SELECT value FROM settings WHERE key = ?',
+          [key]
+        );
+        return result.data ? JSON.parse(result.data.value) : null;
       } else {
         // Web環境: localStorageから設定取得
         const value = localStorage.getItem(`setting_${key}`);
@@ -232,10 +238,13 @@ export const useDatabase = (): DatabaseHook => {
     setError(null);
 
     try {
-      if (isElectron()) {
+      if (isElectron() && window.electronAPI) {
         // Electron環境: SQLiteに設定保存
-        await electronDB.setSetting(key, value);
-        return true;
+        const result = await window.electronAPI.database.query(
+          'INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)',
+          [key, JSON.stringify(value)]
+        );
+        return result.success;
       } else {
         // Web環境: localStorageに設定保存
         localStorage.setItem(`setting_${key}`, JSON.stringify(value));

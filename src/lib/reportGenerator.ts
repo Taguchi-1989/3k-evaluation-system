@@ -576,16 +576,16 @@ ${JSON.stringify(evaluationResult.calculationDetails, null, 2)}
   private analyzeMentalFactor(details: MentalDetails): string {
     let analysis = '**精神的負担の分析結果:**\n\n';
 
-    if (details.complexity) {
-      analysis += `- 作業複雑性: レベル${details.complexity}\n`;
-    }
-    
-    if (details.concentration) {
-      analysis += `- 集中力要求度: レベル${details.concentration}\n`;
+    if (details.workQuality?.cognitiveLoad) {
+      analysis += `- 作業複雑性: レベル${details.workQuality.cognitiveLoad.level}\n`;
     }
 
-    if (details.responsibility) {
-      analysis += `- 責任の重さ: レベル${details.responsibility}\n`;
+    if (details.workQuality?.concentration) {
+      analysis += `- 集中力要求度: レベル${details.workQuality.concentration.level}\n`;
+    }
+
+    if (details.workQuality?.emotionalBurden) {
+      analysis += `- 責任の重さ: レベル${details.workQuality.emotionalBurden.level}\n`;
     }
 
     return analysis;
@@ -594,19 +594,28 @@ ${JSON.stringify(evaluationResult.calculationDetails, null, 2)}
   private analyzeEnvironmentalFactor(details: EnvironmentalDetails, substances?: EnvironmentalSubstance[]): string {
     let analysis = '**環境要因の分析結果:**\n\n';
 
-    if (details.checkboxes?.chemicals && substances) {
+    if (substances && substances.length > 0) {
       analysis += '**化学物質暴露:**\n';
       for (const substance of substances) {
-        analysis += `- ${substance.substanceName}: ${substance.measuredValue}${substance.measurementUnit} (基準値: ${substance.standardValue}${substance.measurementUnit})\n`;
+        const standardValue = substance.permissibleConcentration ?? substance.thresholdValue ?? 0;
+        analysis += `- ${substance.substanceName}: ${substance.measuredValue} (基準値: ${standardValue})\n`;
       }
     }
 
-    if (details.checkboxes?.noise) {
-      analysis += '- 騒音環境での作業が確認されています\n';
+    if (details.noise) {
+      analysis += `- 騒音レベル: ${details.noise}dB\n`;
     }
 
-    if (details.checkboxes?.temperature) {
-      analysis += '- 温度環境の影響が考慮されています\n';
+    if (details.temperature) {
+      analysis += `- 温度: ${details.temperature}℃\n`;
+    }
+
+    if (details.dust) {
+      analysis += `- 粉じん濃度: ${details.dust}mg/m³\n`;
+    }
+
+    if (details.vibration) {
+      analysis += `- 振動レベル: ${details.vibration}m/s²\n`;
     }
 
     return analysis;
