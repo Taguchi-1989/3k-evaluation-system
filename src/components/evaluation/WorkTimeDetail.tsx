@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Header } from '@/components/layout'
 import { FileUpload, Input, Button } from '@/components/ui'
 import { EVALUATION_STANDARDS, DEFAULT_EVALUATION_DATA } from '@/data/defaultEvaluationData'
@@ -35,12 +35,26 @@ export interface WorkTimeDetailProps {
   workers?: Worker[]
 }
 
+interface WorkerData {
+  name: string
+  laborTime: number
+  actualWorkTime: number
+  timeClass?: string
+}
+
+interface WorkTimeFactorData {
+  workers?: WorkerData[]
+}
+
 // デフォルトデータから作業時間項目を生成
 const generateWorkers = (): Worker[] => {
-  const workTimeStandards = EVALUATION_STANDARDS.workTime
-  const defaultData = (DEFAULT_EVALUATION_DATA as any).workTimeFactor ?? DEFAULT_EVALUATION_DATA.workTimeDefaults
+  const _workTimeStandards = EVALUATION_STANDARDS.workTime
+  const defaultData = DEFAULT_EVALUATION_DATA as Record<string, unknown>
+  const workTimeFactor = (defaultData.workTimeFactor ?? defaultData.workTimeDefaults ?? {}) as WorkTimeFactorData
 
-  return ((defaultData as any).workers ?? []).map((worker: any, index: number) => ({
+  const workers = workTimeFactor.workers ?? []
+
+  return workers.map((worker: WorkerData, index: number): Worker => ({
     id: `${index + 1}`,
     name: worker.name,
     laborTime: worker.laborTime,
@@ -76,7 +90,7 @@ export function WorkTimeDetail({
   workInfo,
   photoUrl = 'https://placehold.co/600x450/e5e7eb/4b5563?text=Photo',
   workers = defaultWorkers
-}: WorkTimeDetailProps) {
+}: WorkTimeDetailProps): React.JSX.Element {
   const [workerList, setWorkerList] = useState(workers)
   const [maxTime, setMaxTime] = useState(0)
   const [maxTimeClass, setMaxTimeClass] = useState('')
@@ -95,7 +109,7 @@ export function WorkTimeDetail({
     return Math.round((actualWorkTime / laborTime) * 100)
   }
 
-  const updateWorker = (id: string, field: 'laborTime' | 'actualWorkTime', value: string) => {
+  const updateWorker = (id: string, field: 'laborTime' | 'actualWorkTime', value: string): void => {
     setWorkerList(prev => prev.map(worker => {
       if (worker.id === id) {
         const updated = { ...worker }
@@ -143,11 +157,11 @@ export function WorkTimeDetail({
     setMaxWorkerId(maxId)
   }, [workerList])
 
-  const handleFileUpload = (files: FileList) => {
+  const handleFileUpload = (_files: FileList): void => {
     // TODO: Process uploaded files
   }
 
-  const handleBackToMain = () => {
+  const _handleBackToMain = (): void => {
     window.location.href = '/evaluation/new'
   }
 
