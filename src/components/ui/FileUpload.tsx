@@ -469,9 +469,9 @@ export function FileUpload({
       {/* ファイルプレビューモーダル */}
       {previewFile && (
         <FilePreview
-          fileName={previewFile.name}
-          fileUrl={previewFile.url}
-          fileType={getFileType(previewFile.name)}
+          fileName={previewFile?.name ?? ''}
+          fileUrl={previewFile?.url ?? ''}
+          fileType={getFileType(previewFile?.name ?? '')}
           isOpen={!!previewFile}
           onClose={() => setPreviewFile(null)}
         />

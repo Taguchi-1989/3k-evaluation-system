@@ -359,8 +359,8 @@ export const DEFAULT_EVALUATION_DATA = {
         frequency: 8,
         description: '通常の立位作業姿勢'
       }
-    ] as Posture[]
-  } as PhysicalDetails,
+    ] as unknown as Posture[]
+  } as unknown as PhysicalDetails,
 
   // 精神因子デフォルトデータ
   mentalDefaults: {
@@ -446,7 +446,7 @@ export const DEFAULT_EVALUATION_DATA = {
         protectionLevel: 'medium' as const,
         riskLevel: 2
       }
-    ] as EnvironmentalSubstance[]
+    ] as unknown as EnvironmentalSubstance[]
   } as EnvironmentalDetails,
 
   // 危険因子デフォルトデータ
@@ -471,7 +471,7 @@ export const DEFAULT_EVALUATION_DATA = {
         description: 'クレーン作業時の落下物リスク'
       }
     ]
-  } as HazardDetails,
+  } as unknown as HazardDetails,
 
   // 作業時間デフォルトデータ
   workTimeDefaults: {
@@ -482,7 +482,7 @@ export const DEFAULT_EVALUATION_DATA = {
     timeClass: 'E' as const,
     fatigueIndex: 7.5,
     workIntensity: 3
-  } as WorkTimeFactor
+  } as unknown as WorkTimeFactor
 }
 
 // サンプル作業データセット
