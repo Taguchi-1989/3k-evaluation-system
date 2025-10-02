@@ -575,7 +575,7 @@ export function PhysicalFactorDetail({
                 <span className="truncate">{selectedEvaluationMethod}</span>
                 <svg
                   aria-hidden="true"
-                  className={`w-3 h-3 ml-1 transition-transform ${isMethodDropdownOpen ? \'rotate-180\' : \'rotate-0\'}`}
+                  className={`w-3 h-3 ml-1 transition-transform ${isMethodDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
                 >
                   <path d="M6 9L12 3L18 9" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
