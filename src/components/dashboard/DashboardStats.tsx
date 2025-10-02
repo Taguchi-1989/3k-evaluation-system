@@ -119,15 +119,15 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
           <div className="flex h-3 rounded-full overflow-hidden">
             <div 
               className="bg-red-500" 
-              style={{ width: `${(highRiskItems/totalItems)*100}%` }}
+              style={{ width: `${(highRiskItems/totalItems)*100}%` } as React.CSSProperties}
             ></div>
             <div 
               className="bg-orange-500" 
-              style={{ width: `${(mediumRiskItems/totalItems)*100}%` }}
+              style={{ width: `${(mediumRiskItems/totalItems)*100}%` } as React.CSSProperties}
             ></div>
             <div 
               className="bg-green-500" 
-              style={{ width: `${((totalItems - highRiskItems - mediumRiskItems)/totalItems)*100}%` }}
+              style={{ width: `${((totalItems - highRiskItems - mediumRiskItems)/totalItems)*100}%` } as React.CSSProperties}
             ></div>
           </div>
         </div>
@@ -145,7 +145,7 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
             <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
               <div 
                 className="bg-blue-500 h-2 rounded-full" 
-                style={{ width: `${(avgPhysical/10)*100}%` }}
+                style={{ width: `${(avgPhysical/10)*100}%` } as React.CSSProperties}
               ></div>
             </div>
           </div>
@@ -157,7 +157,7 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
             <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
               <div 
                 className="bg-purple-500 h-2 rounded-full" 
-                style={{ width: `${(avgMental/10)*100}%` }}
+                style={{ width: `${(avgMental/10)*100}%` } as React.CSSProperties}
               ></div>
             </div>
           </div>
@@ -169,7 +169,7 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
             <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
               <div 
                 className="bg-green-500 h-2 rounded-full" 
-                style={{ width: `${(avgEnvironmental/10)*100}%` }}
+                style={{ width: `${(avgEnvironmental/10)*100}%` } as React.CSSProperties}
               ></div>
             </div>
           </div>
@@ -181,7 +181,7 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
             <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
               <div 
                 className="bg-red-500 h-2 rounded-full" 
-                style={{ width: `${(avgHazard/10)*100}%` }}
+                style={{ width: `${(avgHazard/10)*100}%` } as React.CSSProperties}
               ></div>
             </div>
           </div>
