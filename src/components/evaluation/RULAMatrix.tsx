@@ -44,10 +44,12 @@ export function RULAMatrix({
         
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium mb-1">上腕姿勢スコア (1-6)</label>
-            <input 
-              type="range" 
-              min="1" 
+            <label htmlFor="upper-arm-score" className="block text-xs font-medium mb-1">上腕姿勢スコア (1-6)</label>
+            <input
+              id="upper-arm-score"
+              aria-label="上腕姿勢スコア（1から6）"
+              type="range"
+              min="1"
               max="6" 
               value={selectedTabA}
               onChange={(e) => setSelectedTabA(parseInt(e.target.value))}
@@ -85,10 +87,12 @@ export function RULAMatrix({
         
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium mb-1">首・体幹・脚スコア (1-7)</label>
-            <input 
-              type="range" 
-              min="1" 
+            <label htmlFor="neck-trunk-leg-score" className="block text-xs font-medium mb-1">首・体幹・脚スコア (1-7)</label>
+            <input
+              id="neck-trunk-leg-score"
+              aria-label="首・体幹・脚スコア（1から7）"
+              type="range"
+              min="1"
               max="7" 
               value={selectedTabB}
               onChange={(e) => setSelectedTabB(parseInt(e.target.value))}
@@ -173,9 +177,8 @@ export function RULAMatrix({
                         return (
                           <td
                             key={cIdx}
-                            className={getCellClasses(value, rIdx, cIdx)}
+                            className={`${getCellClasses(value, rIdx, cIdx)} ${isSelected ? 'opacity-100' : 'opacity-70'}`}
                             onClick={() => handleCellClick(rIdx, cIdx, value)}
-                            style={{ opacity: isSelected ? 1 : 0.7 }}
                           >
                             <div className="text-center">
                               <div className="font-bold">{value}</div>
