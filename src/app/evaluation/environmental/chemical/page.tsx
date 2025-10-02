@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { Button, Input } from '@/components/ui'
 
@@ -15,7 +15,7 @@ interface ChemicalSubstance {
   hazardCategory: 'low' | 'medium' | 'high' | 'critical'
 }
 
-export default function ChemicalEvaluationPage(): React.JSX.Element {
+function ChemicalEvaluationPageContent(): React.JSX.Element {
   const [selectedSubstances, setSelectedSubstances] = useState<ChemicalSubstance[]>([
     {
       id: '1',
@@ -246,11 +246,13 @@ export default function ChemicalEvaluationPage(): React.JSX.Element {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">単位</label>
-                    <select 
+                    <label htmlFor="substance-unit" className="block text-sm font-medium mb-1">単位</label>
+                    <select
+                      id="substance-unit"
                       value={newSubstance.unit || 'ppm'}
                       onChange={(e) => setNewSubstance(prev => ({...prev, unit: e.target.value}))}
                       className="w-full p-2 border border-gray-300 rounded-md text-sm"
+                      aria-label="物質の単位を選択"
                     >
                       <option value="ppm">ppm</option>
                       <option value="mg/m³">mg/m³</option>
@@ -261,11 +263,13 @@ export default function ChemicalEvaluationPage(): React.JSX.Element {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-1">危険度カテゴリ</label>
-                  <select 
+                  <label htmlFor="hazard-category" className="block text-sm font-medium mb-1">危険度カテゴリ</label>
+                  <select
+                    id="hazard-category"
                     value={newSubstance.hazardCategory || 'low'}
                     onChange={(e) => setNewSubstance(prev => ({...prev, hazardCategory: e.target.value as 'low' | 'medium' | 'high' | 'critical'}))}
                     className="w-full p-2 border border-gray-300 rounded-md"
+                    aria-label="危険度カテゴリを選択"
                   >
                     <option value="low">低危険度</option>
                     <option value="medium">中危険度</option>
@@ -418,5 +422,17 @@ export default function ChemicalEvaluationPage(): React.JSX.Element {
         }
       />
     </div>
+  )
+}
+
+export default function ChemicalEvaluationPage(): React.JSX.Element {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-400">読み込み中...</div>
+      </div>
+    }>
+      <ChemicalEvaluationPageContent />
+    </Suspense>
   )
 }

@@ -112,11 +112,13 @@ export default function ReportsPage(): React.JSX.Element {
           {/* 評価選択 */}
           {evaluations.length > 0 && activeTab === 'generate' && (
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium">対象評価:</label>
+              <label htmlFor="target-evaluation" className="text-sm font-medium">対象評価:</label>
               <select
+                id="target-evaluation"
                 value={selectedEvaluationId}
                 onChange={(e) => setSelectedEvaluationId(e.target.value)}
                 className="p-2 border rounded text-sm"
+                aria-label="レポート対象の評価を選択"
               >
                 <option value="">最新の評価</option>
                 {evaluations.map(evaluation => (

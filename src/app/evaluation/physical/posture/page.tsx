@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Header, Footer } from '@/components/layout'
 import { AspectContainer, AspectHeader, AspectMain, AspectFooter, Button, Input } from '@/components/ui'
 import { PostureList } from '@/components/evaluation'
 
-export default function PostureInputPage(): React.JSX.Element {
+function PostureInputPageContent(): React.JSX.Element {
   const [selectedPosture, setSelectedPosture] = useState<string>('')
 
   const handlePostureSelect = (postureId: string) => {
@@ -99,8 +99,12 @@ export default function PostureInputPage(): React.JSX.Element {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium mb-1">負荷レベル</label>
-                    <select className="w-full p-2 border border-gray-300 rounded-md">
+                    <label htmlFor="load-level" className="block text-sm font-medium mb-1">負荷レベル</label>
+                    <select
+                      id="load-level"
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                      aria-label="負荷レベルを選択"
+                    >
                       <option>低負荷</option>
                       <option>中負荷</option>
                       <option>高負荷</option>
@@ -152,5 +156,17 @@ export default function PostureInputPage(): React.JSX.Element {
         />
       </AspectFooter>
     </AspectContainer>
+  )
+}
+
+export default function PostureInputPage(): React.JSX.Element {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-400">読み込み中...</div>
+      </div>
+    }>
+      <PostureInputPageContent />
+    </Suspense>
   )
 }

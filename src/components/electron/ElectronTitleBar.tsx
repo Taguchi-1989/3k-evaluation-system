@@ -83,8 +83,9 @@ export const ElectronTitleBar: React.FC<ElectronTitleBarProps> = ({
             "
             style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
             title="最小化"
+            aria-label="ウィンドウを最小化"
           >
-            <svg width="10" height="1" viewBox="0 0 10 1" className="fill-gray-600">
+            <svg width="10" height="1" viewBox="0 0 10 1" className="fill-gray-600" aria-hidden="true">
               <rect width="10" height="1" />
             </svg>
           </button>
@@ -99,15 +100,16 @@ export const ElectronTitleBar: React.FC<ElectronTitleBarProps> = ({
             "
             style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
             title={isMaximized ? '復元' : '最大化'}
+            aria-label={isMaximized ? 'ウィンドウを復元' : 'ウィンドウを最大化'}
           >
             {isMaximized ? (
               // 復元アイコン
-              <svg width="10" height="10" viewBox="0 0 10 10" className="fill-gray-600">
+              <svg width="10" height="10" viewBox="0 0 10 10" className="fill-gray-600" aria-hidden="true">
                 <path d="M2,0 L8,0 L8,6 L6,6 L6,8 L0,8 L0,2 L2,2 L2,0 Z M1,3 L1,7 L5,7 L5,6 L2,6 L2,3 L1,3 Z M3,1 L3,5 L7,5 L7,1 L3,1 Z" />
               </svg>
             ) : (
               // 最大化アイコン
-              <svg width="10" height="10" viewBox="0 0 10 10" className="fill-gray-600">
+              <svg width="10" height="10" viewBox="0 0 10 10" className="fill-gray-600" aria-hidden="true">
                 <path d="M0,0 L0,10 L10,10 L10,0 L0,0 Z M1,1 L9,1 L9,9 L1,9 L1,1 Z" />
               </svg>
             )}
@@ -123,8 +125,9 @@ export const ElectronTitleBar: React.FC<ElectronTitleBarProps> = ({
             "
             style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
             title="閉じる"
+            aria-label="アプリケーションを閉じる"
           >
-            <svg width="10" height="10" viewBox="0 0 10 10" className="fill-current">
+            <svg width="10" height="10" viewBox="0 0 10 10" className="fill-current" aria-hidden="true">
               <path d="M0.5,0.5 L9.5,9.5 M9.5,0.5 L0.5,9.5" stroke="currentColor" strokeWidth="1" fill="none" />
             </svg>
           </button>
@@ -168,6 +171,7 @@ export const ElectronMenuBar: React.FC<{
           "
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
           onClick={() => handleMenuClick('file')}
+          aria-label="ファイルメニューを開く"
         >
           ファイル
         </button>
@@ -182,6 +186,7 @@ export const ElectronMenuBar: React.FC<{
           "
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
           onClick={() => handleMenuClick('edit')}
+          aria-label="編集メニューを開く"
         >
           編集
         </button>
@@ -196,6 +201,7 @@ export const ElectronMenuBar: React.FC<{
           "
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
           onClick={() => handleMenuClick('view')}
+          aria-label="表示メニューを開く"
         >
           表示
         </button>
@@ -210,6 +216,7 @@ export const ElectronMenuBar: React.FC<{
           "
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
           onClick={() => handleMenuClick('help')}
+          aria-label="ヘルプメニューを開く"
         >
           ヘルプ
         </button>

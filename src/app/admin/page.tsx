@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { useAuth, DEMO_USERS } from '@/contexts/AuthContext'
 import { PermissionGuard } from '@/components/auth/PermissionGuard'
 import { UserRoleIndicator } from '@/components/auth/UserRoleIndicator'
@@ -9,7 +9,7 @@ import type { User, UserRole } from '@/types/permissions'
 import { ROLE_LABELS } from '@/types/permissions'
 import { Header } from '@/components/layout/Header'
 
-export default function AdminPage(): React.JSX.Element {
+function AdminPageContent(): React.JSX.Element {
   const { user, updateUserRole } = useAuth()
   const [users, setUsers] = useState<User[]>(DEMO_USERS)
   const [editingUser, setEditingUser] = useState<string | null>(null)
@@ -103,9 +103,11 @@ export default function AdminPage(): React.JSX.Element {
                           <td className="p-3">
                             {editingUser === userItem.id ? (
                               <select
+                                id={`role-select-${userItem.id}`}
                                 value={newRole}
                                 onChange={e => setNewRole(e.target.value as UserRole)}
                                 className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                                aria-label={`${userItem.name}のロールを選択`}
                               >
                                 {Object.entries(ROLE_LABELS).map(([role, label]) => (
                                   <option key={role} value={role}>
@@ -231,5 +233,17 @@ export default function AdminPage(): React.JSX.Element {
         </PermissionGuard>
       </div>
     </div>
+  )
+}
+
+export default function AdminPage(): React.JSX.Element {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-400">読み込み中...</div>
+      </div>
+    }>
+      <AdminPageContent />
+    </Suspense>
   )
 }
