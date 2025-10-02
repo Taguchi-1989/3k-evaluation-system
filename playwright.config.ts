@@ -49,7 +49,7 @@ export default defineConfig({
       name: 'localhost-chromium',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:3003',
+        baseURL: 'http://localhost:3001',
       },
       testMatch: /.*\.(spec|test)\.ts$/,
     },
@@ -58,7 +58,7 @@ export default defineConfig({
       name: 'localhost-firefox',
       use: {
         ...devices['Desktop Firefox'],
-        baseURL: 'http://localhost:3003',
+        baseURL: 'http://localhost:3001',
       },
       testMatch: /.*\.(spec|test)\.ts$/,
     },
@@ -90,7 +90,7 @@ export default defineConfig({
       name: 'mobile-chrome',
       use: {
         ...devices['Pixel 5'],
-        baseURL: process.env.VERCEL_URL || 'http://localhost:3003',
+        baseURL: process.env.VERCEL_URL || 'http://localhost:3001',
       },
       testMatch: /.*\.(spec|test)\.ts$/,
       testIgnore: process.env.TEST_MOBILE !== 'true' ? /.*.ts$/ : undefined,
@@ -100,8 +100,8 @@ export default defineConfig({
   // Webサーバー設定（ローカルテスト用）
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3003',
-    reuseExistingServer: !process.env.CI,
+    url: 'http://localhost:3001',
+    reuseExistingServer: true,
     timeout: 120 * 1000,
   },
 })

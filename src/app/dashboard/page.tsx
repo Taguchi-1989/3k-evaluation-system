@@ -12,8 +12,13 @@ const EnhancedDashboard = dynamic(() => import('@/components/dashboard').then(mo
 
 export default function DashboardPage(): React.JSX.Element {
   return (
-    <Suspense fallback={<DashboardSkeleton />}>
-      <EnhancedDashboard />
-    </Suspense>
+    <div className="min-h-screen flex flex-col">
+      <header className="sr-only">
+        <h1>ダッシュボード</h1>
+      </header>
+      <Suspense fallback={<DashboardSkeleton />}>
+        <EnhancedDashboard />
+      </Suspense>
+    </div>
   )
 }

@@ -132,7 +132,7 @@ export default function ReportsPage(): React.JSX.Element {
         </div>
       </header>
 
-      <main className="page-content">
+      <main className="page-content flex-1">
         <div className="max-w-7xl mx-auto p-6">
           {/* タブナビゲーション */}
           <div className="mb-6">
