@@ -24,7 +24,7 @@ export function BackButton({
   return (
     <Button
       onClick={() => { void goBack() }}
-      variant={variant}
+      variant={variant as "primary" | "secondary" | "danger" | "outline" | "ghost" | undefined}
       size={size}
       className={`flex items-center gap-2 ${className}`}
     >

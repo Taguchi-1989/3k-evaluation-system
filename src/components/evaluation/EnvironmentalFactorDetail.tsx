@@ -183,13 +183,19 @@ export function EnvironmentalFactorDetail({
             {items.map((item) => (
               <div key={item.id} className="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-x-2 items-center p-1 rounded hover:bg-gray-50">
                 <input
+                  id={`env-item-${item.id}`}
                   type="checkbox"
                   className="h-4 w-4"
                   checked={item.isChecked}
                   onChange={(e) => handleCheckboxChange(item.id, e.target.checked)}
+                  aria-label={`${item.label}を選択`}
                 />
-                <label className="text-xs">{item.label}</label>
-                <button className="p-1 rounded-full hover:bg-gray-200">
+                <label htmlFor={`env-item-${item.id}`} className="text-xs">{item.label}</label>
+                <button
+                  className="p-1 rounded-full hover:bg-gray-200"
+                  aria-label={`${item.label}の詳細情報`}
+                  title={`${item.label}の詳細情報を表示`}
+                >
                   <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4c0-1.105.448-2.09 1.172-2.828M12 14v.01M12 18v-2m-3-5a3 3 0 116 0 3 3 0 01-6 0z" />
                   </svg>
@@ -201,7 +207,11 @@ export function EnvironmentalFactorDetail({
                   onChange={(e) => handleInputChange(item.id, 'thinkingValue', e.target.value)}
                 />
                 {item.label === '汚れ付着' ? (
-                  <select className="w-16 p-1 border rounded-md text-xs">
+                  <select
+                    id={`dirt-level-${item.id}`}
+                    className="w-16 p-1 border rounded-md text-xs"
+                    aria-label="汚れ付着の強度を選択"
+                  >
                     <option>弱</option>
                     <option>強</option>
                   </select>
@@ -217,10 +227,12 @@ export function EnvironmentalFactorDetail({
                   />
                 )}
                 <select
+                  id={`exposure-duration-${item.id}`}
                   className="w-16 p-1 border rounded-md text-xs"
                   value={item.exposureDuration || '40%'}
                   onChange={(e) => handleInputChange(item.id, 'exposureDuration', e.target.value)}
                   disabled={!item.isChecked}
+                  aria-label={`${item.label}の暴露持続時間を選択`}
                 >
                   <option>5%</option>
                   <option>10%</option>
@@ -236,18 +248,35 @@ export function EnvironmentalFactorDetail({
             ))}
             <div className="p-1 mt-2 border-t pt-2 text-xs">
               <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-x-2 items-center">
-                <input type="checkbox" className="h-4 w-4" />
-                <label>エイヤ</label>
-                <button className="p-1 rounded-full hover:bg-gray-200">
+                <input
+                  id="eiya-checkbox"
+                  type="checkbox"
+                  className="h-4 w-4"
+                  aria-label="エイヤを選択"
+                />
+                <label htmlFor="eiya-checkbox">エイヤ</label>
+                <button
+                  className="p-1 rounded-full hover:bg-gray-200"
+                  aria-label="エイヤの詳細情報"
+                  title="エイヤの詳細情報を表示"
+                >
                   <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4c0-1.105.448-2.09 1.172-2.828M12 14v.01M12 18v-2m-3-5a3 3 0 116 0 3 3 0 01-6 0z" />
                   </svg>
                 </button>
                 <div className="flex items-center gap-1 col-span-4 justify-self-end">
-                  <select className="border rounded-md p-1 text-xs w-24">
+                  <select
+                    id="eiya-select"
+                    className="border rounded-md p-1 text-xs w-24"
+                    aria-label="エイヤの選択肢を選ぶ"
+                  >
                     <option>選択...</option>
                   </select>
-                  <select className="border rounded-md p-1 text-xs w-20">
+                  <select
+                    id="eiya-percentage"
+                    className="border rounded-md p-1 text-xs w-20"
+                    aria-label="エイヤの割合を選択"
+                  >
                     <option>&lt;20%</option>
                     <option>&gt;20%</option>
                   </select>

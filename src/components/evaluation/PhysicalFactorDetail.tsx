@@ -266,10 +266,12 @@ export function PhysicalFactorDetail({
       </div>
       
       <div className="grid grid-cols-[1fr_auto_auto] gap-x-2 items-center p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
-        <label className="flex items-center">
-          <input 
-            type="checkbox" 
+        <label htmlFor="weight-both-hands" className="flex items-center">
+          <input
+            id="weight-both-hands"
+            type="checkbox"
             className="h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+            aria-label="対象重量（両手）を有効化"
             checked={physicalDetails.checkboxes?.weightBoth || false}
             onChange={(e) => {
               setPhysicalDetails(prev => ({
@@ -286,9 +288,11 @@ export function PhysicalFactorDetail({
           />
           <span className="ml-2 text-xs text-gray-800 dark:text-gray-200">対象重量(両手)</span>
         </label>
-        <Input 
-          className="w-16 p-1 text-right text-xs" 
+        <Input
+          id="weight-both-kg"
+          className="w-16 p-1 text-right text-xs"
           placeholder="kg"
+          aria-label="対象重量（両手）の実測値（キログラム）"
           onChange={(e) => {
             const value = parseFloat(e.target.value) || 0
             setPhysicalDetails(prev => ({
@@ -300,33 +304,73 @@ export function PhysicalFactorDetail({
             }))
           }}
         />
-        <Input className="w-16 p-1 text-right text-xs" placeholder="%" />
+        <Input
+          id="weight-both-percentage"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="%"
+          aria-label="対象重量（両手）の負荷割合（パーセント）"
+        />
       </div>
       
       <div className="grid grid-cols-[1fr_auto_auto] gap-x-2 items-center p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
-        <label className="flex items-center">
-          <input type="checkbox" className="h-4 w-4 rounded border-gray-300 dark:border-gray-600" />
+        <label htmlFor="weight-single-hand" className="flex items-center">
+          <input
+            id="weight-single-hand"
+            type="checkbox"
+            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+            aria-label="対象重量（片手）を有効化"
+          />
           <span className="ml-2 text-xs text-gray-800 dark:text-gray-200">対象重量(片手)</span>
         </label>
-        <Input className="w-16 p-1 text-right text-xs" placeholder="kg" />
-        <Input className="w-16 p-1 text-right text-xs" placeholder="%" />
+        <Input
+          id="weight-single-kg"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="kg"
+          aria-label="対象重量（片手）の実測値（キログラム）"
+        />
+        <Input
+          id="weight-single-percentage"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="%"
+          aria-label="対象重量（片手）の負荷割合（パーセント）"
+        />
       </div>
       
       <div className="grid grid-cols-[1fr_auto_auto] gap-x-2 items-center p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
-        <label className="flex items-center">
-          <input type="checkbox" className="h-4 w-4 rounded border-gray-300 dark:border-gray-600" />
+        <label htmlFor="muscle-force" className="flex items-center">
+          <input
+            id="muscle-force"
+            type="checkbox"
+            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+            aria-label="使用筋力を有効化"
+          />
           <span className="ml-2 text-xs text-gray-800 dark:text-gray-200">使用筋力</span>
         </label>
-        <Input className="w-16 p-1 text-right text-xs" placeholder="kg" />
-        <Input className="w-16 p-1 text-right text-xs" placeholder="%" />
+        <Input
+          id="muscle-force-kg"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="kg"
+          aria-label="使用筋力の実測値（キログラム）"
+        />
+        <Input
+          id="muscle-force-percentage"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="%"
+          aria-label="使用筋力の負荷割合（パーセント）"
+        />
       </div>
       
       <div className="grid grid-cols-[1fr_auto_auto] gap-x-2 items-center p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
-        <label className="flex items-center">
-          <input type="checkbox" className="h-4 w-4 rounded border-gray-300 dark:border-gray-600" />
+        <label htmlFor="protective-gear" className="flex items-center">
+          <input
+            id="protective-gear"
+            type="checkbox"
+            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+            aria-label="保護具を有効化"
+          />
           <span className="ml-2 text-xs text-gray-800 dark:text-gray-200">保護具</span>
-          <button 
-            className="ml-1 p-0.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600" 
+          <button
+            className="ml-1 p-0.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
             title="保護具の詳細情報"
             onClick={() => showPopup('保護具について', (EVALUATION_STANDARDS.physical as { protectiveEquipment?: { description?: string } }).protectiveEquipment?.description || '保護具無し・クリーン服作業: 軽い\n呼吸器付作業着・適防耐火服(一部なし): 適防耐火服\n適防耐火服(一式すべて): 対象無し')}
           >
@@ -335,7 +379,11 @@ export function PhysicalFactorDetail({
             </svg>
           </button>
         </label>
-        <select className="w-20 p-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+        <select
+          id="protective-gear-select"
+          className="w-20 p-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+          aria-label="保護具の種類を選択"
+        >
           {((physicalStandards as { protectiveEquipment?: { levels?: string[] } }).protectiveEquipment?.levels?.map((level: string) => (
             <option key={level} className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">{level}</option>
           ))) || [
@@ -348,15 +396,25 @@ export function PhysicalFactorDetail({
             <option key="na" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">対象無し</option>
           ]}
         </select>
-        <Input className="w-16 p-1 text-right text-xs" placeholder="%" />
+        <Input
+          id="protective-gear-percentage"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="%"
+          aria-label="保護具の負荷割合（パーセント）"
+        />
       </div>
       
       <div className="grid grid-cols-[1fr_auto_auto] gap-x-2 items-center p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
-        <label className="flex items-center">
-          <input type="checkbox" className="h-4 w-4 rounded border-gray-300 dark:border-gray-600" />
+        <label htmlFor="eye-strain" className="flex items-center">
+          <input
+            id="eye-strain"
+            type="checkbox"
+            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+            aria-label="眼精疲労を有効化"
+          />
           <span className="ml-2 text-xs text-gray-800 dark:text-gray-200">眼精疲労</span>
-          <button 
-            className="ml-1 p-0.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600" 
+          <button
+            className="ml-1 p-0.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
             title="眼精疲労の詳細情報"
             onClick={() => showPopup('眼精疲労について', (EVALUATION_STANDARDS.physical as { eyeStrain?: { description?: string } }).eyeStrain?.description || '対象無し: 眼精疲労による負担がない\n軽度: わずかに眼の疲れを感じる\n中度: 明らかに眼の疲れを感じる\n重度: 眼の痛み、頭痛を伴う\n限界: 作業継続が困難')}
           >
@@ -365,7 +423,11 @@ export function PhysicalFactorDetail({
             </svg>
           </button>
         </label>
-        <select className="w-20 p-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+        <select
+          id="eye-strain-select"
+          className="w-20 p-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+          aria-label="眼精疲労のレベルを選択"
+        >
           {((physicalStandards as { eyeStrain?: { levels?: string[] } }).eyeStrain?.levels?.map((level: string) => (
             <option key={level} className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">{level}</option>
           ))) || [
@@ -376,7 +438,12 @@ export function PhysicalFactorDetail({
             <option key="critical" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">限界</option>
           ]}
         </select>
-        <Input className="w-16 p-1 text-right text-xs" placeholder="%" />
+        <Input
+          id="eye-strain-percentage"
+          className="w-16 p-1 text-right text-xs"
+          placeholder="%"
+          aria-label="眼精疲労の負荷割合（パーセント）"
+        />
       </div>
       
       <div className="p-1 mt-2 border-t pt-2 text-xs space-y-3">
@@ -456,12 +523,22 @@ export function PhysicalFactorDetail({
           <p className="text-sm font-medium">時間詳細設定</p>
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div>
-              <label className="block">作業時間(分):</label>
-              <Input className="w-full p-1 text-xs" placeholder="例: 480" />
+              <label htmlFor="work-time-minutes" className="block">作業時間(分):</label>
+              <Input
+                id="work-time-minutes"
+                className="w-full p-1 text-xs"
+                placeholder="例: 480"
+                aria-label="作業時間（分）"
+              />
             </div>
             <div>
-              <label className="block">休憩間隔(分):</label>
-              <Input className="w-full p-1 text-xs" placeholder="例: 60" />
+              <label htmlFor="break-interval-minutes" className="block">休憩間隔(分):</label>
+              <Input
+                id="break-interval-minutes"
+                className="w-full p-1 text-xs"
+                placeholder="例: 60"
+                aria-label="休憩間隔（分）"
+              />
             </div>
           </div>
         </div>
@@ -692,9 +769,12 @@ export function PhysicalFactorDetail({
           <div className="p-2 border-t flex-shrink-0 text-xs space-y-1 bg-gray-50 dark:bg-gray-800 h-1/3 overflow-y-auto">
             <h3 className="font-bold text-sm mb-1 text-gray-800 dark:text-gray-200">備考欄</h3>
             <div className="space-y-2">
-              <textarea 
+              <label htmlFor="remarks-textarea" className="sr-only">肉体因子に関する備考</label>
+              <textarea
+                id="remarks-textarea"
                 className="w-full h-16 p-2 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 resize-none"
                 placeholder="肉体因子に関する特記事項、観察内容、改善提案などを記入してください。&#10;&#10;例:&#10;・作業姿勢で気になった点&#10;・使用している保護具の状態&#10;・作業環境の影響&#10;・改善案や対策"
+                aria-label="肉体因子に関する特記事項、観察内容、改善提案を記入"
               ></textarea>
               
               <div className="text-gray-600 dark:text-gray-400 border-t pt-2">

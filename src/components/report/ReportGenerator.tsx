@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import type { ReportData, ReportConfig, GeneratedReport } from '@/lib/reportGenerator';
 import { reportGenerator } from '@/lib/reportGenerator'
 import { useEvaluationDataStore } from '@/stores/evaluationDataStore'
+import type { PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails, WorkTimeFactor } from '@/types/evaluation'
 
 interface ReportGeneratorProps {
   evaluationId?: string;
@@ -54,10 +55,14 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
             workTime: 0
           },
           finalResult: {
-            finalScore: 0,
-            riskLevel: 'low',
-            riskCategory: '低リスク',
-            recommendations: []
+            physicalScore: 0,
+            mentalScore: 0,
+            environmentalScore: 0,
+            hazardScore: 0,
+            workTimeScore: 0,
+            final3KIndex: '0.0',
+            finalKitsusaScore: 0,
+            calculationDetails: {}
           },
           calculationDetails: {},
           timestamp: new Date(),
@@ -73,13 +78,13 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
           shift: undefined
         },
         detailsData: {
-          physical: targetEvaluation.physicalFactor,
-          mental: targetEvaluation.mentalFactor,
-          environmental: targetEvaluation.environmentalFactor,
-          hazard: targetEvaluation.hazardFactor,
+          physical: targetEvaluation.physicalFactor as unknown as PhysicalDetails | undefined,
+          mental: targetEvaluation.mentalFactor as unknown as MentalDetails | undefined,
+          environmental: targetEvaluation.environmentalFactor as unknown as EnvironmentalDetails | undefined,
+          hazard: targetEvaluation.hazardFactor as unknown as HazardDetails | undefined,
           postures: undefined,
           substances: undefined,
-          workTime: targetEvaluation.workTimeFactor
+          workTime: targetEvaluation.workTimeFactor as unknown as WorkTimeFactor | undefined
         }
       };
 
@@ -98,10 +103,14 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
               workTime: 0
             },
             finalResult: {
-              finalScore: 0,
-              riskLevel: 'low' as const,
-              riskCategory: '低リスク',
-              recommendations: []
+              physicalScore: 0,
+              mentalScore: 0,
+              environmentalScore: 0,
+              hazardScore: 0,
+              workTimeScore: 0,
+              final3KIndex: '0.0',
+              finalKitsusaScore: 0,
+              calculationDetails: {}
             },
             calculationDetails: {},
             timestamp: new Date(e.updatedAt),
@@ -186,11 +195,13 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
 
           {/* フォーマット設定 */}
           <div>
-            <label className="block text-sm font-medium mb-2">出力形式</label>
+            <label htmlFor="report-format" className="block text-sm font-medium mb-2">出力形式</label>
             <select
+              id="report-format"
               className="w-full p-2 border rounded"
               value={config.format}
               onChange={(e) => setConfig(prev => ({ ...prev, format: e.target.value as 'pdf' | 'html' | 'docx' }))}
+              aria-label="レポートの出力形式を選択"
             >
               <option value="pdf">PDF</option>
               <option value="html">HTML</option>
@@ -200,11 +211,13 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
 
           {/* テンプレート設定 */}
           <div>
-            <label className="block text-sm font-medium mb-2">レポートテンプレート</label>
+            <label htmlFor="report-template" className="block text-sm font-medium mb-2">レポートテンプレート</label>
             <select
+              id="report-template"
               className="w-full p-2 border rounded"
               value={config.template}
               onChange={(e) => setConfig(prev => ({ ...prev, template: e.target.value as 'summary' | 'standard' | 'detailed' }))}
+              aria-label="レポートテンプレートを選択"
             >
               <option value="summary">サマリー版</option>
               <option value="standard">標準版</option>
@@ -216,39 +229,47 @@ export default function ReportGenerator({ evaluationId, onReportGenerated }: Rep
           <div>
             <h3 className="text-sm font-medium mb-2">含める内容</h3>
             <div className="space-y-2">
-              <label className="flex items-center">
+              <label htmlFor="include-charts" className="flex items-center">
                 <input
+                  id="include-charts"
                   type="checkbox"
                   checked={config.includeCharts}
                   onChange={(e) => setConfig(prev => ({ ...prev, includeCharts: e.target.checked }))}
                   className="mr-2"
+                  aria-label="グラフ・チャートを含める"
                 />
                 グラフ・チャート
               </label>
-              <label className="flex items-center">
+              <label htmlFor="include-recommendations" className="flex items-center">
                 <input
+                  id="include-recommendations"
                   type="checkbox"
                   checked={config.includeRecommendations}
                   onChange={(e) => setConfig(prev => ({ ...prev, includeRecommendations: e.target.checked }))}
                   className="mr-2"
+                  aria-label="改善推奨事項を含める"
                 />
                 改善推奨事項
               </label>
-              <label className="flex items-center">
+              <label htmlFor="include-historical" className="flex items-center">
                 <input
+                  id="include-historical"
                   type="checkbox"
                   checked={config.includeHistoricalData}
                   onChange={(e) => setConfig(prev => ({ ...prev, includeHistoricalData: e.target.checked }))}
                   className="mr-2"
+                  aria-label="履歴データ・トレンド分析を含める"
                 />
                 履歴データ・トレンド分析
               </label>
-              <label className="flex items-center">
+              <label htmlFor="include-matrix" className="flex items-center">
                 <input
+                  id="include-matrix"
                   type="checkbox"
                   checked={config.includeMatrixDetails}
                   onChange={(e) => setConfig(prev => ({ ...prev, includeMatrixDetails: e.target.checked }))}
                   className="mr-2"
+                  aria-label="マトリクス計算詳細を含める"
                 />
                 マトリクス計算詳細
               </label>

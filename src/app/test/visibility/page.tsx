@@ -172,32 +172,40 @@ export default function VisibilityTestPage(): React.JSX.Element {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="test-text-input" className="block text-sm font-medium mb-1">
                   テキスト入力（フォーカスして確認）
                 </label>
                 <input
+                  id="test-text-input"
                   type="text"
                   className="w-full p-2 border rounded"
                   placeholder="フォーカス時の強調を確認"
+                  aria-label="テキスト入力のフォーカステスト"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="test-textarea" className="block text-sm font-medium mb-1">
                   テキストエリア
                 </label>
                 <textarea
+                  id="test-textarea"
                   className="w-full p-2 border rounded"
                   rows={3}
                   placeholder="複数行のテキスト入力"
+                  aria-label="複数行テキスト入力のテスト"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="test-select" className="block text-sm font-medium mb-1">
                   セレクトボックス
                 </label>
-                <select className="w-full p-2 border rounded">
+                <select
+                  id="test-select"
+                  className="w-full p-2 border rounded"
+                  aria-label="テスト用セレクトボックス"
+                >
                   <option>オプション1</option>
                   <option>オプション2</option>
                   <option>オプション3</option>

@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { EnhancedWorkTimeDetail } from '@/components/evaluation/EnhancedWorkTimeDetail'
 import { EvaluationLayout, EvaluationContentContainer } from '@/components/layout/EvaluationLayout'
 import { Footer } from '@/components/layout'
 import { useNavigation } from '@/hooks/useNavigation'
 import { useEvaluationStore } from '@/hooks/useEvaluationStore'
 
-export default function WorktimeFactorPage(): React.JSX.Element {
+function WorktimeFactorPageContent(): React.JSX.Element {
   const { getReturnPath } = useNavigation()
   const { setCurrentPath, pushToHistory } = useEvaluationStore()
 
@@ -54,5 +54,17 @@ export default function WorktimeFactorPage(): React.JSX.Element {
         </EvaluationContentContainer>
       }
     />
+  )
+}
+
+export default function WorktimeFactorPage(): React.JSX.Element {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-400">読み込み中...</div>
+      </div>
+    }>
+      <WorktimeFactorPageContent />
+    </Suspense>
   )
 }

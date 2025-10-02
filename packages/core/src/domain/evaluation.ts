@@ -75,6 +75,8 @@ export interface PhysicalDetails {
     gear?: boolean
     eye?: boolean
   }
+  // Index signature for compatibility with Record<string, unknown>
+  readonly [key: string]: unknown
 }
 
 /**
@@ -111,6 +113,8 @@ export interface MentalDetails {
     strength: string
     duration: string
   }
+  // Index signature for compatibility with Record<string, unknown>
+  readonly [key: string]: unknown
 }
 
 /**
@@ -122,6 +126,8 @@ export interface EnvironmentalDetails {
   readonly dust?: number
   readonly vibration?: number
   readonly contamination?: string
+  // Index signature for compatibility with Record<string, unknown>
+  readonly [key: string]: unknown
 }
 
 /**
@@ -129,6 +135,8 @@ export interface EnvironmentalDetails {
  */
 export interface HazardDetails {
   readonly hazardEvents?: HazardEvent[]
+  // Index signature for compatibility with Record<string, unknown>
+  readonly [key: string]: unknown
 }
 
 /**

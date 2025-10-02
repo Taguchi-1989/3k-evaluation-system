@@ -57,7 +57,7 @@ export function SummaryPanel({
           variant="default"
           layout="horizontal"
           size="md"
-          onFileUpload={onFileUpload}
+          onFileUpload={onFileUpload ? (files: FileList) => onFileUpload(Array.from(files)) : undefined}
           onAttachmentCheck={onAttachmentCheck}
           className=""
         />

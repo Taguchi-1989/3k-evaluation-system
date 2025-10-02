@@ -193,13 +193,15 @@ export function ReportsDashboard({ workItems, className = '' }: ReportsDashboard
               onClick={() => toggleWorkItemSelection(item.id)}
             >
               <input
+                id={`work-item-${item.id}`}
                 type="checkbox"
                 checked={selectedWorkItems.includes(item.id)}
                 onChange={() => toggleWorkItemSelection(item.id)}
                 className="mr-3"
                 onClick={(e) => e.stopPropagation()}
+                aria-label={`作業項目 ${item.workName} を選択`}
               />
-              
+
               <div className="flex-1">
                 <div className="flex items-center space-x-4">
                   <span className="font-medium text-sm">{item.workName}</span>

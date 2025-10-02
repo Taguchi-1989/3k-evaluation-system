@@ -84,10 +84,13 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
       try {
         const parsed = JSON.parse(savedReports) as Array<Record<string, unknown>>;
         setReports(parsed.map((r): ReportHistoryItem => ({
-          ...(r as ReportHistoryItem),
+          ...(r as unknown as ReportHistoryItem),
           metadata: {
             ...((r.metadata as Record<string, unknown>) || {}),
-            generatedAt: new Date((r.metadata as { generatedAt: string }).generatedAt)
+            generatedAt: new Date((r.metadata as { generatedAt: string }).generatedAt),
+            generatedBy: ((r.metadata as { generatedBy?: string })?.generatedBy) || 'System',
+            format: ((r.metadata as { format?: string })?.format) || 'pdf',
+            pageCount: ((r.metadata as { pageCount?: number })?.pageCount) || 0
           },
           lastDownloaded: r.lastDownloaded ? new Date(r.lastDownloaded as string) : undefined
         })));
@@ -226,11 +229,13 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-4">
             <input
+              id="report-search"
               type="text"
               placeholder="レポートを検索..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1 p-2 border rounded"
+              aria-label="レポートを検索"
             />
             
             <select
@@ -302,10 +307,12 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
             {/* ヘッダー */}
             <div className="flex items-center p-3 border-b bg-gray-50 rounded-t">
               <input
+                id="select-all-reports"
                 type="checkbox"
                 checked={selectedReports.length === filteredReports.length}
                 onChange={handleSelectAll}
                 className="mr-3"
+                aria-label="すべてのレポートを選択"
               />
               <div className="flex-1 grid grid-cols-1 md:grid-cols-6 gap-4">
                 <div className="md:col-span-2 font-medium text-sm">レポート名</div>
@@ -325,12 +332,14 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
                 }`}
               >
                 <input
+                  id={`report-${report.reportId}`}
                   type="checkbox"
                   checked={selectedReports.includes(report.reportId)}
                   onChange={() => toggleSelectReport(report.reportId)}
                   className="mr-3"
+                  aria-label={`レポート ${report.title} を選択`}
                 />
-                
+
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-6 gap-4">
                   {/* レポート名とメタデータ */}
                   <div className="md:col-span-2">

@@ -263,7 +263,7 @@ export function StandardsLegend({ factorType, className = '' }: StandardsLegendP
     return titles[factorType] || '評価基準'
   }
 
-  if (!standards) return null
+  if (!standards) return <div></div>
 
   return (
     <div className={`bg-white dark:bg-gray-800 border dark:border-gray-600 rounded-lg ${className}`}>

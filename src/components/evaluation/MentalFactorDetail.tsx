@@ -201,7 +201,7 @@ export function MentalFactorDetail({
           const recommendation = rec as Partial<MentalFactorItem> & { id?: string }
           const itemIndex = updated.findIndex(item => item.id === recommendation.id)
           if (itemIndex !== -1 && typeof recommendation.id === 'string') {
-            updated[itemIndex] = { ...updated[itemIndex], ...recommendation }
+            updated[itemIndex] = { ...updated[itemIndex], ...recommendation } as MentalFactorItem
           }
         })
         return updated
@@ -454,12 +454,14 @@ export function MentalFactorDetail({
                         : 'hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-200 dark:border-gray-600'
                     }`}>
                       <input
+                        id={`mental-checkbox-${item.id}`}
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300"
                         checked={item.isChecked}
                         onChange={(e) => handleCheckboxChange(item.id, e.target.checked)}
+                        aria-label={`${item.label}を選択`}
                       />
-                      <label className="flex items-center font-medium">{item.label}</label>
+                      <label htmlFor={`mental-checkbox-${item.id}`} className="flex items-center font-medium">{item.label}</label>
 
                       <button className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600">
                         <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -622,14 +624,16 @@ export function MentalFactorDetail({
             </div>
             
             <div className="mt-3 pt-3 border-t">
-              <label className="text-xs text-gray-500">作業時間 (時間)</label>
+              <label htmlFor="work-time-hours" className="text-xs text-gray-500">作業時間 (時間)</label>
               <input
+                id="work-time-hours"
                 type="number"
                 min="1"
                 max="24"
                 value={workTimeHours}
                 onChange={(e) => setWorkTimeHours(Number(e.target.value))}
                 className="w-full mt-1 p-1 border rounded text-xs text-center"
+                aria-label="作業時間を入力（1-24時間）"
               />
             </div>
           </div>

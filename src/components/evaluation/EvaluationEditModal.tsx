@@ -85,50 +85,58 @@ export function EvaluationEditModal({
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="work-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       作業名
                     </label>
                     <input
+                      id="work-name"
                       type="text"
                       value={editedItem.workName}
                       onChange={(e) => setEditedItem(prev => ({ ...prev, workName: e.target.value }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="作業名を入力"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="factory-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       工場名
                     </label>
                     <input
+                      id="factory-name"
                       type="text"
                       value={editedItem.factoryName}
                       onChange={(e) => setEditedItem(prev => ({ ...prev, factoryName: e.target.value }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="工場名を入力"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="process-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       工程名
                     </label>
                     <input
+                      id="process-name"
                       type="text"
                       value={editedItem.processName}
                       onChange={(e) => setEditedItem(prev => ({ ...prev, processName: e.target.value }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="工程名を入力"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="status-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       ステータス
                     </label>
                     <select
+                      id="status-select"
                       value={editedItem.status}
                       onChange={(e) => handleStatusChange(e.target.value as WorkItem['status'])}
                       disabled={!canEdit && !canCheck}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="ステータスを選択"
                     >
                       <option value="draft">下書き</option>
                       <option value="reviewed">レビュー済み</option>
@@ -146,10 +154,11 @@ export function EvaluationEditModal({
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="physical-score" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       肉体因子
                     </label>
                     <input
+                      id="physical-score"
                       type="number"
                       min="0"
                       max="10"
@@ -157,13 +166,15 @@ export function EvaluationEditModal({
                       onChange={(e) => setEditedItem(prev => ({ ...prev, physicalScore: parseInt(e.target.value) || 0 }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="肉体因子スコアを入力 (0-10)"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="mental-score" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       精神因子
                     </label>
                     <input
+                      id="mental-score"
                       type="number"
                       min="0"
                       max="10"
@@ -171,13 +182,15 @@ export function EvaluationEditModal({
                       onChange={(e) => setEditedItem(prev => ({ ...prev, mentalScore: parseInt(e.target.value) || 0 }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="精神因子スコアを入力 (0-10)"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="environmental-score" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       環境因子
                     </label>
                     <input
+                      id="environmental-score"
                       type="number"
                       min="0"
                       max="10"
@@ -185,13 +198,15 @@ export function EvaluationEditModal({
                       onChange={(e) => setEditedItem(prev => ({ ...prev, environmentalScore: parseInt(e.target.value) || 0 }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="環境因子スコアを入力 (0-10)"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="hazard-score" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       危険因子
                     </label>
                     <input
+                      id="hazard-score"
                       type="number"
                       min="0"
                       max="10"
@@ -199,6 +214,7 @@ export function EvaluationEditModal({
                       onChange={(e) => setEditedItem(prev => ({ ...prev, hazardScore: parseInt(e.target.value) || 0 }))}
                       disabled={!canEdit}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-gray-800"
+                      aria-label="危険因子スコアを入力 (0-10)"
                     />
                   </div>
                 </div>

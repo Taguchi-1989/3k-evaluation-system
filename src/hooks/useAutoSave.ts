@@ -42,7 +42,7 @@ export function useAutoSave<T = unknown>({
     if (!enabled || isLoading || !hasDataChanged()) return
 
     try {
-      const savedId = await saveEvaluation(data)
+      const savedId = await saveEvaluation(data as unknown as Parameters<typeof saveEvaluation>[0])
       if (savedId) {
         savedDataRef.current = data
         onSave?.(savedId)

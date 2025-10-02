@@ -367,7 +367,7 @@ export function calculateIntegratedHazardScore(
 
   return {
     totalScore: Math.round(maxScore * 10) / 10,
-    dominantRisk,
+    dominantRisk: dominantRisk as "accident_history" | "safety_management" | "ongoing_risks" | null,
     riskLevel,
     urgentActions
   };

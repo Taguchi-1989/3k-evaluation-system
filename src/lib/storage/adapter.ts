@@ -7,12 +7,6 @@ import type { IEvaluationStorage } from '@/types/storage';
 import { LocalStorage } from './local';
 import { ElectronStorage } from './electron';
 
-declare global {
-  interface Window {
-    electron?: unknown;
-  }
-}
-
 /**
  * 実行環境がElectronかどうかを判定
  */

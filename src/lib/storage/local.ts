@@ -19,7 +19,7 @@ export class LocalStorage implements IEvaluationStorage {
       const parsed = JSON.parse(data) as Array<Record<string, unknown>>;
       // Date型を復元
       return parsed.map((e): ComprehensiveEvaluation => ({
-        ...(e as Evaluation),
+        ...(e as unknown as Evaluation),
         id: (e.id as string) || '',
         createdAt: new Date(e.createdAt as string),
         updatedAt: new Date(e.updatedAt as string),
@@ -45,7 +45,7 @@ export class LocalStorage implements IEvaluationStorage {
   async save(evaluation: ComprehensiveEvaluation): Promise<string> {
     const evaluations = this.getEvaluations();
     const id = evaluation.id || this.generateId();
-    const newEvaluation = {
+    const newEvaluation: ComprehensiveEvaluation = {
       ...evaluation,
       id,
       createdAt: evaluation.createdAt || new Date(),
@@ -79,7 +79,7 @@ export class LocalStorage implements IEvaluationStorage {
       ...evaluations[index],
       ...updates,
       updatedAt: new Date(),
-    };
+    } as ComprehensiveEvaluation;
 
     this.saveEvaluations(evaluations);
   }

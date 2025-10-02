@@ -48,7 +48,9 @@ export function VoiceInput({
 
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const result = event.results[i]
+          if (!result) continue
           const alternative = result[0]
+          if (!alternative) continue
           if (result.isFinal) {
             finalTranscript += alternative.transcript
           } else {

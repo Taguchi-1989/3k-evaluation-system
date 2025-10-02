@@ -9,10 +9,10 @@ import type { ScoreCalculationEngine, FinalScoreResult } from './calculation';
 import { calculationEngine } from './calculation';
 import type { EvaluationHistoryService } from './history';
 import { historyService } from './history';
-import type { MatrixCalculator } from './matrixCalculator';
+import type { MatrixCalculator, MatrixCalculationResult, PhysicalMatrixInput, MentalMatrixInput, EnvironmentalMatrixInput, HazardMatrixInput } from './matrixCalculator';
 import { matrixCalculator } from './matrixCalculator';
 import { getMatrix } from '../data/evaluationMatrices';
-import type { 
+import type {
   PhysicalDetails, MentalDetails, EnvironmentalDetails, HazardDetails,
   Posture, EnvironmentalSubstance, WorkTimeFactor,
   PhysicalFactor, MentalFactor, EnvironmentalFactor, HazardFactor
@@ -496,16 +496,16 @@ export class EvaluationEngine {
   public calculateMatrixScore(
     category: 'physical' | 'mental' | 'environmental' | 'hazard',
     inputs: Record<string, unknown>
-  ): number {
+  ): MatrixCalculationResult {
     switch (category) {
       case 'physical':
-        return this.matrixCalculator.calculatePhysicalMatrix(inputs);
+        return this.matrixCalculator.calculatePhysicalMatrix(inputs as unknown as PhysicalMatrixInput);
       case 'mental':
-        return this.matrixCalculator.calculateMentalMatrix(inputs);
+        return this.matrixCalculator.calculateMentalMatrix(inputs as unknown as MentalMatrixInput);
       case 'environmental':
-        return this.matrixCalculator.calculateEnvironmentalMatrix(inputs);
+        return this.matrixCalculator.calculateEnvironmentalMatrix(inputs as unknown as EnvironmentalMatrixInput);
       case 'hazard':
-        return this.matrixCalculator.calculateHazardMatrix(inputs);
+        return this.matrixCalculator.calculateHazardMatrix(inputs as unknown as HazardMatrixInput);
       default:
         throw new Error(`Unknown category: ${category}`);
     }
@@ -532,7 +532,7 @@ export const validateEvaluation = (data: CompleteEvaluationData): ValidationResu
 };
 
 // マトリックス関連の便利な関数
-export const calculateMatrixScore = (category: 'physical' | 'mental' | 'environmental' | 'hazard', inputs: Record<string, unknown>): number => {
+export const calculateMatrixScore = (category: 'physical' | 'mental' | 'environmental' | 'hazard', inputs: Record<string, unknown>): MatrixCalculationResult => {
   return evaluationEngine.calculateMatrixScore(category, inputs);
 };
 

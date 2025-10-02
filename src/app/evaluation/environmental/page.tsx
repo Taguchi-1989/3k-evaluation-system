@@ -13,7 +13,7 @@ const EnhancedEnvironmentalFactorDetail = dynamic(() => import('@/components/eva
   ssr: false
 })
 
-export default function EnvironmentalFactorPage(): React.JSX.Element {
+function EnvironmentalFactorPageContent(): React.JSX.Element {
   const { getReturnPath } = useNavigation()
   const { setCurrentPath, pushToHistory } = useEvaluationStore()
 
@@ -62,5 +62,17 @@ export default function EnvironmentalFactorPage(): React.JSX.Element {
         </EvaluationContentContainer>
       }
     />
+  )
+}
+
+export default function EnvironmentalFactorPage(): React.JSX.Element {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-400">読み込み中...</div>
+      </div>
+    }>
+      <EnvironmentalFactorPageContent />
+    </Suspense>
   )
 }

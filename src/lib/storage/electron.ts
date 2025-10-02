@@ -32,7 +32,7 @@ export class ElectronStorage implements IEvaluationStorage {
 
     // Date型を復元
     return data.map((e): ComprehensiveEvaluation => ({
-      ...(e as Evaluation),
+      ...(e as unknown as Evaluation),
       id: (e.id as string) || '',
       createdAt: new Date(e.createdAt as string),
       updatedAt: new Date(e.updatedAt as string),
@@ -50,13 +50,13 @@ export class ElectronStorage implements IEvaluationStorage {
     if (!window.electron) {
       throw new Error('Electron API not available');
     }
-    await window.electron.store.set(this.STORAGE_KEY, evaluations);
+    await window.electron.store.set(this.STORAGE_KEY, evaluations as unknown as Record<string, unknown>[]);
   }
 
   async save(evaluation: ComprehensiveEvaluation): Promise<string> {
     const evaluations = await this.getEvaluations();
     const id = evaluation.id || this.generateId();
-    const newEvaluation = {
+    const newEvaluation: ComprehensiveEvaluation = {
       ...evaluation,
       id,
       createdAt: evaluation.createdAt || new Date(),
@@ -90,7 +90,7 @@ export class ElectronStorage implements IEvaluationStorage {
       ...evaluations[index],
       ...updates,
       updatedAt: new Date(),
-    };
+    } as ComprehensiveEvaluation;
 
     await this.saveEvaluations(evaluations);
   }

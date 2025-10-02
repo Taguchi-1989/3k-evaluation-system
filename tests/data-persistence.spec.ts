@@ -85,14 +85,14 @@ test.describe('3K評価アプリケーション - データ永続化', () => {
     const savedData = await page.evaluate((id) => {
       const data = localStorage.getItem(`eval:${id}`)
       return data ? JSON.parse(data) as unknown : null
-    }, testId)
+    }, testId) as { id: string; workDescription: string; physicalScore: number; final3KIndex: string } | null
 
     // データが永続化されていることを確認
     expect(savedData).not.toBeNull()
-    expect(savedData.id).toBe(testId)
-    expect(savedData.workDescription).toBe('E2Eテスト評価')
-    expect(savedData.physicalScore).toBe(5)
-    expect(savedData.final3KIndex).toBe('B')
+    expect(savedData?.id).toBe(testId)
+    expect(savedData?.workDescription).toBe('E2Eテスト評価')
+    expect(savedData?.physicalScore).toBe(5)
+    expect(savedData?.final3KIndex).toBe('B')
 
     // クリーンアップ
     await page.evaluate((id) => {

@@ -6,13 +6,13 @@
 import type {
   Posture} from '../types/evaluation';
 
-export interface EvaluationHistory {
+export interface EvaluationHistory<TDetails = Record<string, unknown>> {
   id: string;
   factorTable: string;
   factorId: string;
-  detailsBefore: Record<string, unknown>;
+  detailsBefore: TDetails;
   scoreBefore: number;
-  detailsAfter?: Record<string, unknown>;
+  detailsAfter?: TDetails;
   scoreAfter?: number;
   updatedBy: string;
   archivedAt: Date;
@@ -80,17 +80,17 @@ export class EvaluationHistoryService {
   /**
    * 評価変更履歴を保存
    */
-  public async saveHistory(
+  public async saveHistory<TDetails = Record<string, unknown>>(
     factorTable: string,
     factorId: string,
-    detailsBefore: Record<string, unknown>,
+    detailsBefore: TDetails,
     scoreBefore: number,
-    detailsAfter: Record<string, unknown>,
+    detailsAfter: TDetails,
     scoreAfter: number,
     updatedBy: string
   ): Promise<string> {
     const historyId = this.generateId();
-    const history: EvaluationHistory = {
+    const history: EvaluationHistory<TDetails> = {
       id: historyId,
       factorTable,
       factorId,
@@ -106,7 +106,8 @@ export class EvaluationHistoryService {
     if (!this.histories.has(factorId)) {
       this.histories.set(factorId, []);
     }
-    this.histories.get(factorId)!.push(history);
+    // Type assertion needed for backwards compatibility with Map storage
+    this.histories.get(factorId)!.push(history as EvaluationHistory);
 
     return historyId;
   }

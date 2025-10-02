@@ -47,6 +47,8 @@ export interface PhysicalDetails {
     gear: boolean;
     eye: boolean;
   };
+  // Index signature for compatibility with Record<string, unknown>
+  [key: string]: unknown;
 }
 
 export interface MentalFactor {
@@ -92,6 +94,8 @@ export interface MentalDetails {
     strength: string;
     duration: string;
   };
+  // Index signature for compatibility with Record<string, unknown>
+  [key: string]: unknown;
 }
 
 // 厚生労働省「心理的負荷による精神障害の認定基準」準拠
@@ -135,6 +139,8 @@ export interface EnvironmentalDetails {
   dust?: number;
   vibration?: number;
   contamination?: number;
+  // Index signature for compatibility with Record<string, unknown>
+  [key: string]: unknown;
 }
 
 export interface EnvironmentalSubstance {
@@ -168,6 +174,8 @@ export interface HazardDetails {
   safetyManagementStress?: SafetyManagementStressAssessment;
   // 現在進行中のリスク・再発可能性評価
   ongoingRisks?: OngoingRiskAssessment[];
+  // Index signature for compatibility with Record<string, unknown>
+  [key: string]: unknown;
 }
 
 export interface HazardEvent {

@@ -4,10 +4,6 @@
  */
 
 /* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Header } from '@/components/layout'
 import { Card, CardContent, Button, Input } from '@/components/ui'
 
@@ -164,7 +164,7 @@ A. ページを再読み込みするか、ブラウザの設定を確認して�
   }
 ]
 
-export default function HelpPage(): React.JSX.Element {
+function HelpPageContent(): React.JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -302,5 +302,17 @@ export default function HelpPage(): React.JSX.Element {
         </div>
       </main>
     </div>
+  )
+}
+
+export default function HelpPage(): React.JSX.Element {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-400">読み込み中...</div>
+      </div>
+    }>
+      <HelpPageContent />
+    </Suspense>
   )
 }

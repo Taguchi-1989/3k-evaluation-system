@@ -4,6 +4,7 @@
  */
 
 import { getEvaluationStandards, getStandardByCategory, getChemicalStandard } from '../data/evaluationStandards';
+import type { EvaluationStandards as EvalStandards } from '@/types/evaluation-standards';
 
 export interface EvaluationStandards {
   environmental_factors: Record<string, unknown>;
@@ -103,7 +104,7 @@ export class EvaluationStandardsService {
    * 化学物質の基準値を取得
    */
   public getChemicalSubstanceStandard(substanceName: string): ChemicalSubstance | null {
-    return getChemicalStandard(substanceName);
+    return getChemicalStandard(substanceName) as ChemicalSubstance | null;
   }
 
   /**
@@ -334,7 +335,7 @@ export class EvaluationStandardsService {
    * 特定カテゴリの基準値を検索
    */
   public findStandardsByCategory(category: string): Record<string, unknown> {
-    return getStandardByCategory(category) as unknown as Record<string, unknown>;
+    return getStandardByCategory(category as unknown as keyof EvalStandards) as unknown as Record<string, unknown>;
   }
 }
 

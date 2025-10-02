@@ -61,7 +61,7 @@ export function getChemicalStandard(substanceName: string): ChemicalSubstance | 
   // 一般化学物質から検索
   const substances = chemicalSubstances.general_chemicals?.substances;
   if (substances && substanceName in substances) {
-    return substances[substanceName];
+    return substances[substanceName] ?? null;
   }
 
   // アンモニアの場合（将来の拡張用）

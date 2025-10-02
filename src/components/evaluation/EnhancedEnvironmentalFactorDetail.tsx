@@ -410,11 +410,13 @@ export function EnhancedEnvironmentalFactorDetail({
                 />
                 
                 <div>
-                  <label className="block text-sm font-medium mb-1">カテゴリ</label>
+                  <label htmlFor={`substance-category-${substance.id}`} className="block text-sm font-medium mb-1">カテゴリ</label>
                   <select
+                    id={`substance-category-${substance.id}`}
                     value={substance.category}
                     onChange={(e) => handleSubstanceChange(substance.id, 'category', e.target.value)}
                     className="w-full p-2 border rounded"
+                    aria-label="物質カテゴリを選択"
                   >
                     <option value="chemical">化学物質</option>
                     <option value="physical">物理的要因</option>
@@ -464,11 +466,13 @@ export function EnhancedEnvironmentalFactorDetail({
 
             <div className="mt-3 flex items-center justify-between">
               <div>
-                <label className="block text-sm font-medium mb-1">防護レベル</label>
+                <label htmlFor={`protection-level-${substance.id}`} className="block text-sm font-medium mb-1">防護レベル</label>
                 <select
+                  id={`protection-level-${substance.id}`}
                   value={substance.protectionLevel}
                   onChange={(e) => handleSubstanceChange(substance.id, 'protectionLevel', e.target.value)}
                   className="p-2 border rounded"
+                  aria-label="防護レベルを選択"
                 >
                   <option value="none">なし</option>
                   <option value="low">低</option>
