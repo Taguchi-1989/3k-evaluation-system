@@ -62,7 +62,7 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 ${className}`} data-testid="stats">
       {/* 新規評価作成ボタン */}
       <div className="flex justify-end">
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
@@ -71,7 +71,7 @@ export function DashboardStats({ workItems, className = '' }: DashboardStatsProp
       </div>
 
       {/* 概要統計 */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4" data-testid="stats-cards">
         <div className="bg-white p-6 rounded-lg border shadow-sm">
           <div className="text-sm font-medium text-gray-600">総作業数</div>
           <div className="text-3xl font-bold text-gray-900">{totalItems}</div>

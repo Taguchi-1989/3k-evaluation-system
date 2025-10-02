@@ -92,13 +92,14 @@ export function useAutoSave<T = unknown>({
 
   // ページ離脱時の保存
   useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent): string | undefined => {
       // データが変更されている場合のみ警告を表示
       if (hasDataChangedRef.current?.()) {
         const message = '変更が保存されていません。このページを離れますか？'
         e.returnValue = message
         return message
       }
+      return undefined
     }
 
     const handleVisibilityChange = () => {

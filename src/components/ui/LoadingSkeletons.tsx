@@ -5,37 +5,46 @@ import { Card } from '@/components/ui'
 
 export function DashboardSkeleton(): React.JSX.Element {
   return (
-    <div className="min-h-screen bg-gray-50 animate-pulse">
-      <div className="container mx-auto px-4 py-6">
-        {/* Header skeleton */}
-        <div className="mb-8">
-          <div className="h-8 bg-gray-200 rounded-md w-64 mb-4"></div>
-          <div className="h-4 bg-gray-200 rounded-md w-96"></div>
-        </div>
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <main className="flex-1 animate-pulse">
+        <div className="container mx-auto px-4 py-6">
+          {/* Header skeleton */}
+          <div className="mb-8">
+            <div className="h-8 bg-gray-200 rounded-md w-64 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded-md w-96"></div>
+          </div>
 
-        {/* Stats grid skeleton */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Card key={i} className="p-6">
-              <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
-              <div className="h-8 bg-gray-200 rounded w-16 mb-4"></div>
-              <div className="h-3 bg-gray-200 rounded w-full"></div>
+          {/* Tabs skeleton */}
+          <div className="flex gap-2 mb-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-10 bg-gray-200 rounded-md w-24"></div>
+            ))}
+          </div>
+
+          {/* Stats grid skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Card key={i} className="p-6">
+                <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                <div className="h-8 bg-gray-200 rounded w-16 mb-4"></div>
+                <div className="h-3 bg-gray-200 rounded w-full"></div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Charts skeleton */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="p-6">
+              <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+              <div className="h-64 bg-gray-200 rounded"></div>
             </Card>
-          ))}
+            <Card className="p-6">
+              <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+              <div className="h-64 bg-gray-200 rounded"></div>
+            </Card>
+          </div>
         </div>
-
-        {/* Charts skeleton */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="p-6">
-            <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
-            <div className="h-64 bg-gray-200 rounded"></div>
-          </Card>
-          <Card className="p-6">
-            <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
-            <div className="h-64 bg-gray-200 rounded"></div>
-          </Card>
-        </div>
-      </div>
+      </main>
     </div>
   )
 }

@@ -705,8 +705,8 @@ function calculateContaminationScore(contamination: string): number {
 }
 
 function calculateRiskScore(
-  encounterFrequency: number,
-  dangerPossibility: number,
+  _encounterFrequency: number,
+  _dangerPossibility: number,
   occurrencePossibility: number,
   harmSeverity: number
 ): number {

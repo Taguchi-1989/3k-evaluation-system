@@ -4,7 +4,17 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    
+    // Strict mode - すべて有効化
     "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -15,9 +25,20 @@
     "incremental": true,
     "composite": false,
     "forceConsistentCasingInFileNames": true,
+    
+    // 追加の厳格な型チェック
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": false,
     "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    // noUnusedLocals/noUnusedParameters はESLintで処理
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false,
+    
     "plugins": [
       {
         "name": "next"
@@ -32,6 +53,22 @@
       "@3k/adapters-web": ["./packages/adapters-web"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "packages/ports/**/*.ts", "packages/core/**/*.ts", "packages/adapters-web/**/*.ts"],
-  "exclude": ["node_modules", "3k-evaluation-app", "dist", "release", ".next", "out", "packages/adapters-electron"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "packages/ports/**/*.ts",
+    "packages/core/**/*.ts",
+    "packages/adapters-web/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "3k-evaluation-app",
+    "dist",
+    "release",
+    ".next",
+    "out",
+    "packages/adapters-electron"
+  ]
 }

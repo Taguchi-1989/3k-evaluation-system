@@ -168,6 +168,11 @@ export function EnhancedDashboard({ workItems }: EnhancedDashboardProps): React.
   const [displayWorkItems, setDisplayWorkItems] = useState<WorkItem[]>(workItems || defaultWorkItems)
   const database = useDatabase()
 
+  const handleTabChange = useCallback((tabId: string): void => {
+    console.log('Tab change requested:', tabId)
+    setActiveTab(tabId)
+  }, [])
+
   // データベースから評価データを読み込み
   useEffect(() => {
     const loadEvaluations = async (): Promise<void> => {
@@ -294,8 +299,9 @@ export function EnhancedDashboard({ workItems }: EnhancedDashboardProps): React.
           <div className="border-b border-gray-200 bg-white px-6 py-3">
             <TabInterface
               tabs={tabs}
-              defaultTab={activeTab}
-              onTabChange={setActiveTab}
+              defaultTab="overview"
+              activeTab={activeTab}
+              onTabChange={handleTabChange}
             />
           </div>
           
