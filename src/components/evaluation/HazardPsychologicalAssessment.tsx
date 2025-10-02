@@ -173,6 +173,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       事故日
                     </label>
                     <input
+                      id={`accident-date-${index}`}
+                      aria-label={`事故履歴${index + 1}の事故日`}
                       type="date"
                       value={event.accidentDate.toISOString().split('T')[0]}
                       onChange={(e) => {
@@ -210,6 +212,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       重篤度
                     </label>
                     <select
+                      id={`accident-severity-${index}`}
+                      aria-label={`事故履歴${index + 1}の重篤度`}
                       value={event.severity}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
@@ -251,6 +255,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       防止策の効果
                     </label>
                     <select
+                      id={`accident-effectiveness-${index}`}
+                      aria-label={`事故履歴${index + 1}の防止策の効果`}
                       value={event.effectiveness}
                       onChange={(e) => {
                         const newHistory = [...accidentHistory]
@@ -335,6 +341,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 法令順守度
               </label>
               <select
+                id="compliance-level"
+                aria-label="安全管理体制の法令順守度"
                 value={safetyManagement.complianceLevel}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
@@ -354,6 +362,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 安全教育充実度
               </label>
               <select
+                id="training-adequacy"
+                aria-label="安全管理体制の教育充実度"
                 value={safetyManagement.trainingAdequacy}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
@@ -373,6 +383,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 インシデント報告制度
               </label>
               <select
+                id="reporting-system"
+                aria-label="安全管理体制の報告制度"
                 value={safetyManagement.reportingSystem}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
@@ -392,6 +404,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                 リスク評価頻度
               </label>
               <select
+                id="risk-assessment-freq"
+                aria-label="安全管理体制のリスク評価頻度"
                 value={safetyManagement.riskAssessmentFreq}
                 onChange={(e) => setSafetyManagement({
                   ...safetyManagement,
@@ -476,6 +490,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     リスク内容
                   </label>
                   <input
+                    id={`risk-description-${index}`}
+                    aria-label={`継続リスク${index + 1}の内容`}
                     type="text"
                     value={risk.riskDescription}
                     onChange={(e) => {
@@ -494,6 +510,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     再発確率
                   </label>
                   <select
+                    id={`risk-recurrence-${index}`}
+                    aria-label={`継続リスク${index + 1}の再発確率`}
                     value={risk.recurrenceProbability}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
@@ -517,6 +535,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     潜在的影響度
                   </label>
                   <select
+                    id={`risk-impact-${index}`}
+                    aria-label={`継続リスク${index + 1}の潜在的影響度`}
                     value={risk.potentialImpact}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
@@ -539,6 +559,8 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     現在の状況
                   </label>
                   <select
+                    id={`risk-status-${index}`}
+                    aria-label={`継続リスク${index + 1}の現在の状況`}
                     value={risk.currentStatus}
                     onChange={(e) => {
                       const newRisks = [...ongoingRisks]
