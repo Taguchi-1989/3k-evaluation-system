@@ -173,7 +173,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       事故日
                     </label>
                     <input
-                      id={`accident-date-${index}`}
+                      id={`accident-history-date-${index}`}
                       aria-label={`事故履歴${index + 1}の事故日`}
                       type="date"
                       value={event.accidentDate.toISOString().split('T')[0]}
@@ -212,7 +212,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       重篤度
                     </label>
                     <select
-                      id={`accident-severity-${index}`}
+                      id={`accident-history-severity-${index}`}
                       aria-label={`事故履歴${index + 1}の重篤度`}
                       value={event.severity}
                       onChange={(e) => {
@@ -255,7 +255,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                       防止策の効果
                     </label>
                     <select
-                      id={`accident-effectiveness-${index}`}
+                      id={`accident-history-effectiveness-${index}`}
                       aria-label={`事故履歴${index + 1}の防止策の効果`}
                       value={event.effectiveness}
                       onChange={(e) => {
@@ -490,7 +490,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     リスク内容
                   </label>
                   <input
-                    id={`risk-description-${index}`}
+                    id={`ongoing-risk-description-${index}`}
                     aria-label={`継続リスク${index + 1}の内容`}
                     type="text"
                     value={risk.riskDescription}
@@ -510,7 +510,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     再発確率
                   </label>
                   <select
-                    id={`risk-recurrence-${index}`}
+                    id={`ongoing-risk-recurrence-${index}`}
                     aria-label={`継続リスク${index + 1}の再発確率`}
                     value={risk.recurrenceProbability}
                     onChange={(e) => {
@@ -535,7 +535,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     潜在的影響度
                   </label>
                   <select
-                    id={`risk-impact-${index}`}
+                    id={`ongoing-risk-impact-${index}`}
                     aria-label={`継続リスク${index + 1}の潜在的影響度`}
                     value={risk.potentialImpact}
                     onChange={(e) => {
@@ -559,7 +559,7 @@ export function HazardPsychologicalAssessment({ onAssessmentChange }: HazardPsyc
                     現在の状況
                   </label>
                   <select
-                    id={`risk-status-${index}`}
+                    id={`ongoing-risk-status-${index}`}
                     aria-label={`継続リスク${index + 1}の現在の状況`}
                     value={risk.currentStatus}
                     onChange={(e) => {
