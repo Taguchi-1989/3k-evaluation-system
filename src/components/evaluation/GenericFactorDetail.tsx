@@ -78,8 +78,8 @@ export function GenericFactorDetail({
           <p className="text-gray-600">{title}の評価項目</p>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-xs">評価項目1:</label>
-              <select className="border rounded-md p-1 text-xs">
+              <label htmlFor="generic-eval-item-1" className="text-xs">評価項目1:</label>
+              <select id="generic-eval-item-1" aria-label="評価項目1の評価レベル" className="border rounded-md p-1 text-xs">
                 <option>低い</option>
                 <option>普通</option>
                 <option>高い</option>

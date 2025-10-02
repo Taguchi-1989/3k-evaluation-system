@@ -328,6 +328,8 @@ export function HazardFactorDetail({
                         </td>
                         <td className="p-1 border">
                           <textarea
+                            id={`event-desc-${event.id}`}
+                            aria-label={`事象${event.id}の説明`}
                             className={`w-full border rounded p-1 text-xs ${isMaxRisk ? 'bg-yellow-50 dark:bg-yellow-900/30' : 'bg-white dark:bg-gray-700'} text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600`}
                             rows={1}
                             value={event.eventDescription}
@@ -336,6 +338,8 @@ export function HazardFactorDetail({
                         </td>
                         <td className="p-1 border">
                           <select
+                            id={`encounter-freq-${event.id}`}
+                            aria-label={`事象${event.id}の遭遇頻度`}
                             className={`w-full p-1 border rounded ${isMaxRisk ? 'bg-yellow-50 dark:bg-yellow-900/30' : 'bg-white dark:bg-gray-700'} text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600`}
                             value={event.encounterFrequency}
                             onChange={(e) => handleEventChange(event.id, 'encounterFrequency', Number(e.target.value))}
@@ -347,6 +351,8 @@ export function HazardFactorDetail({
                         </td>
                         <td className="p-1 border">
                           <select
+                            id={`possibility-${event.id}`}
+                            aria-label={`事象${event.id}の可能性`}
                             className={`w-full p-1 border rounded ${isMaxRisk ? 'bg-yellow-50 dark:bg-yellow-900/30' : 'bg-white dark:bg-gray-700'} text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600`}
                             value={event.possibility}
                             onChange={(e) => handleEventChange(event.id, 'possibility', Number(e.target.value))}
@@ -359,6 +365,8 @@ export function HazardFactorDetail({
                         <td className="p-1 border text-center bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">{event.occurrenceProbability}</td>
                         <td className="p-1 border">
                           <select
+                            id={`severity-${event.id}`}
+                            aria-label={`事象${event.id}の深刻度`}
                             className={`w-full p-1 border rounded ${isMaxRisk ? 'bg-yellow-50 dark:bg-yellow-900/30' : 'bg-white dark:bg-gray-700'} text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600`}
                             value={event.severityLevel}
                             onChange={(e) => handleEventChange(event.id, 'severityLevel', e.target.value)}
