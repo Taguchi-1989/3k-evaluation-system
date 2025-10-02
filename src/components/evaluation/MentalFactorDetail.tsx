@@ -463,8 +463,11 @@ export function MentalFactorDetail({
                       />
                       <label htmlFor={`mental-checkbox-${item.id}`} className="flex items-center font-medium">{item.label}</label>
 
-                      <button className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600">
-                        <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <button
+                        aria-label={`${item.label}の詳細情報`}
+                        className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
+                      >
+                        <svg aria-hidden="true" className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </button>
@@ -489,6 +492,8 @@ export function MentalFactorDetail({
                       ) : (
                         <div className="flex flex-col gap-1">
                           <select
+                            id={`mental-severity-${item.id}`}
+                            aria-label={`${item.label}の程度選択`}
                             className="border rounded-md p-1 text-xs w-32 bg-white dark:bg-gray-600"
                             value={item.selectValue || ''}
                             onChange={(e) => handleSelectChange(item.id, e.target.value)}
@@ -499,6 +504,8 @@ export function MentalFactorDetail({
                             ))}
                           </select>
                           <select
+                            id={`mental-duration-${item.id}`}
+                            aria-label={`${item.label}の時間割合選択`}
                             className="border rounded-md p-1 text-xs w-20 bg-white dark:bg-gray-600"
                             value={item.durationValue || item.inputValue || '20%'}
                             onChange={(e) => handleDurationChange(item.id, e.target.value)}
