@@ -19,6 +19,7 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
+    user-select: none;
 
     /* Mobile Chromeでのオートフィル背景色修正 */
     background-color: transparent !important;
@@ -77,8 +78,8 @@
     input:focus,
     textarea:focus,
     select:focus {
-      transform: scale(1) !important;
       -webkit-transform: scale(1) !important;
+      transform: scale(1) !important;
     }
   }
 }

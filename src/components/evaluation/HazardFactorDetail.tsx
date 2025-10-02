@@ -296,8 +296,9 @@ export function HazardFactorDetail({
                 size="sm"
                 className="ml-auto text-xs"
                 onClick={addNewEvent}
+                aria-label="新しい危険事象を追加"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
                 危険事象を追加
@@ -380,11 +381,13 @@ export function HazardFactorDetail({
                         <td className="p-1 border text-center bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-gray-200">{event.riskLevel}</td>
                         <td className="p-1 border text-center">
                           <button
+                            id={`delete-btn-${event.id}`}
                             onClick={() => removeEvent(event.id)}
                             className="text-red-600 hover:text-red-800 p-1"
+                            aria-label={`事象${event.id}を削除`}
                             title="削除"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
                           </button>
@@ -401,15 +404,17 @@ export function HazardFactorDetail({
             {/* リスクマトリックス */}
             <div className="risk-matrix text-xs bg-gray-50 p-2 rounded border">
               <p className="font-bold mb-1 text-center text-sm">リスクマトリックス</p>
-              <div className="grid grid-cols-6 gap-px bg-white p-1 text-[10px]">
-                <div className="font-bold"></div>
-                {['S1', 'S2', 'S3', 'S4', 'S5'].map(s => (
-                  <div key={`header-${s}`} className={`font-bold text-center p-1 ${s === maxRiskEvent?.severityLevel ? 'bg-blue-100' : ''}`}>{s}</div>
-                ))}
-                
+              <div className="grid grid-cols-6 gap-px bg-white p-1 text-[10px]" role="grid" aria-label="リスクマトリックス表">
+                <div className="contents" role="row">
+                  <div className="font-bold" role="columnheader"></div>
+                  {['S1', 'S2', 'S3', 'S4', 'S5'].map(s => (
+                    <div key={`header-${s}`} className={`font-bold text-center p-1 ${s === maxRiskEvent?.severityLevel ? 'bg-blue-100' : ''}`} role="columnheader">{s}</div>
+                  ))}
+                </div>
+
                 {['P5', 'P4', 'P3', 'P2', 'P1'].map(p => (
-                  <React.Fragment key={`row-${p}`}>
-                    <div className={`font-bold text-center p-1 ${p === maxRiskEvent?.occurrenceProbability ? 'bg-blue-100' : ''}`}>{p}</div>
+                  <div key={`row-${p}`} className="contents" role="row">
+                    <div className={`font-bold text-center p-1 ${p === maxRiskEvent?.occurrenceProbability ? 'bg-blue-100' : ''}`} role="rowheader">{p}</div>
                     {['S1', 'S2', 'S3', 'S4', 'S5'].map(s => {
                       const value = calculateRiskPoint(p, s)
                       return (
@@ -418,12 +423,15 @@ export function HazardFactorDetail({
                           className={getRiskMatrixCellClass(p, s, value)}
                           onMouseEnter={() => setHighlightedCell({ p, s })}
                           onMouseLeave={() => setHighlightedCell(null)}
+                          role="gridcell"
+                          aria-label={`発生可能性${p}、重大性${s}のリスクポイント: ${value}`}
+                          tabIndex={0}
                         >
                           {value}
                         </div>
                       )
                     })}
-                  </React.Fragment>
+                  </div>
                 ))}
               </div>
             </div>

@@ -70,7 +70,6 @@ checks.forEach((check, index) => {
 
   try {
     const content = fs.readFileSync(filePath, 'utf8');
-    const lines = content.split('\n');
 
     // パターンマッチング
     const found = content.match(check.pattern);

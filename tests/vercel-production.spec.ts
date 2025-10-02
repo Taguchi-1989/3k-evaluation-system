@@ -195,7 +195,7 @@ test.describe('Vercel本番環境テスト', () => {
     await expect(main).toBeVisible()
   })
 
-  test('本番環境でAPIエンドポイントが動作する', async ({ page, request }) => {
+  test('本番環境でAPIエンドポイントが動作する', async ({ request }) => {
     // APIエンドポイントが存在する場合のテスト
     const apiEndpoints = [
       `${productionURL}/api/health`,
