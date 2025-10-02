@@ -32,8 +32,12 @@ const InfoPopup = ({ isOpen, onClose, title, content }: {
       <div className="bg-white dark:bg-gray-800 rounded-lg p-4 max-w-md w-full mx-4">
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">{title}</h3>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button
+            onClick={onClose}
+            aria-label="ヘルプモーダルを閉じる"
+            className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+          >
+            <svg aria-hidden="true" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
@@ -569,7 +573,10 @@ export function PhysicalFactorDetail({
                 className="flex items-center justify-between w-32 px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <span className="truncate">{selectedEvaluationMethod}</span>
-                <svg className="w-3 h-3 ml-1 transition-transform" style={{transform: isMethodDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
+                <svg
+                  aria-hidden="true"
+                  className={`w-3 h-3 ml-1 transition-transform ${isMethodDropdownOpen ? \'rotate-180\' : \'rotate-0\'}`}
+                >
                   <path d="M6 9L12 3L18 9" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
@@ -885,9 +892,10 @@ export function PhysicalFactorDetail({
               <button
                 data-testid="close-modal"
                 onClick={() => setIsHelpModalOpen(false)}
+                aria-label="姿勢評価ヘルプモーダルを閉じる"
                 className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
               </button>
