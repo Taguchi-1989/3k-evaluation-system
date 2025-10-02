@@ -237,8 +237,10 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
               className="flex-1 p-2 border rounded"
               aria-label="レポートを検索"
             />
-            
+
             <select
+              id="report-format-filter"
+              aria-label="レポート形式でフィルター"
               value={filterFormat}
               onChange={(e) => setFilterFormat(e.target.value)}
               className="p-2 border rounded"
@@ -253,8 +255,10 @@ export default function ReportHistory({ onSelectReport, onDeleteReport }: Report
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <label className="text-sm">並び順:</label>
+                <label htmlFor="report-sort-by" className="text-sm">並び順:</label>
                 <select
+                  id="report-sort-by"
+                  aria-label="レポートの並び順を選択"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as 'date' | 'title' | 'downloads')}
                   className="p-1 border rounded text-sm"
