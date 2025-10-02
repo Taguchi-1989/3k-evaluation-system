@@ -73,7 +73,6 @@ test.describe('ホームページ機能テスト', () => {
     await expect(highRiskCard).toBeVisible()
 
     // 数値データが表示されている
-    const numberPattern = /\d+/
     const statsValues = page.locator('text=/\\d+件/')
     await expect(statsValues.first()).toBeVisible()
   })
